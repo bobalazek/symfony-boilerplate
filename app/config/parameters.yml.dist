@@ -1,0 +1,17 @@
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: sfbp
+    database_user: sfbp
+    database_password: sfbp
+    
+    mailer_transport: smtp
+    mailer_host: corcosoft.com
+    mailer_port: 465
+    mailer_user: sfbp@corcosoft.com
+    mailer_password: ~
+    mailer_encryption: ssl
+    
+    secret: 'MySuperSecureToken'
+
+    reset_password_expiry_time: '15 minutes'

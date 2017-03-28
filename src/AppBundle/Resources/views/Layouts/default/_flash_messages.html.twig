@@ -1,0 +1,15 @@
+{% if flash_messages is not empty %}
+    <div id="flash-messages">
+        {% for type, flash_messages_group in flash_messages %}
+            {% for flash_message in flash_messages_group %}
+                <div class="alert alert-{{ type }}">
+                    <button class="close"
+                        type="button"
+                        data-dismiss="alert"
+                        aria-hidden="true">&times;</button>
+                    {{ flash_message | trans }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div> <!-- /#flash-messages -->
+{% endif %}

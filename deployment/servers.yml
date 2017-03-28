@@ -1,0 +1,8 @@
+production_server:
+  host: 138.68.77.188
+  port: 22
+  user: root
+  forward_agent: ~
+  stage: production
+  deploy_path: /var/www/html/deployment/production
+  branch: master

@@ -1,0 +1,83 @@
+{% extends 'bootstrap_3_layout.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block form_label %}
+{% spaceless %}
+    {{ parent() }}
+    {% if required and label %}
+        <span class="required-asterisk">*</span>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block form_row %}
+{% spaceless %}
+    <div class="form-group{% if (not compound or force_error | default(false)) and not valid %} has-error{% endif %}">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        {% for attrname,attrvalue in attr if attrname == 'data-help-text' %}
+            <span class="help-block">
+                {{ attrvalue | trans({}, translation_domain) | raw }}
+            </span>
+        {% endfor %}
+        {{ form_errors(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block checkbox_row %}
+{% spaceless %}
+    <div class="form-group{% if not valid %} has-error{% endif %}">
+        {{ form_widget(form) }}
+        {% for attrname,attrvalue in attr if attrname == 'data-help-text' %}
+            <span class="help-block">
+                {{ attrvalue | trans({}, translation_domain) | raw }}
+            </span>
+        {% endfor %}
+        {{ form_errors(form) }}
+    </div>
+{% endspaceless %}
+{% endblock checkbox_row %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <div class="checkbox">
+        <label for="{{ id }}">
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %}
+                value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+            {{ label|trans({}, translation_domain) }}
+        </label>
+    </div>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block radio_row %}
+{% spaceless %}
+    <div class="form-group{% if not valid %} has-error{% endif %}">
+        {{ form_widget(form) }}
+        {% for attrname,attrvalue in attr if attrname == 'data-help-text' %}
+            <span class="help-block">
+                {{ attrvalue | trans({}, translation_domain) | raw }}
+            </span>
+        {% endfor %}
+        {{ form_errors(form) }}
+    </div>
+{% endspaceless %}
+{% endblock radio_row %}
+
+{% block widget_attributes %}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {%- for attrname, attrvalue in attr if attrname != 'data-help-text' -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ attrvalue | trans({}, translation_domain) }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{% endblock widget_attributes %}

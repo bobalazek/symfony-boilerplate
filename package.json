@@ -1,0 +1,10 @@
+{
+  "name": "housekeeper-app",
+  "description": "Housekeeper App",
+  "author": "Borut Balazek <bobalazek124@gmail.com>",
+  "devDependencies": {
+    "eslint-config-jquery": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1"
+  }
+}

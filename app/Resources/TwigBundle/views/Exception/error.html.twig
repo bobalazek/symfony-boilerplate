@@ -1,0 +1,6 @@
+{% extends 'AppBundle::Layouts/default.html.twig' %}
+
+{% block main %}
+    <h1>{{ 'Error' }} {{ status_code }}</h1>
+    <h2>{{ 'We are very sorry for that. Our administrator was informed and we will try to fix this issue as soon as possible.' | trans }}</h2>
+{% endblock %}

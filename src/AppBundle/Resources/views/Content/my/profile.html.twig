@@ -1,0 +1,8 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block title %}{{ 'My Profile' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'My Profile' | trans }}</h1>
+    <h2>{{ app.user }}</h2>
+{% endblock %}

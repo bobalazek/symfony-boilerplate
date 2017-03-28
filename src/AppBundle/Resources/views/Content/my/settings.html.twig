@@ -1,0 +1,34 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block title %}{{ 'My Settings' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'My Settings' | trans }}</h1>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{ 'Profile' | trans }}</h3>
+                {{ form_row(form.profile.title) }}
+                {{ form_row(form.profile.firstName) }}
+                {{ form_row(form.profile.lastName) }}
+            </div>
+            <div class="col-md-6">
+                <h3>{{ 'Account' | trans }}</h3>
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+                {% if app.user.getNewEmail() %}
+                    <div class="alert alert-info">
+                        {{ 'my.settings.new_email_request.form_text' | trans({
+                            ':email:': app.user.getNewEmail(),
+                        }) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <button type="submit"
+            class="btn btn-primary btn-lg btn-block" />
+            {{ 'Save' | trans }}
+        </button>
+    {{ form_end(form) }}
+{% endblock %}

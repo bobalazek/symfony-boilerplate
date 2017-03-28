@@ -1,0 +1,6 @@
+<a{% for attr, value in options %} {{ attr }}="{{ value }}"{% endfor %}>
+    {{ title }}
+    {% if sorted %}
+        <i class="fa fa-fw fa-angle-{{ direction == 'asc' ? 'down' : 'up' }}"></i>
+    {% endif %}
+</a>

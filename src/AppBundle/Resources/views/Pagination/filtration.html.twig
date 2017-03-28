@@ -1,0 +1,35 @@
+<form method="get"
+    action="{{ action }}"
+    enctype="application/x-www-form-urlencoded">
+    <div class="row">
+        <div class="col-md-4">
+            <select class="form-control"
+                name="{{ filterFieldName }}">
+                {% for field, label in fields %}
+                    <option value="{{ field }}"{% if selectedField == field %} selected="selected"{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div> <!-- /.col-md-4 -->
+        <div class="col-md-4">
+            <input class="form-control"
+                type="text"
+                value="{{ selectedValue }}"
+                name="{{ filterValueName }}" />    
+        </div> <!-- /.col-md-4 -->
+        <div class="col-md-4">
+            <button class="btn btn-default"
+                type="submit">
+                {{ options.button }}
+            </button>
+        </div> <!-- /.col-md-4 -->
+    </div> <!-- /.row -->
+    <div class="row">
+        <div class="col-md-12">
+            <small>
+                {{ 'For wildcard searches use the asterisk (*), for example: info@*.com, *@gmail.com, ...' | trans }}
+            </small>
+        </div> <!-- /.col-md-12 -->
+    </div> <!-- /.row -->
+</form>

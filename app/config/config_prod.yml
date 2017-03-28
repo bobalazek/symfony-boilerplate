@@ -1,0 +1,34 @@
+imports:
+    - { resource: config.yml }
+
+swiftmailer:
+    spool: { type: file }
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      grouped
+            excluded_404s:
+                - ^/phpmyadmin
+        grouped:
+            type:    group
+            members: [streamed, deduplicated]
+        streamed:
+            type:  stream
+            path:  '%kernel.logs_dir%/%kernel.environment%.log'
+            level: debug
+        deduplicated:
+            type:    deduplication
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: 'mailer.rwe-app@corcosoft.com'
+            to_email:   'errors@corcosoft.com'
+            subject:    '[RWE App] An Error Occurred! %%message%%'
+            level:      debug
+            formatter:  monolog.formatter.html
+            content_type: text/html
+        console:
+            type:  console

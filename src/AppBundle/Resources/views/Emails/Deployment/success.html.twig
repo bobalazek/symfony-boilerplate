@@ -1,0 +1,78 @@
+{% extends 'AppBundle:Layouts:email.html.twig' %}
+
+{% block main %}
+    <table class="row note">
+        <tr>
+            <td class="wrapper last">
+                <p>{{ 'The deployment of the %app_name% was succsessful.' | trans({
+                    '%app_name%': globals.app_name,
+                }) }}</p>
+                <table class="twelve columns">
+                    <tr>
+                        <td class="panel">
+                            <p>
+                                {{ 'Stage' | trans }}:
+                                <b>{{ stage }}</b>
+                            </p>
+                            <p>
+                                {{ 'Server name' | trans }}:
+                                <b>{{ server_name }}</b>
+                            </p>
+                            <p>
+                                {{ 'Server host' | trans }}:
+                                <b>{{ server_host }}</b>
+                            </p>
+                            <p>
+                                {{ 'Branch' | trans }}:
+                                <b>{{ branch }}</b>
+                            </p>
+                            <p>
+                                {{ 'Version' | trans }}:
+                                <b>{{ version }}</b>
+                            </p>
+                            <p>
+                                {{ 'Assets version' | trans }}:
+                                <b>{{ assets_version }}</b>
+                            </p>
+                            <p>
+                                {{ 'Time' | trans }}:
+                                <b>{{ 'now' | date(globals.date_time_format) }}</b>
+                            </p>
+                            <h5>{{ 'Additional information' | trans }}</h5>
+                            <p>
+                                {{ 'Last deploymenr time' | trans }}:
+                                <b>{{ last_release_time | date(globals.date_time_format) }}</b>
+                            </p>
+                            {% if commits_since_last_deployment %}
+                                <p>
+                                    {{ 'New commits since the last deployment' | trans }}:
+                                    <ul>
+                                        {% for commit in commits_since_last_deployment %}
+                                            <li>{{ commit }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </p>
+                            {% endif %}
+                            <p>
+                                {{ 'Last stable version' | trans }}:
+                                <b>{{ last_tag }}</b>
+                            </p>
+                            {% if commits_since_last_tag %}
+                                <p>
+                                    {{ 'Commits since the last stable version' | trans }}:
+                                    <ul>
+                                        {% for commit in commits_since_last_tag %}
+                                            <li>{{ commit }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </p>
+                            {% endif %}
+                        </td>
+                        <td class="expander"></td>
+                    </tr>
+                </table>
+                <p></p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,91 @@
+parameters:
+
+services:
+    # General
+    app.emogrifier:
+        class: AppBundle\Service\EmogrifierService
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    app.mailer:
+        class: AppBundle\Service\MailerService
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    app.user_actions:
+        class: AppBundle\Service\UserActionsService
+        calls:
+            - [setContainer, ["@service_container"]]
+    
+    app.apifier:
+        class: AppBundle\Service\ApifierService
+        arguments: ["@request_stack"]
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    app.twig_extension:
+        class: AppBundle\Twig\CoreExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+    
+    app.user_provider:
+        class: AppBundle\Security\UserProvider
+        arguments: [ "@doctrine.orm.entity_manager" ]
+    
+    app.token_authenticator:
+        class: AppBundle\Security\TokenAuthenticator
+    
+    # Event Subscribers & Listeners
+    app.authentication_subscriber:
+        class: AppBundle\EventSubscriber\AuthenticationSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: [ "@doctrine.orm.entity_manager", "@app.user_actions" ]
+        
+    app.security_subscriber:
+        class: AppBundle\EventSubscriber\SecuritySubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: [ "@security.token_storage", "@security.authorization_checker", "@app.user_actions" ]
+    
+    app.logout_listener:
+        class: AppBundle\EventListener\LogoutListener
+        arguments: [ "@app.user_actions" ]
+
+    app.exception_listener:
+        class: AppBundle\EventListener\ExceptionListener
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    app.last_active_listener:
+        class: AppBundle\EventListener\LastActiveListener
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller }
+
+    # Form types
+    app.form.type.user:
+        class: AppBundle\Form\Type\UserType
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: form.type }
+
+    # Session
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        public:    false
+        arguments:
+            - 'mysql:host=%database_host%;dbname=%database_name%'
+            - { db_username: '%database_user%', db_password: '%database_password%' }
+
+    # Data fixtures
+    data_fixtures.processor.user:
+        class: AppBundle\DataFixtures\Processor\UserProcessor
+        arguments:
+            - '@security.password_encoder'
+        tags: [ { name: fidry_alice_data_fixtures.processor } ]

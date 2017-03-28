@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <nav id="tertiary-navigation"
+                class="navigation"
+                role="navigation">
+                <ul id="tertiary-navigation-list"
+                    class="navigation-list list-inline">
+                    <li>
+                        <a href="{{ url('disclaimer') }}">
+                            {{ 'Disclaimer' | trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('imprint') }}">
+                            {{ 'Imprint' | trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('privacy') }}">
+                            {{ 'Privacy' | trans }}
+                        </a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <b>Admin info:</b>
+                            Version: {{ globals.version }}
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav> <!-- /#tertiary-navigation -->
+        </div> <!-- /.col-md-6 -->
+        <div class="col-md-6">
+            <div class="logo pull-right">
+                &copy; {{ globals.author }}
+            </div>
+        </div> <!-- /.col-md-6 -->
+    </div>
+</div>

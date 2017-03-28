@@ -1,0 +1,158 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+parameters:
+    locale: en_US
+    app_name: SymfonyBoilerplate
+    description: My personal symfony boilerplate.
+    author: Borut Balazek
+    sender_address: sfbp@corcosoft.com # from which email will the emails be sent
+    sender_name: Symfony Boilerplate Mailer # name of the sender, from which the emails will be sent
+    version: 'v0.1.0-dev'
+    assets_version: 'v2017-03-28-00-00'
+    date_format: "d.m.Y"
+    date_time_format: "d.m.Y H:i:s"
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
+    uploads_directory: '%kernel.root_dir%/../web/assets/uploads'
+    uploads_path: '/assets/uploads'
+    deployment_emails: # to whom should the email be sent, after a successful deployment?
+        bobalazek124@gmail.com: 'Borut'
+
+framework:
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    serializer:
+        enabled: true
+        enable_annotations: true
+    templating:
+        engines: [ 'twig' ]
+    default_locale: "%locale%"
+    trusted_hosts: ~
+    trusted_proxies: ~
+    session:
+        handler_id: session.handler.pdo
+    fragments:  ~
+    http_method_override: true
+    assets:
+        # NOTE: whenever you'll change the version here and deploy for the first time,
+        # you'll get a "The template "SecurityBundle:Collector:security.html.twig" contains an error: ..." error (email).
+        # The reason for that is, that we include ALL the dev bundles (debug & web profiler; composer WITHOUT the --no-dev flag)
+        # in the production environment (that is, because we need the "php bin/console doctrine:schema:update"
+        # command, that is for some reason only available in development). So for that, I guess,
+        # the assetic scrapper finds the security & doctrine bundle templates, but because the environment
+        # is set to "prod", the twig function "profiler_dump" isn't being loaded into twig.
+        version: "%assets_version%"
+    php_errors:
+        log: true
+    translator: { fallbacks: [ '%locale%' ] }
+
+# Twig Configuration
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        globals: # we want to access those variables literally via "globals.{variable}"
+            locale: "%locale%"
+            app_name: "%app_name%"
+            description: "%description%"
+            author: "%author%"
+            version: "%version%"
+            assets_version: "%assets_version%"
+            date_format: "%date_format%"
+            date_time_format: "%date_time_format%"
+    form_themes:
+        - AppBundle:Form:layout.html.twig
+
+# Assetic
+assetic:
+    debug: '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
+        charset: UTF8
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            gedmo_loggable:
+                type: annotation
+                prefix: Gedmo\Loggable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                alias: GedmoLoggable
+                is_bundle: false
+        filters:
+            softdeleteable:
+                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                enabled: true
+        
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/../src/AppBundle/Migrations"
+    namespace: AppBundle\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host: "%mailer_host%"
+    port: "%mailer_port%"
+    encryption: "%mailer_encryption%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    sender_address: "%sender_address%"
+    spool: { type: memory }
+
+# KNP Paginator
+knp_paginator:
+    page_range: 5
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+        sortable: AppBundle:Pagination:sortable_link.html.twig
+        filtration: AppBundle:Pagination:filtration.html.twig
+
+# KNP Doctrine behaviors
+knp_doctrine_behaviors:
+    blameable: true
+    loggable: true
+    timestampable: true
+    soft_deletable: true
+
+# Stof
+stof_doctrine_extensions:
+    orm:
+        default:
+            loggable: true
+            softdeleteable: true
+
+# Nelmio CORS
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: ['*']
+        allow_headers: ['*']
+        allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        max_age: 3600
+        hosts: []
+        origin_regex: false
+
+# JMS Serializer
+jms_serializer:
+    enable_short_alias: false

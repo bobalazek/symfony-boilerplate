@@ -1,0 +1,32 @@
+# Symfony
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+/vendor/
+/web/bundles/
+
+# Bower
+/web/assets/vendor
+/web/assets/uploads/*
+!/web/assets/uploads/.gitkeep
+
+# NPM
+/node_modules/*
+
+# Assetic assets
+/web/js/*
+/web/css/*
+
+# PHP CS Cache
+/.php_cs.cache

@@ -1,0 +1,16 @@
+{% extends 'AppBundle:Layouts:email.html.twig' %}
+
+{% block main %}
+    <table class="row note">
+        <tr>
+            <td class="wrapper last">
+                <h4>{{ 'Hello %user_name%!' | trans({
+                    '%user_name%': user.getName(),
+                }) }}</h4>
+                <p>{{ 'Thank you for your registration. Have fun using %app_name%!' | trans({
+                    '%app_name%': globals.app_name,
+                }) }}</p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

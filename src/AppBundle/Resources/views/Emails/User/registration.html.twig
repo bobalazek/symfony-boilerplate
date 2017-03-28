@@ -1,0 +1,29 @@
+{% extends 'AppBundle:Layouts:email.html.twig' %}
+
+{% block main %}
+    <table class="row note">
+        <tr>
+            <td class="wrapper last">
+                <h4>{{ 'Hello %user_name%!' | trans({
+                    '%user_name%': user.getName(),
+                }) }}</h4>
+                <p>
+                     <b>{{ 'Username' | trans }}:</b>
+                     {{ user.getUsername() }}
+                </p>
+                <p>{{ 'Please click on the link below to activate your account.' | trans }}</p>
+                <table class="twelve columns">
+                    <tr>
+                        <td class="panel">
+                            <a href="{{ url('registration', { code: user.getActivationCode() }) }}" target="_blank">
+                                {{ url('registration', { code: user.getActivationCode() }) }}
+                            </a>
+                        </td>
+                        <td class="expander"></td>
+                    </tr>
+                </table>
+                <p>{{ 'If the link does not work, copy and paste it into your browser window.' | trans }}</p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
