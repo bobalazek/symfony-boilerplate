@@ -18,7 +18,8 @@ class UserAction
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
-        ORMBehaviors\Timestampable\Timestampable;
+        ORMBehaviors\Timestampable\Timestampable
+    ;
 
     /**
      * @var int
