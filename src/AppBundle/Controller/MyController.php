@@ -75,8 +75,8 @@ class MyController extends Controller
                             ]
                         ),
                         'to' => [$user->getNewEmail() => $user->getName()],
-                        'body' => 'AppBundle:Emails:User/new-email.html.twig',
-                        'templateData' => [
+                        'body' => 'AppBundle:Emails:User/new_email.html.twig',
+                        'template_data' => [
                             'user' => $user,
                         ],
                     ])
@@ -155,8 +155,8 @@ class MyController extends Controller
                             ]
                         ),
                         'to' => [$user->getEmail() => $user->getName()],
-                        'body' => 'AppBundle:Emails:User/new-email-confirmation.html.twig',
-                        'templateData' => [
+                        'body' => 'AppBundle:Emails:User/new_email_confirmation.html.twig',
+                        'template_data' => [
                             'user' => $user,
                         ],
                     ])

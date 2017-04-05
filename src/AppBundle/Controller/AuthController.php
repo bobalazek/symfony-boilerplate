@@ -126,8 +126,8 @@ class AuthController extends Controller
                         ]
                     ),
                     'to' => [$user->getEmail() => $user->getName()],
-                    'body' => 'AppBundle:Emails:User/registration-confirmation.html.twig',
-                    'templateData' => [
+                    'body' => 'AppBundle:Emails:User/registration_confirmation.html.twig',
+                    'template_data' => [
                         'user' => $user,
                     ],
                 ])
@@ -166,7 +166,7 @@ class AuthController extends Controller
                     ),
                     'to' => [$user->getEmail() => $user->getName()],
                     'body' => 'AppBundle:Emails:User/registration.html.twig',
-                    'templateData' => [
+                    'template_data' => [
                         'user' => $user,
                     ],
                 ])
@@ -276,8 +276,8 @@ class AuthController extends Controller
                                     ]
                                 ),
                                 'to' => [$user->getEmail() => $user->getName()],
-                                'body' => 'AppBundle:Emails:User/reset-password.html.twig',
-                                'templateData' => [
+                                'body' => 'AppBundle:Emails:User/reset_password.html.twig',
+                                'template_data' => [
                                     'user' => $user,
                                 ],
                             ])
@@ -343,8 +343,8 @@ class AuthController extends Controller
                                 ]
                             ),
                             'to' => [$user->getEmail() => $user->getName()],
-                            'body' => 'AppBundle:Emails:User/reset-password-confirmation.html.twig',
-                            'templateData' => [
+                            'body' => 'AppBundle:Emails:User/reset_password_confirmation.html.twig',
+                            'template_data' => [
                                 'user' => $user,
                             ],
                         ])

@@ -48,8 +48,8 @@ class MailerService
             ->setFrom($from)
         ;
 
-        if (isset($data['replyTo'])) {
-            $swiftMessageInstance->setReplyTo($data['replyTo']);
+        if (isset($data['reply_to'])) {
+            $swiftMessageInstance->setReplyTo($data['reply_to']);
         }
 
         if (isset($data['cc'])) {
@@ -69,10 +69,10 @@ class MailerService
             $templateData['user'] = $this->container->get('security.token_storage')->getToken()->getUser();
         }
 
-        if (isset($data['templateData'])) {
+        if (isset($data['template_data'])) {
             $templateData = array_merge(
                 $templateData,
-                $data['templateData']
+                $data['template_data']
             );
         }
 
