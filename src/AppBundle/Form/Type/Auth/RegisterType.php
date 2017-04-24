@@ -15,7 +15,7 @@ use AppBundle\Form\Type\ProfileType;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class RegistrationType extends AbstractType
+class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -45,7 +45,7 @@ class RegistrationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\User',
-            'validation_groups' => ['registration'],
+            'validation_groups' => ['register'],
         ]);
     }
 }

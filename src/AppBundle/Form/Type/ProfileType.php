@@ -25,7 +25,7 @@ class ProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\Profile',
-            'validation_groups' => ['registration', 'my.settings'],
+            'validation_groups' => ['register', 'my.settings'],
             'cascade_validation' => true,
         ]);
     }

@@ -1,0 +1,37 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block title %}{{ 'Register' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'Register' | trans }}</h1>
+    {% if alert %}
+        <div class="alert alert-{{ alert }}">
+            {{ alert_message | trans }}
+        </div>
+    {% else %}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_row(form.profile.title) }}
+                </div> <!-- /.col-md-6 -->
+            </div> <!-- /.row -->
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.profile.firstName) }}
+                </div> <!-- /.col-md-6 -->
+                <div class="col-md-6">
+                    {{ form_row(form.profile.lastName) }}
+                </div> <!-- /.col-md-6 -->
+            </div> <!-- /.row -->
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword) }}
+            {{ form_row(form.terms) }}
+            <button type="submit"
+                class="btn btn-block btn-lg btn-primary" />
+                {{ 'Register' | trans }}
+            </button>
+        {{ form_end(form) }}
+    {% endif %}
+{% endblock %}

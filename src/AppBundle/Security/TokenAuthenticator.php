@@ -21,7 +21,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         // Skip the authentication, if we're on those pages
         if (in_array($request->getPathInfo(), [
             '/api/login',
-            '/api/registration',
+            '/api/register',
             '/api/reset-password',
         ])) {
             return;

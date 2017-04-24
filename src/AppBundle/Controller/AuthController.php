@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\Auth\RegistrationType;
+use AppBundle\Form\Type\Auth\RegisterType;
 use AppBundle\Form\Type\Auth\ResetPasswordType;
 use AppBundle\Form\Type\Auth\ResetPasswordRequestType;
 
@@ -56,12 +56,12 @@ class AuthController extends Controller
         return $this->redirectToRoute('login');
     }
 
-    /********** Registration **********/
+    /********** Register **********/
 
     /**
-     * @Route("/registration", name="registration")
+     * @Route("/register", name="register")
      */
-    public function registrationAction(Request $request)
+    public function registerAction(Request $request)
     {
         if ($this->isGranted('ROLE_USER')) {
             $this->addFlash(
@@ -75,23 +75,23 @@ class AuthController extends Controller
         $code = $request->query->has('code')
             ? $request->query->get('code')
             : false;
-        $isRegistrationConfirmation = !empty($code);
+        $isRegisterConfirmation = !empty($code);
         $alert = false;
         $alertMessage = '';
 
         $form = $this->createForm(
-            RegistrationType::class,
+            RegisterType::class,
             new User()
         );
 
-        if ($isRegistrationConfirmation) {
-            $this->handleRegistrationConfirmation($code, $alert, $alertMessage);
+        if ($isRegisterConfirmation) {
+            $this->handleRegisterConfirmation($code, $alert, $alertMessage);
         } else {
-            $this->handleRegistration($form, $request, $alert, $alertMessage);
+            $this->handleRegister($form, $request, $alert, $alertMessage);
         }
 
         return $this->render(
-            'AppBundle:Content:auth/registration.html.twig',
+            'AppBundle:Content:auth/register.html.twig',
             [
                 'form' => $form->createView(),
                 'alert' => $alert,
@@ -100,7 +100,7 @@ class AuthController extends Controller
         );
     }
 
-    private function handleRegistrationConfirmation($code, &$alert, &$alertMessage)
+    private function handleRegisterConfirmation($code, &$alert, &$alertMessage)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em
@@ -120,13 +120,13 @@ class AuthController extends Controller
             $this->get('app.mailer')
                 ->swiftMessageInitializeAndSend([
                     'subject' => $this->get('translator')->trans(
-                        'auth.registration_confirmation.email.subject',
+                        'auth.register_confirmation.email.subject',
                         [
                             '%app_name%' => $this->getParameter('app_name'),
                         ]
                     ),
                     'to' => [$user->getEmail() => $user->getName()],
-                    'body' => 'AppBundle:Emails:User/registration_confirmation.html.twig',
+                    'body' => 'AppBundle:Emails:User/register_confirmation.html.twig',
                     'template_data' => [
                         'user' => $user,
                     ],
@@ -134,14 +134,14 @@ class AuthController extends Controller
             ;
 
             $alert = 'success';
-            $alertMessage = $this->get('translator')->trans('auth.registration_confirmation.success');
+            $alertMessage = $this->get('translator')->trans('auth.register_confirmation.success');
         } else {
             $alert = 'danger';
-            $alertMessage = $this->get('translator')->trans('auth.registration_confirmation.code_not_found');
+            $alertMessage = $this->get('translator')->trans('auth.register_confirmation.code_not_found');
         }
     }
 
-    private function handleRegistration(&$form, Request $request, &$alert, &$alertMessage)
+    private function handleRegister(&$form, Request $request, &$alert, &$alertMessage)
     {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -159,13 +159,13 @@ class AuthController extends Controller
             $this->get('app.mailer')
                 ->swiftMessageInitializeAndSend([
                     'subject' => $this->get('translator')->trans(
-                        'auth.registration.email.subject',
+                        'auth.register.email.subject',
                         [
                             '%app_name%' => $this->getParameter('app_name'),
                         ]
                     ),
                     'to' => [$user->getEmail() => $user->getName()],
-                    'body' => 'AppBundle:Emails:User/registration.html.twig',
+                    'body' => 'AppBundle:Emails:User/register.html.twig',
                     'template_data' => [
                         'user' => $user,
                     ],
@@ -173,7 +173,7 @@ class AuthController extends Controller
             ;
 
             $alert = 'success';
-            $alertMessage = $this->get('translator')->trans('auth.registration.success');
+            $alertMessage = $this->get('translator')->trans('auth.register.success');
         }
     }
 
