@@ -14,8 +14,9 @@
 
 ## Development
 
-* Clone the repository: `git clone git@github.com:bobalazek/blendist-server.git`
-* Navigate inside the project: `cd blendist-server`
+* Clone the repository: `git clone git@github.com:bobalazek/symfony-boilerplate.git`
+* Navigate inside the project: `cd symfony-boilerplate`
+* Prepare [Set up file permissions](http://symfony.com/doc/current/setup/file_permissions.html)
 * **Back-end**
   * Prepare a database for the project.
   * Install back-end dependencies with composer: `composer install` and enter your database parameters
