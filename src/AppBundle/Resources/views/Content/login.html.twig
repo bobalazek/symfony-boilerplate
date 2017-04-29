@@ -9,7 +9,7 @@
             {{ error.messageKey | trans(error.messageData) }}
         </div>
     {% endif %}
-    <form method="post">
+    <form action="{{ path('login') }}" method="post">
         <div class="form-group">
             <label for="username">
                 {{ 'Username or email' | trans }}
