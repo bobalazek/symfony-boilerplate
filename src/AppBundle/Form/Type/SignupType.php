@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class RegisterType extends AbstractType
+class SignupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,7 +33,7 @@ class RegisterType extends AbstractType
                 'invalid_message' => 'Invalid Password.',
             ])
             ->add('terms', CheckboxType::class, [
-                'label' => 'register.terms_text',
+                'label' => 'signup.terms_text',
                 'required' => true,
                 'mapped' => false,
             ])
@@ -44,7 +44,7 @@ class RegisterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\User',
-            'validation_groups' => ['register'],
+            'validation_groups' => ['signup'],
         ]);
     }
 }

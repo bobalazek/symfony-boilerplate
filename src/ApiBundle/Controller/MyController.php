@@ -11,6 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class MyController extends Controller
 {
+    /********** Login **********/
+    // TODO
+
+    /********** Signup **********/
+    // TODO
+
+    /********** Reset password **********/
+    // TODO
+
     /********** Me **********/
 
     /**

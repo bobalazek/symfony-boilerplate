@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ApiController extends Controller
 {
-    /********** Me **********/
-
     /**
      * @Route("/api", name="api")
      */

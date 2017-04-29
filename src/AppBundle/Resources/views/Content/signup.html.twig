@@ -1,9 +1,9 @@
 {% extends 'AppBundle:Layouts:default.html.twig' %}
 
-{% block title %}{{ 'Register' | trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'Signup' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
-    <h1>{{ 'Register' | trans }}</h1>
+    <h1>{{ 'Signup' | trans }}</h1>
     {% if alert %}
         <div class="alert alert-{{ alert }}">
             {{ alert_message | trans }}
@@ -30,7 +30,7 @@
             {{ form_row(form.terms) }}
             <button type="submit"
                 class="btn btn-block btn-lg btn-primary" />
-                {{ 'Register' | trans }}
+                {{ 'Signup' | trans }}
             </button>
         {{ form_end(form) }}
     {% endif %}

@@ -20,13 +20,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     fields={"email"},
  *     errorPath="email",
  *     message="This email is already in use.",
- *     groups={"register", "my.settings", "edit"}
+ *     groups={"signup", "my.settings", "edit"}
  * )
  * @UniqueEntity(
  *     fields={"username"},
  *     errorPath="username",
  *     message="This username is already in use.",
- *     groups={"register", "my.settings", "edit"}
+ *     groups={"signup", "my.settings", "edit"}
  * )
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -59,10 +59,10 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @Assert\NotBlank(
-     *     groups={"register", "my.settings", "reset_password_request", "edit"}
+     *     groups={"signup", "my.settings", "reset_password_request", "edit"}
      * )
      * @Assert\Email(
-     *     groups={"register", "my.settings", "reset_password_request", "edit"}
+     *     groups={"signup", "my.settings", "reset_password_request", "edit"}
      * )
      *
      * @ORM\Column(name="email", type="string", length=128, unique=true)
@@ -96,7 +96,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @Assert\NotBlank(
-     *     groups={"register", "my.password", "reset_password"}
+     *     groups={"signup", "my.password", "reset_password"}
      * )
      */
     protected $plainPassword;

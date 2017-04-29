@@ -44,7 +44,7 @@ class Profile
      * @var string
      *
      * @Assert\NotBlank(
-     *     groups={"new", "edit", "register", "my.settings"}
+     *     groups={"new", "edit", "signup", "my.settings"}
      * )
      *
      * @ORM\Column(name="first_name", type="string", length=32, nullable=true)
