@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form\Type\Auth;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,7 +34,7 @@ class RegisterType extends AbstractType
                 'invalid_message' => 'Invalid Password.',
             ])
             ->add('terms', CheckboxType::class, [
-                'label' => 'Do you accept the terms?',
+                'label' => 'register.terms_text',
                 'required' => true,
                 'mapped' => false,
             ])
