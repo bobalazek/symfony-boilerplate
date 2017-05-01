@@ -223,6 +223,14 @@ class UserAction
 
         return $this;
     }
+    
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return '['.$this->getKey().'] '.$this->getMessage();
+    }
 
     /**
      * @return array

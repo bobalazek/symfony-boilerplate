@@ -34,6 +34,9 @@ class AppKernel extends Kernel
 
             // Stof
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            
+            // Easy Admin
+            new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
 
             // App
             new AppBundle\AppBundle(),

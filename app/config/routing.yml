@@ -6,9 +6,10 @@ api:
     resource: "@ApiBundle/Controller/"
     type: annotation
 
-admin:
-    resource: "@AdminBundle/Controller/"
-    type: annotation
-
 logout:
     path: /logout
+
+admin:
+    resource: "@AdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin

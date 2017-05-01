@@ -156,3 +156,50 @@ nelmio_cors:
 # JMS Serializer
 jms_serializer:
     enable_short_alias: false
+
+# Easy Admin
+easy_admin:
+    site_name: "%app_name%"
+    design:
+        menu:
+            - { entity: 'User', label: 'Users', icon: 'user' }
+    entities:
+        User:
+            class: AppBundle\Entity\User
+            list:
+                fields:
+                    - id
+                    - name
+                    - username
+                    - email
+                    - enabled
+                    - verified
+                    - createdAt
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Account' }
+                    - username
+                    - email
+                    - property: roles
+                      type: choice
+                      type_options: 
+                          expanded: true
+                          multiple: true
+                          choices:
+                              - 'Super Admin': ROLE_SUPER_ADMIN
+                              - 'Admin': ROLE_ADMIN
+                              - 'User': ROLE_USER
+                    - property: plainPassword # TODO: should re required when creating the user
+                      type: text
+                      type_options:
+                          required: false
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Statuses' }
+                    - enabled
+                    - verified
+                    - warned
+                    - locked
+                    - lockedReason
+                    - newsletter
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Profile' }
+                    - property: 'profile'
+                      type: 'AppBundle\Form\Type\ProfileType'

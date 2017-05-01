@@ -2,28 +2,23 @@
 
 namespace AdminBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
-/**
- * @author Borut Balazek <bobalazek124@gmail.com>
- */
-class AdminController extends Controller
+class AdminController extends BaseAdminController
 {
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function indexAction(Request $request)
-    {
-        $this->denyAccessUnlessGranted(
-            'ROLE_ADMIN',
-            null,
-            'You have no permissions to access this page!'
-        );
-
-        return $this->render(
-            'AdminBundle:Content:index.html.twig'
-        );
+    public function prePersistEntity($entity) {
+        $this->preUpdateEntity($entity);
+    }
+    
+    public function preUpdateEntity($entity) {
+        if (
+            method_exists($entity, 'setPlainPassword') &&
+            $entity->getPlainPassword()
+        ) {
+            $entity->setPlainPassword(
+                $entity->getPlainPassword(),
+                $this->container->get('security.password_encoder')
+            );
+        }
     }
 }
