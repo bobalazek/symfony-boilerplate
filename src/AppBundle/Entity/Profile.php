@@ -4,11 +4,13 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Profile Entity.
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="profiles")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProfileRepository")
  *
@@ -36,6 +38,7 @@ class Profile
      *
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="title", type="string", length=32, nullable=true)
      */
     protected $title;
@@ -43,6 +46,7 @@ class Profile
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @Assert\NotBlank(
      *     groups={"new", "edit", "signup", "my.settings"}
      * )
@@ -54,6 +58,7 @@ class Profile
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="last_name", type="string", length=32, nullable=true)
      */
     protected $lastName;

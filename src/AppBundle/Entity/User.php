@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,6 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * User Entity.
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @UniqueEntity(
@@ -51,6 +53,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="username", type="string", length=64, unique=true)
      */
     protected $username;
@@ -58,6 +61,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @Assert\NotBlank(
      *     groups={"signup", "my.settings", "reset_password_request", "edit"}
      * )
@@ -74,6 +78,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @var string
      *
+     * @Gedmo\Versioned
      * @Assert\Email(
      *     groups={"my.settings"}
      * )
@@ -86,6 +91,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="password", type="string", length=255)
      */
     protected $password;
@@ -116,6 +122,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var array
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="roles", type="json_array")
      */
     protected $roles = ['ROLE_USER'];
@@ -135,6 +142,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var bool
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="enabled", type="boolean")
      */
     protected $enabled = false;
@@ -142,6 +150,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var bool
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="verified", type="boolean")
      */
     protected $verified = false;
@@ -149,6 +158,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var bool
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="warned", type="boolean")
      */
     protected $warned = false;
@@ -156,6 +166,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var bool
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="locked", type="boolean")
      */
     protected $locked = false;
@@ -163,6 +174,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="locked_reason", type="text", nullable=true)
      */
     protected $lockedReason;
@@ -170,6 +182,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var bool
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="newsletter", type="boolean")
      */
     protected $newsletter = false;
