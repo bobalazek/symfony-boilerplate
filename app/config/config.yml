@@ -158,6 +158,8 @@ jms_serializer:
     enable_short_alias: false
 
 # Easy Admin
+# TODO: disable doctrine (soft-delete) filters (https://github.com/javiereguiluz/EasyAdminBundle/blob/master/Resources/doc/tutorials/tips-and-tricks.rst#dont-apply-global-doctrine-filters-in-the-backend)
+# TODO: user password should be required when creating the user
 easy_admin:
     site_name: "%app_name%"
     design:
@@ -189,7 +191,7 @@ easy_admin:
                               - 'Super Admin': ROLE_SUPER_ADMIN
                               - 'Admin': ROLE_ADMIN
                               - 'User': ROLE_USER
-                    - property: plainPassword # TODO: should re required when creating the user
+                    - property: plainPassword
                       type: text
                       type_options:
                           required: false
