@@ -115,10 +115,10 @@ class UserAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                     'impersonate' => [
-                        'template' => 'AdminBundle:User:list__action_impersonate.html.twig'
+                        'template' => 'AdminBundle:User:list__action_impersonate.html.twig',
                     ],
                     'restore' => [
-                        'template' => 'AdminBundle:User:list__action_restore.html.twig'
+                        'template' => 'AdminBundle:User:list__action_restore.html.twig',
                     ],
                 ],
             ])
@@ -180,10 +180,24 @@ class UserAdmin extends AbstractAdmin
     /***** Hooks *****/
     public function prePersist($user)
     {
-        $this->preUpdate($user);
+        $this->setPlainPassword($user);
     }
 
     public function preUpdate($user)
+    {
+        $this->setPlainPassword($user);
+
+        // TODO: prevent locking yourself
+        // TODO: prevent disabling yourself
+    }
+
+    public function preRemove($user)
+    {
+        // TODO: prevent removing yourself (temporary solution is now, inside the UserController::preDelete())
+    }
+
+    /***** Helpers *****/
+    private function setPlainPassword($user)
     {
         if ($user->getPlainPassword()) {
             $user->setPlainPassword(

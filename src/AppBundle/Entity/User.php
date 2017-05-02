@@ -966,7 +966,7 @@ class User implements AdvancedUserInterface, \Serializable
         $criteria = Criteria::create()->orderBy([
             'createdAt' => Criteria::DESC,
         ]);
-        
+
         return $this->userActions->matching($criteria)->toArray();
     }
 
