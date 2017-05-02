@@ -18,8 +18,6 @@ services:
             - name: sonata.admin
               manager_type: orm
               group: General
-              label: User
-              trash: true
-              audit: true
+              label: Users
         calls:
             - [setContainer, ["@service_container"]]

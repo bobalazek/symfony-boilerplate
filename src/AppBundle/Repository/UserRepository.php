@@ -11,20 +11,33 @@ class UserRepository extends EntityRepository
 {
     public function findByUsernameOrEmail($username)
     {
-        return $this->createQueryBuilder('u')
+        $user = $this->createQueryBuilder('u')
             ->where('u.username = :username OR u.email = :username')
             ->setParameter('username', $username)
             ->getQuery()
             ->getOneOrNullResult();
+
+        if ($user && $user->isDeleted()) {
+            return null;
+        }
+
+        return $user;
     }
 
     public function findByIdAndToken($id, $token)
     {
-        return $this->createQueryBuilder('u')
-            ->where('u.id = :id AND u.token = :token')
+        $user = $this->createQueryBuilder('u')
+            ->where('(u.id = :id AND u.token = :token) AND u.deletedAt = :deleted')
             ->setParameter('id', $id)
             ->setParameter('token', $token)
+            ->setParameter('deleted', null)
             ->getQuery()
             ->getOneOrNullResult();
+
+        if ($user && $user->isDeleted()) {
+            return null;
+        }
+
+        return $user;
     }
 }

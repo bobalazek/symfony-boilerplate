@@ -10,7 +10,6 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-// TODO: show deleted (red row) on soft-deleted users
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
@@ -26,7 +25,7 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $subject = $this->getSubject();
+        $user = $this->getSubject();
 
         $formMapper
             ->with('Profile')
@@ -44,7 +43,7 @@ class UserAdmin extends AbstractAdmin
                 ->add('username', 'text')
                 ->add('email', 'email')
                 ->add('plainPassword', 'repeated', [
-                    'required' => $subject->getId()
+                    'required' => $user->getId()
                         ? false
                         : true,
                     'type' => 'password',
@@ -54,7 +53,7 @@ class UserAdmin extends AbstractAdmin
                     'second_options' => [
                         'label' => 'Repeat password',
                     ],
-                ]) 
+                ])
             ->end()
             ->with('Roles')
                 ->add('roles', 'choice', [
@@ -109,16 +108,20 @@ class UserAdmin extends AbstractAdmin
             ->add('locked')
             ->add('lastActiveAt')
             ->add('createdAt')
+            ->add('deletedAt')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
-                ]
+                    'impersonate' => [
+                        'template' => 'AdminBundle:CRUD:list__action_impersonate.html.twig'
+                    ],
+                ],
             ])
         ;
     }
-    
+
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
@@ -153,13 +156,18 @@ class UserAdmin extends AbstractAdmin
             ->end()
         ;
     }
-    
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('impersonate', $this->getRouterIdParameter().'/impersonate');
+    }
+
     /***** Hooks *****/
     public function prePersist($user)
     {
         $this->preUpdate($user);
     }
-    
+
     public function preUpdate($user)
     {
         if ($user->getPlainPassword()) {

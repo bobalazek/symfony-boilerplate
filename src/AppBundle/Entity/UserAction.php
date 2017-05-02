@@ -223,7 +223,7 @@ class UserAction
 
         return $this;
     }
-    
+
     /**
      * @return string
      */
