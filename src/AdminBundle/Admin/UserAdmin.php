@@ -206,4 +206,22 @@ class UserAdmin extends AbstractAdmin
             );
         }
     }
+
+    private function addFlash($type, $message)
+    {
+        return $this->container
+            ->get('session')
+            ->getFlashBag()
+            ->add($type, $message)
+        ;
+    }
+
+    private function getUser()
+    {
+        return $this->container
+            ->get('security.token_storage')
+            ->getToken()
+            ->getUser()
+        ;
+    }
 }
