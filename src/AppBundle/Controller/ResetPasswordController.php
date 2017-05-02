@@ -76,15 +76,15 @@ class ResetPasswordController extends Controller
             ;
 
             if ($user) {
-                $isPasswordCodeAlreadySent = $user->getTimeResetPasswordCodeExpires()
-                    && new \DateTime() < $user->getTimeResetPasswordCodeExpires();
+                $isPasswordCodeAlreadySent = $user->getResetPasswordCodeExpiresAt()
+                    && new \DateTime() < $user->getResetPasswordCodeExpiresAt();
                 if ($isPasswordCodeAlreadySent) {
                     $alert = 'info';
                     $alertMessage = $this->get('translator')->trans('reset_password.request.already_requested');
                 } else {
                     $user
                         ->setResetPasswordCode(md5(uniqid(null, true)))
-                        ->setTimeResetPasswordCodeExpires(
+                        ->setResetPasswordCodeExpiresAt(
                             new \Datetime(
                                 'now +'.$this->getParameter('reset_password_expiry_time')
                         ));
@@ -141,7 +141,7 @@ class ResetPasswordController extends Controller
         ;
 
         if ($user) {
-            $isResetPasswordCodeExpired = new \DateTime() > $user->getTimeResetPasswordCodeExpires();
+            $isResetPasswordCodeExpired = new \DateTime() > $user->getResetPasswordCodeExpiresAt();
             if ($isResetPasswordCodeExpired) {
                 $alert = 'danger';
                 $alertMessage = $this->get('translator')->trans('reset_password.code_expired');
@@ -152,7 +152,7 @@ class ResetPasswordController extends Controller
 
                     $user
                         ->setResetPasswordCode(null)
-                        ->setTimeResetPasswordCodeExpires(null)
+                        ->setResetPasswordCodeExpiresAt(null)
                         ->setPlainPassword(
                             $formUser->getPlainPassword(),
                             $this->get('security.password_encoder')

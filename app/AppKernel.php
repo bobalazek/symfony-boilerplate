@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             // KNP
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
             // Nelmio
             new Nelmio\CorsBundle\NelmioCorsBundle(),
@@ -35,8 +36,11 @@ class AppKernel extends Kernel
             // Stof
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             
-            // Easy Admin
-            new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            // Sonata
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
 
             // App
             new AppBundle\AppBundle(),

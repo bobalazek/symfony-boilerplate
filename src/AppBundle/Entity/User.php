@@ -211,16 +211,16 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="time_last_active", type="datetime", nullable=true)
+     * @ORM\Column(name="last_active_at", type="datetime", nullable=true)
      */
-    protected $timeLastActive;
+    protected $lastActiveAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="time_reset_password_code_expires", type="datetime", nullable=true)
+     * @ORM\Column(name="reset_password_code_expires_at", type="datetime", nullable=true)
      */
-    protected $timeResetPasswordCodeExpires;
+    protected $resetPasswordCodeExpiresAt;
 
     /**
      * @Assert\Valid
@@ -832,46 +832,46 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** Time last active ***/
+    /*** Last active at ***/
 
     /**
      * @return \DateTime
      */
-    public function getTimeLastActive()
+    public function getLastActiveAt()
     {
-        return $this->timeLastActive;
+        return $this->lastActiveAt;
     }
 
     /**
-     * @param \DateTime $timeLastActive
+     * @param \DateTime $lastActiveAt
      *
      * @return User
      */
-    public function setTimeLastActive(\DateTime $timeLastActive = null)
+    public function setLastActiveAt(\DateTime $lastActiveAt = null)
     {
-        $this->timeLastActive = $timeLastActive;
+        $this->lastActiveAt = $lastActiveAt;
 
         return $this;
     }
 
-    /*** Time Reset Password Code Expires ***/
+    /*** Reset Password Code Expires at ***/
 
     /**
      * @return \DateTime
      */
-    public function getTimeResetPasswordCodeExpires()
+    public function getResetPasswordCodeExpires()
     {
-        return $this->timeResetPasswordCodeExpires;
+        return $this->resetPasswordCodeExpiresAt;
     }
 
     /**
-     * @param \DateTime $timeResetPasswordCodeExpires
+     * @param \DateTime $resetPasswordCodeExpiresAt
      *
      * @return User
      */
-    public function setTimeResetPasswordCodeExpires(\DateTime $timeResetPasswordCodeExpires = null)
+    public function setPasswordCodeExpires(\DateTime $resetPasswordCodeExpiresAt = null)
     {
-        $this->timeResetPasswordCodeExpires = $timeResetPasswordCodeExpires;
+        $this->resetPasswordCodeExpiresAt = $resetPasswordCodeExpiresAt;
 
         return $this;
     }
@@ -1045,7 +1045,9 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getName()
     {
-        return $this->getProfile()->getFullName();
+        return $this->getProfile()
+            ? $this->getProfile()->getFullName()
+            : 'Unknown';
     }
 
     /**

@@ -157,51 +157,12 @@ nelmio_cors:
 jms_serializer:
     enable_short_alias: false
 
-# Easy Admin
-# TODO: disable doctrine (soft-delete) filters (https://github.com/javiereguiluz/EasyAdminBundle/blob/master/Resources/doc/tutorials/tips-and-tricks.rst#dont-apply-global-doctrine-filters-in-the-backend)
-# TODO: user password should be required when creating the user
-easy_admin:
-    site_name: "%app_name%"
-    design:
-        menu:
-            - { entity: 'User', label: 'Users', icon: 'user' }
-    entities:
-        User:
-            class: AppBundle\Entity\User
-            list:
-                fields:
-                    - id
-                    - name
-                    - username
-                    - email
-                    - enabled
-                    - verified
-                    - createdAt
-            form:
-                fields:
-                    - { type: 'group', css_class: 'col-sm-4', label: 'Account' }
-                    - username
-                    - email
-                    - property: roles
-                      type: choice
-                      type_options: 
-                          expanded: true
-                          multiple: true
-                          choices:
-                              - 'Super Admin': ROLE_SUPER_ADMIN
-                              - 'Admin': ROLE_ADMIN
-                              - 'User': ROLE_USER
-                    - property: plainPassword
-                      type: text
-                      type_options:
-                          required: false
-                    - { type: 'group', css_class: 'col-sm-4', label: 'Statuses' }
-                    - enabled
-                    - verified
-                    - warned
-                    - locked
-                    - lockedReason
-                    - newsletter
-                    - { type: 'group', css_class: 'col-sm-4', label: 'Profile' }
-                    - property: 'profile'
-                      type: 'AppBundle\Form\Type\ProfileType'
+# Sonata
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+    title: "%app_name%" 

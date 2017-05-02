@@ -32,7 +32,7 @@ class LastActiveListener
 
         $em = $this->container->get('doctrine.orm.entity_manager');
         $user = $token->getUser();
-        $user->setTimeLastActive(new \DateTime());
+        $user->setLastActiveAt(new \DateTime());
 
         $em->persist($user);
         $em->flush();
