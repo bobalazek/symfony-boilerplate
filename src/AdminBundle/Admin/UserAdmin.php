@@ -115,10 +115,10 @@ class UserAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                     'impersonate' => [
-                        'template' => 'AdminBundle:CRUD:list__action_impersonate.html.twig'
+                        'template' => 'AdminBundle:User:list__action_impersonate.html.twig'
                     ],
                     'restore' => [
-                        'template' => 'AdminBundle:CRUD:list__action_restore.html.twig'
+                        'template' => 'AdminBundle:User:list__action_restore.html.twig'
                     ],
                 ],
             ])
@@ -165,7 +165,7 @@ class UserAdmin extends AbstractAdmin
             ->end()
             ->with('Actions')
                 ->add('userActions', 'html_template', [
-                    'html' => "{% include 'AdminBundle:CRUD:list__user_actions_table.html.twig' %}",
+                    'html' => "{% include 'AdminBundle:User:list__user_actions_table.html.twig' %}",
                 ])
             ->end()
         ;
