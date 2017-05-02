@@ -1,5 +1,3 @@
-parameters:
-
 services:
     # General
     app.emogrifier:
@@ -89,18 +87,3 @@ services:
         arguments:
             - '@security.password_encoder'
         tags: [ { name: fidry_alice_data_fixtures.processor } ]
-
-    # Admin
-    admin.user:
-        class: AdminBundle\Admin\UserAdmin
-        arguments:
-            - ~
-            - AppBundle\Entity\User
-            - AdminBundle:User
-        tags:
-            - name: sonata.admin
-              manager_type: orm
-              group: General
-              label: User
-              trash: true
-              audit: true

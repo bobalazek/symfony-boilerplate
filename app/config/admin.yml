@@ -1,0 +1,25 @@
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+    title: "%app_name%" 
+    
+services:
+    admin.user:
+        class: AdminBundle\Admin\UserAdmin
+        arguments:
+            - ~
+            - AppBundle\Entity\User
+            - AdminBundle:User
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User
+              trash: true
+              audit: true
+        calls:
+            - [setContainer, ["@service_container"]]

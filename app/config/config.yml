@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: admin.yml }
 
 parameters:
     locale: en_US
@@ -159,13 +160,3 @@ nelmio_cors:
 # JMS Serializer
 jms_serializer:
     enable_short_alias: false
-
-# Sonata
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts: [admin]
-
-sonata_admin:
-    title: "%app_name%" 

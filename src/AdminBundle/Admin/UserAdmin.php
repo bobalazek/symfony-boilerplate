@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 // TODO: show deleted (red row) on soft-deleted users
 /**
@@ -13,6 +14,8 @@ use Sonata\AdminBundle\Form\FormMapper;
  */
 class UserAdmin extends AbstractAdmin
 {
+    use ContainerAwareTrait;
+
     protected $roleChoices = [
         'Super admin' => 'ROLE_SUPER_ADMIN',
         'Admin' => 'ROLE_ADMIN',
@@ -37,11 +40,12 @@ class UserAdmin extends AbstractAdmin
             ->end()
             ->with('Account')
                 ->add('username', 'text')
-                ->add('email', 'text')
+                ->add('email', 'email')
                 ->add('plainPassword', 'repeated', [
                     'required' => $subject->getId()
                         ? false
                         : true,
+                    'type' => 'password',
                     'first_options' => [
                         'label' => 'Password',
                     ],
@@ -104,5 +108,20 @@ class UserAdmin extends AbstractAdmin
             ->add('lastActiveAt')
             ->add('createdAt')
         ;
+    }
+    
+    public function prePersist($user)
+    {
+        $this->preUpdate($user);
+    }
+    
+    public function preUpdate($user)
+    {
+        if ($user->getPlainPassword()) {
+            $user->setPlainPassword(
+                $user->getPlainPassword(),
+                $this->container->get('security.password_encoder')
+            );
+        }
     }
 }
