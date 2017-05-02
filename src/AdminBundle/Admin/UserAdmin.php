@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 // TODO: show deleted (red row) on soft-deleted users
-// TODO: user password should be required when creating the user
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
@@ -22,6 +21,8 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $subject = $this->getSubject();
+
         $formMapper
             ->with('Profile')
                 ->add('profile.title', 'text', [
@@ -38,7 +39,9 @@ class UserAdmin extends AbstractAdmin
                 ->add('username', 'text')
                 ->add('email', 'text')
                 ->add('plainPassword', 'repeated', [
-                    'required' => false,
+                    'required' => $subject->getId()
+                        ? false
+                        : true,
                     'first_options' => [
                         'label' => 'Password',
                     ],
@@ -70,6 +73,12 @@ class UserAdmin extends AbstractAdmin
         $datagridMapper
             ->add('username')
             ->add('email')
+            ->add('profile.firstName', null, [
+                'label' => 'First name',
+            ])
+            ->add('profile.lastName', null, [
+                'label' => 'Last name',
+            ])
         ;
     }
 

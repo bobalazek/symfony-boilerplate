@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new Picoss\SonataExtraAdminBundle\PicossSonataExtraAdminBundle(),
 
             // App
             new AppBundle\AppBundle(),

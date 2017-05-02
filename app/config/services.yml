@@ -91,11 +91,16 @@ services:
         tags: [ { name: fidry_alice_data_fixtures.processor } ]
 
     # Admin
-    admin.category:
+    admin.user:
         class: AdminBundle\Admin\UserAdmin
-        arguments: [~, AppBundle\Entity\User, ~]
+        arguments:
+            - ~
+            - AppBundle\Entity\User
+            - AdminBundle:User
         tags:
             - name: sonata.admin
               manager_type: orm
               group: General
               label: User
+              trash: true
+              audit: true

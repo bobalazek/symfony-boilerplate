@@ -102,6 +102,9 @@ doctrine:
             softdeleteable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                 enabled: true
+            softdeleteabletrash:
+                class: Picoss\SonataExtraAdminBundle\Filter\SoftDeleteableTrashFilter
+                enabled: true
         
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/../src/AppBundle/Migrations"

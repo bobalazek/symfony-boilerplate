@@ -254,6 +254,8 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function __construct()
     {
+        $this->profile = new Profile();
+
         $this->setSalt(
             md5(uniqid(null, true))
         );
