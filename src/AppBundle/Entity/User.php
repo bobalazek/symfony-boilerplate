@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Criteria;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -962,7 +963,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getUserActions()
     {
-        return $this->userActions->toArray();
+        $criteria = Criteria::create()->orderBy([
+            'createdAt' => Criteria::DESC,
+        ]);
+        
+        return $this->userActions->matching($criteria)->toArray();
     }
 
     /**

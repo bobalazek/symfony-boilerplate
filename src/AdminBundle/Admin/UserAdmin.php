@@ -28,7 +28,7 @@ class UserAdmin extends AbstractAdmin
         $user = $this->getSubject();
 
         $formMapper
-            ->with('Profile')
+            ->with('Profile', ['class' => 'col-md-4'])
                 ->add('profile.title', 'text', [
                     'label' => 'Title',
                 ])
@@ -39,7 +39,7 @@ class UserAdmin extends AbstractAdmin
                     'label' => 'Last name',
                 ])
             ->end()
-            ->with('Account')
+            ->with('Account', ['class' => 'col-md-4'])
                 ->add('username', 'text')
                 ->add('email', 'email')
                 ->add('plainPassword', 'repeated', [
@@ -55,7 +55,7 @@ class UserAdmin extends AbstractAdmin
                     ],
                 ])
             ->end()
-            ->with('Roles')
+            ->with('Roles', ['class' => 'col-md-4'])
                 ->add('roles', 'choice', [
                     'label' => false,
                     'multiple' => true,
@@ -63,7 +63,7 @@ class UserAdmin extends AbstractAdmin
                     'choices' => $this->roleChoices,
                 ])
             ->end()
-            ->with('Statuses')
+            ->with('Statuses', ['class' => 'col-md-4'])
                 ->add('enabled')
                 ->add('verified')
                 ->add('warned')
@@ -128,7 +128,7 @@ class UserAdmin extends AbstractAdmin
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->with('Profile')
+            ->with('Profile', ['class' => 'col-md-4'])
                 ->add('profile.title', null, [
                     'label' => 'Title',
                 ])
@@ -139,23 +139,34 @@ class UserAdmin extends AbstractAdmin
                     'label' => 'Last name',
                 ])
             ->end()
-            ->with('Account')
+            ->with('Account', ['class' => 'col-md-4'])
                 ->add('username')
                 ->add('email')
+                ->add('newEmail')
+                ->add('lastActiveAt')
+                ->add('updatedAt')
+                ->add('createdAt')
+                ->add('deletedAt')
             ->end()
-            ->with('Roles')
+            ->with('Roles', ['class' => 'col-md-4'])
                 ->add('roles', 'choice', [
                     'multiple' => true,
                     'expanded' => true,
                     'choices' => $this->roleChoices,
                 ])
             ->end()
-            ->with('Statuses')
+            ->with('Statuses', ['class' => 'col-md-4'])
                 ->add('enabled')
                 ->add('verified')
                 ->add('warned')
                 ->add('locked')
                 ->add('lockedReason')
+                ->add('newsletter')
+            ->end()
+            ->with('Actions')
+                ->add('userActions', 'html_template', [
+                    'html' => "{% include 'AdminBundle:CRUD:list__user_actions_table.html.twig' %}",
+                ])
             ->end()
         ;
     }
