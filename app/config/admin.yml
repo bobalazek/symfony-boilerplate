@@ -5,7 +5,7 @@ sonata_block:
             contexts: [admin]
 
 sonata_admin:
-    title: "%app_name%" 
+    title: "%app_name%"
     
 services:
     admin.user:
