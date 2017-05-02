@@ -6,6 +6,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 // TODO: show deleted (red row) on soft-deleted users
@@ -107,9 +109,52 @@ class UserAdmin extends AbstractAdmin
             ->add('locked')
             ->add('lastActiveAt')
             ->add('createdAt')
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show' => [],
+                    'edit' => [],
+                    'delete' => [],
+                ]
+            ])
         ;
     }
     
+    public function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->with('Profile')
+                ->add('profile.title', null, [
+                    'label' => 'Title',
+                ])
+                ->add('profile.firstName', null, [
+                    'label' => 'First name',
+                ])
+                ->add('profile.lastName', null, [
+                    'label' => 'Last name',
+                ])
+            ->end()
+            ->with('Account')
+                ->add('username')
+                ->add('email')
+            ->end()
+            ->with('Roles')
+                ->add('roles', 'choice', [
+                    'multiple' => true,
+                    'expanded' => true,
+                    'choices' => $this->roleChoices,
+                ])
+            ->end()
+            ->with('Statuses')
+                ->add('enabled')
+                ->add('verified')
+                ->add('warned')
+                ->add('locked')
+                ->add('lockedReason')
+            ->end()
+        ;
+    }
+    
+    /***** Hooks *****/
     public function prePersist($user)
     {
         $this->preUpdate($user);
