@@ -117,6 +117,9 @@ class UserAdmin extends AbstractAdmin
                     'impersonate' => [
                         'template' => 'AdminBundle:CRUD:list__action_impersonate.html.twig'
                     ],
+                    'restore' => [
+                        'template' => 'AdminBundle:CRUD:list__action_restore.html.twig'
+                    ],
                 ],
             ])
         ;
@@ -160,6 +163,7 @@ class UserAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('impersonate', $this->getRouterIdParameter().'/impersonate');
+        $collection->add('restore', $this->getRouterIdParameter().'/restore');
     }
 
     /***** Hooks *****/

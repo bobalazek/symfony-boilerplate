@@ -1,4 +1,8 @@
-<a class="btn btn-sm btn-default impersonate_link" href="{{ admin.generateObjectUrl('impersonate', object) }}">
-    <i class="fa fa-repeat" aria-hidden="true"></i>
+<a class="btn btn-sm btn-default impersonate_link {{ object.isDeleted() ? 'disabled' : '' }}"
+    href="{{ admin.generateObjectUrl('impersonate', object) }}"
+    {{ object.isDeleted()
+        ? 'disabled="disabled"'
+        : '' }}>
+    <i class="fa fa-magic" aria-hidden="true"></i>
     Impersonate
 </a>

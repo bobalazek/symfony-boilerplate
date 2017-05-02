@@ -1,0 +1,7 @@
+{% if object.isDeleted() %}
+    <a class="btn btn-sm btn-default recover_link"
+        href="{{ admin.generateObjectUrl('restore', object) }}">
+        <i class="fa fa-medkit" aria-hidden="true"></i>
+        Restore
+    </a>
+{% endif %}
