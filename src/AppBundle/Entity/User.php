@@ -165,6 +165,14 @@ class User implements AdvancedUserInterface, \Serializable
     protected $warned = false;
 
     /**
+     * @var string
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="warned_reason", type="text", nullable=true)
+     */
+    protected $warnedReason;
+
+    /**
      * @var bool
      *
      * @Gedmo\Versioned
@@ -660,13 +668,38 @@ class User implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
+    
+    /*** Warned reason ***/
 
     /**
+     * @return string
+     */
+    public function getWarnedReason()
+    {
+        return $this->warnedReason;
+    }
+
+    /**
+     * @param $warnedReason
+     *
      * @return User
      */
-    public function warn()
+    public function setWarnedReason($warnedReason)
+    {
+        $this->warnedReason = $warnedReason;
+
+        return $this;
+    }
+
+    /**
+     * @param $reason
+     *
+     * @return User
+     */
+    public function warn($reason)
     {
         $this->setWarned(true);
+        $this->setWarnedReason($reason);
 
         return $this;
     }
@@ -677,6 +710,7 @@ class User implements AdvancedUserInterface, \Serializable
     public function unwarn()
     {
         $this->setWarned(false);
+        $this->setLockedReason(null);
 
         return $this;
     }
@@ -904,7 +938,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return bool
      */
-    public function getExpired()
+    public function isExpired()
     {
         return $this->expired;
     }
@@ -912,17 +946,9 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return bool
      */
-    public function isExpired()
-    {
-        return $this->getExpired();
-    }
-
-    /**
-     * @return bool
-     */
     public function isAccountNonExpired()
     {
-        return !$this->getExpired();
+        return !$this->isExpired();
     }
 
     /*** Credentials expired ***/
@@ -948,7 +974,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function isCredentialsNonExpired()
     {
-        return !$this->getExpired();
+        return !$this->isExpired();
     }
 
     /*** Profile ***/
@@ -1084,11 +1110,18 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return [
             'id' => $this->getId(),
+            'name' => $this->getName(),
             'username' => $this->getUsername(),
             'email' => $this->getEmail(),
             'token' => $this->getToken(),
-            'super_admin' => $this->isSuperAdmin(),
-            'admin' => $this->isAdmin(),
+            'is_enabled' => $this->isEnabled(),
+            'is_verified' => $this->isVerified(),
+            'is_warned' => $this->isWarned(),
+            'warned_reason' => $this->getWarnedReason(),
+            'is_locked' => $this->isLocked(),
+            'locked_reason' => $this->getLockedReason(),
+            'is_super_admin' => $this->isSuperAdmin(),
+            'is_admin' => $this->isAdmin(),
             'profile' => $this->getProfile()->toArray(),
             'created_at' => $this->getCreatedAt()->format(DATE_ATOM),
             'updated_at' => $this->getUpdatedAt()->format(DATE_ATOM),

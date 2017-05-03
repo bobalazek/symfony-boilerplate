@@ -67,6 +67,7 @@ class UserAdmin extends AbstractAdmin
                 ->add('enabled')
                 ->add('verified')
                 ->add('warned')
+                ->add('warnedReason')
                 ->add('locked')
                 ->add('lockedReason')
             ->end()
@@ -159,6 +160,7 @@ class UserAdmin extends AbstractAdmin
                 ->add('enabled')
                 ->add('verified')
                 ->add('warned')
+                ->add('warnedReason')
                 ->add('locked')
                 ->add('lockedReason')
                 ->add('newsletter')
@@ -187,6 +189,7 @@ class UserAdmin extends AbstractAdmin
     {
         $this->preparePlainPassword($user);
         $this->preventLockingYourself($user);
+        $this->preventLockingWithoutReason($user);
         $this->preventDisablingYourself($user);
         // TODO: prevent degrading users with bigger premissions
     }
@@ -213,6 +216,21 @@ class UserAdmin extends AbstractAdmin
             $this->addFlash(
                 'sonata_flash_error',
                 'You can not lock yourself.'
+            );
+        }
+    }
+
+    private function preventLockingWithoutReason($user)
+    {
+        if (
+            $user->isLocked() &&
+            empty($user->getLockedReason())
+        ) {
+            $user->unlock();
+
+            $this->addFlash(
+                'sonata_flash_error',
+                'You can not lock someone without entering a reason.'
             );
         }
     }

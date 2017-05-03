@@ -1,6 +1,12 @@
-<a class="btn btn-sm btn-default impersonate_link {{ object.isDeleted() ? 'disabled' : '' }}"
+{% set is_deleted = object.isDeleted() %}
+{% set is_locked = object.isLocked() %}
+{% set is_disabled = object.isEnabled() == false %}
+{% set can_not_impersonate = (is_deleted or is_locked or is_disabled) == true %}
+<a class="btn btn-sm btn-default impersonate_link {{ can_not_impersonate
+    ? 'disabled'
+    : '' }}"
     href="{{ admin.generateObjectUrl('impersonate', object) }}"
-    {{ object.isDeleted()
+    {{ can_not_impersonate
         ? 'disabled="disabled"'
         : '' }}>
     <i class="fa fa-magic" aria-hidden="true"></i>
