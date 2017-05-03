@@ -38,6 +38,11 @@ class UserController extends Controller
         $user->restore();
         $em->persist($user);
         $em->flush();
+        
+        $this->addFlash(
+            'sonata_flash_success',
+            sprintf('You have succesfully restored the user "%s".', $user)
+        );
 
         return $this->redirect(
             $this->admin->generateObjectUrl('list', null)
@@ -45,11 +50,13 @@ class UserController extends Controller
     }
 
     /***** Hooks *****/
-    // TODO: move inside UserAdmin::preRemove()?
     public function preDelete(Request $request, $user)
     {
         if ($user === $this->getUser()) {
-            $this->addFlash('sonata_flash_error', 'You can not delete yourself.');
+            $this->addFlash(
+                'sonata_flash_error',
+                'You can not delete yourself.'
+            );
 
             return $this->redirect(
                 $this->admin->generateObjectUrl('list', null)

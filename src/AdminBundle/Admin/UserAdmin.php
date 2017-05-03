@@ -180,29 +180,54 @@ class UserAdmin extends AbstractAdmin
     /***** Hooks *****/
     public function prePersist($user)
     {
-        $this->setPlainPassword($user);
+        $this->preparePlainPassword($user);
     }
 
     public function preUpdate($user)
     {
-        $this->setPlainPassword($user);
-
-        // TODO: prevent locking yourself
-        // TODO: prevent disabling yourself
-    }
-
-    public function preRemove($user)
-    {
-        // TODO: prevent removing yourself (temporary solution is now, inside the UserController::preDelete())
+        $this->preparePlainPassword($user);
+        $this->preventLockingYourself($user);
+        $this->preventDisablingYourself($user);
+        // TODO: prevent degrading users with bigger premissions
     }
 
     /***** Helpers *****/
-    private function setPlainPassword($user)
+    private function preparePlainPassword($user)
     {
         if ($user->getPlainPassword()) {
             $user->setPlainPassword(
                 $user->getPlainPassword(),
                 $this->container->get('security.password_encoder')
+            );
+        }
+    }
+    
+    private function preventLockingYourself($user)
+    {
+        if (
+            $user === $this->getUser() &&
+            $user->isLocked()
+        ) {
+            $user->unlock();
+
+            $this->addFlash(
+                'sonata_flash_error',
+                'You can not lock yourself.'
+            );
+        }
+    }
+    
+    private function preventDisablingYourself($user)
+    {
+        if (
+            $user === $this->getUser() &&
+            !$user->isEnabled()
+        ) {
+            $user->enable();
+
+            $this->addFlash(
+                'sonata_flash_error',
+                'You can not disable yourself.'
             );
         }
     }

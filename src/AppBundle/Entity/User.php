@@ -662,13 +662,21 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param $reason
-     *
      * @return User
      */
     public function warn()
     {
         $this->setWarned(true);
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function unwarn()
+    {
+        $this->setWarned(false);
 
         return $this;
     }
@@ -704,6 +712,17 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->setLocked(true);
         $this->setLockedReason($reason);
+
+        return $this;
+    }
+    
+    /**
+     * @return User
+     */
+    public function unlock()
+    {
+        $this->setLocked(false);
+        $this->setLockedReason(null);
 
         return $this;
     }
