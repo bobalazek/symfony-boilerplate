@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use AppBundle\Entity\User;
+use AppBundle\AppBundle;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -17,12 +19,19 @@ class UserAdmin extends AbstractAdmin
 {
     use ContainerAwareTrait;
 
+    /**
+     * @var array $roleChoices
+     */
     protected $roleChoices = [
         'Super admin' => 'ROLE_SUPER_ADMIN',
         'Admin' => 'ROLE_ADMIN',
         'User' => 'ROLE_USER',
     ];
 
+    /***** Configuration *****/
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $user = $this->getSubject();
@@ -74,6 +83,9 @@ class UserAdmin extends AbstractAdmin
         ;
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -88,6 +100,9 @@ class UserAdmin extends AbstractAdmin
         ;
     }
 
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -126,7 +141,10 @@ class UserAdmin extends AbstractAdmin
         ;
     }
 
-    public function configureShowFields(ShowMapper $showMapper)
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->with('Profile', ['class' => 'col-md-4'])
@@ -173,6 +191,9 @@ class UserAdmin extends AbstractAdmin
         ;
     }
 
+    /**
+     * @param RouteCollection $collection
+     */
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('impersonate', $this->getRouterIdParameter().'/impersonate');
@@ -180,11 +201,17 @@ class UserAdmin extends AbstractAdmin
     }
 
     /***** Hooks *****/
+    /**
+     * @param AppBundle\Entity\User $user
+     */
     public function prePersist($user)
     {
         $this->preparePlainPassword($user);
     }
 
+    /**
+     * @param AppBundle\Entity\User $user
+     */
     public function preUpdate($user)
     {
         $this->preparePlainPassword($user);
@@ -195,6 +222,9 @@ class UserAdmin extends AbstractAdmin
     }
 
     /***** Helpers *****/
+    /**
+     * @param AppBundle\Entity\User $user
+     */
     private function preparePlainPassword($user)
     {
         if ($user->getPlainPassword()) {
@@ -205,6 +235,9 @@ class UserAdmin extends AbstractAdmin
         }
     }
     
+    /**
+     * @param AppBundle\Entity\User $user
+     */
     private function preventLockingYourself($user)
     {
         if (
@@ -220,6 +253,9 @@ class UserAdmin extends AbstractAdmin
         }
     }
 
+    /**
+     * @param AppBundle\Entity\User $user
+     */
     private function preventLockingWithoutReason($user)
     {
         if (
@@ -235,6 +271,9 @@ class UserAdmin extends AbstractAdmin
         }
     }
     
+    /**
+     * @param AppBundle\Entity\User $user
+     */
     private function preventDisablingYourself($user)
     {
         if (
@@ -250,6 +289,10 @@ class UserAdmin extends AbstractAdmin
         }
     }
 
+    /**
+     * @param string $type
+     * @param string $message
+     */
     private function addFlash($type, $message)
     {
         return $this->container
@@ -259,12 +302,25 @@ class UserAdmin extends AbstractAdmin
         ;
     }
 
+    /**
+     * @return AppBundle\Entity\User
+     */
     private function getUser()
     {
         return $this->container
             ->get('security.token_storage')
             ->getToken()
             ->getUser()
+        ;
+    }
+    
+    /**
+     * @return Doctrine\ORM\EntityManager
+     **/
+    private function getEntityManager()
+    {
+        return $this->container
+            ->get('doctrine.orm.entity_manager')
         ;
     }
 }

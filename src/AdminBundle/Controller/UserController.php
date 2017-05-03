@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UserController extends Controller
 {
+    /**
+     * @param int $id
+     */
     public function impersonateAction($id)
     {
         $user = $this->admin->getSubject();
@@ -24,6 +27,9 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @param int $id
+     */
     public function restoreAction($id)
     {
         $user = $this->admin->getSubject();
@@ -50,6 +56,10 @@ class UserController extends Controller
     }
 
     /***** Hooks *****/
+    /**
+     * @param Request $request
+     * @param AppBundle\Entity\User $user
+     */
     public function preDelete(Request $request, $user)
     {
         if ($user === $this->getUser()) {
