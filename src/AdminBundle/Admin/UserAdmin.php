@@ -218,7 +218,8 @@ class UserAdmin extends AbstractAdmin
         $this->preventLockingYourself($user);
         $this->preventLockingWithoutReason($user);
         $this->preventDisablingYourself($user);
-        // TODO: prevent degrading users with bigger premissions
+        // TODO: figure out a way to prevent removing roles from from users with higher roles,
+        // for example: user A has ROLE_ADMIN and tries to remove the ROLE_SUPER_ADMIN from user B.
     }
 
     /***** Helpers *****/
@@ -317,10 +318,10 @@ class UserAdmin extends AbstractAdmin
     /**
      * @return Doctrine\ORM\EntityManager
      **/
-    private function getEntityManager()
+    private function getDoctrineEntityManager()
     {
         return $this->container
-            ->get('doctrine.orm.entity_manager')
+            ->get('doctrine')->getEntityManager()
         ;
     }
 }
