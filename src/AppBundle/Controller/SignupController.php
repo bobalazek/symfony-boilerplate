@@ -66,6 +66,7 @@ class SignupController extends Controller
         if ($user) {
             $user
                 ->setActivationCode(null)
+                ->setActivatedAt(new \DateTime())
                 ->enable()
             ;
 

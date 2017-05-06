@@ -10,7 +10,7 @@ use AppBundle\Entity\Profile;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class TitleType extends AbstractType
+class GenderType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -18,7 +18,7 @@ class TitleType extends AbstractType
             'required' => false,
             'choices' => array_merge([
                 '-- none --' => '',
-            ], array_flip(Profile::$titles)),
+            ], array_flip(Profile::$genders)),
         ]);
     }
 

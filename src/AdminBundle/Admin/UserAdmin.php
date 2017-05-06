@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;
 use AppBundle\AppBundle;
+use AppBundle\Form\Type\ProfileType;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -19,16 +20,8 @@ class UserAdmin extends AbstractAdmin
 {
     use ContainerAwareTrait;
 
-    /**
-     * @var array $roleChoices
-     */
-    protected $roleChoices = [
-        'Super admin' => 'ROLE_SUPER_ADMIN',
-        'Admin' => 'ROLE_ADMIN',
-        'User' => 'ROLE_USER',
-    ];
-
     /***** Configuration *****/
+
     /**
      * @param FormMapper $formMapper
      */
@@ -38,14 +31,8 @@ class UserAdmin extends AbstractAdmin
 
         $formMapper
             ->with('Profile', ['class' => 'col-md-4'])
-                ->add('profile.title', 'text', [
-                    'label' => 'Title',
-                ])
-                ->add('profile.firstName', 'text', [
-                    'label' => 'First name',
-                ])
-                ->add('profile.lastName', 'text', [
-                    'label' => 'Last name',
+                ->add('profile', ProfileType::class, [
+                    'label' => false,
                 ])
             ->end()
             ->with('Account', ['class' => 'col-md-4'])
@@ -69,7 +56,7 @@ class UserAdmin extends AbstractAdmin
                     'label' => false,
                     'multiple' => true,
                     'expanded' => true,
-                    'choices' => $this->roleChoices,
+                    'choices' => User::$rolesAvailable,
                 ])
             ->end()
             ->with('Statuses', ['class' => 'col-md-4'])
@@ -116,7 +103,7 @@ class UserAdmin extends AbstractAdmin
             ])
             ->add('roles', 'choice', [ // HACK, to show it as a string
                 'multiple' => true,
-                'choices' => $this->roleChoices,
+                'choices' => User::$rolesAvailable,
             ])
             ->add('enabled')
             ->add('verified')
@@ -157,12 +144,19 @@ class UserAdmin extends AbstractAdmin
                 ->add('profile.lastName', null, [
                     'label' => 'Last name',
                 ])
+                ->add('profile.gender', null, [
+                    'label' => 'Gender',
+                ])
+                ->add('profile.birthday', 'date', [
+                    'label' => 'Birthday',
+                ])
             ->end()
             ->with('Account', ['class' => 'col-md-4'])
                 ->add('username')
                 ->add('email')
                 ->add('newEmail')
                 ->add('lastActiveAt')
+                ->add('activatedAt')
                 ->add('updatedAt')
                 ->add('createdAt')
                 ->add('deletedAt')
@@ -171,7 +165,7 @@ class UserAdmin extends AbstractAdmin
                 ->add('roles', 'choice', [
                     'multiple' => true,
                     'expanded' => true,
-                    'choices' => $this->roleChoices,
+                    'choices' => User::$rolesAvailable,
                 ])
             ->end()
             ->with('Statuses', ['class' => 'col-md-4'])
@@ -201,6 +195,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     /***** Hooks *****/
+
     /**
      * @param AppBundle\Entity\User $user
      */
@@ -223,6 +218,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     /***** Helpers *****/
+
     /**
      * @param AppBundle\Entity\User $user
      */
@@ -235,7 +231,7 @@ class UserAdmin extends AbstractAdmin
             );
         }
     }
-    
+
     /**
      * @param AppBundle\Entity\User $user
      */
@@ -271,7 +267,7 @@ class UserAdmin extends AbstractAdmin
             );
         }
     }
-    
+
     /**
      * @param AppBundle\Entity\User $user
      */
@@ -314,7 +310,7 @@ class UserAdmin extends AbstractAdmin
             ->getUser()
         ;
     }
-    
+
     /**
      * @return Doctrine\ORM\EntityManager
      **/

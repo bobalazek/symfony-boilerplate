@@ -24,6 +24,17 @@ class Profile
         ORMBehaviors\Timestampable\Timestampable
     ;
 
+    public static $titles = [
+        'mr' => 'Mr.',
+        'ms' => 'Ms.',
+        'mrs' => 'Mrs.',
+    ];
+
+    public static $genders = [
+        'male' => 'Male',
+        'female' => 'Female',
+    ];
+
     /**
      * @var int
      *
@@ -62,6 +73,21 @@ class Profile
      * @ORM\Column(name="last_name", type="string", length=32, nullable=true)
      */
     protected $lastName;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="gender", type="string", length=32, nullable=true)
+     */
+    protected $gender;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="datetime", nullable=true)
+     */
+    protected $birthday;
 
     /**
      * @Assert\NotBlank()
@@ -171,6 +197,50 @@ class Profile
             $this->getFirstName().' '.
             $this->getLastName()
         );
+    }
+
+    /*** Gender ***/
+
+    /**
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param $gender
+     *
+     * @return Profile
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /*** Birthday ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @param \DateTime $birthday
+     *
+     * @return Profile
+     */
+    public function setBirthday(\DateTime $birthday = null)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
     }
 
     /*** User ***/

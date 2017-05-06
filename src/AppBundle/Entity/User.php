@@ -41,6 +41,12 @@ class User implements AdvancedUserInterface, \Serializable
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable
     ;
+    
+    public static $rolesAvailable = [
+        'Super admin' => 'ROLE_SUPER_ADMIN',
+        'Admin' => 'ROLE_ADMIN',
+        'User' => 'ROLE_USER',
+    ];
 
     /**
      * @var int
@@ -230,6 +236,13 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="reset_password_code_expires_at", type="datetime", nullable=true)
      */
     protected $resetPasswordCodeExpiresAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="activated_at", type="datetime", nullable=true)
+     */
+    protected $activatedAt;
 
     /**
      * @Assert\Valid
@@ -668,7 +681,7 @@ class User implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /*** Warned reason ***/
 
     /**
@@ -749,7 +762,7 @@ class User implements AdvancedUserInterface, \Serializable
 
         return $this;
     }
-    
+
     /**
      * @return User
      */
@@ -975,6 +988,28 @@ class User implements AdvancedUserInterface, \Serializable
     public function isCredentialsNonExpired()
     {
         return !$this->isExpired();
+    }
+
+    /*** Activated at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getActivatedAt()
+    {
+        return $this->activatedAt;
+    }
+
+    /**
+     * @param \DateTime $activatedAt
+     *
+     * @return User
+     */
+    public function setActivatedAt(\DateTime $activatedAt = null)
+    {
+        $this->activatedAt = $activatedAt;
+
+        return $this;
     }
 
     /*** Profile ***/

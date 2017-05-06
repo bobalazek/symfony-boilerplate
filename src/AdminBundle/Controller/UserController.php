@@ -44,7 +44,7 @@ class UserController extends Controller
         $user->restore();
         $em->persist($user);
         $em->flush();
-        
+
         $this->addFlash(
             'sonata_flash_success',
             sprintf('You have succesfully restored the user "%s".', $user)
@@ -56,8 +56,9 @@ class UserController extends Controller
     }
 
     /***** Hooks *****/
+
     /**
-     * @param Request $request
+     * @param Request               $request
      * @param AppBundle\Entity\User $user
      */
     public function preDelete(Request $request, $user)
