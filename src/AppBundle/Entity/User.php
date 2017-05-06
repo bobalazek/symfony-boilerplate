@@ -41,7 +41,7 @@ class User implements AdvancedUserInterface, \Serializable
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable
     ;
-    
+
     public static $rolesAvailable = [
         'Super admin' => 'ROLE_SUPER_ADMIN',
         'Admin' => 'ROLE_ADMIN',
