@@ -1,0 +1,47 @@
+{% set agent = user_agent(value) %}
+<table class="table">
+    <tbody>
+        <tr>
+            <td>Languages</td>
+            <td>{{ agent.languages() | join(', ') }}</td>
+        </tr>
+        <tr>
+            <td>Device</td>
+            <td>{{ agent.device() }}</td>
+        </tr>
+        <tr>
+            <td>Platform</td>
+            <td>
+                {{ agent.platform() }}
+                <small>{{ agent.version(agent.platform()) }}</small>
+            </td>
+        </tr>
+        <tr>
+            <td>Browser</td>
+            <td>
+                {{ agent.browser() }}
+                <small>{{ agent.version(agent.browser()) }}</small>
+            </td>
+        </tr>
+        <tr>
+            <td>Robot</td>
+            <td>{{ agent.robot() }}</td>
+        </tr>
+        <tr>
+            <td>Mobile</td>
+            <td>{{ agent.isMobile() ? 'yes' : 'no' }}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{ agent.isPhone() ? 'yes' : 'no' }}</td>
+        </tr>
+        <tr>
+            <td>Tablet</td>
+            <td>{{ agent.isTablet() ? 'yes' : 'no' }}</td>
+        </tr>
+        <tr>
+            <td>Desktop</td>
+            <td>{{ agent.isDesktop() ? 'yes' : 'no' }}</td>
+        </tr>
+    </tbody>
+</table>

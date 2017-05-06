@@ -106,9 +106,9 @@ class UserAdmin extends AbstractAdmin
             ->add('profile.lastName', null, [
                 'label' => 'Last name',
             ])
-            ->add('roles', 'choice', [ // HACK, to show it as a string
-                'multiple' => true,
-                'choices' => User::$rolesAvailable,
+            ->add('roles', 'html_template', [
+                'label' => 'Roles',
+                'html' => "{{ value | join(', ') }}",
             ])
             ->add('enabled')
             ->add('verified')
@@ -167,10 +167,9 @@ class UserAdmin extends AbstractAdmin
                 ->add('deletedAt')
             ->end()
             ->with('Roles', ['class' => 'col-md-4'])
-                ->add('roles', 'choice', [
-                    'multiple' => true,
-                    'expanded' => true,
-                    'choices' => User::$rolesAvailable,
+                ->add('roles', 'html_template', [
+                    'label' => 'Roles',
+                    'html' => "{{ value | join(', ') }}",
                 ])
             ->end()
             ->with('Statuses', ['class' => 'col-md-4'])
@@ -184,7 +183,8 @@ class UserAdmin extends AbstractAdmin
             ->end()
             ->with('Actions')
                 ->add('userActions', 'html_template', [
-                    'html' => "{% include 'AdminBundle:User:list__user_actions_table.html.twig' %}",
+                    'label' => 'Actions',
+                    'html' => "{% include 'AdminBundle:User:show__user_actions_table.html.twig' %}",
                 ])
             ->end()
         ;

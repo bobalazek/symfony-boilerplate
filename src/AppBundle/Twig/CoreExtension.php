@@ -4,6 +4,7 @@ namespace AppBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFunction;
+use Jenssegers\Agent\Agent;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -18,6 +19,16 @@ class CoreExtension extends Twig_Extension
                 array(
                     $this,
                     'fileGetContents',
+                ),
+                array(
+                    'is_safe' => array('html'),
+                )
+            ),
+            new Twig_SimpleFunction(
+                'user_agent',
+                array(
+                    $this,
+                    'userAgent',
                 ),
                 array(
                     'is_safe' => array('html'),
@@ -39,6 +50,14 @@ class CoreExtension extends Twig_Extension
 
             return file_get_contents($file);
         }
+    }
+    
+    public function userAgent($userAgentString)
+    {
+        $agent = new Agent();
+        $agent->setUserAgent($userAgentString);
+        
+        return $agent;
     }
 
     public function getName()

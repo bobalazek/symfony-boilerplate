@@ -48,6 +48,12 @@ class UserActionAdmin extends AbstractAdmin
             ->add('message', null, [
                 'label' => 'Message',
             ])
+            ->add('ip', null, [
+                'label' => 'IP',
+            ])
+            ->add('userAgent', null, [
+                'label' => 'User Agent',
+            ])
         ;
     }
 
@@ -106,6 +112,12 @@ class UserActionAdmin extends AbstractAdmin
                 ])
                 ->add('user.profile.lastName', null, [
                     'label' => 'Last name',
+                ])
+            ->end()
+            ->with('User Agent')
+                ->add('userAgentData', 'html_template', [
+                    'label' => 'Data',
+                    'html' => "{% include 'AdminBundle:UserAction:show__user_agent_table.html.twig' %}",
                 ])
             ->end()
             ->with('Data')
