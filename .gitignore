@@ -16,6 +16,9 @@
 /vendor/
 /web/bundles/
 
+# MaxMind
+/app/Resources/MaxMind/*
+
 # Bower
 /web/assets/vendor
 /web/assets/uploads/*

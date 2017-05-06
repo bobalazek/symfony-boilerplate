@@ -44,7 +44,8 @@
         "picoss/sonata-extra-admin-bundle": "dev-master",
         "twig/extensions": "^1.4",
         "simplethings/entity-audit-bundle": "^1.0",
-        "jenssegers/agent": "^2.5"
+        "jenssegers/agent": "^2.5",
+        "cravler/maxmind-geoip-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

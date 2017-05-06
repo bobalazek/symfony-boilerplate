@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "57a55451c85ce20a95e041d88e3cbf83",
+    "content-hash": "3f3a457d3a02c8237454bc7938dda6dc",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -168,6 +168,67 @@
                 "tls"
             ],
             "time": "2017-03-06T11:59:08+00:00"
+        },
+        {
+            "name": "cravler/maxmind-geoip-bundle",
+            "version": "v1.1.1",
+            "target-dir": "Cravler/MaxMindGeoIpBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cravler/CravlerMaxMindGeoIpBundle.git",
+                "reference": "b6b64a28e750d993fae24801eb3dfca4073c3c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cravler/CravlerMaxMindGeoIpBundle/zipball/b6b64a28e750d993fae24801eb3dfca4073c3c24",
+                "reference": "b6b64a28e750d993fae24801eb3dfca4073c3c24",
+                "shasum": ""
+            },
+            "require": {
+                "geoip2/geoip2": "~2.0",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.3|~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "modera-module": {
+                    "register-bundle": "Cravler\\MaxMindGeoIpBundle\\CravlerMaxMindGeoIpBundle",
+                    "scripts": {
+                        "post-package-install": [
+                            "Cravler\\MaxMindGeoIpBundle\\Composer\\ScriptHandler::maxMindGeoIpUpdate"
+                        ],
+                        "post-package-update": [
+                            "Cravler\\MaxMindGeoIpBundle\\Composer\\ScriptHandler::maxMindGeoIpUpdate"
+                        ]
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Cravler\\MaxMindGeoIpBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergei Vizel",
+                    "email": "sergei.vizel@gmail.com",
+                    "homepage": "http://github.com/cravler"
+                }
+            ],
+            "description": "Bundle integrating MaxMind GeoIP2 database into symfony application",
+            "keywords": [
+                "geoip2",
+                "maxmind",
+                "symfony"
+            ],
+            "time": "2016-09-07T08:30:56+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1198,6 +1259,57 @@
             "time": "2017-04-23T08:59:41+00:00"
         },
         {
+            "name": "geoip2/geoip2",
+            "version": "v2.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/GeoIP2-php.git",
+                "reference": "b28a0ed0190cd76c878ed7002a5d1bb8c5f4c175"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/b28a0ed0190cd76c878ed7002a5d1bb8c5f4c175",
+                "reference": "b28a0ed0190cd76c878ed7002a5d1bb8c5f4c175",
+                "shasum": ""
+            },
+            "require": {
+                "maxmind-db/reader": "~1.0",
+                "maxmind/web-service-common": "~0.3",
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GeoIp2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory J. Oschwald",
+                    "email": "goschwald@maxmind.com",
+                    "homepage": "http://www.maxmind.com/"
+                }
+            ],
+            "description": "MaxMind GeoIP2 PHP API",
+            "homepage": "https://github.com/maxmind/GeoIP2-php",
+            "keywords": [
+                "IP",
+                "geoip",
+                "geoip2",
+                "geolocation",
+                "maxmind"
+            ],
+            "time": "2017-01-31T17:28:48+00:00"
+        },
+        {
             "name": "illuminate/contracts",
             "version": "v5.4.19",
             "source": {
@@ -2139,6 +2251,105 @@
                 "minification"
             ],
             "time": "2016-11-11T18:43:20+00:00"
+        },
+        {
+            "name": "maxmind-db/reader",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
+                "reference": "7eeccf61b078bb23bb07b1a151a7e5db52871e65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/7eeccf61b078bb23bb07b1a151a7e5db52871e65",
+                "reference": "7eeccf61b078bb23bb07b1a151a7e5db52871e65",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*",
+                "satooshi/php-coveralls": "1.0.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "suggest": {
+                "ext-bcmath": "bcmath or gmp is requred for decoding larger integers with the pure PHP decoder",
+                "ext-gmp": "bcmath or gmp is requred for decoding larger integers with the pure PHP decoder",
+                "ext-maxminddb": "A C-based database decoder that provides significantly faster lookups"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MaxMind\\Db\\": "src/MaxMind/Db"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory J. Oschwald",
+                    "email": "goschwald@maxmind.com",
+                    "homepage": "http://www.maxmind.com/"
+                }
+            ],
+            "description": "MaxMind DB Reader API",
+            "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
+            "keywords": [
+                "database",
+                "geoip",
+                "geoip2",
+                "geolocation",
+                "maxmind"
+            ],
+            "time": "2017-01-19T23:49:38+00:00"
+        },
+        {
+            "name": "maxmind/web-service-common",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/web-service-common-php.git",
+                "reference": "1fe780bcd6a9038b7e36b13fa0aeeeeca4cdb0a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/web-service-common-php/zipball/1fe780bcd6a9038b7e36b13fa0aeeeeca4cdb0a4",
+                "reference": "1fe780bcd6a9038b7e36b13fa0aeeeeca4cdb0a4",
+                "shasum": ""
+            },
+            "require": {
+                "composer/ca-bundle": "^1.0.3",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MaxMind\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory Oschwald",
+                    "email": "goschwald@maxmind.com"
+                }
+            ],
+            "description": "Internal MaxMind Web Service API",
+            "homepage": "https://github.com/maxmind/mm-web-service-api-php",
+            "time": "2016-08-18T16:36:52+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

@@ -26,6 +26,8 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+        calls:
+            - [setContainer, ["@service_container"]]
     
     app.user_provider:
         class: AppBundle\Security\UserProvider

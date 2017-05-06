@@ -114,10 +114,16 @@ class UserActionAdmin extends AbstractAdmin
                     'label' => 'Last name',
                 ])
             ->end()
-            ->with('User Agent')
+            ->with('User Agent', ['class' => 'col-md-6'])
                 ->add('userAgentData', 'html_template', [
                     'label' => 'Data',
                     'html' => "{% include 'AdminBundle:UserAction:show__user_agent_table.html.twig' %}",
+                ])
+            ->end()
+            ->with('IP', ['class' => 'col-md-6'])
+                ->add('ipData', 'html_template', [
+                    'label' => 'Data',
+                    'html' => "{% include 'AdminBundle:UserAction:show__ip_table.html.twig' %}",
                 ])
             ->end()
             ->with('Data')

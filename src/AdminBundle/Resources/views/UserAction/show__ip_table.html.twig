@@ -1,0 +1,12 @@
+{% set record = geo_ip(object.getIp()) %}
+<table class="table">
+    <tbody>
+        {% if record.error is defined %}
+            <tr>
+                <td>{{ record.error.getMessage() }}</td>
+            </tr>
+        {% else %}
+            {{dump(record)}}
+        {% endif %}
+    </tbody>
+</table>

@@ -21,7 +21,8 @@
   * Prepare a database for the project.
   * Install back-end dependencies with composer: `composer install` and enter your database parameters
   * Update the database schema: `php bin/console doctrine:schema:update --force`
-  * Load the database fixtures: `php bin/console doctrine:fixtures:load` (default credentials are `bobalazek124@gmail.com:password`) OR `php bin/console hautelook:fixtures:load` (default credentials are `superadmin@app.com:password`) or
+  * Load the database fixtures: `php bin/console doctrine:fixtures:load` (default credentials are `bobalazek124@gmail.com:password`) OR `php bin/console hautelook:fixtures:load` (default credentials are `superadmin@app.com:password`)
+  * (optional) [Download & update MaxMind GeoIp2 database](https://github.com/cravler/CravlerMaxMindGeoIpBundle#download-and-update-the-maxmind-geoip2-database): `php bin/console cravler:maxmind:geoip-update`
 * **Front-end**
   * Install NPM dependencies: `npm install` (you'll need to have [NPM](https://www.npmjs.com/) installed)
   * Install front-end dependencies with bower: `bower install`
