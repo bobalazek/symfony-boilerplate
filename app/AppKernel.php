@@ -21,22 +21,22 @@ class AppKernel extends Kernel
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
-            // Nelmio
+            // CORS
             new Nelmio\CorsBundle\NelmioCorsBundle(),
 
-            // JMS
+            // Serializer
             new JMS\SerializerBundle\JMSSerializerBundle(),
 
-            // Doctrine
+            // Doctrine migrations
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 
             // Assetic
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 
-            // Stof
+            // Doctrine Extensions
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
-            // GEOIP
+            // GeoIP
             new Cravler\MaxMindGeoIpBundle\CravlerMaxMindGeoIpBundle(),
 
             // Sonata

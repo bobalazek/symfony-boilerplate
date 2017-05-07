@@ -115,7 +115,7 @@ doctrine_migrations:
     table_name: migration_versions
     name: Application Migrations
 
-# Swiftmailer Configuration
+# Swiftmailer
 swiftmailer:
     transport: "%mailer_transport%"
     host: "%mailer_host%"
@@ -125,7 +125,7 @@ swiftmailer:
     password: "%mailer_password%"
     spool: { type: memory }
 
-# KNP Paginator
+# Paginator
 knp_paginator:
     page_range: 5
     template:
@@ -133,21 +133,21 @@ knp_paginator:
         sortable: AppBundle:Pagination:sortable_link.html.twig
         filtration: AppBundle:Pagination:filtration.html.twig
 
-# KNP Doctrine behaviors
+# Doctrine behaviors
 knp_doctrine_behaviors:
     blameable: true
     loggable: true
     timestampable: true
     soft_deletable: true
 
-# Stof
+# Doctrine extensions
 stof_doctrine_extensions:
     orm:
         default:
             loggable: true
             softdeleteable: true
 
-# Nelmio CORS
+# CORS
 nelmio_cors:
     defaults:
         allow_credentials: false
@@ -158,6 +158,6 @@ nelmio_cors:
         hosts: []
         origin_regex: false
 
-# JMS Serializer
+# Serializer
 jms_serializer:
     enable_short_alias: false
