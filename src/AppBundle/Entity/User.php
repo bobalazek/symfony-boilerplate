@@ -1168,7 +1168,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return \DateTime
      */
-    public function getResetPasswordCodeExpires()
+    public function getResetPasswordCodeExpiresAt()
     {
         return $this->resetPasswordCodeExpiresAt;
     }
@@ -1178,7 +1178,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return User
      */
-    public function setPasswordCodeExpires(\DateTime $resetPasswordCodeExpiresAt = null)
+    public function setResetPasswordCodeExpiresAt(\DateTime $resetPasswordCodeExpiresAt = null)
     {
         $this->resetPasswordCodeExpiresAt = $resetPasswordCodeExpiresAt;
 

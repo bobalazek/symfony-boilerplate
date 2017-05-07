@@ -18,10 +18,10 @@ parameters:
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
     uploads_directory: '%kernel.root_dir%/../web/assets/uploads'
     uploads_path: '/assets/uploads'
-    deployment_emails: # to whom should the email be sent, after a successful deployment?
-        bobalazek124@gmail.com: 'Borut'
     reset_password_expiry_time: '15 minutes'
     mobile_activation_code_expiry_time: '15 minutes'
+    deployment_emails: # to whom should the email be sent, after a successful deployment?
+        bobalazek124@gmail.com: 'Borut'
 
 framework:
     secret: "%secret%"

@@ -82,41 +82,9 @@ class ResetPasswordController extends Controller
                     $alert = 'info';
                     $alertMessage = $this->get('translator')->trans('reset_password.request.already_requested');
                 } else {
-                    $user
-                        ->setResetPasswordCode(md5(uniqid(null, true)))
-                        ->setResetPasswordCodeExpiresAt(
-                            new \Datetime(
-                                'now +'.$this->getParameter('reset_password_expiry_time')
-                        ));
-
-                    $em->persist($user);
-
                     // In the REALLY unlikely case that the reset password code wouldn't be unique
                     try {
-                        $em->flush();
-
-                        $this->get('app.user_actions')->add(
-                            'user.password_reset.request',
-                            $this->get('translator')->trans('reset_password.request.user_action.text'),
-                            [],
-                            $user
-                        );
-
-                        $this->get('app.mailer')
-                            ->swiftMessageInitializeAndSend([
-                                'subject' => $this->get('translator')->trans(
-                                    'reset_password.request.email.subject',
-                                    [
-                                    '%app_name%' => $this->getParameter('app_name'),
-                                    ]
-                                ),
-                                'to' => [$user->getEmail() => $user->getName()],
-                                'body' => 'AppBundle:Emails:User/reset_password.html.twig',
-                                'template_data' => [
-                                    'user' => $user,
-                                ],
-                            ])
-                        ;
+                        $this->get('app.user_manager')->resetPasswordRequest($user);
 
                         $alert = 'success';
                         $alertMessage = $this->get('translator')->trans('reset_password.request.success');
@@ -150,40 +118,7 @@ class ResetPasswordController extends Controller
                 if ($form->isSubmitted() && $form->isValid()) {
                     $formUser = $form->getData();
 
-                    $user
-                        ->setResetPasswordCode(null)
-                        ->setResetPasswordCodeExpiresAt(null)
-                        ->setPlainPassword(
-                            $formUser->getPlainPassword(),
-                            $this->get('security.password_encoder')
-                        )
-                    ;
-
-                    $em->persist($user);
-                    $em->flush();
-
-                    $this->get('app.user_actions')->add(
-                        'user.password_reset',
-                        $this->get('translator')->trans('reset_password.user_action.text'),
-                        [],
-                        $user
-                    );
-
-                    $this->get('app.mailer')
-                        ->swiftMessageInitializeAndSend([
-                            'subject' => $this->get('translator')->trans(
-                                'reset_password.email.subject',
-                                [
-                                '%app_name%' => $this->getParameter('app_name'),
-                                ]
-                            ),
-                            'to' => [$user->getEmail() => $user->getName()],
-                            'body' => 'AppBundle:Emails:User/reset_password_confirmation.html.twig',
-                            'template_data' => [
-                                'user' => $user,
-                            ],
-                        ])
-                    ;
+                    $this->get('app.user_manager')->resetPassword($user, $formUser);
 
                     $alert = 'success';
                     $alertMessage = $this->get('translator')->trans('reset_password.success');
