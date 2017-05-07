@@ -20,6 +20,8 @@ parameters:
     uploads_path: '/assets/uploads'
     deployment_emails: # to whom should the email be sent, after a successful deployment?
         bobalazek124@gmail.com: 'Borut'
+    reset_password_expiry_time: '15 minutes'
+    mobile_activation_code_expiry_time: '15 minutes'
 
 framework:
     secret: "%secret%"

@@ -64,31 +64,7 @@ class SignupController extends Controller
         ;
 
         if ($user) {
-            $user
-                ->setActivationCode(null)
-                ->setActivatedAt(new \DateTime())
-                ->enable()
-                ->verifyEmail()
-            ;
-
-            $em->persist($user);
-            $em->flush();
-
-            $this->get('app.mailer')
-                ->swiftMessageInitializeAndSend([
-                    'subject' => $this->get('translator')->trans(
-                        'signup.confirmation.email.subject',
-                        [
-                            '%app_name%' => $this->getParameter('app_name'),
-                        ]
-                    ),
-                    'to' => [$user->getEmail() => $user->getName()],
-                    'body' => 'AppBundle:Emails:User/signup_confirmation.html.twig',
-                    'template_data' => [
-                        'user' => $user,
-                    ],
-                ])
-            ;
+            $this->get('app.user_manager')->signupConfirmation($user);
 
             $alert = 'success';
             $alertMessage = $this->get('translator')->trans('signup.confirmation.success');
@@ -104,30 +80,7 @@ class SignupController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $user->setPlainPassword(
-                $user->getPlainPassword(),
-                $this->get('security.password_encoder')
-            );
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            $this->get('app.mailer')
-                ->swiftMessageInitializeAndSend([
-                    'subject' => $this->get('translator')->trans(
-                        'signup.email.subject',
-                        [
-                            '%app_name%' => $this->getParameter('app_name'),
-                        ]
-                    ),
-                    'to' => [$user->getEmail() => $user->getName()],
-                    'body' => 'AppBundle:Emails:User/signup.html.twig',
-                    'template_data' => [
-                        'user' => $user,
-                    ],
-                ])
-            ;
+            $this->get('app.user_manager')->signup($user);
 
             $alert = 'success';
             $alertMessage = $this->get('translator')->trans('signup.success');

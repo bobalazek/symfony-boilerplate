@@ -287,11 +287,29 @@ class User implements AdvancedUserInterface, \Serializable
     protected $resetPasswordCodeExpiresAt;
 
     /**
+     * When the email was activated at?
+     *
      * @var \DateTime
      *
      * @ORM\Column(name="activated_at", type="datetime", nullable=true)
      */
     protected $activatedAt;
+
+    /**
+     * When the mobile number activated at?
+     *
+     * @var \DateTime
+     *
+     * @ORM\Column(name="mobile_activated_at", type="datetime", nullable=true)
+     */
+    protected $mobileActivatedAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="mobile_activation_code_expires_at", type="datetime", nullable=true)
+     */
+    protected $mobileActivationCodeExpiresAt;
 
     /**
      * @Assert\Valid
@@ -1229,6 +1247,50 @@ class User implements AdvancedUserInterface, \Serializable
     public function setActivatedAt(\DateTime $activatedAt = null)
     {
         $this->activatedAt = $activatedAt;
+
+        return $this;
+    }
+
+    /*** Mobile activated at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getMobileActivatedAt()
+    {
+        return $this->mobileActivatedAt;
+    }
+
+    /**
+     * @param \DateTime $mobileActivatedAt
+     *
+     * @return User
+     */
+    public function setMobileActivatedAt(\DateTime $mobileActivatedAt = null)
+    {
+        $this->mobileActivatedAt = $mobileActivatedAt;
+
+        return $this;
+    }
+
+    /*** Mobile Activation Code Expires at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getMobileActivationCodeExpires()
+    {
+        return $this->mobileActivationCodeExpiresAt;
+    }
+
+    /**
+     * @param \DateTime $mobileActivationCodeExpiresAt
+     *
+     * @return User
+     */
+    public function setMobileActivationCodeExpires(\DateTime $mobileActivationCodeExpiresAt = null)
+    {
+        $this->mobileActivationCodeExpiresAt = $mobileActivationCodeExpiresAt;
 
         return $this;
     }

@@ -13,5 +13,3 @@ parameters:
     mailer_encryption: ssl
     
     secret: 'MySuperSecureToken'
-
-    reset_password_expiry_time: '15 minutes'
