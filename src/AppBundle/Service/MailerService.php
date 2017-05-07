@@ -124,7 +124,7 @@ class MailerService
     /**
      * @param \Swift_Message $swiftMessageInstance
      *
-     * @return Mailer
+     * @return MailerService
      */
     public function setSwiftMessageInstance(\Swift_Message $swiftMessageInstance)
     {

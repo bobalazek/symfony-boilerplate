@@ -123,8 +123,6 @@ swiftmailer:
     encryption: "%mailer_encryption%"
     username: "%mailer_user%"
     password: "%mailer_password%"
-    sender_address: "%sender_address%"
-    spool: { type: memory }
 
 # KNP Paginator
 knp_paginator:
