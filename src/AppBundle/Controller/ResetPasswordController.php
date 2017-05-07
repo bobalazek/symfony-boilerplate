@@ -90,7 +90,7 @@ class ResetPasswordController extends Controller
                         $alertMessage = $this->get('translator')->trans('reset_password.request.success');
                     } catch (\Exception $e) {
                         $alert = 'danger';
-                        $alertMessage = $this->get('translator')->trans('something_went_wrong');
+                        $alertMessage = $this->get('translator')->trans('general.something_went_wrong');
                     }
                 }
             } else {

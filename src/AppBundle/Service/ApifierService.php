@@ -23,12 +23,14 @@ class ApifierService
     /**
      * Get a nicer errors format.
      */
-    public function errors(ConstraintViolationList $errors, $errorMessage = 'Ein oder mehrere Felder sind ungültig.')
+    public function errors(ConstraintViolationList $errors, $errorMessage = 'One or more fields are invalid.')
     {
         $errorsWithPaths = [];
 
         foreach ($errors as $error) {
-            $errorsWithPaths[$error->getPropertyPath()] = $error->getMessage();
+            $errorsWithPaths[$error->getPropertyPath()] = $this->container->get('translator')->trans(
+                $error->getMessage()
+            );
         }
 
         return [
@@ -53,7 +55,9 @@ class ApifierService
             $env === 'prod' &&
             !is_a($e, 'AppBundle\Exception\UserException')
         ) {
-            return 'Something went wrong. Please try again.';
+            return $this->container->get('translator')->trans(
+                'general.something_went_wrong'
+            );
         }
 
         return $e->getMessage();
