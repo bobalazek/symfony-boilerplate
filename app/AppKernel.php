@@ -35,7 +35,7 @@ class AppKernel extends Kernel
 
             // Stof
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            
+
             // GEOIP
             new Cravler\MaxMindGeoIpBundle\CravlerMaxMindGeoIpBundle(),
 

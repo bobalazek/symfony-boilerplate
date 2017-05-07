@@ -68,6 +68,7 @@ class SignupController extends Controller
                 ->setActivationCode(null)
                 ->setActivatedAt(new \DateTime())
                 ->enable()
+                ->verifyEmail()
             ;
 
             $em->persist($user);

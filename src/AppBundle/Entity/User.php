@@ -81,7 +81,7 @@ class User implements AdvancedUserInterface, \Serializable
     protected $email;
 
     /**
-     * We must confirm the new password, so temporary save it inside this field.
+     * We must confirm the new email, so temporary save it inside this field.
      *
      * @var string
      *
@@ -127,6 +127,24 @@ class User implements AdvancedUserInterface, \Serializable
     protected $oldPassword;
 
     /**
+     * @var string
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="mobile", type="string", length=255, nullable=true)
+     */
+    protected $mobile;
+
+    /**
+     * We must confirm the new mobile, so temporary save it inside this field.
+     *
+     * @var string
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="new_mobile", type="string", length=255, nullable=true)
+     */
+    protected $newMobile;
+
+    /**
      * @var array
      *
      * @Gedmo\Versioned
@@ -145,6 +163,14 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="token", type="string", length=255, nullable=true)
      */
     protected $token;
+
+    /**
+     * @Assert\Locale()
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="locale", type="string", length=32, nullable=true)
+     */
+    protected $locale = 'en_US';
 
     /**
      * @var bool
@@ -203,6 +229,22 @@ class User implements AdvancedUserInterface, \Serializable
     protected $newsletter = false;
 
     /**
+     * @var bool
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="email_verified", type="boolean")
+     */
+    protected $emailVerified = false;
+
+    /**
+     * @var bool
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="mobile_verified", type="boolean")
+     */
+    protected $mobileVerified = false;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="reset_password_code", type="string", length=255, nullable=true, unique=true)
@@ -215,6 +257,13 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="activation_code", type="string", length=255, nullable=true, unique=true)
      */
     protected $activationCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile_activation_code", type="string", length=255, nullable=true)
+     */
+    protected $mobileActivationCode;
 
     /**
      * @var string
@@ -460,6 +509,50 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
+    /*** Mobile ***/
+
+    /**
+     * @return string
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * @param $mobile
+     *
+     * @return User
+     */
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    /*** New mobile ***/
+
+    /**
+     * @return string
+     */
+    public function getNewMobile()
+    {
+        return $this->newMobile;
+    }
+
+    /**
+     * @param $newMobile
+     *
+     * @return User
+     */
+    public function setNewMobile($newMobile)
+    {
+        $this->newMobile = $newMobile;
+
+        return $this;
+    }
+
     /*** Roles ***/
 
     /**
@@ -572,6 +665,28 @@ class User implements AdvancedUserInterface, \Serializable
     public function setToken($token)
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /*** Locale ***/
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return User
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
 
         return $this;
     }
@@ -836,6 +951,90 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
+    /*** Email verified ***/
+
+    /**
+     * @return bool
+     */
+    public function isEmailVerified()
+    {
+        return $this->emailVerified;
+    }
+
+    /**
+     * @param $emailVerified
+     *
+     * @return User
+     */
+    public function setEmailVerified($emailVerified)
+    {
+        $this->emailVerified = $emailVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function verifyEmail()
+    {
+        $this->setEmailVerified(true);
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function unverifyEmail()
+    {
+        $this->setEmailVerified(false);
+
+        return $this;
+    }
+
+    /*** Mobile verified ***/
+
+    /**
+     * @return bool
+     */
+    public function isMobileVerified()
+    {
+        return $this->mobileVerified;
+    }
+
+    /**
+     * @param $mobileVerified
+     *
+     * @return User
+     */
+    public function setMobileVerified($mobileVerified)
+    {
+        $this->mobileVerified = $mobileVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function verifyMobile()
+    {
+        $this->setMobileVerified(true);
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function unverifyMobile()
+    {
+        $this->setMobileVerified(false);
+
+        return $this;
+    }
+
     /*** Reset password code ***/
 
     /**
@@ -876,6 +1075,28 @@ class User implements AdvancedUserInterface, \Serializable
     public function setActivationCode($activationCode)
     {
         $this->activationCode = $activationCode;
+
+        return $this;
+    }
+
+    /*** Mobile activation code ***/
+
+    /**
+     * @return string
+     */
+    public function getMobileActivationCode()
+    {
+        return $this->mobileActivationCode;
+    }
+
+    /**
+     * @param $mobileActivationCode
+     *
+     * @return User
+     */
+    public function setMobileActivationCode($mobileActivationCode)
+    {
+        $this->mobileActivationCode = $mobileActivationCode;
 
         return $this;
     }
@@ -1148,13 +1369,17 @@ class User implements AdvancedUserInterface, \Serializable
             'name' => $this->getName(),
             'username' => $this->getUsername(),
             'email' => $this->getEmail(),
+            'mobile' => $this->getMobile(),
             'token' => $this->getToken(),
+            'locale' => $this->getLocale(),
             'is_enabled' => $this->isEnabled(),
             'is_verified' => $this->isVerified(),
             'is_warned' => $this->isWarned(),
             'warned_reason' => $this->getWarnedReason(),
             'is_locked' => $this->isLocked(),
             'locked_reason' => $this->getLockedReason(),
+            'is_email_verified' => $this->isEmailVerified(),
+            'is_mobile_verified' => $this->isMobileVerified(),
             'is_super_admin' => $this->isSuperAdmin(),
             'is_admin' => $this->isAdmin(),
             'profile' => $this->getProfile()->toArray(),

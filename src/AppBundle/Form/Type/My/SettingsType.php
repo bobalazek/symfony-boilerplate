@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use AppBundle\Form\Type\ProfileType;
 
 /**
@@ -25,6 +26,7 @@ class SettingsType extends AbstractType
             ])
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
+            ->add('locale', LocaleType::class)
         ;
     }
 

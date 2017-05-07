@@ -55,6 +55,8 @@ class UserAdmin extends AbstractAdmin
                         'label' => 'Repeat password',
                     ],
                 ])
+                ->add('mobile')
+                ->add('locale', 'locale')
             ->end()
             ->with('Roles', ['class' => 'col-md-4'])
                 ->add('roles', 'choice', [
@@ -71,6 +73,8 @@ class UserAdmin extends AbstractAdmin
                 ->add('warnedReason')
                 ->add('locked')
                 ->add('lockedReason')
+                ->add('emailVerified')
+                ->add('mobileVerified')
             ->end()
         ;
     }
@@ -159,7 +163,10 @@ class UserAdmin extends AbstractAdmin
             ->with('Account', ['class' => 'col-md-4'])
                 ->add('username')
                 ->add('email')
-                ->add('newEmail')
+                ->add('mobile')
+                ->add('locale')
+            ->end()
+            ->with('Timestamps', ['class' => 'col-md-4'])
                 ->add('lastActiveAt')
                 ->add('activatedAt')
                 ->add('updatedAt')
@@ -180,6 +187,8 @@ class UserAdmin extends AbstractAdmin
                 ->add('locked')
                 ->add('lockedReason')
                 ->add('newsletter')
+                ->add('emailVerified')
+                ->add('mobileVerified')
             ->end()
             ->with('Actions')
                 ->add('userActions', 'html_template', [

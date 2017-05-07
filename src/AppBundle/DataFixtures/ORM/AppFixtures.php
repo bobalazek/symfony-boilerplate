@@ -47,6 +47,7 @@ class AppFixtures implements FixtureInterface, ContainerAwareInterface
             ->setProfile($profile)
             ->enable()
             ->verify()
+            ->verifyEmail()
         ;
 
         $manager->persist($user);

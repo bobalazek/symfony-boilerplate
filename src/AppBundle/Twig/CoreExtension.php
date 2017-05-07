@@ -64,19 +64,19 @@ class CoreExtension extends Twig_Extension
             return file_get_contents($file);
         }
     }
-    
+
     public function userAgent($userAgentString)
     {
         $agent = new Agent();
         $agent->setUserAgent($userAgentString);
-        
+
         return $agent;
     }
-    
+
     public function geoIp($ipAddress = 'me', $type = 'city')
     {
         $geoIpService = $this->container->get('cravler_max_mind_geo_ip.service.geo_ip_service');
-        
+
         try {
             return $geoIpService->getRecord($ipAddress, $type);
         } catch (\Exception $e) {
