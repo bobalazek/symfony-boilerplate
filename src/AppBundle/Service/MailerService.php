@@ -23,7 +23,7 @@ class MailerService
      *
      * @throws \Exception If subject or recipient (to) are not specified
      */
-    public function swiftMessageInitializeAndSend(array $data, array $attachments = array())
+    public function swiftMessageInitializeAndSend(array $data, array $attachments = [])
     {
         $swiftMessageInstance = \Swift_Message::newInstance();
 
@@ -60,10 +60,10 @@ class MailerService
             $swiftMessageInstance->setBcc($data['bcc']);
         }
 
-        $templateData = array(
+        $templateData = [
             'email' => $to,
             'swiftMessage' => $swiftMessageInstance,
-        );
+        ];
 
         if ($this->container->get('security.token_storage')->getToken()) {
             $templateData['user'] = $this->container->get('security.token_storage')->getToken()->getUser();

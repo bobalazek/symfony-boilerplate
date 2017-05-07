@@ -81,7 +81,7 @@ class UserManagerService
 
         return true;
     }
-    
+
     /**
      * @param User $user
      * @param User $formUser
@@ -89,7 +89,7 @@ class UserManagerService
     public function resetPassword(User $user, User $formUser)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        
+
         $user
             ->setResetPasswordCode(null)
             ->setResetPasswordCodeExpiresAt(null)
@@ -127,7 +127,7 @@ class UserManagerService
 
         return true;
     }
-    
+
     /**
      * @param User $user
      */
@@ -158,7 +158,7 @@ class UserManagerService
                 'subject' => $this->container->get('translator')->trans(
                     'reset_password.request.email.subject',
                     [
-                    '%app_name%' => $this->container->getParameter('app_name'),
+                        '%app_name%' => $this->container->getParameter('app_name'),
                     ]
                 ),
                 'to' => [$user->getEmail() => $user->getName()],
@@ -168,7 +168,7 @@ class UserManagerService
                 ],
             ])
         ;
-        
+
         return true;
     }
 }
