@@ -31,27 +31,3 @@ AppBundle\Entity\Profile:
     user_profile:
         firstName: Normal
         lastName: User
-
-AppBundle\Entity\Project:
-    test_project:
-        name: Test project
-        street: Street
-        houseNumber: HouseNumber
-        postalCode: PostalCode
-        town: Town
-        user: '@super_admin'
-
-AppBundle\Entity\Building:
-    test_building:
-        name: Test building
-        section: Section
-        floorCount: 8
-        project: '@test_project'
-
-AppBundle\Entity\Room:
-    test_room:
-        name: Test room
-        number: Number
-        count: 1
-        floor: 1
-        building: '@test_building'

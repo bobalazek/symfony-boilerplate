@@ -4,13 +4,13 @@ namespace Tests\AppBundle\Controller;
 
 use Tests\AppBundle\WebTestCase;
 
-class AuthControllerTest extends WebTestCase
+class UserSystemControllerTest extends WebTestCase
 {
     public function testPages()
     {
         $routes = [
             'login',
-            'registration',
+            'signup',
             'reset_password',
         ];
 
