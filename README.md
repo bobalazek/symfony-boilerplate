@@ -12,6 +12,7 @@
 * Ability to set [VirtualHost(-s)](http://symfony.com/doc/current/setup/web_server_configuration.html) for Apache OR set the DocumentRoot via the server's admin panel (cPanel or similar)
 * A SSL certificate
 
+
 ## Development
 
 * Clone the repository: `git clone git@github.com:bobalazek/symfony-boilerplate.git`
@@ -28,7 +29,9 @@
   * Install front-end dependencies with bower: `bower install`
 * (optional) You can run the app via a PHP server with: `php bin/console server:run`
 
+
 ## Deployment
+
 **IMPORTANT:** It's SSH Key protected, so your public key will need to be added to the server, if you want to do the deployment or access the server.
 
 * We use [Deployer](http://deployer.org/)
@@ -42,6 +45,11 @@
   * Load the fixtures
     * Navigate to the project current folder (which is just a symlink for the current project folder): `cd /var/www/html/deployment/production/current`
     * Run the fixtures: `php bin/console doctrine:fixtures:load`
+
+```
+Note: whenever you'll change the version here and deploy for the first time, you'll get a "The template "SecurityBundle:Collector:security.html.twig" contains an error: ..." error (email). The reason for that is, that we include ALL the dev bundles (debug & web profiler; composer WITHOUT the --no-dev flag) in the production environment (that is, because we need the "php bin/console doctrine:schema:update" command, that is for some reason only available in development). So for that, I guess, the assetic scrapper finds the security & doctrine bundle templates, but because the environment is set to "prod", the twig function "profiler_dump" isn't being loaded into twig.
+```
+
 
 ## Server
 
@@ -62,10 +70,12 @@
   * GIT (`sudo apt-get install git`)
   * Other stuff: `sudo apt-get install zip unzip wget curl`
 
-Commands
-----------------
+
+## Commands
+
 * Coding Standard fixes: `gulp csfix`
   * Fixes both front- and back-end files
+
 
 ## Tests
 
@@ -81,6 +91,7 @@ Commands
     * `php bin/console twig:yaml src`
     * `php bin/console twig:yaml app`
 
+
 ## Coding Standards
 
 * **Back-end**
@@ -91,9 +102,21 @@ Commands
   * We use [ESLint](https://github.com/adametry/gulp-eslint) (with the [jQuery ESLint Config](https://github.com/jquery/eslint-config-jquery))
   * Run `gulp csfix-frontend`
 
+
+## Versioning
+
+You shall follow the [Semver](http://semver.org/) versioning.
+
+
+## Change log
+
+You shall follow the [Keep a Changelog](http://keepachangelog.com/) format.
+
+
 ## Cron Jobs
 
 * Email spool (in production): `* * * * * php /var/www/html/deployment/production/current/bin/console swiftmailer:spool:send --message-limit=10 --env=prod`
+
 
 ## License
 
