@@ -32,7 +32,7 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN apt-get install -yq nodejs npm
 
 ### NPM
-RUN npm install bower gulp
+RUN npm install -g bower gulp
 
 
 #### Fix node path
