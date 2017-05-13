@@ -30,11 +30,11 @@ RUN mv composer.phar /usr/local/bin/composer
 ## Node
 RUN apt-get install -yq nodejs npm
 
-### NPM
-RUN npm install -g bower gulp
-
 #### Fix node path
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+
+### NPM
+RUN npm install -g bower gulp
 
 # Cleanup
 RUN apt-get clean
