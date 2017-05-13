@@ -27,26 +27,18 @@ RUN apt-get install -yq php php-cli php-mysql php-mcrypt php-curl php-zip php-gd
 RUN curl -s https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
-
 ## Node
 RUN apt-get install -yq nodejs npm
 
 ### NPM
 RUN npm install -g bower gulp
 
-
 #### Fix node path
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
-
 
 # Cleanup
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-# Set workdir
-WORKDIR /
-
-
 # Expose ports
-EXPOSE 80 3306
+EXPOSE 80 443 3306
