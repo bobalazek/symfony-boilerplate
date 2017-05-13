@@ -1,10 +1,21 @@
-app:
+version: '3'
+
+services:
+
+  app:
     build: .
     dockerfile: Dockerfile
     links:
-        - redis
+      - redis
     ports:
-        - "8080:80"
-    
-redis:
+      - 8080:80
+    volumes:
+      - .:/var/www/html
+    expose:
+      - 80
+
+  redis:
     image: redis
+    
+  memcached:
+    image: memcached
