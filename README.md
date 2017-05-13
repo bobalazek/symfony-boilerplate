@@ -1,4 +1,4 @@
-# Blendist Server
+# Symfony Boilerplate
 
 ## Server requirements
 
@@ -47,7 +47,7 @@
     * Run the fixtures: `php bin/console doctrine:fixtures:load`
 
 > **Note:** whenever you'll change the version here and deploy for the first time, you'll get a "The template "SecurityBundle:Collector:security.html.twig" contains an error: ..." error (email).
->The reason for that is, that we include ALL the dev bundles (debug & web profiler; composer WITHOUT the --no-dev flag) in the production environment (that is, because we need the "php bin/console doctrine:schema:update" command, that is for some reason only available in development).
+> The reason for that is, that we include ALL the dev bundles (debug & web profiler; composer WITHOUT the --no-dev flag) in the production environment (that is, because we need the "php bin/console doctrine:schema:update" command, that is for some reason only available in development).
 > So for that, I guess, the assetic scrapper finds the security & doctrine bundle templates, but because the environment is set to "prod", the twig function "profiler_dump" isn't being loaded into twig.
 
 
