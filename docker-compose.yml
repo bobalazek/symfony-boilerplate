@@ -1,19 +1,69 @@
 version: '3'
 
+networks:
+
+    default:
+        driver: bridge
+
 services:
 
-  app:
-    build: .
-    dockerfile: Dockerfile
-    links:
-      - redis
-    ports:
-      - 8080:80
-    volumes:
-      - .:/var/www/html
+    web:
+        build: .
+        links:
+            - apache
+            - php
+            - node
+            - mysql
+            - redis
+            - memcached
+        depends_on:
+            - apache
+            - php
+            - node
+            - mysql
+            - redis
+            - memcached
+        volumes:
+            - .:/var/www/html
+        networks:
+            - default
 
-  redis:
-    image: redis:latest
-    
-  memcached:
-    image: memcached:latest
+    apache:
+        image: httpd
+        volumes:
+            - "./docker/var/logs/apache:/var/log/apache2"
+        networks:
+            - default
+
+    php:
+        image: php
+        networks:
+            - default
+
+    node:
+        image: node
+        networks:
+            - default
+
+    mysql:
+        image: mysql
+        volumes:
+            - "./docker/var/logs/mysql:/var/log/mysql"
+            - "./docker/var/data/mysql:/var/lib/mysql"
+        networks:
+            - default
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: sfbp
+            MYSQL_USER: sfbp
+            MYSQL_PASSWORD: sfbp
+
+    redis:
+        image: redis
+        networks:
+            - default
+
+    memcached:
+        image: memcached
+        networks:
+            - default

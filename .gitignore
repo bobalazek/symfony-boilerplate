@@ -16,6 +16,12 @@
 /vendor/
 /web/bundles/
 
+# Docker
+/docker/var/logs/*
+!/docker/var/logs/.gitkeep
+/docker/var/data/*
+!/docker/var/data/.gitkeep
+
 # MaxMind
 /app/Resources/MaxMind/*
 
