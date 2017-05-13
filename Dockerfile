@@ -5,7 +5,7 @@ FROM phusion/baseimage
 
 # General dependencies
 RUN apt-get update
-RUN apt-get install -yq git curl zip unzip wget curl supervisor
+RUN apt-get install -yq git curl zip wget curl
 
 # PHP dependencies
 RUN curl -s https://getcomposer.org/installer | php
