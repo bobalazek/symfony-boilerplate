@@ -51,6 +51,12 @@
 > So for that, I guess, the assetic scrapper finds the security & doctrine bundle templates, but because the environment is set to "prod", the twig function "profiler_dump" isn't being loaded into twig.
 
 
+# Docker
+
+* We are using [Docker compose] (https://docs.docker.com/compose/)
+* Run `docker-compose up`
+
+
 ## Server
 
 * Should be the typical LAMP stack:
