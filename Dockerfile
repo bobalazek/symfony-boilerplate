@@ -3,9 +3,6 @@
 # General
 FROM phusion/baseimage
 
-## Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
-
 # Install dependencies
 RUN apt-get update
 RUN apt-get install -yq git curl zip unzip wget curl supervisor
@@ -19,6 +16,8 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN a2enmod ssl
 RUN a2enmod rewrite
 RUN service apache2 restart
+
+COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 ### PHP
 RUN apt-get install -yq php php-cli php-mysql php-mcrypt php-curl php-zip php-gd
@@ -41,4 +40,9 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Expose ports
-EXPOSE 80 443 3306
+EXPOSE 80
+EXPOSE 443
+EXPOSE 3306
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
