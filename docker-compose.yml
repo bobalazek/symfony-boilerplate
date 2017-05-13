@@ -15,7 +15,7 @@ services:
       - 80
 
   redis:
-    image: redis
+    image: redis:latest
     
   memcached:
-    image: memcached
+    image: memcached:latest
