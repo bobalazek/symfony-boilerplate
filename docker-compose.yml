@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 networks:
 
@@ -17,13 +17,21 @@ services:
             - mysql
             - redis
             - memcached
+        ports:
+            - "500:80"
+            - "501:443"
         volumes:
-            - .:/var/www/html
+            - ".:/var/www/html"
+            - "/var/www/html/docker" # create an empty directory for the un-needed files
+            - "./docker/apache2/sites-available:/etc/apache2/sites-available"
+            - "./docker/apache2/apache2.conf:/etc/apache2/apache2.conf"
         networks:
             - default
 
     mysql:
         image: mysql
+        ports:
+            - "502:3306"
         volumes:
             - "./docker/var/logs/mysql:/var/log/mysql"
             - "./docker/var/data/mysql:/var/lib/mysql"
@@ -37,10 +45,14 @@ services:
 
     redis:
         image: redis
+        ports:
+            - "503:6379"
         networks:
             - default
 
     memcached:
         image: memcached
+        ports:
+            - "504:11211"
         networks:
             - default
