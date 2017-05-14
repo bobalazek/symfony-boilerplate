@@ -24,6 +24,7 @@ services:
             - ".:/var/www/html"
             - "/var/www/html/docker" # create an empty directory for the un-needed files
             - "./docker/apache2/sites-available:/etc/apache2/sites-available"
+            - "./docker/apache2/sites-enabled:/etc/apache2/sites-enabled"
             - "./docker/apache2/apache2.conf:/etc/apache2/apache2.conf"
         networks:
             - default
