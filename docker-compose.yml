@@ -10,38 +10,15 @@ services:
     web:
         build: .
         links:
-            - apache
-            - php
-            - node
             - mysql
             - redis
             - memcached
         depends_on:
-            - apache
-            - php
-            - node
             - mysql
             - redis
             - memcached
         volumes:
             - .:/var/www/html
-        networks:
-            - default
-
-    apache:
-        image: httpd
-        volumes:
-            - "./docker/var/logs/apache:/var/log/apache2"
-        networks:
-            - default
-
-    php:
-        image: php
-        networks:
-            - default
-
-    node:
-        image: node
         networks:
             - default
 
