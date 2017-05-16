@@ -60,6 +60,7 @@ twig:
             description: "%description%"
             author: "%author%"
             version: "%version%"
+            copyright: "Copyright © %author% 2017. All rights reserved."
             assets_version: "%assets_version%"
             date_format: "%date_format%"
             date_time_format: "%date_time_format%"

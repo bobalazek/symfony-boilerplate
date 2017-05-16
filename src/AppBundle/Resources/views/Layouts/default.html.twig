@@ -5,16 +5,15 @@
     lang="{{ globals.locale }}"
     {% block html_attr %}{% endblock %}>
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}{{ globals.app_name }}{% endblock %}</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta http-equiv="cleartype" content="on" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="MobileOptimized" content="480" />
         {% block metas %}
-            <meta name="author" content="{{ globals.author }}" />
-            <meta name="description" content="{{ globals.description }}" />
+            <meta name="application-name" content="{{ globals.app_name }}">
+            <meta name="description" content="{{ globals.description }}">
+            <link rel="author" href="{{ url('home') | trim('/') }}/humans.txt">
+            <link rel="copyright" href="{{ globals.copyright }}">
         {% endblock %}
         <!-- Stylesheets -->
         {% block stylesheets_before %}{% endblock %}
@@ -26,7 +25,7 @@
                 'assets/vendor/toastr/toastr.min.css'
                 'assets/css/app.css'
                 filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset_url }}" />
+                <link rel="stylesheet" href="{{ asset_url }}">
             {% endstylesheets %}
         {% endblock %}
         {% block stylesheets_after %}{% endblock %}
