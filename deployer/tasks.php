@@ -42,31 +42,43 @@ before('deploy:symlink', 'database:migrate');
 
 /*** Notify success ***/
 task('notify_success', function () {
-    $server = get('server');
+    $host = host(get('hostname'));
     $stage = input()->getArgument('stage');
-    $serverName = $server['name'];
-    $serverHost = $server['host'];
+    $serverName = $server->getHostname();
+    $serverHost = $server->getConfig()->has('host')
+        ? $server->getConfig()->get('host')
+        : 'localhost';
     $branch = get('branch');
     $scheme = get('scheme');
     $baseUrl = get('base_url');
-    $lastTag = trim(
-        runLocally('git describe --tags --abbrev=0')->getOutput()
-    );
-    $commitsSinceLastTag = trim(
-        runLocally('git log '.$lastTag.'..HEAD --oneline')->getOutput()
-    );
     $releases = get('releases_list');
     $previousReleaseDir = '{{deploy_path}}/releases/'.$releases[0];
 
-    $lastReleaseTime = trim(
-        run('find '.$previousReleaseDir.' -maxdepth 0 -printf "%TY-%Tm-%Td %TH:%TM:%TS\n"')->getOutput()
-    );
-    $lastReleaseTimeExploded = explode('.', $lastReleaseTime);
-    $lastReleaseTime = $lastReleaseTimeExploded[0];
-    $lastReleaseTime = new \Datetime($lastReleaseTime);
-    $offset = $lastReleaseTime->getOffset();
-    $lastReleaseTime->add(new \DateInterval('PT'.$offset.'S'));
-    $lastReleaseTime = $lastReleaseTime->format(\DateTime::ISO8601);
+    $lastTag = '';
+    $commitsSinceLastTag = '';
+    try {
+        $lastTag = trim(
+            runLocally('git describe --tags --abbrev=0')->getOutput()
+        );
+        $commitsSinceLastTag = trim(
+            runLocally('git log '.$lastTag.'..HEAD --oneline')->getOutput()
+        );
+    } catch (\Exception $e) {}
+
+    $lastReleaseTime = '0000-00-00T00:00:00+00:00';
+    try {
+        $lastReleaseTime = trim(
+            run('find '.$previousReleaseDir.' -maxdepth 0 -printf "%TY-%Tm-%Td %TH:%TM:%TS\n"')->getOutput()
+        );
+        $lastReleaseTimeExploded = explode('.', $lastReleaseTime);
+        $lastReleaseTime = $lastReleaseTimeExploded[0];
+        $lastReleaseTime = new \Datetime($lastReleaseTime);
+        $offset = $lastReleaseTime->getOffset();
+        $lastReleaseTime->add(new \DateInterval('PT'.$offset.'S'));
+        $lastReleaseTime = $lastReleaseTime->format(\DateTime::ISO8601);
+    } catch (\Exception $e) {
+        // TODO: make it also work for non-ubuntu systems
+    }
 
     $commitsSinceLastDeployment = trim(
         runLocally('git log --date=local --since="'.$lastReleaseTime.'" --oneline')->getOutput()

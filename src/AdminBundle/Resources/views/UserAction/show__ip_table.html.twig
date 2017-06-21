@@ -1,12 +1,19 @@
 {% set record = geo_ip(object.getIp()) %}
 <table class="table">
     <tbody>
-        {% if record.error is defined %}
-            <tr>
-                <td>{{ record.error.getMessage() }}</td>
-            </tr>
-        {% else %}
-            {{dump(record)}}
-        {% endif %}
+        <tr>
+            <td>
+                {% if record.error is defined %}
+                    {{ record.error.getMessage() }}
+                {% else %}
+                    <ul>
+                        {% for key, val in record %}
+                            <b>{{ key }}:</b>
+                            {{ val }}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </td>
+        </tr>
     </tbody>
 </table>
