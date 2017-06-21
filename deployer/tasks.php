@@ -22,6 +22,12 @@ task('deploy:vendors_bower', function () {
 })->desc('Installing bower vendors');
 after('deploy:vendors', 'deploy:vendors_bower');
 
+/*** Database backup ***/
+task('database:backup', function () {
+    run('{{env_vars}} {{bin/php}} {{bin/console}} app:database:backup');
+})->desc('Backing up the current database');
+before('database:migrate', 'database:backup');
+
 /*** Doctrine schema update ***/
 // At least until we don't have a stable production version.
 // From there on on, we shall better use only doctrine migrations
