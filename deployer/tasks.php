@@ -43,16 +43,14 @@ before('deploy:symlink', 'database:migrate');
 /*** Notify success ***/
 task('notify_success', function () {
     $host = host(get('hostname'));
-    $stage = input()->getArgument('stage');
-    $serverName = $server->getHostname();
-    $serverHost = $server->getConfig()->has('host')
-        ? $server->getConfig()->get('host')
+    $stage = get('stage');
+    $serverName = $host->getHostname();
+    $serverHost = $host->getConfig()->has('host')
+        ? $host->getConfig()->get('host')
         : 'localhost';
     $branch = get('branch');
     $scheme = get('scheme');
     $baseUrl = get('base_url');
-    $releases = get('releases_list');
-    $previousReleaseDir = '{{deploy_path}}/releases/'.$releases[0];
 
     $lastTag = '';
     $commitsSinceLastTag = '';
@@ -63,21 +61,24 @@ task('notify_success', function () {
         $commitsSinceLastTag = trim(
             runLocally('git log '.$lastTag.'..HEAD --oneline')->getOutput()
         );
-    } catch (\Exception $e) {}
+    } catch (\Exception $e) {
+    }
 
     $lastReleaseTime = '0000-00-00T00:00:00+00:00';
-    try {
-        $lastReleaseTime = trim(
-            run('find '.$previousReleaseDir.' -maxdepth 0 -printf "%TY-%Tm-%Td %TH:%TM:%TS\n"')->getOutput()
-        );
-        $lastReleaseTimeExploded = explode('.', $lastReleaseTime);
-        $lastReleaseTime = $lastReleaseTimeExploded[0];
-        $lastReleaseTime = new \Datetime($lastReleaseTime);
-        $offset = $lastReleaseTime->getOffset();
-        $lastReleaseTime->add(new \DateInterval('PT'.$offset.'S'));
-        $lastReleaseTime = $lastReleaseTime->format(\DateTime::ISO8601);
-    } catch (\Exception $e) {
-        // TODO: make it also work for non-ubuntu systems
+    if (has('previous_release')) {
+        try {
+            $lastReleaseTime = trim(
+                run('find {{previous_release}} -maxdepth 0 -printf "%TY-%Tm-%Td %TH:%TM:%TS\n"')->getOutput()
+            );
+            $lastReleaseTimeExploded = explode('.', $lastReleaseTime);
+            $lastReleaseTime = $lastReleaseTimeExploded[0];
+            $lastReleaseTime = new \Datetime($lastReleaseTime);
+            $offset = $lastReleaseTime->getOffset();
+            $lastReleaseTime->add(new \DateInterval('PT'.$offset.'S'));
+            $lastReleaseTime = $lastReleaseTime->format(\DateTime::ISO8601);
+        } catch (\Exception $e) {
+            // TODO: make it also work for non-unix systems
+        }
     }
 
     $commitsSinceLastDeployment = trim(
