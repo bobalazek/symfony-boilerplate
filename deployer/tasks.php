@@ -41,7 +41,7 @@ after('database:migrate', 'database:schema_update');
 before('deploy:symlink', 'database:migrate');
 
 /*** Notify success ***/
-task('notify_success', function () {
+task('notify:success', function () {
     $host = host(get('hostname'));
     $stage = get('stage');
     $serverName = $host->getHostname();
@@ -98,7 +98,7 @@ task('notify_success', function () {
         '--commits-since-last-deployment="'.escapeMultilineString($commitsSinceLastDeployment).'"'
     );
 })->desc('Notifying team about the successful deplyment');
-after('success', 'notify_success');
+after('success', 'notify:success');
 
 /*** Unlock on failed deployment ***/
 after('deploy:failed', 'deploy:unlock');
