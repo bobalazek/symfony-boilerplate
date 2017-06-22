@@ -83,6 +83,25 @@
   * Fixes both front- and back-end files
 
 
+## Stages
+
+* Development (`dev`)
+    * Description: This is normally the stage in which you work on locally.
+    * Branch: `develop` (or rather the specific branch for the feature / bug / hotfix / ... you are currently working on)
+* Testing (`test`)
+    * Description: In this stage we do (functional / integration / unit) tests for the application. Locally and / or the CI / CD server. Should have a separate database just for the tests.
+    * Branch: `develop`
+* QA (`qa`)
+    * Description: Is the total bleeding-edge / current version of the application. Used for testing only internally by the company developers / testers. May contain many bugs. Runs on a separate qa database.
+    * Branch: `develop`
+* Beta (`beta`)
+    * Description: Most things already work fine, so external users can already use it, but it may still contain bugs. Runs on the production database.
+    * Branch: `beta`
+* Production (`prod`)
+    * Description: The live version for the users.
+    * Branch: `master`
+
+
 ## Tests
 
 * You'll need to create a new database:
