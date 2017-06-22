@@ -4,12 +4,11 @@ namespace Deployer;
 
 // Make sure that stuff works before you push it to the server!
 task('test', function () {
-    // TODO: maybe prepend the {{bin/php}}?
-    runLocally('{{env_vars}} vendor/bin/simple-phpunit');
-    runLocally('{{env_vars}} bin/console lint:yaml src');
-    runLocally('{{env_vars}} bin/console lint:yaml app');
-    runLocally('{{env_vars}} bin/console lint:twig src');
-    runLocally('{{env_vars}} bin/console lint:twig app');
+    runLocally('{{env_vars}} {{bin/php}} vendor/bin/simple-phpunit');
+    runLocally('{{env_vars}} {{bin/php}} bin/console lint:yaml src');
+    runLocally('{{env_vars}} {{bin/php}} bin/console lint:yaml app');
+    runLocally('{{env_vars}} {{bin/php}} bin/console lint:twig src');
+    runLocally('{{env_vars}} {{bin/php}} bin/console lint:twig app');
 })->desc('Running tests before the deployment');
 before('deploy', 'test');
 
