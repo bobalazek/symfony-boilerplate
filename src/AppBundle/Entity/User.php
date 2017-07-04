@@ -8,9 +8,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -39,14 +37,15 @@ class User implements AdvancedUserInterface, \Serializable
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
-        ORMBehaviors\Timestampable\Timestampable
+        ORMBehaviors\Timestampable\Timestampable,
+        User\VerifiedTrait,
+        User\StatesTrait,
+        User\RolesTrait,
+        User\CodesTrait,
+        User\TimestampsTrait,
+        User\PasswordsTrait,
+        User\EmailsTrait
     ;
-
-    public static $rolesAvailable = [
-        'Super admin' => 'ROLE_SUPER_ADMIN',
-        'Admin' => 'ROLE_ADMIN',
-        'User' => 'ROLE_USER',
-    ];
 
     /**
      * @var int
@@ -69,67 +68,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @Gedmo\Versioned
-     * @Assert\NotBlank(
-     *     groups={"signup", "my.settings", "reset_password_request", "edit"}
-     * )
-     * @Assert\Email(
-     *     groups={"signup", "my.settings", "reset_password_request", "edit"}
-     * )
-     *
-     * @ORM\Column(name="email", type="string", length=128, unique=true)
-     */
-    protected $email;
-
-    /**
-     * We must confirm the new email, so temporary save it inside this field.
-     *
-     * @var string
-     *
-     * @Gedmo\Versioned
-     * @Assert\Email(
-     *     groups={"my.settings"}
-     * )
-     *
-     * @ORM\Column(name="new_email", type="string", length=128, nullable=true)
-     */
-    protected $newEmail;
-
-    /**
-     * @var string
-     *
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    protected $password;
-
-    /**
-     * Used only when saving the user.
-     *
-     * @var string
-     *
-     * @Assert\NotBlank(
-     *     groups={"signup", "my.password", "reset_password"}
-     * )
-     */
-    protected $plainPassword;
-
-    /**
-     * Used only when saving a new password.
-     *
-     * @var string
-     *
-     * @SecurityAssert\UserPassword(
-     *     message="Wrong value for your current password",
-     *     groups={"my.password"}
-     * )
-     */
-    protected $oldPassword;
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Versioned
      * @ORM\Column(name="mobile", type="string", length=255, nullable=true)
      */
     protected $mobile;
@@ -143,14 +81,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="new_mobile", type="string", length=255, nullable=true)
      */
     protected $newMobile;
-
-    /**
-     * @var array
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="roles", type="json_array")
-     */
-    protected $roles = ['ROLE_USER'];
 
     /**
      * @var string
@@ -171,145 +101,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="locale", type="string", length=32, nullable=true)
      */
     protected $locale = 'en_US';
-
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="enabled", type="boolean")
-     */
-    protected $enabled = false;
-
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="verified", type="boolean")
-     */
-    protected $verified = false;
-
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="warned", type="boolean")
-     */
-    protected $warned = false;
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="warned_reason", type="text", nullable=true)
-     */
-    protected $warnedReason;
-
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="locked", type="boolean")
-     */
-    protected $locked = false;
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="locked_reason", type="text", nullable=true)
-     */
-    protected $lockedReason;
-
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="newsletter", type="boolean")
-     */
-    protected $newsletter = false;
-
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="email_verified", type="boolean")
-     */
-    protected $emailVerified = false;
-
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="mobile_verified", type="boolean")
-     */
-    protected $mobileVerified = false;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="reset_password_code", type="string", length=255, nullable=true, unique=true)
-     */
-    protected $resetPasswordCode;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="activation_code", type="string", length=255, nullable=true, unique=true)
-     */
-    protected $activationCode;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mobile_activation_code", type="string", length=255, nullable=true)
-     */
-    protected $mobileActivationCode;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="new_email_code", type="string", length=255, nullable=true, unique=true)
-     */
-    protected $newEmailCode;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="last_active_at", type="datetime", nullable=true)
-     */
-    protected $lastActiveAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="reset_password_code_expires_at", type="datetime", nullable=true)
-     */
-    protected $resetPasswordCodeExpiresAt;
-
-    /**
-     * When the email was activated at?
-     *
-     * @var \DateTime
-     *
-     * @ORM\Column(name="activated_at", type="datetime", nullable=true)
-     */
-    protected $activatedAt;
-
-    /**
-     * When the mobile number activated at?
-     *
-     * @var \DateTime
-     *
-     * @ORM\Column(name="mobile_activated_at", type="datetime", nullable=true)
-     */
-    protected $mobileActivatedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="mobile_activation_code_expires_at", type="datetime", nullable=true)
-     */
-    protected $mobileActivationCodeExpiresAt;
 
     /**
      * @Assert\Valid
@@ -405,128 +196,6 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** Email ***/
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /*** New email ***/
-
-    /**
-     * @return string
-     */
-    public function getNewEmail()
-    {
-        return $this->newEmail;
-    }
-
-    /**
-     * @param $newEmail
-     *
-     * @return User
-     */
-    public function setNewEmail($newEmail)
-    {
-        $this->newEmail = $newEmail;
-
-        return $this;
-    }
-
-    /*** Password ***/
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        if (!empty($password)) {
-            $this->password = $password;
-        }
-
-        return $this;
-    }
-
-    /*** Plain password ***/
-
-    /**
-     * @return string
-     */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param $plainPassword
-     * @param EncoderFactory $encoderFactory
-     *
-     * @return User
-     */
-    public function setPlainPassword($plainPassword, UserPasswordEncoder $encoder = null)
-    {
-        $this->plainPassword = $plainPassword;
-
-        if ($encoder !== null) {
-            $password = $encoder->encodePassword(
-                $this,
-                $plainPassword
-            );
-
-            $this->setPassword($password);
-        }
-
-        return $this;
-    }
-
-    /*** Old password ***/
-
-    /**
-     * @return string
-     */
-    public function getOldPassword()
-    {
-        return $this->oldPassword;
-    }
-
-    /**
-     * @param $oldPassword
-     *
-     * @return User
-     */
-    public function setOldPassword($oldPassword)
-    {
-        $this->oldPassword = $oldPassword;
-
-        return $this;
-    }
-
     /*** Mobile ***/
 
     /**
@@ -569,78 +238,6 @@ class User implements AdvancedUserInterface, \Serializable
         $this->newMobile = $newMobile;
 
         return $this;
-    }
-
-    /*** Roles ***/
-
-    /**
-     * @return array
-     */
-    public function getRoles()
-    {
-        $roles = is_array($this->roles)
-            ? $this->roles
-            : []
-        ;
-
-        $roles[] = 'ROLE_USER';
-
-        return (array) array_unique($roles, SORT_REGULAR);
-    }
-
-    /**
-     * @param array $roles
-     *
-     * @return User
-     */
-    public function setRoles(array $roles = ['ROLE_USER'])
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @param string $role
-     *
-     * @return bool
-     */
-    public function addRole($role)
-    {
-        $this->roles[] = $role;
-
-        $this->roles = (array) array_unique($this->roles, SORT_REGULAR);
-
-        return $this;
-    }
-
-    /**
-     * @param string $role
-     *
-     * @return bool
-     */
-    public function hasRole($role)
-    {
-        return in_array(
-            $role,
-            $this->getRoles()
-        );
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return $this->hasRole('ROLE_ADMIN') || $this->isSuperAdmin();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSuperAdmin()
-    {
-        return $this->hasRole('ROLE_SUPER_ADMIN');
     }
 
     /*** Salt ***/
@@ -709,592 +306,6 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** Enabled ***/
-
-    /**
-     * @return bool
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * @param $enabled
-     *
-     * @return User
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function enable()
-    {
-        $this->setEnabled(true);
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function disable()
-    {
-        $this->setEnabled(false);
-
-        return $this;
-    }
-
-    /*** Verified ***/
-
-    /**
-     * @return bool
-     */
-    public function isVerified()
-    {
-        return $this->verified;
-    }
-
-    /**
-     * @param $verified
-     *
-     * @return User
-     */
-    public function setVerified($verified)
-    {
-        $this->verified = $verified;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function verify()
-    {
-        $this->setVerified(true);
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function unverify()
-    {
-        $this->setVerified(false);
-
-        return $this;
-    }
-
-    /*** Warned ***/
-
-    /**
-     * @return bool
-     */
-    public function isWarned()
-    {
-        return $this->warned;
-    }
-
-    /**
-     * @param $warned
-     *
-     * @return User
-     */
-    public function setWarned($warned)
-    {
-        $this->warned = $warned;
-
-        return $this;
-    }
-
-    /*** Warned reason ***/
-
-    /**
-     * @return string
-     */
-    public function getWarnedReason()
-    {
-        return $this->warnedReason;
-    }
-
-    /**
-     * @param $warnedReason
-     *
-     * @return User
-     */
-    public function setWarnedReason($warnedReason)
-    {
-        $this->warnedReason = $warnedReason;
-
-        return $this;
-    }
-
-    /**
-     * @param $reason
-     *
-     * @return User
-     */
-    public function warn($reason)
-    {
-        $this->setWarned(true);
-        $this->setWarnedReason($reason);
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function unwarn()
-    {
-        $this->setWarned(false);
-        $this->setLockedReason(null);
-
-        return $this;
-    }
-
-    /*** Locked ***/
-
-    /**
-     * @return bool
-     */
-    public function isLocked()
-    {
-        return $this->locked;
-    }
-
-    /**
-     * @param $locked
-     *
-     * @return User
-     */
-    public function setLocked($locked)
-    {
-        $this->locked = $locked;
-
-        return $this;
-    }
-
-    /**
-     * @param $reason
-     *
-     * @return User
-     */
-    public function lock($reason = '')
-    {
-        $this->setLocked(true);
-        $this->setLockedReason($reason);
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function unlock()
-    {
-        $this->setLocked(false);
-        $this->setLockedReason(null);
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAccountNonLocked()
-    {
-        return !$this->isLocked();
-    }
-
-    /*** Locked reason ***/
-
-    /**
-     * @return string
-     */
-    public function getLockedReason()
-    {
-        return $this->lockedReason;
-    }
-
-    /**
-     * @param $lockedReason
-     *
-     * @return User
-     */
-    public function setLockedReason($lockedReason)
-    {
-        $this->lockedReason = $lockedReason;
-
-        return $this;
-    }
-
-    /*** Newsletter ***/
-
-    /**
-     * @return bool
-     */
-    public function getNewsletter()
-    {
-        return $this->newsletter;
-    }
-
-    /**
-     * Just an alias for the isNewsletter method.
-     *
-     * @return bool
-     */
-    public function hasNewsletter()
-    {
-        return $this->getNewsletter();
-    }
-
-    /**
-     * @param $newsletter
-     *
-     * @return User
-     */
-    public function setNewsletter($newsletter)
-    {
-        $this->newsletter = $newsletter;
-
-        return $this;
-    }
-
-    /*** Email verified ***/
-
-    /**
-     * @return bool
-     */
-    public function isEmailVerified()
-    {
-        return $this->emailVerified;
-    }
-
-    /**
-     * @param $emailVerified
-     *
-     * @return User
-     */
-    public function setEmailVerified($emailVerified)
-    {
-        $this->emailVerified = $emailVerified;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function verifyEmail()
-    {
-        $this->setEmailVerified(true);
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function unverifyEmail()
-    {
-        $this->setEmailVerified(false);
-
-        return $this;
-    }
-
-    /*** Mobile verified ***/
-
-    /**
-     * @return bool
-     */
-    public function isMobileVerified()
-    {
-        return $this->mobileVerified;
-    }
-
-    /**
-     * @param $mobileVerified
-     *
-     * @return User
-     */
-    public function setMobileVerified($mobileVerified)
-    {
-        $this->mobileVerified = $mobileVerified;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function verifyMobile()
-    {
-        $this->setMobileVerified(true);
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function unverifyMobile()
-    {
-        $this->setMobileVerified(false);
-
-        return $this;
-    }
-
-    /*** Reset password code ***/
-
-    /**
-     * @return string
-     */
-    public function getResetPasswordCode()
-    {
-        return $this->resetPasswordCode;
-    }
-
-    /**
-     * @param $resetPasswordCode
-     *
-     * @return User
-     */
-    public function setResetPasswordCode($resetPasswordCode)
-    {
-        $this->resetPasswordCode = $resetPasswordCode;
-
-        return $this;
-    }
-
-    /*** Activation code ***/
-
-    /**
-     * @return string
-     */
-    public function getActivationCode()
-    {
-        return $this->activationCode;
-    }
-
-    /**
-     * @param $activationCode
-     *
-     * @return User
-     */
-    public function setActivationCode($activationCode)
-    {
-        $this->activationCode = $activationCode;
-
-        return $this;
-    }
-
-    /*** Mobile activation code ***/
-
-    /**
-     * @return string
-     */
-    public function getMobileActivationCode()
-    {
-        return $this->mobileActivationCode;
-    }
-
-    /**
-     * @param $mobileActivationCode
-     *
-     * @return User
-     */
-    public function setMobileActivationCode($mobileActivationCode)
-    {
-        $this->mobileActivationCode = $mobileActivationCode;
-
-        return $this;
-    }
-
-    /*** New email code ***/
-
-    /**
-     * @return string
-     */
-    public function getNewEmailCode()
-    {
-        return $this->newEmailCode;
-    }
-
-    /**
-     * @param $newEmailCode
-     *
-     * @return User
-     */
-    public function setNewEmailCode($newEmailCode)
-    {
-        $this->newEmailCode = $newEmailCode;
-
-        return $this;
-    }
-
-    /*** Last active at ***/
-
-    /**
-     * @return \DateTime
-     */
-    public function getLastActiveAt()
-    {
-        return $this->lastActiveAt;
-    }
-
-    /**
-     * @param \DateTime $lastActiveAt
-     *
-     * @return User
-     */
-    public function setLastActiveAt(\DateTime $lastActiveAt = null)
-    {
-        $this->lastActiveAt = $lastActiveAt;
-
-        return $this;
-    }
-
-    /*** Reset Password Code Expires at ***/
-
-    /**
-     * @return \DateTime
-     */
-    public function getResetPasswordCodeExpiresAt()
-    {
-        return $this->resetPasswordCodeExpiresAt;
-    }
-
-    /**
-     * @param \DateTime $resetPasswordCodeExpiresAt
-     *
-     * @return User
-     */
-    public function setResetPasswordCodeExpiresAt(\DateTime $resetPasswordCodeExpiresAt = null)
-    {
-        $this->resetPasswordCodeExpiresAt = $resetPasswordCodeExpiresAt;
-
-        return $this;
-    }
-
-    /*** Expired ***/
-
-    /**
-     * @return bool
-     */
-    public function isExpired()
-    {
-        return $this->expired;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAccountNonExpired()
-    {
-        return !$this->isExpired();
-    }
-
-    /*** Credentials expired ***/
-
-    /**
-     * @return bool
-     */
-    public function getCredentialsExpired()
-    {
-        return $this->credentialsExpired;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCredentialsExpired()
-    {
-        return $this->getCredentialsExpired();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCredentialsNonExpired()
-    {
-        return !$this->isExpired();
-    }
-
-    /*** Activated at ***/
-
-    /**
-     * @return \DateTime
-     */
-    public function getActivatedAt()
-    {
-        return $this->activatedAt;
-    }
-
-    /**
-     * @param \DateTime $activatedAt
-     *
-     * @return User
-     */
-    public function setActivatedAt(\DateTime $activatedAt = null)
-    {
-        $this->activatedAt = $activatedAt;
-
-        return $this;
-    }
-
-    /*** Mobile activated at ***/
-
-    /**
-     * @return \DateTime
-     */
-    public function getMobileActivatedAt()
-    {
-        return $this->mobileActivatedAt;
-    }
-
-    /**
-     * @param \DateTime $mobileActivatedAt
-     *
-     * @return User
-     */
-    public function setMobileActivatedAt(\DateTime $mobileActivatedAt = null)
-    {
-        $this->mobileActivatedAt = $mobileActivatedAt;
-
-        return $this;
-    }
-
-    /*** Mobile Activation Code Expires at ***/
-
-    /**
-     * @return \DateTime
-     */
-    public function getMobileActivationCodeExpires()
-    {
-        return $this->mobileActivationCodeExpiresAt;
-    }
-
-    /**
-     * @param \DateTime $mobileActivationCodeExpiresAt
-     *
-     * @return User
-     */
-    public function setMobileActivationCodeExpires(\DateTime $mobileActivationCodeExpiresAt = null)
-    {
-        $this->mobileActivationCodeExpiresAt = $mobileActivationCodeExpiresAt;
-
-        return $this;
-    }
-
     /*** Profile ***/
 
     /**
@@ -1343,6 +354,50 @@ class User implements AdvancedUserInterface, \Serializable
         $this->userActions = $userActions;
 
         return $this;
+    }
+
+    /*** Expired ***/
+
+    /**
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return $this->expired;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAccountNonExpired()
+    {
+        return !$this->isExpired();
+    }
+
+    /*** Credentials expired ***/
+
+    /**
+     * @return bool
+     */
+    public function getCredentialsExpired()
+    {
+        return $this->credentialsExpired;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCredentialsExpired()
+    {
+        return $this->getCredentialsExpired();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCredentialsNonExpired()
+    {
+        return !$this->isExpired();
     }
 
     /**
