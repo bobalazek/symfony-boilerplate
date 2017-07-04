@@ -16,38 +16,38 @@ class CoreExtension extends Twig_Extension
 
     public function getFunctions()
     {
-        return array(
+        return [
             new Twig_SimpleFunction(
                 'file_get_contents',
-                array(
+                [
                     $this,
                     'fileGetContents',
-                ),
-                array(
-                    'is_safe' => array('html'),
-                )
+                ],
+                [
+                    'is_safe' => ['html'],
+                ]
             ),
             new Twig_SimpleFunction(
                 'user_agent',
-                array(
+                [
                     $this,
                     'userAgent',
-                ),
-                array(
-                    'is_safe' => array('html'),
-                )
+                ],
+                [
+                    'is_safe' => ['html'],
+                ]
             ),
             new Twig_SimpleFunction(
                 'geo_ip',
-                array(
+                [
                     $this,
                     'geoIp',
-                ),
-                array(
-                    'is_safe' => array('html'),
-                )
+                ],
+                [
+                    'is_safe' => ['html'],
+                ]
             ),
-        );
+        ];
     }
 
     public function fileGetContents($file)

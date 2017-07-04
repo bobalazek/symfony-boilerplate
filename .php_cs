@@ -11,6 +11,7 @@ return PhpCsFixer\Config::create()
         '@PSR1' => true,
         '@PSR2' => true,
         '@Symfony' => true,
+        'array_syntax' => ['syntax' => 'short'],
     ))
     ->setFinder($finder)
 ;

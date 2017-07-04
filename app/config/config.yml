@@ -15,13 +15,14 @@ parameters:
     assets_version: 'v2017-03-28-00-00'
     date_format: "d.m.Y"
     date_time_format: "d.m.Y H:i:s"
-    knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
     uploads_directory: '%kernel.root_dir%/../web/assets/uploads'
     uploads_path: '/assets/uploads'
     reset_password_expiry_time: '15 minutes'
     mobile_activation_code_expiry_time: '15 minutes'
     deployment_emails: # to whom should the email be sent, after a successful deployment?
         bobalazek124@gmail.com: 'Borut'
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
+    security.authentication.listener.form.class: AppBundle\EventListener\UsernamePasswordFormAuthenticationListener
 
 framework:
     secret: "%secret%"
@@ -102,7 +103,7 @@ doctrine:
             softdeleteabletrash:
                 class: Picoss\SonataExtraAdminBundle\Filter\SoftDeleteableTrashFilter
                 enabled: true
-        
+
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/../src/AppBundle/Migrations"
     namespace: AppBundle\Migrations

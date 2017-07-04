@@ -16,8 +16,10 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     protected $em;
     protected $userActionsService;
 
-    public function __construct(EntityManager $em, UserActionsService $userActionsService)
-    {
+    public function __construct(
+        EntityManager $em,
+        UserActionsService $userActionsService
+    ) {
         $this->em = $em;
         $this->userActionsService = $userActionsService;
     }
@@ -43,7 +45,7 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AuthenticationEvents::AUTHENTICATION_FAILURE => array('onAuthenticationFailure'),
+            AuthenticationEvents::AUTHENTICATION_FAILURE => ['onAuthenticationFailure'],
         ];
     }
 }

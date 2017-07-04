@@ -17,7 +17,7 @@ class EmogrifierService
      * @param array twigTemplateData
      * @param bool isTwigTemplate
      */
-    public function convert($twigTemplatePathOrContent, $twigTemplateData = array(), $isTwigTemplate = true)
+    public function convert($twigTemplatePathOrContent, $twigTemplateData = [], $isTwigTemplate = true)
     {
         $emogrifier = new Emogrifier();
 
@@ -27,9 +27,9 @@ class EmogrifierService
                 'AppBundle::Emails/blank.html.twig',
                 array_merge(
                     $twigTemplateData,
-                    array(
+                    [
                         'content' => $twigTemplatePathOrContent,
-                    )
+                    ]
                 )
             )
         ;

@@ -20,7 +20,7 @@ class UserActionsService
      *
      * @return bool
      */
-    public function add($key, $message, array $data = array(), User $user = null)
+    public function add($key, $message, array $data = [], User $user = null)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
         $token = $this->container->get('security.token_storage')->getToken();

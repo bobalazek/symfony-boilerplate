@@ -10,7 +10,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use AppBundle\Entity\User\TwoFactorTrait;
 
 /**
  * User Entity.

@@ -67,13 +67,11 @@ class SecuritySubscriber implements EventSubscriberInterface
         }
     }
 
-    // TODO: Implement logout event
-
     public static function getSubscribedEvents()
     {
         return [
-            SecurityEvents::INTERACTIVE_LOGIN => array('onInteractiveLogin'),
-            SecurityEvents::SWITCH_USER => array('onSwitchUser'),
+            SecurityEvents::INTERACTIVE_LOGIN => ['onInteractiveLogin'],
+            SecurityEvents::SWITCH_USER => ['onSwitchUser'],
         ];
     }
 }

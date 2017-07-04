@@ -22,7 +22,7 @@ class SettingsType extends AbstractType
                 'label' => false,
                 'by_reference' => true,
                 'data_class' => 'AppBundle\Entity\Profile',
-                'validation_groups' => array('my.settings'),
+                'validation_groups' => ['my.settings'],
             ])
             ->add('username', TextType::class)
             ->add('email', EmailType::class)

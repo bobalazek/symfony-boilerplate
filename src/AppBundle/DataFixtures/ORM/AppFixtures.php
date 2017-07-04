@@ -42,7 +42,7 @@ class AppFixtures implements FixtureInterface, ContainerAwareInterface
                 'password',
                 $this->container->get('security.password_encoder')
             )
-            ->setRoles(array('ROLE_SUPER_ADMIN'))
+            ->setRoles(['ROLE_SUPER_ADMIN'])
             ->setActivatedAt(new \DateTime())
             ->setProfile($profile)
             ->enable()

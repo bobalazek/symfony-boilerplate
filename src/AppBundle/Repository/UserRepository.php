@@ -9,6 +9,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * @param string $username
+     */
     public function findByUsernameOrEmail($username)
     {
         $user = $this->createQueryBuilder('u')
@@ -24,6 +27,10 @@ class UserRepository extends EntityRepository
         return $user;
     }
 
+    /**
+     * @param string $id
+     * @param string $token
+     */
     public function findByIdAndToken($id, $token)
     {
         $user = $this->createQueryBuilder('u')
