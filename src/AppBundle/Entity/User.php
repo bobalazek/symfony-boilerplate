@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use AppBundle\Entity\User\TwoFactorTrait;
 
 /**
  * User Entity.
@@ -44,7 +45,9 @@ class User implements AdvancedUserInterface, \Serializable
         User\CodesTrait,
         User\TimestampsTrait,
         User\PasswordsTrait,
-        User\EmailsTrait
+        User\EmailTrait,
+        User\MobileTrait,
+        User\TwoFactorTrait
     ;
 
     /**
@@ -63,24 +66,6 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="username", type="string", length=64, unique=true)
      */
     protected $username;
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="mobile", type="string", length=255, nullable=true)
-     */
-    protected $mobile;
-
-    /**
-     * We must confirm the new mobile, so temporary save it inside this field.
-     *
-     * @var string
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="new_mobile", type="string", length=255, nullable=true)
-     */
-    protected $newMobile;
 
     /**
      * @var string
@@ -192,50 +177,6 @@ class User implements AdvancedUserInterface, \Serializable
     public function setUsername($username)
     {
         $this->username = $username;
-
-        return $this;
-    }
-
-    /*** Mobile ***/
-
-    /**
-     * @return string
-     */
-    public function getMobile()
-    {
-        return $this->mobile;
-    }
-
-    /**
-     * @param $mobile
-     *
-     * @return User
-     */
-    public function setMobile($mobile)
-    {
-        $this->mobile = $mobile;
-
-        return $this;
-    }
-
-    /*** New mobile ***/
-
-    /**
-     * @return string
-     */
-    public function getNewMobile()
-    {
-        return $this->newMobile;
-    }
-
-    /**
-     * @param $newMobile
-     *
-     * @return User
-     */
-    public function setNewMobile($newMobile)
-    {
-        $this->newMobile = $newMobile;
 
         return $this;
     }

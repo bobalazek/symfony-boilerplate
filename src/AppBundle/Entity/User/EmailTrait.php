@@ -2,10 +2,12 @@
 
 namespace AppBundle\Entity\User;
 
+use AppBundle\Entity\User;
+
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-trait EmailsTrait
+trait EmailTrait
 {
     /**
      * @var string

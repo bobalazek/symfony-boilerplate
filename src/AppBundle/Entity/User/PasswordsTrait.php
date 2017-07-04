@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\User;
 
+use AppBundle\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
