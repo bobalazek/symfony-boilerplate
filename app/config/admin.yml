@@ -5,8 +5,9 @@ sonata_block:
             contexts: [admin]
 
 sonata_admin:
-    title: "%app_name%"
-    
+    title: "Administration"
+    title_logo: 'http://corcosoft.com/assets/images/logo/icon.png'
+
 services:
     admin.user:
         class: AdminBundle\Admin\UserAdmin
@@ -35,4 +36,3 @@ services:
               label: User Actions
         calls:
             - [setContainer, ["@service_container"]]
-
