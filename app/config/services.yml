@@ -14,12 +14,12 @@ services:
         class: AppBundle\Service\UserActionsService
         calls:
             - [setContainer, ["@service_container"]]
-            
+
     app.user_manager:
         class: AppBundle\Service\UserManagerService
         calls:
             - [setContainer, ["@service_container"]]
-    
+
     app.apifier:
         class: AppBundle\Service\ApifierService
         arguments: ["@request_stack"]
@@ -33,27 +33,27 @@ services:
             - { name: twig.extension }
         calls:
             - [setContainer, ["@service_container"]]
-    
+
     app.user_provider:
         class: AppBundle\Security\UserProvider
         arguments: [ "@doctrine.orm.entity_manager" ]
-    
+
     app.token_authenticator:
         class: AppBundle\Security\TokenAuthenticator
-    
+
     # Event Subscribers & Listeners
     app.authentication_subscriber:
         class: AppBundle\EventSubscriber\AuthenticationSubscriber
         tags:
             - { name: kernel.event_subscriber }
         arguments: [ "@doctrine.orm.entity_manager", "@app.user_actions" ]
-        
+
     app.security_subscriber:
         class: AppBundle\EventSubscriber\SecuritySubscriber
         tags:
             - { name: kernel.event_subscriber }
         arguments: [ "@security.token_storage", "@security.authorization_checker", "@app.user_actions" ]
-    
+
     app.logout_listener:
         class: AppBundle\EventListener\LogoutListener
         arguments: [ "@app.user_actions" ]
@@ -71,6 +71,11 @@ services:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
+
+    app.brute_force_listener:
+        class: AppBundle\EventListener\BruteForceAttemptListener
+        tags:
+            - { name: kernel.event_listener, event: security.brute_force_attempt, method: onBruteForceAttempt }
 
     # Form types
     app.form.type.user:

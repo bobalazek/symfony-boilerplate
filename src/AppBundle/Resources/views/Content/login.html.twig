@@ -6,7 +6,7 @@
     <h1>{{ 'Login' | trans }}</h1>
     {% if error %}
         <div class="alert alert-danger">
-            {{ error.messageKey | trans(error.messageData) }}
+            {{ error.getMessage() | trans(error.messageData) }}
         </div>
     {% endif %}
     <form action="{{ path('login') }}" method="post">
