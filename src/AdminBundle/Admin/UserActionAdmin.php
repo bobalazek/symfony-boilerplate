@@ -128,7 +128,7 @@ class UserActionAdmin extends AbstractAdmin
             ->end()
             ->with('Data')
                 ->add('data', 'html_template', [
-                    'html' => '{{ dump(value) }}',
+                    'html' => "{% include 'AdminBundle:UserAction:show__data_table.html.twig' %}",
                 ])
             ->end()
         ;

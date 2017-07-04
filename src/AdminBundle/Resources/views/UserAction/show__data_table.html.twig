@@ -1,0 +1,10 @@
+{% if value %}
+    <ul>
+        {% for key, val in value %}
+            <b>{{ key }}:</b>
+            {{ val }}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No data</p>
+{% endif %}
