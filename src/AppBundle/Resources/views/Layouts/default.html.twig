@@ -12,8 +12,14 @@
         {% block metas %}
             <meta name="application-name" content="{{ globals.app_name }}">
             <meta name="description" content="{{ globals.description }}">
-            <link rel="author" href="{{ url('home') | trim('/') }}/humans.txt">
+            <link rel="author" href="{{ asset('humans.txt') }}">
+            <link rel="manifest" href="{{ asset('manifest.json') }}">
             <link rel="copyright" href="{{ globals.copyright }}">
+            <meta name="mobile-web-app-capable" content="yes">
+            <meta name="msapplication-tooltip" content="{{ globals.description }}">
+            <meta name="msapplication-starturl" content="{{ url('home') }}">
+            <meta name="msapplication-config" content="{{ asset('browserconfig.xml') }}">
+            {% include 'AppBundle:Layouts:default/_head_icons.html.twig' %}
         {% endblock %}
         <!-- Stylesheets -->
         {% block stylesheets_before %}{% endblock %}
