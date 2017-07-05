@@ -9,6 +9,11 @@ use AppBundle\Entity\User;
  */
 trait TwoFactorTrait
 {
+    public static $twoFactorMethods = [
+        'email' => 'Email',
+        'google_authenticator' => 'Google Authenticator',
+    ];
+
     /**
      * @var string
      *
