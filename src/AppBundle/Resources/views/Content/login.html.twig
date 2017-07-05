@@ -49,6 +49,9 @@
                 </a>
             </div>
         </div>
+        <input type="hidden"
+            name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}" />
         <button class="btn btn-block btn-lg btn-primary"
             type="submit">
             {{ 'Login' | trans }}

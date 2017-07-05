@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ class MyController extends Controller
 {
     /**
      * @Route("/my/profile", name="my.profile")
+     * @Security("has_role('ROLE_USER')")
      */
     public function profileAction(Request $request)
     {
@@ -25,6 +27,7 @@ class MyController extends Controller
 
     /**
      * @Route("/my/settings", name="my.settings")
+     * @Security("has_role('ROLE_USER')")
      */
     public function settingsAction(Request $request)
     {
@@ -190,6 +193,7 @@ class MyController extends Controller
 
     /**
      * @Route("/my/password", name="my.password")
+     * @Security("has_role('ROLE_USER')")
      */
     public function passwordAction(Request $request)
     {
@@ -237,6 +241,7 @@ class MyController extends Controller
 
     /**
      * @Route("/my/actions", name="my.actions")
+     * @Security("has_role('ROLE_USER')")
      */
     public function actionsAction(Request $request)
     {

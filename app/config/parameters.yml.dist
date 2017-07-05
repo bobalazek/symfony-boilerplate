@@ -4,12 +4,12 @@ parameters:
     database_name: sfbp
     database_user: sfbp
     database_password: sfbp
-    
+
     mailer_transport: smtp
     mailer_host: corcosoft.com
     mailer_port: 465
     mailer_user: sfbp@corcosoft.com
     mailer_password: ~
     mailer_encryption: ssl
-    
+
     secret: 'MySuperSecureToken'
