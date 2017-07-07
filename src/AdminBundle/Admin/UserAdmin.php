@@ -68,6 +68,7 @@ class UserAdmin extends AbstractAdmin
             ->end()
             ->with('Statuses', ['class' => 'col-md-4'])
                 ->add('enabled')
+                ->add('twoFactorAuthenticationEnabled')
                 ->add('verified')
                 ->add('warned')
                 ->add('warnedReason')
@@ -115,6 +116,7 @@ class UserAdmin extends AbstractAdmin
                 'html' => "{{ value | join(', ') }}",
             ])
             ->add('enabled')
+            ->add('twoFactorAuthenticationEnabled')
             ->add('verified')
             ->add('warned')
             ->add('locked')
@@ -181,6 +183,7 @@ class UserAdmin extends AbstractAdmin
             ->end()
             ->with('Statuses', ['class' => 'col-md-4'])
                 ->add('enabled')
+                ->add('twoFactorAuthenticationEnabled')
                 ->add('verified')
                 ->add('warned')
                 ->add('warnedReason')

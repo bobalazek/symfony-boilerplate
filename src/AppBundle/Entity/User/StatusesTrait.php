@@ -7,7 +7,7 @@ use AppBundle\Entity\User;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-trait StatesTrait
+trait StatusesTrait
 {
     /**
      * @var bool
@@ -16,6 +16,14 @@ trait StatesTrait
      * @ORM\Column(name="enabled", type="boolean")
      */
     protected $enabled = false;
+
+    /**
+     * @var bool
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="two_factor_authentication_enabled", type="boolean")
+     */
+    protected $twoFactorAuthenticationEnabled = false;
 
     /**
      * @var bool
@@ -95,6 +103,48 @@ trait StatesTrait
     public function disable()
     {
         $this->setEnabled(false);
+
+        return $this;
+    }
+
+    /*** Two factor authentication Enabled ***/
+
+    /**
+     * @return bool
+     */
+    public function isTwoFactorAuthenticationEnabled()
+    {
+        return $this->twoFactorAuthenticationEnabled;
+    }
+
+    /**
+     * @param $twoFactorAuthenticationEnabled
+     *
+     * @return User
+     */
+    public function setTwoFactorAuthenticationEnabled($twoFactorAuthenticationEnabled)
+    {
+        $this->twoFactorAuthenticationEnabled = $twoFactorAuthenticationEnabled;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function enableTwoFactorAuthentication()
+    {
+        $this->setTwoFactorAuthenticationEnabled(true);
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function disableTwoFactorAuthentication()
+    {
+        $this->setTwoFactorAuthenticationEnabled(false);
 
         return $this;
     }

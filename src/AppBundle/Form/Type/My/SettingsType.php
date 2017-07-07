@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use AppBundle\Form\Type\ProfileType;
 
 /**
@@ -27,6 +28,12 @@ class SettingsType extends AbstractType
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
             ->add('locale', LocaleType::class)
+            ->add('twoFactorAuthenticationEnabled', CheckboxType::class, [
+                'label' => 'Two factor authentication',
+                'attr' => [
+                    'data-help-text' => 'If you want to have the 2FA protection enabled. Note: only works, if you set up at least one 2FA method.',
+                ],
+            ])
         ;
     }
 

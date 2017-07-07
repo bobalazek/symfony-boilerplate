@@ -39,7 +39,7 @@ class User implements AdvancedUserInterface, \Serializable
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable,
         User\VerifiedTrait,
-        User\StatesTrait,
+        User\StatusesTrait,
         User\RolesTrait,
         User\CodesTrait,
         User\TimestampsTrait,
@@ -101,6 +101,13 @@ class User implements AdvancedUserInterface, \Serializable
     protected $userActions;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserTwoFactorMethod", mappedBy="user")
+     */
+    protected $userTwoFactorMethods;
+
+    /**
      * Otherwise known as: userExpired / accountExpired.
      *
      * @var bool
@@ -133,6 +140,7 @@ class User implements AdvancedUserInterface, \Serializable
         );
 
         $this->userActions = new ArrayCollection();
+        $this->userTwoFactorMethods = new ArrayCollection();
     }
 
     /*** Id ***/
@@ -291,6 +299,32 @@ class User implements AdvancedUserInterface, \Serializable
     public function setUserActions($userActions)
     {
         $this->userActions = $userActions;
+
+        return $this;
+    }
+
+    /*** User two factor methods ***/
+
+    /**
+     * @return array
+     */
+    public function getUserTwoFactorMethods()
+    {
+        $criteria = Criteria::create()->orderBy([
+            'createdAt' => Criteria::DESC,
+        ]);
+
+        return $this->userTwoFactorMethods->matching($criteria)->toArray();
+    }
+
+    /**
+     * @param $userTwoFactorMethods
+     *
+     * @return User
+     */
+    public function setUserTwoFactorMethods($userTwoFactorMethods)
+    {
+        $this->userTwoFactorMethods = $userTwoFactorMethods;
 
         return $this;
     }
