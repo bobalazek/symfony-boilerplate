@@ -35,6 +35,9 @@ class UserActionsService
 
         $request = $this->container->get('request_stack')->getCurrentRequest();
 
+        $session = $this->container->get('session');
+        $sessionId = $session->getId();
+
         $userAction = new UserAction();
         $userAction
             ->setUser($user)
@@ -43,6 +46,7 @@ class UserActionsService
             ->setData($data)
             ->setIp($request->getClientIp())
             ->setUserAgent($request->headers->get('User-Agent'))
+            ->setSessionId($sessionId)
         ;
 
         $em->persist($userAction);

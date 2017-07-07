@@ -66,6 +66,13 @@ class UserAction
     protected $userAgent;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="session_id", type="text", nullable=true)
+     */
+    protected $sessionId;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userActions")
      */
     protected $user;
@@ -198,6 +205,28 @@ class UserAction
     public function setUserAgent($userAgent)
     {
         $this->userAgent = $userAgent;
+
+        return $this;
+    }
+
+    /*** Session ID ***/
+
+    /**
+     * @return string
+     */
+    public function getSessionId()
+    {
+        return $this->sessionId;
+    }
+
+    /**
+     * @param $sessionId
+     *
+     * @return UserAction
+     */
+    public function setSessionId($sessionId)
+    {
+        $this->sessionId = $sessionId;
 
         return $this;
     }
