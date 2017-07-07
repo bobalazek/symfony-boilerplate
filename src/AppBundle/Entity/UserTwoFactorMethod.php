@@ -25,6 +25,7 @@ class UserTwoFactorMethod
 
     public static $methods = [
         'email' => 'Email',
+        'backup_codes' => 'Backup codes',
         'google_authenticator' => 'Google Authenticator',
     ];
 
@@ -41,7 +42,7 @@ class UserTwoFactorMethod
      * @var string
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="method", type="string", length=64, nullable=true)
+     * @ORM\Column(name="method", type="string", length=64)
      */
     protected $method;
 

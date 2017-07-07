@@ -15,10 +15,7 @@ class TwoFactorMethodType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'required' => false,
-            'choices' => array_merge([
-                '-- none --' => '',
-            ], array_flip(UserTwoFactorMethod::$methods)),
+            'choices' => array_flip(UserTwoFactorMethod::$methods),
         ]);
     }
 

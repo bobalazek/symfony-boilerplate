@@ -306,11 +306,22 @@ class User implements AdvancedUserInterface, \Serializable
     /*** User two factor methods ***/
 
     /**
+     * @param bool $onlyNonDeleted Show only active/non-deleted two-factor methods
+     *
      * @return array
      */
-    public function getUserTwoFactorMethods()
+    public function getUserTwoFactorMethods($onlyNonDeleted = false)
     {
-        $criteria = Criteria::create()->orderBy([
+        $criteria = Criteria::create();
+
+        if ($onlyNonDeleted) {
+            $criteria->where(Criteria::expr()->eq(
+                'deletedAt',
+                null
+            ));
+        }
+
+        $criteria->orderBy([
             'createdAt' => Criteria::DESC,
         ]);
 
