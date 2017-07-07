@@ -50,7 +50,9 @@ class SettingsController extends Controller
 
                 $this->get('app.user_actions')->add(
                     'user.settings.email.change.request',
-                    $this->get('translator')->trans('my.settings.new_email_request.user_action.text'),
+                    $this->get('translator')->trans(
+                        'my.settings.new_email_request.user_action.text'
+                    ),
                     [
                         'current' => $user->getEmail(),
                         'new' => $user->getNewEmail(),
@@ -75,7 +77,9 @@ class SettingsController extends Controller
 
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('my.settings.new_email_request.flash_message')
+                    $this->get('translator')->trans(
+                        'my.settings.new_email_request.flash_message'
+                    )
                 );
             }
 
@@ -84,7 +88,9 @@ class SettingsController extends Controller
 
             $this->get('app.user_actions')->add(
                 'user.settings.change',
-                $this->get('translator')->trans('my.settings.user_action.text'),
+                $this->get('translator')->trans(
+                    'my.settings.user_action.text'
+                ),
                 [
                     'old' => $userOldArray,
                     'new' => $user->toArray(),
@@ -93,7 +99,9 @@ class SettingsController extends Controller
 
             $this->addFlash(
                 'success',
-                $this->get('translator')->trans('my.settings.save.flash_message')
+                $this->get('translator')->trans(
+                    'my.settings.save.flash_message'
+                )
             );
 
             return $this->redirectToRoute('my.settings');
@@ -155,7 +163,9 @@ class SettingsController extends Controller
 
                 $this->get('app.user_actions')->add(
                     'user.settings.email.change',
-                    $this->get('translator')->trans('my.settings.new_email.user_action.text'),
+                    $this->get('translator')->trans(
+                        'my.settings.new_email.user_action.text'
+                    ),
                     [
                         'old' => $oldEmail,
                         'new' => $user->getEmail(),
@@ -164,12 +174,16 @@ class SettingsController extends Controller
 
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('my.settings.new_email.flash_message')
+                    $this->get('translator')->trans(
+                        'my.settings.new_email.flash_message'
+                    )
                 );
             } else {
                 $this->addFlash(
                     'warning',
-                    $this->get('translator')->trans('my.settings.new_email.code_invalid.flash_message')
+                    $this->get('translator')->trans(
+                        'my.settings.new_email.code_invalid.flash_message'
+                    )
                );
             }
 

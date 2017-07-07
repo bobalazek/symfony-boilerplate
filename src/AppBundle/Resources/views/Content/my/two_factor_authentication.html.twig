@@ -4,5 +4,14 @@
 
 {% block main %}
     <h1>{{ 'My Two-factor authentication' | trans }}</h1>
-    TODO
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.twoFactorAuthenticationEnabled) }}
+        {{ form_row(form.twoFactorAuthenticationEmailEnabled) }}
+        {{ form_row(form.twoFactorAuthenticationBackupCodesEnabled) }}
+        <button type="submit"
+            class="btn btn-primary btn-lg btn-block" />
+            {{ 'Save' | trans }}
+        </button>
+    {{ form_end(form) }}
 {% endblock %}

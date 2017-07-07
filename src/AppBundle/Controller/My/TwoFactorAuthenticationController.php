@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
-use AppBundle\Form\Type\My\TwoFactorMethodType;
+use AppBundle\Form\Type\My\TwoFactorAuthenticationType;
 use AppBundle\Entity\UserTwoFactorMethod;
 
 /**
@@ -21,10 +21,47 @@ class TwoFactorAuthenticationController extends Controller
      */
     public function twoFactorAuthenticationAction(Request $request)
     {
-        // TODO
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(
+            TwoFactorAuthenticationType::class,
+            $this->getUser()
+        );
+
+        $userOld = clone $this->getUser();
+        $userOldArray = $userOld->toArray();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->get('app.user_actions')->add(
+                'user.settings.change',
+                $this->get('translator')->trans('my.settings.user_action.text'),
+                [
+                    'old' => $userOldArray,
+                    'new' => $user->toArray(),
+                ]
+            );
+
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'my.two_factor_authentication.save.flash_message'
+                )
+            );
+
+            return $this->redirectToRoute('my.two_factor_authentication');
+        }
 
         return $this->render(
-            'AppBundle:Content:my/two_factor_authentication.html.twig'
+            'AppBundle:Content:my/two_factor_authentication.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
         );
     }
 }
