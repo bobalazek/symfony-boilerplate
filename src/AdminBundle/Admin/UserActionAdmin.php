@@ -54,6 +54,9 @@ class UserActionAdmin extends AbstractAdmin
             ->add('userAgent', null, [
                 'label' => 'User Agent',
             ])
+            ->add('sessionId', null, [
+                'label' => 'Session ID',
+            ])
         ;
     }
 
@@ -95,6 +98,9 @@ class UserActionAdmin extends AbstractAdmin
                 ])
                 ->add('userAgent', null, [
                     'label' => 'User Agent',
+                ])
+                ->add('sessionId', null, [
+                    'label' => 'Session ID',
                 ])
             ->end()
             ->with('User', ['class' => 'col-md-6'])
