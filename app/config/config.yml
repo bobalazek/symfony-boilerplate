@@ -21,6 +21,7 @@ parameters:
     mobile_activation_code_expiry_time: '15 minutes'
     deployment_emails: # to whom should the email be sent, after a successful deployment?
         bobalazek124@gmail.com: 'Borut'
+    google_authenticator_secret: 'XVQ9UHNO75HRUKJ9'
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
 
 framework:

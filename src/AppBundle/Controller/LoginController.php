@@ -48,6 +48,14 @@ class LoginController extends Controller
     }
 
     /**
+     * @Route("/login/two-factor-authentication", name="login.two_factor_authentication")
+     */
+    public function loginTwoFactorAuthenticationAction(Request $request)
+    {
+        // TODO
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logoutAction(Request $request)

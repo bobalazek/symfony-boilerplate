@@ -103,9 +103,9 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserTwoFactorMethod", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserBackupCode", mappedBy="user")
      */
-    protected $userTwoFactorMethods;
+    protected $userBackupCodes;
 
     /**
      * Otherwise known as: userExpired / accountExpired.
@@ -140,7 +140,7 @@ class User implements AdvancedUserInterface, \Serializable
         );
 
         $this->userActions = new ArrayCollection();
-        $this->userTwoFactorMethods = new ArrayCollection();
+        $this->userBackupCodes = new ArrayCollection();
     }
 
     /*** Id ***/
@@ -303,14 +303,15 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** User two factor methods ***/
+    /*** User backup codes ***/
 
     /**
      * @param bool $onlyNonDeleted Show only active/non-deleted two-factor methods
+     * @param bool $onlyNonUsed    Show only active/non-used backup codes
      *
      * @return array
      */
-    public function getUserTwoFactorMethods($onlyNonDeleted = false)
+    public function getUserBackupCodes($onlyNonDeleted = false, $onlyNonUsed = false)
     {
         $criteria = Criteria::create();
 
@@ -321,21 +322,28 @@ class User implements AdvancedUserInterface, \Serializable
             ));
         }
 
+        if ($onlyNonUsed) {
+            $criteria->where(Criteria::expr()->eq(
+                'usedAt',
+                null
+            ));
+        }
+
         $criteria->orderBy([
             'createdAt' => Criteria::DESC,
         ]);
 
-        return $this->userTwoFactorMethods->matching($criteria)->toArray();
+        return $this->userBackupCodes->matching($criteria)->toArray();
     }
 
     /**
-     * @param $userTwoFactorMethods
+     * @param $userBackupCodes
      *
      * @return User
      */
-    public function setUserTwoFactorMethods($userTwoFactorMethods)
+    public function setUserBackupCodes($userBackupCodes)
     {
-        $this->userTwoFactorMethods = $userTwoFactorMethods;
+        $this->userBackupCodes = $userBackupCodes;
 
         return $this;
     }
