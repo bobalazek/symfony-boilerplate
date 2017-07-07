@@ -5,7 +5,6 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use AppBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -16,9 +15,11 @@ class TwoFactorMethodType extends AbstractType
     {
         $resolver->setDefaults([
             'required' => false,
-            'choices' => array_merge([
+            'choices' => [
                 '-- none --' => '',
-            ], array_flip(User::$twoFactorMethods)),
+                'Email' => 'email',
+                'Google Authenticator' => 'google_authenticator',
+            ],
         ]);
     }
 

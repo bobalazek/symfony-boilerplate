@@ -45,8 +45,7 @@ class User implements AdvancedUserInterface, \Serializable
         User\TimestampsTrait,
         User\PasswordsTrait,
         User\EmailTrait,
-        User\MobileTrait,
-        User\TwoFactorTrait
+        User\MobileTrait
     ;
 
     /**
