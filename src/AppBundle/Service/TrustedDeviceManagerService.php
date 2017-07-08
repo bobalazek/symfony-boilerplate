@@ -97,7 +97,7 @@ class TrustedDeviceManagerService
     {
         $token = $this->getRandomString(32);
 
-        $tokenList = $request->cookies->get($cookieName);
+        $tokenList = $request->cookies->get($this->cookieName);
         $tokenList .= ($tokenList !== null ? ';' : '').$token;
         $expiresAt = (new \Datetime())->add(new \Dateinterval('PT'.$this->cookieLifetime.'S'));
 

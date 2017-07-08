@@ -36,3 +36,17 @@ services:
               label: User Actions
         calls:
             - [setContainer, ["@service_container"]]
+
+    admin.user_trusted_device:
+        class: AdminBundle\Admin\UserTrustedDeviceAdmin
+        arguments:
+            - ~
+            - AppBundle\Entity\UserTrustedDevice
+            - ~
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User Trusted Devices
+        calls:
+            - [setContainer, ["@service_container"]]
