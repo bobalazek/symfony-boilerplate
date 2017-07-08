@@ -31,7 +31,14 @@ class GeneralListener
             if ($token->getUser() instanceof User) {
                 // Two factor authentication
                 if ($session->get('two_factor_authentication_in_progress')) {
-                    // TODO: only in secured area!
+                    $accessMap = $this->container->get('security.access_map');
+                    $patterns = $accessMap->getPatterns($request);
+                    $roles = $patterns[0];
+
+                    // Prevent the gate kicking in on pages, that do not require authentication
+                    if ($roles === null) {
+                        return false;
+                    }
 
                     $twoFactorAuthenticationRoute = 'login.two_factor_authentication';
                     if ($twoFactorAuthenticationRoute === $event->getRequest()->get('_route')) {
