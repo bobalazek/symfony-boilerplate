@@ -15,8 +15,13 @@
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
-                            <a href="{{ url('signup', { code: user.getActivationCode() }) }}" target="_blank">
-                                {{ url('signup', { code: user.getActivationCode() }) }}
+                            <a href="{{ url('signup', {
+                                code: user.getActivationCode(),
+                            }) }}"
+                                target="_blank">
+                                {{ url('signup', {
+                                    code: user.getActivationCode(),
+                                }) }}
                             </a>
                         </td>
                         <td class="expander"></td>

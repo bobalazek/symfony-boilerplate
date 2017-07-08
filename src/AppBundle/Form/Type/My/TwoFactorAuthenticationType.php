@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use AppBundle\Form\Type\TwoFactorMethodType;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -20,6 +21,12 @@ class TwoFactorAuthenticationType extends AbstractType
                 'label' => 'Enabled',
                 'attr' => [
                     'data-help-text' => 'If you want to have the 2FA protection enabled. Note: it will only work, if you have on the the methods set up.',
+                ],
+            ])
+            ->add('twoFactorAuthenticationDefaultMethod', TwoFactorMethodType::class, [
+                'label' => 'Default method',
+                'attr' => [
+                    'data-help-text' => 'Which is the default method on the 2FA?',
                 ],
             ])
             ->add('twoFactorAuthenticationEmailEnabled', CheckboxType::class, [

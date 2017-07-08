@@ -7,23 +7,24 @@
                 <h4>{{ 'Hello %user_name%!' | trans({
                     '%user_name%': user.getName(),
                 }) }}</h4>
-                <p>{{ 'Please click on the link below to reset your password.' | trans }}</p>
+                <p>{{ 'We detected a login request. Please on the link below or directly enter the following to into the form: :code:.' | trans({
+                    ':code:': code,
+                }) }}</p>
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
-                            <a href="{{ url('reset_password', {
-                                code: user.getResetPasswordCode(),
+                            <a href="{{ url('login.two_factor_authentication', {
+                                code: code,
                             }) }}"
                                 target="_blank">
-                                {{ url('reset_password', {
-                                    code: user.getResetPasswordCode(),
+                                {{ url('login.two_factor_authentication', {
+                                    code: code,
                                 }) }}
                             </a>
                         </td>
                         <td class="expander"></td>
                     </tr>
                 </table>
-                <p>{{ 'If the link does not work, copy and paste it into your browser window.' | trans }}</p>
             </td>
         </tr>
     </table>

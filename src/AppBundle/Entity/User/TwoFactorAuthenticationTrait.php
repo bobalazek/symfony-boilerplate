@@ -7,8 +7,12 @@ use AppBundle\Entity\User;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-trait TwoFactorTrait
+trait TwoFactorAuthenticationTrait
 {
+    public static $twoFactorAuthenticationMethods = [
+        'email' => 'Email',
+    ];
+
     /**
      * @var bool
      *
@@ -16,6 +20,14 @@ trait TwoFactorTrait
      * @ORM\Column(name="two_factor_authentication_enabled", type="boolean")
      */
     protected $twoFactorAuthenticationEnabled = false;
+
+    /**
+     * @var bool
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="two_factor_authentication_default_method", type="string", length=64, nullable=true)
+     */
+    protected $twoFactorAuthenticationDefaultMethod = 'email';
 
     /**
      * @var bool
@@ -67,7 +79,29 @@ trait TwoFactorTrait
         return $this;
     }
 
-    /*** Two factor authentication email Enabled ***/
+    /*** Two factor authentication default method ***/
+
+    /**
+     * @return string
+     */
+    public function getTwoFactorAuthenticationDefaultMethod()
+    {
+        return $this->twoFactorAuthenticationDefaultMethod;
+    }
+
+    /**
+     * @param $twoFactorAuthenticationDefaultMethod
+     *
+     * @return User
+     */
+    public function setTwoFactorAuthenticationDefaultMethod($twoFactorAuthenticationDefaultMethod)
+    {
+        $this->twoFactorAuthenticationDefaultMethod = $twoFactorAuthenticationDefaultMethod;
+
+        return $this;
+    }
+
+    /*** Two factor authentication email enabled ***/
 
     /**
      * @return bool

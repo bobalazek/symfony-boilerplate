@@ -3,10 +3,12 @@
 namespace AppBundle\EventSubscriber;
 
 use Symfony\Component\Security\Http\SecurityEvents;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use AppBundle\Manager\UserActionManager;
+use AppBundle\Manager\TwoFactorAuthenticationManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -16,21 +18,29 @@ class SecuritySubscriber implements EventSubscriberInterface
     protected $tokenStorage;
     protected $authorizationChecker;
     protected $userActionManager;
+    protected $twoFactorAuthenticationManager;
 
     public function __construct(
         TokenStorage $tokenStorage,
         AuthorizationChecker $authorizationChecker,
-        UserActionManager $userActionManager
+        UserActionManager $userActionManager,
+        TwoFactorAuthenticationManager $twoFactorAuthenticationManager
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
         $this->userActionManager = $userActionManager;
+        $this->twoFactorAuthenticationManager = $twoFactorAuthenticationManager;
     }
 
-    public function onInteractiveLogin($event)
+    public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $url = $event->getRequest()->getUri();
         if (strpos($url, '/api')) {
+            return false;
+        }
+
+        $continuePropagation = $this->twoFactorAuthenticationManager->handle($event);
+        if (!$continuePropagation) {
             return false;
         }
 

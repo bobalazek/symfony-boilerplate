@@ -40,7 +40,7 @@ class User implements AdvancedUserInterface, \Serializable
         ORMBehaviors\Timestampable\Timestampable,
         User\VerifiedTrait,
         User\StatusesTrait,
-        User\TwoFactorTrait,
+        User\TwoFactorAuthenticationTrait,
         User\RolesTrait,
         User\CodesTrait,
         User\TimestampsTrait,

@@ -31,6 +31,11 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.two_factor_authentication_manager:
+        class: AppBundle\Manager\TwoFactorAuthenticationManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
     app.twig_core_extension:
         class: AppBundle\Twig\CoreExtension
         public: false
@@ -57,7 +62,11 @@ services:
         class: AppBundle\EventSubscriber\SecuritySubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: [ "@security.token_storage", "@security.authorization_checker", "@app.user_action_manager" ]
+        arguments:
+            - "@security.token_storage"
+            - "@security.authorization_checker"
+            - "@app.user_action_manager"
+            - "@app.two_factor_authentication_manager"
 
     app.logout_listener:
         class: AppBundle\EventListener\LogoutListener
@@ -70,8 +79,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
-    app.last_active_listener:
-        class: AppBundle\EventListener\LastActiveListener
+    app.general_listener:
+        class: AppBundle\EventListener\GeneralListener
         calls:
             - [setContainer, ["@service_container"]]
         tags:
