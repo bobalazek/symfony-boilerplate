@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
-use AppBundle\Service\UserActionsService;
+use AppBundle\Manager\UserActionManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -14,14 +14,14 @@ use AppBundle\Service\UserActionsService;
 class AuthenticationSubscriber implements EventSubscriberInterface
 {
     protected $em;
-    protected $userActionsService;
+    protected $userActionManager;
 
     public function __construct(
         EntityManager $em,
-        UserActionsService $userActionsService
+        UserActionManager $userActionManager
     ) {
         $this->em = $em;
-        $this->userActionsService = $userActionsService;
+        $this->userActionManager = $userActionManager;
     }
 
     public function onAuthenticationFailure($event)
@@ -32,7 +32,7 @@ class AuthenticationSubscriber implements EventSubscriberInterface
             ->getRepository('AppBundle:User')
             ->findByUsernameOrEmail($authenticationTokenUser);
 
-        $this->userActionsService->add(
+        $this->userActionManager->add(
             'user.login.fail',
             'User has tried to log in!',
             [

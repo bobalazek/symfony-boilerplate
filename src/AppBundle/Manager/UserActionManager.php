@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;
@@ -9,7 +9,7 @@ use AppBundle\Entity\UserAction;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserActionsService
+class UserActionManager
 {
     use ContainerAwareTrait;
 

@@ -36,7 +36,7 @@ class TwoFactorAuthenticationController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->get('app.user_actions')->add(
+            $this->get('app.user_action_manager')->add(
                 'user.settings.change',
                 $this->get('translator')->trans('my.settings.user_action.text'),
                 [

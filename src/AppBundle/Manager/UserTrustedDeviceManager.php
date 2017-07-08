@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -11,7 +11,7 @@ use AppBundle\Entity\UserTrustedDevice;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class TrustedDeviceManagerService
+class UserTrustedDeviceManager
 {
     use ContainerAwareTrait;
 

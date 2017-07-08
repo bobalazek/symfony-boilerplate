@@ -6,7 +6,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use AppBundle\Service\UserActionsService;
+use AppBundle\Manager\UserActionManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -15,16 +15,16 @@ class SecuritySubscriber implements EventSubscriberInterface
 {
     protected $tokenStorage;
     protected $authorizationChecker;
-    protected $userActionsService;
+    protected $userActionManager;
 
     public function __construct(
         TokenStorage $tokenStorage,
         AuthorizationChecker $authorizationChecker,
-        UserActionsService $userActionsService
+        UserActionManager $userActionManager
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
-        $this->userActionsService = $userActionsService;
+        $this->userActionManager = $userActionManager;
     }
 
     public function onInteractiveLogin($event)
@@ -34,7 +34,7 @@ class SecuritySubscriber implements EventSubscriberInterface
             return false;
         }
 
-        $this->userActionsService->add(
+        $this->userActionManager->add(
             'user.login',
             'User has been logged in!'
         );
@@ -46,7 +46,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         $targetUser = $event->getTargetUser();
 
         if ($this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
-            $this->userActionsService->add(
+            $this->userActionManager->add(
                 'user.switch.back',
                 'User has switched back to own user (from user with ID "'.$user->getId().'")!',
                 [
@@ -56,7 +56,7 @@ class SecuritySubscriber implements EventSubscriberInterface
                 $targetUser // when we switch back, the target user is actually the admin, that impersonated the user
             );
         } else {
-            $this->userActionsService->add(
+            $this->userActionManager->add(
                 'user.switch',
                 'User has switched to user with ID "'.$targetUser->getId().'"!',
                 [

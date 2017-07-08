@@ -48,7 +48,7 @@ class SettingsController extends Controller
                     ->setEmail($userOld->getEmail())
                 ;
 
-                $this->get('app.user_actions')->add(
+                $this->get('app.user_action_manager')->add(
                     'user.settings.email.change.request',
                     $this->get('translator')->trans(
                         'my.settings.new_email_request.user_action.text'
@@ -86,7 +86,7 @@ class SettingsController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->get('app.user_actions')->add(
+            $this->get('app.user_action_manager')->add(
                 'user.settings.change',
                 $this->get('translator')->trans(
                     'my.settings.user_action.text'
@@ -161,7 +161,7 @@ class SettingsController extends Controller
                     ])
                 ;
 
-                $this->get('app.user_actions')->add(
+                $this->get('app.user_action_manager')->add(
                     'user.settings.email.change',
                     $this->get('translator')->trans(
                         'my.settings.new_email.user_action.text'

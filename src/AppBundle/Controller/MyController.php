@@ -50,7 +50,7 @@ class MyController extends Controller
                 $em->persist($user);
                 $em->flush();
 
-                $this->get('app.user_actions')->add(
+                $this->get('app.user_action_manager')->add(
                     'user.settings.password.change',
                     $this->get('translator')->trans('my.password.user_action.text')
                 );

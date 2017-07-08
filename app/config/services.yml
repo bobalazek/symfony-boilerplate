@@ -10,24 +10,24 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    app.user_actions:
-        class: AppBundle\Service\UserActionsService
-        calls:
-            - [setContainer, ["@service_container"]]
-
-    app.user_manager:
-        class: AppBundle\Service\UserManagerService
-        calls:
-            - [setContainer, ["@service_container"]]
-
     app.apifier:
         class: AppBundle\Service\ApifierService
         arguments: ["@request_stack"]
         calls:
             - [setContainer, ["@service_container"]]
 
-    app.trusted_device_manager:
-        class: AppBundle\Service\TrustedDeviceManagerService
+    app.user_action_manager:
+        class: AppBundle\Manager\UserActionManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    app.user_manager:
+        class: AppBundle\Manager\UserManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    app.user_trusted_device_manager:
+        class: AppBundle\Manager\UserTrustedDeviceManager
         calls:
             - [setContainer, ["@service_container"]]
 
@@ -51,17 +51,17 @@ services:
         class: AppBundle\EventSubscriber\AuthenticationSubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: [ "@doctrine.orm.entity_manager", "@app.user_actions" ]
+        arguments: [ "@doctrine.orm.entity_manager", "@app.user_action_manager" ]
 
     app.security_subscriber:
         class: AppBundle\EventSubscriber\SecuritySubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: [ "@security.token_storage", "@security.authorization_checker", "@app.user_actions" ]
+        arguments: [ "@security.token_storage", "@security.authorization_checker", "@app.user_action_manager" ]
 
     app.logout_listener:
         class: AppBundle\EventListener\LogoutListener
-        arguments: [ "@app.user_actions" ]
+        arguments: [ "@app.user_action_manager" ]
 
     app.exception_listener:
         class: AppBundle\EventListener\ExceptionListener

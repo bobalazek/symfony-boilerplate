@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;
@@ -8,7 +8,7 @@ use AppBundle\Entity\User;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserManagerService
+class UserManager
 {
     use ContainerAwareTrait;
 
@@ -102,7 +102,7 @@ class UserManagerService
         $em->persist($user);
         $em->flush();
 
-        $this->get('app.user_actions')->add(
+        $this->get('app.user_action_manager')->add(
             'user.password_reset',
             $this->container->get('translator')->trans('reset_password.user_action.text'),
             [],
@@ -146,7 +146,7 @@ class UserManagerService
         $em->persist($user);
         $em->flush();
 
-        $this->container->get('app.user_actions')->add(
+        $this->container->get('app.user_action_manager')->add(
             'user.password_reset.request',
             $this->container->get('translator')->trans('reset_password.request.user_action.text'),
             [],
