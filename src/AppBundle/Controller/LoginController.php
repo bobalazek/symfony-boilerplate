@@ -52,9 +52,26 @@ class LoginController extends Controller
      */
     public function loginTwoFactorAuthenticationAction(Request $request)
     {
-        // TODO
+        $session = $this->get('session');
+
+        if (!$session->get('two_factor_authentication_in_progress')) {
+            $this->addFlash(
+                'info',
+                $this->get('translator')->trans('general.already_logged_in')
+            );
+
+            return $this->redirectToRoute('home');
+        }
+
+        $method = $session->get('two_factor_authentication_method');
+        $code = $request->query->get('code');
+
         return $this->render(
-            'AppBundle:Content:login/two_factor_authentication.html.twig'
+            'AppBundle:Content:login/two_factor_authentication.html.twig',
+            [
+                'method' => $method,
+                'code' => $code,
+            ]
         );
     }
 

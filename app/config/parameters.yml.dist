@@ -9,7 +9,7 @@ parameters:
     mailer_host: corcosoft.com
     mailer_port: 465
     mailer_user: sfbp@corcosoft.com
-    mailer_password: ~
+    mailer_password: password
     mailer_encryption: ssl
 
     secret: 'MySuperSecureToken'
