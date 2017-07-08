@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use AppBundle\Form\Type\TwoFactorMethodType as TwoFactorMethodTypeChoice;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>

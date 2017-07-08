@@ -6,9 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\FormError;
 use AppBundle\Form\Type\My\TwoFactorAuthenticationType;
-use AppBundle\Entity\UserTwoFactorMethod;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
