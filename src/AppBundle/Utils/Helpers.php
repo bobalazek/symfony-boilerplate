@@ -2,7 +2,8 @@
 
 namespace AppBundle\Utils;
 
-class Helpers {
+class Helpers
+{
     /**
      * Creates the cookie for that trusted device.
      *

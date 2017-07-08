@@ -9,7 +9,7 @@
                 }) }}</h4>
                 <p>{{ 'We detected a login request. Please on the link below or directly enter the following to into the form: :code:.' | trans({
                     ':code:': '<b>' ~ code ~ '</b>',
-                }) }}</p>
+                }) | raw }}</p>
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
@@ -25,6 +25,7 @@
                         <td class="expander"></td>
                     </tr>
                 </table>
+                <p></p>
             </td>
         </tr>
     </table>

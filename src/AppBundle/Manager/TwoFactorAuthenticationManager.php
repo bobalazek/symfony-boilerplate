@@ -4,6 +4,9 @@ namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use AppBundle\Entity\User;
 use AppBundle\Utils\Helpers;
 
@@ -44,6 +47,12 @@ class TwoFactorAuthenticationManager
                 'User has been logged in, but still needs to confirm 2FA!'
             );
 
+            $this->container->get('event_dispatcher')
+                ->addListener(
+                    KernelEvents::RESPONSE,
+                    [$this, 'onKernelResponse']
+                );
+
             return false;
         }
 
@@ -54,7 +63,7 @@ class TwoFactorAuthenticationManager
      * Handle all the method related stuff.
      *
      * @param string $method
-     * @param User $user
+     * @param User   $user
      *
      * @return bool
      */
@@ -81,5 +90,19 @@ class TwoFactorAuthenticationManager
         }
 
         return true;
+    }
+
+    /**
+     * Redirect it directly to the two factor authentication route.
+     *
+     * @param FilterResponseEvent $event
+     */
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
+        $router = $this->container->get('router');
+        $response = new RedirectResponse(
+            $router->generate('login.two_factor_authentication')
+        );
+        $event->setResponse($response);
     }
 }

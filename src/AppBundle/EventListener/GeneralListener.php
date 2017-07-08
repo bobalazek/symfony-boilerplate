@@ -48,7 +48,7 @@ class GeneralListener
                     $url = $this->container->get('router')
                         ->generate($twoFactorAuthenticationRoute);
                     $response = new RedirectResponse($url);
-                    $event->setController(function() use($response) {
+                    $event->setController(function () use ($response) {
                         return $response;
                     });
 

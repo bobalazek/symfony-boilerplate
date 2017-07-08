@@ -19,6 +19,15 @@
                         name="code"
                         value="{{ code }}">
                 </div>
+                <div class="checkbox">
+                    <input id="trusted-device-input"
+                        type="checkbox"
+                        name="trusted_device"
+                        value="yes">
+                    <label for="trusted-device-input">
+                        {{ 'Is trusted device?' | trans }}
+                    </label>
+                </div>
                 <button class="btn btn-block btn-lg btn-primary"
                     type="submit">
                     {{ 'Submit' | trans }}
