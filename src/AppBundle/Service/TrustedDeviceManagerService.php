@@ -37,7 +37,8 @@ class TrustedDeviceManagerService
         if ($name === null) {
             $agent = new Agent();
             $agent->setUserAgent($userAgentString);
-            $name = $agent->device();
+
+            $name = $agent->platform().' - '.$agent->browser();
         }
 
         $userTrustedDevice = new UserTrustedDevice();
@@ -56,7 +57,7 @@ class TrustedDeviceManagerService
 
         $cookie = $this->createCookie($token);
 
-        return true;
+        return $userAction;
     }
 
     /**
@@ -64,6 +65,8 @@ class TrustedDeviceManagerService
      *
      * @param User   $user
      * @param string $token
+     *
+     * @return bool
      */
     public function is(User $user, $token)
     {
@@ -78,7 +81,8 @@ class TrustedDeviceManagerService
 
         if (
             $userTrustedDevice !== null &&
-            $userTrustedDevice->getExpiresAt() < new \Datetime()
+            $userTrustedDevice->getExpiresAt() < new \Datetime() &&
+            !$userTrustedDevice->isDeleted()
         ) {
             return true;
         }

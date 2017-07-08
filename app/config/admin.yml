@@ -50,3 +50,17 @@ services:
               label: User Trusted Devices
         calls:
             - [setContainer, ["@service_container"]]
+
+    admin.user_backup_code:
+        class: AdminBundle\Admin\UserBackupCodeAdmin
+        arguments:
+            - ~
+            - AppBundle\Entity\UserBackupCode
+            - ~
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User Backup Codes
+        calls:
+            - [setContainer, ["@service_container"]]

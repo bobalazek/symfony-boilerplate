@@ -78,7 +78,31 @@ class TwoFactorAuthenticationController extends Controller
      */
     public function twoFactorAuthenticationBackupCodesAction(Request $request)
     {
-        // TODO
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQueryBuilder()
+            ->select('ubc')
+            ->from('AppBundle:UserBackupCode', 'ubc')
+            ->where('ubc.user = ?1')
+            ->setParameter(1, $this->getUser())
+        ;
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10,
+            [
+                'defaultSortFieldName' => 'ubc.createdAt',
+                'defaultSortDirection' => 'desc',
+            ]
+        );
+
+        return $this->render(
+            'AppBundle:Content:my/two_factor_authentication/backup_codes.html.twig',
+            [
+                'pagination' => $pagination,
+            ]
+        );
     }
 
     /**
@@ -87,6 +111,30 @@ class TwoFactorAuthenticationController extends Controller
      */
     public function twoFactorAuthenticationTrustedDevicesAction(Request $request)
     {
-        // TODO
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQueryBuilder()
+            ->select('utd')
+            ->from('AppBundle:UserTrustedDevice', 'utd')
+            ->where('utd.user = ?1')
+            ->setParameter(1, $this->getUser())
+        ;
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10,
+            [
+                'defaultSortFieldName' => 'utd.createdAt',
+                'defaultSortDirection' => 'desc',
+            ]
+        );
+
+        return $this->render(
+            'AppBundle:Content:my/two_factor_authentication/trusted_devices.html.twig',
+            [
+                'pagination' => $pagination,
+            ]
+        );
     }
 }

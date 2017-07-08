@@ -378,13 +378,22 @@ class User implements AdvancedUserInterface, \Serializable
     /*** User trusted devices ***/
 
     /**
+     * @param bool $onlyNonDeleted Show only active/non-deleted two-factor methods
+     *
      * @return array
      */
-    public function getUserTrustedDevices()
+    public function getUserTrustedDevices($onlyNonDeleted = false)
     {
         $criteria = Criteria::create()->orderBy([
             'createdAt' => Criteria::DESC,
         ]);
+
+        if ($onlyNonDeleted) {
+            $criteria->where(Criteria::expr()->eq(
+                'deletedAt',
+                null
+            ));
+        }
 
         return $this->userTrustedDevices->matching($criteria)->toArray();
     }

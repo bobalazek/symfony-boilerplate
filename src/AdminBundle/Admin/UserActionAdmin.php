@@ -69,6 +69,9 @@ class UserActionAdmin extends AbstractAdmin
             ->add('user.username', null, [
                 'label' => 'Username',
             ])
+            ->add('user.email', null, [
+                'label' => 'Email',
+            ])
             ->add('key')
             ->add('message')
             ->add('createdAt')
@@ -102,6 +105,7 @@ class UserActionAdmin extends AbstractAdmin
                 ->add('sessionId', null, [
                     'label' => 'Session ID',
                 ])
+                ->add('createdAt')
             ->end()
             ->with('User', ['class' => 'col-md-6'])
                 ->add('user.id', null, [
@@ -123,18 +127,18 @@ class UserActionAdmin extends AbstractAdmin
             ->with('User Agent', ['class' => 'col-md-6'])
                 ->add('userAgentData', 'html_template', [
                     'label' => 'Data',
-                    'html' => "{% include 'AdminBundle:UserAction:show__user_agent_table.html.twig' %}",
+                    'html' => "{% include 'AdminBundle:Shared:show__user_agent_table.html.twig' %}",
                 ])
             ->end()
             ->with('IP', ['class' => 'col-md-6'])
                 ->add('ipData', 'html_template', [
                     'label' => 'Data',
-                    'html' => "{% include 'AdminBundle:UserAction:show__ip_table.html.twig' %}",
+                    'html' => "{% include 'AdminBundle:Shared:show__ip_table.html.twig' %}",
                 ])
             ->end()
             ->with('Data')
                 ->add('data', 'html_template', [
-                    'html' => "{% include 'AdminBundle:UserAction:show__data_table.html.twig' %}",
+                    'html' => "{% include 'AdminBundle:Shared:show__data_table.html.twig' %}",
                 ])
             ->end()
         ;

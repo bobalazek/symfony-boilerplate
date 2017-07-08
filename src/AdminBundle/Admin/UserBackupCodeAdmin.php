@@ -13,7 +13,7 @@ use AppBundle\Entity\User;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserTrustedDeviceAdmin extends AbstractAdmin
+class UserBackupCodeAdmin extends AbstractAdmin
 {
     use ContainerAwareTrait;
 
@@ -42,17 +42,8 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
             ->add('user.profile.lastName', null, [
                 'label' => 'Last name',
             ])
-            ->add('name', null, [
+            ->add('code', null, [
                 'label' => 'Key',
-            ])
-            ->add('ip', null, [
-                'label' => 'IP',
-            ])
-            ->add('userAgent', null, [
-                'label' => 'User Agent',
-            ])
-            ->add('sessionId', null, [
-                'label' => 'Session ID',
             ])
         ;
     }
@@ -69,9 +60,9 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
             ->add('user.email', null, [
                 'label' => 'Email',
             ])
-            ->add('name')
+            ->add('code')
             ->add('createdAt')
-            ->add('expiresAt')
+            ->add('usedAt')
             ->add('deletedAt')
             ->add('_action', 'actions', [
                 'actions' => [
@@ -88,20 +79,11 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
     {
         $showMapper
             ->with('General', ['class' => 'col-md-6'])
-                ->add('name', null, [
+                ->add('code', null, [
                     'label' => 'Name',
                 ])
-                ->add('ip', null, [
-                    'label' => 'IP',
-                ])
-                ->add('userAgent', null, [
-                    'label' => 'User Agent',
-                ])
-                ->add('sessionId', null, [
-                    'label' => 'Session ID',
-                ])
                 ->add('createdAt')
-                ->add('expiresAt')
+                ->add('usedAt')
                 ->add('deletedAt')
             ->end()
             ->with('User', ['class' => 'col-md-6'])
@@ -119,23 +101,6 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
                 ])
                 ->add('user.profile.lastName', null, [
                     'label' => 'Last name',
-                ])
-            ->end()
-            ->with('User Agent', ['class' => 'col-md-6'])
-                ->add('userAgentData', 'html_template', [
-                    'label' => 'Data',
-                    'html' => "{% include 'AdminBundle:Shared:show__user_agent_table.html.twig' %}",
-                ])
-            ->end()
-            ->with('IP', ['class' => 'col-md-6'])
-                ->add('ipData', 'html_template', [
-                    'label' => 'Data',
-                    'html' => "{% include 'AdminBundle:Shared:show__ip_table.html.twig' %}",
-                ])
-            ->end()
-            ->with('Data')
-                ->add('data', 'html_template', [
-                    'html' => "{% include 'AdminBundle:Shared:show__data_table.html.twig' %}",
                 ])
             ->end()
         ;
