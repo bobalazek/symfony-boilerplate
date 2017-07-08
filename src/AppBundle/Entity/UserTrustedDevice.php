@@ -6,14 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * User action Entity.
+ * User trusted device Entity.
  *
- * @ORM\Table(name="user_actions")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserActionRepository")
+ * @ORM\Table(name="user_trusted_devices")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserTrustedDeviceRepository")
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserAction
+class UserTrustedDevice
 {
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
@@ -33,16 +33,16 @@ class UserAction
     /**
      * @var string
      *
-     * @ORM\Column(name="`key`", type="text", nullable=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    protected $key;
+    protected $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="text", nullable=true)
+     * @ORM\Column(name="token", type="text")
      */
-    protected $message;
+    protected $token;
 
     /**
      * @var string
@@ -73,7 +73,21 @@ class UserAction
     protected $sessionId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userActions")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_active_at", type="datetime", nullable=true)
+     */
+    protected $lastActiveAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
+     */
+    protected $expiresAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userTrustedDevices")
      */
     protected $user;
 
@@ -90,7 +104,7 @@ class UserAction
     /**
      * @param $id
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
     public function setId($id)
     {
@@ -99,46 +113,46 @@ class UserAction
         return $this;
     }
 
-    /*** Key ***/
+    /*** Name ***/
 
     /**
      * @return string
      */
-    public function getKey()
+    public function getName()
     {
-        return $this->key;
+        return $this->name;
     }
 
     /**
-     * @param $key
+     * @param $name
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
-    public function setKey($key)
+    public function setName($name)
     {
-        $this->key = $key;
+        $this->name = $name;
 
         return $this;
     }
 
-    /*** Message ***/
+    /*** Token ***/
 
     /**
      * @return string
      */
-    public function getMessage()
+    public function getToken()
     {
-        return $this->message;
+        return $this->token;
     }
 
     /**
-     * @param $message
+     * @param $token
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
-    public function setMessage($message)
+    public function setToken($token)
     {
-        $this->message = $message;
+        $this->token = $token;
 
         return $this;
     }
@@ -156,7 +170,7 @@ class UserAction
     /**
      * @param array $data
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
     public function setData(array $data)
     {
@@ -178,7 +192,7 @@ class UserAction
     /**
      * @param $ip
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
     public function setIp($ip)
     {
@@ -200,7 +214,7 @@ class UserAction
     /**
      * @param $userAgent
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
     public function setUserAgent($userAgent)
     {
@@ -222,11 +236,55 @@ class UserAction
     /**
      * @param $sessionId
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
     public function setSessionId($sessionId)
     {
         $this->sessionId = $sessionId;
+
+        return $this;
+    }
+
+    /*** Last active at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastActiveAt()
+    {
+        return $this->lastActiveAt;
+    }
+
+    /**
+     * @param \DateTime $lastActiveAt
+     *
+     * @return User
+     */
+    public function setLastActiveAt(\DateTime $lastActiveAt = null)
+    {
+        $this->lastActiveAt = $lastActiveAt;
+
+        return $this;
+    }
+
+    /*** Expires at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @param \DateTime $expiresAt
+     *
+     * @return User
+     */
+    public function setExpiresAt(\DateTime $expiresAt = null)
+    {
+        $this->expiresAt = $expiresAt;
 
         return $this;
     }
@@ -244,7 +302,7 @@ class UserAction
     /**
      * @param User $user
      *
-     * @return UserAction
+     * @return UserTrustedDevice
      */
     public function setUser(User $user = null)
     {
@@ -258,7 +316,7 @@ class UserAction
      */
     public function __toString()
     {
-        return '['.$this->getKey().'] '.$this->getMessage();
+        return $this->getName();
     }
 
     /**
@@ -268,11 +326,17 @@ class UserAction
     {
         return [
             'id' => $this->getId(),
-            'key' => $this->getKey(),
-            'message' => $this->getMessage(),
+            'name' => $this->getName(),
+            'token' => $this->getToken(),
             'ip' => $this->getIp(),
             'user_agent' => $this->getUserAgent(),
             'session_id' => $this->getSessionId(),
+            'last_active_at' => $this->getLastActiveAt()
+                ? $this->getLastActiveAt()->format(DATE_ATOM)
+                : null,
+            'expires_at' => $this->getExpiresAt()
+                ? $this->getExpiresAt()->format(DATE_ATOM)
+                : null,
             'created_at' => $this->getCreatedAt()->format(DATE_ATOM),
             'updated_at' => $this->getUpdatedAt()->format(DATE_ATOM),
         ];

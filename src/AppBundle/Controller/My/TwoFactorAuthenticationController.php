@@ -62,4 +62,31 @@ class TwoFactorAuthenticationController extends Controller
             ]
         );
     }
+
+    /**
+     * @Route("/my/two-factor-authentication/email", name="my.two_factor_authentication.email")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function twoFactorAuthenticationEmailAction(Request $request)
+    {
+        // TODO
+    }
+
+    /**
+     * @Route("/my/two-factor-authentication/backup-codes", name="my.two_factor_authentication.backup_codes")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function twoFactorAuthenticationBackupCodesAction(Request $request)
+    {
+        // TODO
+    }
+
+    /**
+     * @Route("/my/two-factor-authentication/trusted-devices", name="my.two_factor_authentication.trusted_devices")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function twoFactorAuthenticationTrustedDevicesAction(Request $request)
+    {
+        // TODO
+    }
 }

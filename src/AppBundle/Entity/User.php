@@ -109,6 +109,13 @@ class User implements AdvancedUserInterface, \Serializable
     protected $userBackupCodes;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserTrustedDevice", mappedBy="user", cascade={"all"})
+     */
+    protected $userTrustedDevices;
+
+    /**
      * Otherwise known as: userExpired / accountExpired.
      *
      * @var bool
@@ -142,6 +149,7 @@ class User implements AdvancedUserInterface, \Serializable
 
         $this->userActions = new ArrayCollection();
         $this->userBackupCodes = new ArrayCollection();
+        $this->userTrustedDevices = new ArrayCollection();
 
         $this->prepareUserBackupCodes();
     }
@@ -356,7 +364,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function prepareUserBackupCodes($count = 8)
     {
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             $userBackupCode = new UserBackupCode();
             $userBackupCode
                 ->setCode(rand(10000000, 99999999))
@@ -365,6 +373,32 @@ class User implements AdvancedUserInterface, \Serializable
 
             $this->userBackupCodes->add($userBackupCode);
         }
+    }
+
+    /*** User trusted devices ***/
+
+    /**
+     * @return array
+     */
+    public function getUserTrustedDevices()
+    {
+        $criteria = Criteria::create()->orderBy([
+            'createdAt' => Criteria::DESC,
+        ]);
+
+        return $this->userTrustedDevices->matching($criteria)->toArray();
+    }
+
+    /**
+     * @param $userTrustedDevices
+     *
+     * @return User
+     */
+    public function setUserTrustedDevices($userTrustedDevices)
+    {
+        $this->userTrustedDevices = $userTrustedDevices;
+
+        return $this;
     }
 
     /*** Expired ***/

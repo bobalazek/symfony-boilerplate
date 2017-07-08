@@ -40,13 +40,13 @@ class UserActionsService
 
         $userAction = new UserAction();
         $userAction
-            ->setUser($user)
             ->setKey($key)
             ->setMessage($message)
             ->setData($data)
             ->setIp($request->getClientIp())
             ->setUserAgent($request->headers->get('User-Agent'))
             ->setSessionId($sessionId)
+            ->setUser($user)
         ;
 
         $em->persist($userAction);

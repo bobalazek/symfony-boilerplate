@@ -26,6 +26,11 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.trusted_device_manager:
+        class: AppBundle\Service\TrustedDeviceManagerService
+        calls:
+            - [setContainer, ["@service_container"]]
+
     app.twig_core_extension:
         class: AppBundle\Twig\CoreExtension
         public: false
