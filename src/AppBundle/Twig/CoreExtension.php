@@ -47,6 +47,16 @@ class CoreExtension extends Twig_Extension
                     'is_safe' => ['html'],
                 ]
             ),
+            new Twig_SimpleFunction(
+                'dump_data',
+                [
+                    $this,
+                    'dumpData',
+                ],
+                [
+                    'is_safe' => ['html'],
+                ]
+            ),
         ];
     }
 
@@ -84,6 +94,37 @@ class CoreExtension extends Twig_Extension
                 'error' => $e,
             ];
         }
+    }
+
+    public function dumpData($data)
+    {
+        $html = '';
+
+        if (is_object($data)) {
+            $data = (array) $data;
+        }
+
+        if (
+            !empty($data) &&
+            is_array($data)
+        ) {
+            $html .= '<ul>';
+            foreach ($data as $key => $val) {
+                $html .= '<li>';
+                $html .= '<b>'.$key.'</b>: ';
+                if (is_array($val)) {
+                    $html .= $this->dumpData($val);
+                } else {
+                    $html .= $val;
+                }
+                $html .= '</li>';
+            }
+            $html .= '</ul>';
+        } elseif (!empty($data)) {
+            $html .= $data;
+        }
+
+        return $html;
     }
 
     public function getName()

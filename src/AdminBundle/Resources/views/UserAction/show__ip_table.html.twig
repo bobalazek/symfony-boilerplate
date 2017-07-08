@@ -6,12 +6,7 @@
                 {% if record.error is defined %}
                     {{ record.error.getMessage() }}
                 {% else %}
-                    <ul>
-                        {% for key, val in record %}
-                            <b>{{ key }}:</b>
-                            {{ val }}
-                        {% endfor %}
-                    </ul>
+                    {{ dump_data(record) }}
                 {% endif %}
             </td>
         </tr>
