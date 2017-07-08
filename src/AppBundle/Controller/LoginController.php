@@ -53,6 +53,9 @@ class LoginController extends Controller
     public function loginTwoFactorAuthenticationAction(Request $request)
     {
         // TODO
+        return $this->render(
+            'AppBundle:Content:login/two_factor_authentication.html.twig'
+        );
     }
 
     /**

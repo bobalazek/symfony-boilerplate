@@ -18,23 +18,9 @@ class GeneralListener
     {
         $session = $this->container->get('session');
         $tokenStorage = $this->container->get('security.token_storage');
+        $request = $this->container->get('request_stack')->getCurrentRequest();
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        // Two factor authentication
-        if ($session->get('two_factor_authentication_in_progress')) {
-            // TODO: only in secured area!
-
-            $twoFactorAuthenticationRoute = 'login.two_factor_authentication';
-            if ($route === $event->getRequest()->get('_route')) {
-                return false;
-            }
-
-            $url = $this->router->generate($twoFactorAuthenticationRoute);
-            $response = new RedirectResponse($url);
-            $event->setResponse($response);
-        }
-
-        // Last active
         if (
             $event->isMasterRequest() &&
             $tokenStorage->getToken()
@@ -43,6 +29,26 @@ class GeneralListener
             $user = $token->getUser();
 
             if ($token->getUser() instanceof User) {
+                // Two factor authentication
+                if ($session->get('two_factor_authentication_in_progress')) {
+                    // TODO: only in secured area!
+
+                    $twoFactorAuthenticationRoute = 'login.two_factor_authentication';
+                    if ($twoFactorAuthenticationRoute === $event->getRequest()->get('_route')) {
+                        return false;
+                    }
+
+                    $url = $this->container->get('router')
+                        ->generate($twoFactorAuthenticationRoute);
+                    $response = new RedirectResponse($url);
+                    $event->setController(function() use($response) {
+                        return $response;
+                    });
+
+                    return false;
+                }
+
+                // Last active
                 $user->setLastActiveAt(new \DateTime());
                 // TODO: setLastActiveAt also for the trusted device
 
