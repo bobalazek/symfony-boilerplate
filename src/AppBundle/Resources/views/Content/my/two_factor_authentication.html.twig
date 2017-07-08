@@ -10,7 +10,7 @@
         {{ form_row(form.twoFactorAuthenticationEnabled) }}
         <h3>{{ 'Email' | trans }}</h3>
         {{ form_row(form.twoFactorAuthenticationEmailEnabled) }}
-        <a href="{{ url('my.two_factor_authentication.email') }}"
+        <a href="{{ url('my.two_factor_authentication.login_codes') }}"
             class="btn btn-default">
             {{ 'Show history' | trans }}
         </a>

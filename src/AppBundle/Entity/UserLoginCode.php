@@ -4,18 +4,16 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * User backup code Entity.
+ * User email login Entity.
  *
- * @Gedmo\Loggable
- * @ORM\Table(name="user_backup_codes")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserBackupCodeRepository")
+ * @ORM\Table(name="user_login_codes")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserLoginCodeRepository")
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserBackupCode
+class UserLoginCode
 {
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
@@ -35,10 +33,30 @@ class UserBackupCode
     /**
      * @var string
      *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="code", type="string", length=16)
+     * @ORM\Column(name="code", type="string", length=255, nullable=true)
      */
     protected $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip", type="string", length=255, nullable=true)
+     */
+    protected $ip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_agent", type="text", nullable=true)
+     */
+    protected $userAgent;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="session_id", type="text", nullable=true)
+     */
+    protected $sessionId;
 
     /**
      * @var \DateTime
@@ -48,7 +66,7 @@ class UserBackupCode
     protected $usedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userBackupCodes")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userLoginCodes")
      */
     protected $user;
 
@@ -65,7 +83,7 @@ class UserBackupCode
     /**
      * @param $id
      *
-     * @return UserBackupCode
+     * @return UserEmailLogin
      */
     public function setId($id)
     {
@@ -87,11 +105,77 @@ class UserBackupCode
     /**
      * @param $code
      *
-     * @return UserBackupCode
+     * @return UserEmailLogin
      */
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /*** IP ***/
+
+    /**
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @param $ip
+     *
+     * @return UserEmailLogin
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /*** User agent ***/
+
+    /**
+     * @return string
+     */
+    public function getUserAgent()
+    {
+        return $this->userAgent;
+    }
+
+    /**
+     * @param $userAgent
+     *
+     * @return UserEmailLogin
+     */
+    public function setUserAgent($userAgent)
+    {
+        $this->userAgent = $userAgent;
+
+        return $this;
+    }
+
+    /*** Session ID ***/
+
+    /**
+     * @return string
+     */
+    public function getSessionId()
+    {
+        return $this->sessionId;
+    }
+
+    /**
+     * @param $sessionId
+     *
+     * @return UserLoginCode
+     */
+    public function setSessionId($sessionId)
+    {
+        $this->sessionId = $sessionId;
 
         return $this;
     }
@@ -109,7 +193,7 @@ class UserBackupCode
     /**
      * @param \DateTime $usedAt
      *
-     * @return UserBackupCode
+     * @return UserLoginCode
      */
     public function setUsedAt(\DateTime $usedAt = null)
     {
@@ -131,7 +215,7 @@ class UserBackupCode
     /**
      * @param User $user
      *
-     * @return UserBackupCode
+     * @return UserLoginCode
      */
     public function setUser(User $user = null)
     {
@@ -145,7 +229,7 @@ class UserBackupCode
      */
     public function __toString()
     {
-        return (string) $this->getCode();
+        return $this->getCode();
     }
 
     /**
@@ -156,10 +240,9 @@ class UserBackupCode
         return [
             'id' => $this->getId(),
             'code' => $this->getCode(),
-            'is_used' => $this->getUsedAt() !== null,
-            'used_at' => $this->getUsedAt()
-                ? $this->getUsedAt()->format(DATE_ATOM)
-                : null,
+            'ip' => $this->getIp(),
+            'user_agent' => $this->getUserAgent(),
+            'session_id' => $this->getSessionId(),
             'created_at' => $this->getCreatedAt()->format(DATE_ATOM),
             'updated_at' => $this->getUpdatedAt()->format(DATE_ATOM),
         ];

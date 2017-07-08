@@ -64,3 +64,17 @@ services:
               label: User Trusted Devices
         calls:
             - [setContainer, ["@service_container"]]
+
+    admin.login_code:
+        class: AdminBundle\Admin\UserLoginCodeAdmin
+        arguments:
+            - ~
+            - AppBundle\Entity\UserLoginCode
+            - ~
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User Login Codes
+        calls:
+            - [setContainer, ["@service_container"]]

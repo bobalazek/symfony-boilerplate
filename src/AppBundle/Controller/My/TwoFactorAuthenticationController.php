@@ -64,10 +64,10 @@ class TwoFactorAuthenticationController extends Controller
     }
 
     /**
-     * @Route("/my/two-factor-authentication/email", name="my.two_factor_authentication.email")
+     * @Route("/my/two-factor-authentication/login-codes", name="my.two_factor_authentication.login_codes")
      * @Security("has_role('ROLE_USER')")
      */
-    public function twoFactorAuthenticationEmailAction(Request $request)
+    public function twoFactorAuthenticationLoginCodesAction(Request $request)
     {
         // TODO
     }
