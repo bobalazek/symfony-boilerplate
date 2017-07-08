@@ -24,11 +24,10 @@ class TwoFactorAuthenticationType extends AbstractType
             ])
             ->add('twoFactorAuthenticationEmailEnabled', CheckboxType::class, [
                 'required' => false,
-                'label' => 'Enable email',
-            ])
-            ->add('twoFactorAuthenticationBackupCodesEnabled', CheckboxType::class, [
-                'required' => false,
-                'label' => 'Enable backup codes',
+                'label' => 'Enable email authentication',
+                'attr' => [
+                    'data-help-text' => 'On each login, you will get an email with a security code, that you will need to type in, before you will be able to fully log into your account.',
+                ],
             ])
         ;
     }

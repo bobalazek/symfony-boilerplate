@@ -25,14 +25,6 @@ trait TwoFactorTrait
      */
     protected $twoFactorAuthenticationEmailEnabled = false;
 
-    /**
-     * @var bool
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="two_factor_authentication_backup_codes_enabled", type="boolean")
-     */
-    protected $twoFactorAuthenticationBackupCodesEnabled = false;
-
     /*** Two factor authentication Enabled ***/
 
     /**
@@ -113,48 +105,6 @@ trait TwoFactorTrait
     public function disableTwoFactorAuthenticationEmail()
     {
         $this->setTwoFactorAuthenticationEmailEnabled(false);
-
-        return $this;
-    }
-
-    /*** Two factor authentication backup codes Enabled ***/
-
-    /**
-     * @return bool
-     */
-    public function isTwoFactorAuthenticationBackupCodesEnabled()
-    {
-        return $this->twoFactorAuthenticationBackupCodesEnabled;
-    }
-
-    /**
-     * @param $twoFactorAuthenticationBackupCodesEnabled
-     *
-     * @return User
-     */
-    public function setTwoFactorAuthenticationBackupCodesEnabled($twoFactorAuthenticationBackupCodesEnabled)
-    {
-        $this->twoFactorAuthenticationBackupCodesEnabled = $twoFactorAuthenticationBackupCodesEnabled;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function enableTwoFactorAuthenticationBackupCodes()
-    {
-        $this->setTwoFactorAuthenticationBackupCodesEnabled(true);
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function disableTwoFactorAuthenticationBackupCodes()
-    {
-        $this->setTwoFactorAuthenticationBackupCodesEnabled(false);
 
         return $this;
     }

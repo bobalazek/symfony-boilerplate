@@ -145,7 +145,7 @@ class UserBackupCode
      */
     public function __toString()
     {
-        return $this->getCode();
+        return (string)$this->getCode();
     }
 
     /**

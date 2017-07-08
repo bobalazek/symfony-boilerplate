@@ -97,14 +97,14 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserAction", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserAction", mappedBy="user", cascade={"all"})
      */
     protected $userActions;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserBackupCode", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserBackupCode", mappedBy="user", cascade={"all"})
      */
     protected $userBackupCodes;
 
@@ -142,6 +142,8 @@ class User implements AdvancedUserInterface, \Serializable
 
         $this->userActions = new ArrayCollection();
         $this->userBackupCodes = new ArrayCollection();
+
+        $this->prepareUserBackupCodes();
     }
 
     /*** Id ***/
@@ -347,6 +349,22 @@ class User implements AdvancedUserInterface, \Serializable
         $this->userBackupCodes = $userBackupCodes;
 
         return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function prepareUserBackupCodes($count = 8)
+    {
+        for ($i = 0; $i < $count; $i++) {
+            $userBackupCode = new UserBackupCode();
+            $userBackupCode
+                ->setCode(rand(10000000, 99999999))
+                ->setUser($this)
+            ;
+
+            $this->userBackupCodes->add($userBackupCode);
+        }
     }
 
     /*** Expired ***/
