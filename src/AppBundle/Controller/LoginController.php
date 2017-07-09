@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Utils\Helpers;
 use AppBundle\Exception\BruteForceAttemptHttpException;
@@ -93,13 +94,13 @@ class LoginController extends Controller
         }
 
         $method = $session->get('two_factor_authentication_method');
-        $success = $this->handleTwoFactorAuthenticationLogin(
+        $response = $this->handleTwoFactorAuthenticationLogin(
             $method,
             $request,
             $session,
             $em
         );
-        if ($success) {
+        if ($response) {
             $this->addFlash(
                 'success',
                 $this->get('translator')->trans(
@@ -107,7 +108,7 @@ class LoginController extends Controller
                 )
             );
 
-            return $this->redirectToRoute('home');
+            return $response;
         }
 
         return $this->render(
@@ -125,10 +126,14 @@ class LoginController extends Controller
      * @param Session       $session
      * @param EntityManager $em
      *
-     * @return bool Was the authorization successful?
+     * @return Response
      */
-    private function handleTwoFactorAuthenticationLogin($method, Request $request, Session $session, EntityManager $em)
-    {
+    private function handleTwoFactorAuthenticationLogin(
+        $method,
+        Request $request,
+        Session $session,
+        EntityManager $em
+    ) {
         if ($method === 'email') {
             if ($request->getMethod() === 'POST') {
                 $code = $request->request->get('code');
@@ -162,9 +167,10 @@ class LoginController extends Controller
                         'user.login.2fa.fail'
                     );
 
-                    return false;
+                    return null;
                 }
 
+                $response = $this->redirectToRoute('home');
                 if ($isTrustedDevice) {
                     $token = Helpers::getRandomString(64);
                     $userTrustedDeviceManager = $this->get('app.user_trusted_device_manager');
@@ -177,16 +183,16 @@ class LoginController extends Controller
                         $token,
                         $request
                     );
-                    // TODO: append this cookies the response!
+                    $response->headers->setcookie($cookie);
                 }
 
                 $session->remove('two_factor_authentication_in_progress');
 
-                return true;
+                return $response;
             }
         }
 
-        return false;
+        return null;
     }
 
     /**

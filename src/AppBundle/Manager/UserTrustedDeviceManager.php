@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Jenssegers\Agent\Agent;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserTrustedDevice;
-use AppBundle\Utils\Helpers;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -92,7 +91,7 @@ class UserTrustedDeviceManager
 
                 if (
                     $userTrustedDevice !== null &&
-                    $userTrustedDevice->getExpiresAt() < new \Datetime() &&
+                    $userTrustedDevice->getExpiresAt() > new \Datetime() &&
                     !$userTrustedDevice->isDeleted()
                 ) {
                     return true;
@@ -113,7 +112,6 @@ class UserTrustedDeviceManager
      */
     public function createCookie($token, Request $request)
     {
-        $token = Helpers::getRandomString(32);
         $tokens = $request->cookies->get($this->cookieName);
         $tokens .= ($tokens !== null ? ';' : '').$token;
         $expiresAt = (new \Datetime())->add(new \Dateinterval('PT'.$this->cookieLifetime.'S'));
