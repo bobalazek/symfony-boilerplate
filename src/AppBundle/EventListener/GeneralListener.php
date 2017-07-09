@@ -57,9 +57,11 @@ class GeneralListener
 
                 // Last active
                 $user->setLastActiveAt(new \DateTime());
-                // TODO: setLastActiveAt also for the trusted device
-
                 $em->persist($user);
+
+                // Last active trusted device
+                // TODO
+
                 $em->flush();
             }
         }
