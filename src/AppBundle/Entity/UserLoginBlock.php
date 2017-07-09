@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="user_login_blocks")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserBackupCodeRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserLoginBlockRepository")
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */

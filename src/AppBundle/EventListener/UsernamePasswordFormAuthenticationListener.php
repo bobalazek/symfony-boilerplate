@@ -4,22 +4,39 @@ namespace AppBundle\EventListener;
 
 use Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener as BaseListener;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use AppBundle\Manager\BruteForceManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
 class UsernamePasswordFormAuthenticationListener extends BaseListener
 {
-    use ContainerAwareTrait;
+    /**
+     * @var BruteForceManager
+     */
+    protected $bruteForceManager;
+
+    /**
+     * @return BruteForceManager
+     */
+    public function getBruteForceManager()
+    {
+        return $this->bruteForceManager;
+    }
+    /**
+     * @param BruteForceManager $bruteForceManager
+     */
+    public function setBruteForceManager(BruteForceManager $bruteForceManager)
+    {
+        $this->bruteForceManager = $bruteForceManager;
+    }
 
     /**
      * @param Request $request
      */
     protected function attemptAuthentication(Request $request)
     {
-        $this->container->get('app.brute_force_manager')
-            ->attemptAuthentication($request);
+        $this->bruteForceManager->attemptAuthentication($request);
 
         return parent::attemptAuthentication($request);
     }

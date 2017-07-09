@@ -69,7 +69,12 @@ services:
         class: AppBundle\EventSubscriber\AuthenticationSubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: [ "@doctrine.orm.entity_manager", "@app.user_action_manager" ]
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@app.user_action_manager"
+            - "@request_stack"
+            - "@session"
+            - "%brute_force%"
 
     app.security_subscriber:
         class: AppBundle\EventSubscriber\SecuritySubscriber

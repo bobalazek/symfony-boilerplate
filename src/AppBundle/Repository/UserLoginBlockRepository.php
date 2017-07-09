@@ -12,17 +12,24 @@ use Symfony\Component\HttpFoundation\Request;
 class UserLoginBlockRepository extends EntityRepository
 {
     /**
-     * @param Request $request
-     * @param Session $session
+     * @param string $ip
+     * @param string $sessionId
+     * @param string $userAgent
      */
-    public function getCurrentlyActive(Request $request, Session $session)
+    public function getCurrentlyActive($ip, $sessionId, $userAgent)
     {
-        return $this->createQueryBuilder('ulg')
-            ->where('ulb.ip = :ip AND ulb.sessionId = :sessionid AND ulb.userAgent = :userAgent AND ulb.expiresAt < :expiresAt AND ulb.deletedAt = :deletedAt')
-            ->orderBy('expiresAt', 'DESC')
-            ->setParameter('ip', $request->getClientIp())
-            ->setParameter('sessionId', $session->getId())
-            ->setParameter('ip', $request->headers->get('User-Agent'))
+        return $this->createQueryBuilder('ulb')
+            ->where(implode(' AND ', [
+                'ulb.ip = :ip',
+                'ulb.sessionId = :sessionId',
+                'ulb.userAgent = :userAgent',
+                'ulb.expiresAt < :expiresAt',
+                'ulb.deletedAt = :deletedAt',
+            ]))
+            ->orderBy('ulb.expiresAt', 'DESC')
+            ->setParameter('ip', $ip)
+            ->setParameter('sessionId', $sessionId)
+            ->setParameter('userAgent', $userAgent)
             ->setParameter('expiresAt', new \Datetime())
             ->setParameter('deletedAt', null)
             ->getQuery()

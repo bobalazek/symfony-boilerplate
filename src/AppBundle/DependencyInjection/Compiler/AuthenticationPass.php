@@ -20,9 +20,9 @@ class AuthenticationPass implements CompilerPassInterface
             ->getDefinition('security.authentication.listener.form')
             ->setClass($container->getParameter('app.security.authentication.listener.form.class'))
             ->addMethodCall(
-                'setContainer',
+                'setBruteForceManager',
                 [
-                    new Reference('service_container'),
+                    new Reference('app.brute_force_manager'),
                 ]
             );
     }

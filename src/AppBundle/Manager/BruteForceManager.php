@@ -20,9 +20,17 @@ class BruteForceManager
     {
         $session = $this->container->get('session');
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $repository = $em->getRepository('AppBundle:UserLoginBlock');
+        $ip = $request->getClientIp();
+        $sessionId = $session->getId();
+        $userAgent = $request->headers->get('User-Agent');
 
-        $userLoginBlock = $repository->getCurrentlyActive($request, $session);
+        $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
+            ->getCurrentlyActive(
+                $ip,
+                $sessionId,
+                $userAgent
+            );
+        var_dump($userLoginBlock);exit;
         if ($userLoginBlock) {
             throw new BruteForceAttemptException(
                 $this->container->get('translator')

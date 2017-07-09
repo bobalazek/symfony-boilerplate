@@ -28,6 +28,7 @@ parameters:
     brute_force:
         max_attempts_before_block: 10
         block_time: 600 # in seconds; 10 minutes
+        watch_time: 300 # in seconds; 5 minutes; compare the last X (watch_time) seconds if Y (max_attempts_before_block) attempts appeared
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
     app.security.authentication.listener.form.class: AppBundle\EventListener\UsernamePasswordFormAuthenticationListener
 
