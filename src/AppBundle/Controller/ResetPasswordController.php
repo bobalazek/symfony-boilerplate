@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Form;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\ResetPasswordType;
 use AppBundle\Form\Type\ResetPasswordRequestType;
@@ -62,7 +63,13 @@ class ResetPasswordController extends Controller
         );
     }
 
-    private function handleResetPasswordRequest(Request $request, &$form, &$alert, &$alertMessage)
+    /**
+     * @param Request $request
+     * @param Form    $form
+     * @param bool    $alert
+     * @param string  $alertMessage
+     */
+    private function handleResetPasswordRequest(Request $request, Form &$form, &$alert, &$alertMessage)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -100,6 +107,12 @@ class ResetPasswordController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param Form    $form
+     * @param bool    $alert
+     * @param string  $alertMessage
+     */
     private function handleResetPassword($code, Request $request, &$form, &$alert, &$alertMessage)
     {
         $em = $this->getDoctrine()->getManager();

@@ -7,7 +7,7 @@
                 <h4>{{ 'Hello %user_name%!' | trans({
                     '%user_name%': user.getName(),
                 }) }}</h4>
-                <p>{{ 'We detected a login request. Please on the link below or directly enter the following to into the form: :code:.' | trans({
+                <p>{{ 'We detected a login request. Please click on the link below or enter the following code to into the form: :code:' | trans({
                     ':code:': '<b>' ~ code ~ '</b>',
                 }) | raw }}</p>
                 <table class="twelve columns">

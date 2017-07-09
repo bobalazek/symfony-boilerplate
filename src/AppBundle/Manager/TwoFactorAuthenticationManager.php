@@ -71,16 +71,19 @@ class TwoFactorAuthenticationManager
     {
         if ($method === 'email') {
             $code = Helpers::getRandomString(16);
+
+            $this->container->get('app.user_login_code_manager')->add($code, $method);
+
             $this->container->get('app.mailer')
                 ->swiftMessageInitializeAndSend([
                     'subject' => $this->container->get('translator')->trans(
-                        'login_2fa.email.subject',
+                        'login.2fa.email.subject',
                         [
                             '%app_name%' => $this->container->getParameter('app_name'),
                         ]
                     ),
                     'to' => [$user->getEmail() => $user->getName()],
-                    'body' => 'AppBundle:Emails:User/login_2fa.html.twig',
+                    'body' => 'AppBundle:Emails:User/login/2fa.html.twig',
                     'template_data' => [
                         'user' => $user,
                         'code' => $code,

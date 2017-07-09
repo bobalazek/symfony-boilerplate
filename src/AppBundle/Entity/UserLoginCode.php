@@ -21,6 +21,11 @@ class UserLoginCode
         ORMBehaviors\Timestampable\Timestampable
     ;
 
+    public static $methods = [
+        'email' => 'Email',
+        'sms' => 'SMS',
+    ];
+
     /**
      * @var int
      *
@@ -36,6 +41,13 @@ class UserLoginCode
      * @ORM\Column(name="code", type="string", length=255, nullable=true)
      */
     protected $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="method", type="string", length=32, nullable=true)
+     */
+    protected $method = 'email';
 
     /**
      * @var string
@@ -110,6 +122,28 @@ class UserLoginCode
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /*** Method ***/
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param $method
+     *
+     * @return UserEmailLogin
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
 
         return $this;
     }

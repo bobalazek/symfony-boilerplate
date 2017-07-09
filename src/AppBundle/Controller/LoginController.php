@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -64,34 +65,18 @@ class LoginController extends Controller
         }
 
         $method = $session->get('two_factor_authentication_method');
-        $code = $request->query->get('code');
-
-        if ($request->getMethod() === 'POST') {
-            $em = $this->getDoctrine()->getManager();
-            $code = $request->request->get('code');
-
-            $userLoginCode = $em->getRepository('AppBundle:UserLoginCode')
-                ->findOneBy([
-                    'user' => $this->getUser(),
-                    'code' => $code,
-                ]);
-
-            if (!$userLoginCode) {
-                $this->addFlash(
-                    'danger',
-                    $this->get('translator')->trans(
-                        'login.two_factor_authentication.code_not_found'
-                    )
-                );
-
-                return $this->redirectToRoute(
-                    'login.two_factor_authentication'
-                );
-            }
-
-            // TODO: add to trusted computers
-
-            $session->remove('two_factor_authentication_in_progress');
+        $success = $this->handleTwoFactorAuthenticationLogin(
+            $method,
+            $request,
+            $session
+        );
+        if ($success) {
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'login.two_factor_authentication.success'
+                )
+            );
 
             return $this->redirectToRoute('home');
         }
@@ -100,9 +85,51 @@ class LoginController extends Controller
             'AppBundle:Content:login/two_factor_authentication.html.twig',
             [
                 'method' => $method,
-                'code' => $code,
+                'code' => $request->query->get('code'),
             ]
         );
+    }
+
+    /**
+     * @param string  $method
+     * @param Request $request
+     * @param Session $session
+     *
+     * @return bool Was the authorization successful?
+     */
+    private function handleTwoFactorAuthenticationLogin($method, Request $request, Session $session)
+    {
+        if ($method === 'email') {
+            if ($request->getMethod() === 'POST') {
+                $em = $this->getDoctrine()->getManager();
+                $code = $request->request->get('code');
+
+                $userLoginCode = $em->getRepository('AppBundle:UserLoginCode')
+                    ->findOneBy([
+                        'user' => $this->getUser(),
+                        'code' => $code,
+                    ]);
+
+                if (!$userLoginCode) {
+                    $this->addFlash(
+                        'danger',
+                        $this->get('translator')->trans(
+                            'login.two_factor_authentication.code_not_found'
+                        )
+                    );
+
+                    return false;
+                }
+
+                // TODO: add to trusted computers
+
+                $session->remove('two_factor_authentication_in_progress');
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

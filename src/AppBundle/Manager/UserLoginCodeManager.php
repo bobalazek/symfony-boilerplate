@@ -4,24 +4,23 @@ namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;
-use AppBundle\Entity\UserAction;
+use AppBundle\Entity\UserLoginCode;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserActionManager
+class UserLoginCodeManager
 {
     use ContainerAwareTrait;
 
     /**
-     * @param string $key
-     * @param string $message
-     * @param array  $data
+     * @param string $code
+     * @param string $method
      * @param User   $user
      *
      * @return bool
      */
-    public function add($key, $message, array $data = [], User $user = null)
+    public function add($code, $method = 'email', User $user = null)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
         $token = $this->container->get('security.token_storage')->getToken();
@@ -38,18 +37,17 @@ class UserActionManager
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $sessionId = $session->getId();
 
-        $userAction = new UserAction();
-        $userAction
-            ->setKey($key)
-            ->setMessage($message)
-            ->setData($data)
+        $userLoginCode = new UserLoginCode();
+        $userLoginCode
+            ->setCode($code)
+            ->setMethod($method)
             ->setIp($request->getClientIp())
             ->setUserAgent($request->headers->get('User-Agent'))
             ->setSessionId($sessionId)
             ->setUser($user)
         ;
 
-        $em->persist($userAction);
+        $em->persist($userLoginCode);
         $em->flush();
 
         return true;

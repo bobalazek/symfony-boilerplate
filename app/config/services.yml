@@ -21,6 +21,11 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.user_login_code_manager:
+        class: AppBundle\Manager\UserLoginCodeManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
     app.user_manager:
         class: AppBundle\Manager\UserManager
         calls:
