@@ -39,3 +39,6 @@
 
 # PHP CS Cache
 /.php_cs.cache
+
+# MacOS
+._*
