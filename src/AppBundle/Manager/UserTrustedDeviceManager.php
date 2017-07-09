@@ -17,31 +17,39 @@ class UserTrustedDeviceManager
 {
     use ContainerAwareTrait;
 
+    private $cookieName;
+    private $cookieLifetime;
+
+    /**
+     * Prepare variables.
+     */
+    public function prepareVariables()
+    {
+        $trustedDevicesParameters = $this->container->getParameter('trusted_devices');
+        $this->cookieName = $trustedDevicesParameters['cookie_name'];
+        $this->cookieLifetime = $trustedDevicesParameters['cookie_lifetime'];
+    }
+
     /**
      * Add a new trusted device for that user.
      *
      * @param User   $user
      * @param string $token
-     * @param string $name
      */
-    public function add(User $user, $token, $name = null)
+    public function add(User $user, $token)
     {
-        $cookieLifetime = $this->container->getParameter('trusted_devices.cookie_lifetime');
         $em = $this->container->get('doctrine.orm.entity_manager');
         $request = $this->container->get('request_stack')->getCurrentRequest();
-        $userAgentString = $request->headers->get('User-Agent');
         $session = $this->container->get('session');
+        $agent = new Agent();
+
+        $userAgentString = $request->headers->get('User-Agent');
         $sessionId = $session->getId();
         $expiresAt = (new \Datetime())->add(
-            new \Dateinterval('PT'.$cookieLifetime.'S')
+            new \Dateinterval('PT'.$this->cookieLifetime.'S')
         );
-
-        if ($name === null) {
-            $agent = new Agent();
-            $agent->setUserAgent($userAgentString);
-
-            $name = $agent->platform().' - '.$agent->browser();
-        }
+        $agent->setUserAgent($userAgentString);
+        $name = $agent->platform().' - '.$agent->browser();
 
         $userTrustedDevice = new UserTrustedDevice();
         $userTrustedDevice
@@ -57,36 +65,39 @@ class UserTrustedDeviceManager
         $em->persist($userTrustedDevice);
         $em->flush();
 
-        $cookie = $this->createCookie($token, $request);
-
         return $userTrustedDevice;
     }
 
     /**
      * Determine if that is one of the trusted devices.
      *
-     * @param User   $user
-     * @param string $token
+     * @param User $user
      *
      * @return bool
      */
-    public function is(User $user, $token)
+    public function is(User $user)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $repository = $em->getRepository('AppBundle:UserTrustedDevice');
         $request = $this->container->get('request_stack')->getCurrentRequest();
+        $trustedDevicesParameters = $this->container->getParameter('trusted_devices');
 
-        $userTrustedDevice = $repository->findOneBy([
-            'user' => $user,
-            'token' => $token,
-        ]);
+        if ($request->cookies->has($this->cookieName)) {
+            $tokens = explode(';', $request->cookies->get($this->cookieName));
+            foreach ($tokens as $token) {
+                $userTrustedDevice = $em->getRepository('AppBundle:UserTrustedDevice')
+                    ->findOneBy([
+                        'user' => $user,
+                        'token' => $token,
+                    ]);
 
-        if (
-            $userTrustedDevice !== null &&
-            $userTrustedDevice->getExpiresAt() < new \Datetime() &&
-            !$userTrustedDevice->isDeleted()
-        ) {
-            return true;
+                if (
+                    $userTrustedDevice !== null &&
+                    $userTrustedDevice->getExpiresAt() < new \Datetime() &&
+                    !$userTrustedDevice->isDeleted()
+                ) {
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -102,11 +113,9 @@ class UserTrustedDeviceManager
      */
     public function createCookie($token, Request $request)
     {
-        $cookieName = $this->container->getParameter('trusted_devices.cookie_name');
-
         $token = Helpers::getRandomString(32);
-        $tokenList = $request->cookies->get($this->cookieName);
-        $tokenList .= ($tokenList !== null ? ';' : '').$token;
+        $tokens = $request->cookies->get($this->cookieName);
+        $tokens .= ($tokens !== null ? ';' : '').$token;
         $expiresAt = (new \Datetime())->add(new \Dateinterval('PT'.$this->cookieLifetime.'S'));
 
         $domain = null;
@@ -117,7 +126,7 @@ class UserTrustedDeviceManager
 
         return new Cookie(
             $this->cookieName,
-            $tokenList,
+            $tokens,
             $expiresAt,
             '/',
             $domain

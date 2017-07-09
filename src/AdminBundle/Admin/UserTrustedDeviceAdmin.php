@@ -43,7 +43,10 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
                 'label' => 'Last name',
             ])
             ->add('name', null, [
-                'label' => 'Key',
+                'label' => 'Name',
+            ])
+            ->add('token', null, [
+                'label' => 'Token',
             ])
             ->add('ip', null, [
                 'label' => 'IP',
@@ -90,6 +93,9 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
             ->with('General', ['class' => 'col-md-6'])
                 ->add('name', null, [
                     'label' => 'Name',
+                ])
+                ->add('token', null, [
+                    'label' => 'Token',
                 ])
                 ->add('ip', null, [
                     'label' => 'IP',

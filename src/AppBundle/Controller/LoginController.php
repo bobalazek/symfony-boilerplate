@@ -166,10 +166,18 @@ class LoginController extends Controller
                 }
 
                 if ($isTrustedDevice) {
-                    $this->get('app.user_trusted_device_manager')->add(
+                    $token = Helpers::getRandomString(64);
+                    $userTrustedDeviceManager = $this->get('app.user_trusted_device_manager');
+
+                    $userTrustedDeviceManager->add(
                         $this->getUser(),
-                        Helpers::getRandomString(64)
+                        $token
                     );
+                    $cookie = $userTrustedDeviceManager->createCookie(
+                        $token,
+                        $request
+                    );
+                    // TODO: append this cookies the response!
                 }
 
                 $session->remove('two_factor_authentication_in_progress');

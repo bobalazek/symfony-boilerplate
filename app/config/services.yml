@@ -36,6 +36,7 @@ services:
         class: AppBundle\Manager\UserTrustedDeviceManager
         calls:
             - [setContainer, ["@service_container"]]
+            - [prepareVariables, []]
 
     app.two_factor_authentication_manager:
         class: AppBundle\Manager\TwoFactorAuthenticationManager
