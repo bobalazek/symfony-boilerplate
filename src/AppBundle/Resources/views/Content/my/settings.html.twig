@@ -22,7 +22,7 @@
                 {% if app.user.getNewEmail() %}
                     <div class="alert alert-info">
                         {{ 'my.settings.new_email_request.form_text' | trans({
-                            ':email:': app.user.getNewEmail(),
+                            '%email%': app.user.getNewEmail(),
                         }) }}
                     </div>
                 {% endif %}

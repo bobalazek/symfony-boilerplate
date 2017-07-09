@@ -40,7 +40,9 @@ class UserTrustedDeviceManager
         $userAgentString = $request->headers->get('User-Agent');
         $session = $this->container->get('session');
         $sessionId = $session->getId();
-        $expiresAt = (new \Datetime())->add(new \Dateinterval('PT'.$this->cookieLifetime.'S'));
+        $expiresAt = (new \Datetime())->add(
+            new \Dateinterval('PT'.$this->cookieLifetime.'S')
+        );
 
         if ($name === null) {
             $agent = new Agent();
@@ -79,7 +81,7 @@ class UserTrustedDeviceManager
     public function is(User $user, $token)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $repository = $em->getRepository('AppBundle:TrustedDeviceManager');
+        $repository = $em->getRepository('AppBundle:UserTrustedDevice');
         $request = $this->container->get('request_stack')->getCurrentRequest();
 
         $userTrustedDevice = $repository->findOneBy([
