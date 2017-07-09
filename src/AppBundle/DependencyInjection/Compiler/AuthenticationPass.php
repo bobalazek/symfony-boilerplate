@@ -22,7 +22,7 @@ class AuthenticationPass implements CompilerPassInterface
             ->addMethodCall(
                 'setContainer',
                 [
-                    new Reference('service_container')
+                    new Reference('service_container'),
                 ]
             );
     }

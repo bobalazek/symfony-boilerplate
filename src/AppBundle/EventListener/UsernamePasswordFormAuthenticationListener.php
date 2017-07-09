@@ -4,7 +4,6 @@ namespace AppBundle\EventListener;
 
 use Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener as BaseListener;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Exception\BruteForceAttemptException;
 
