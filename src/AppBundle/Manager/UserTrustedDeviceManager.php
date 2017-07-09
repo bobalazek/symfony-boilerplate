@@ -17,15 +17,6 @@ class UserTrustedDeviceManager
 {
     use ContainerAwareTrait;
 
-    public $cookieLifetime;
-    public $cookieName;
-
-    public function __construct()
-    {
-        $this->cookieLifetime = $this->container->getParameter('trusted_devices.cookie_lifetime');
-        $this->cookieName = $this->container->getParameter('trusted_devices.cookie_name');
-    }
-
     /**
      * Add a new trusted device for that user.
      *
@@ -35,13 +26,14 @@ class UserTrustedDeviceManager
      */
     public function add(User $user, $token, $name = null)
     {
+        $cookieLifetime = $this->container->getParameter('trusted_devices.cookie_lifetime');
         $em = $this->container->get('doctrine.orm.entity_manager');
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $userAgentString = $request->headers->get('User-Agent');
         $session = $this->container->get('session');
         $sessionId = $session->getId();
         $expiresAt = (new \Datetime())->add(
-            new \Dateinterval('PT'.$this->cookieLifetime.'S')
+            new \Dateinterval('PT'.$cookieLifetime.'S')
         );
 
         if ($name === null) {
@@ -110,8 +102,9 @@ class UserTrustedDeviceManager
      */
     public function createCookie($token, Request $request)
     {
-        $token = Helpers::getRandomString(32);
+        $cookieName = $this->container->getParameter('trusted_devices.cookie_name');
 
+        $token = Helpers::getRandomString(32);
         $tokenList = $request->cookies->get($this->cookieName);
         $tokenList .= ($tokenList !== null ? ';' : '').$token;
         $expiresAt = (new \Datetime())->add(new \Dateinterval('PT'.$this->cookieLifetime.'S'));
