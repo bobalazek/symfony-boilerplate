@@ -72,9 +72,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@app.user_action_manager"
-            - "@request_stack"
-            - "@session"
-            - "%brute_force%"
+            - "@app.brute_force_manager"
 
     app.security_subscriber:
         class: AppBundle\EventSubscriber\SecuritySubscriber

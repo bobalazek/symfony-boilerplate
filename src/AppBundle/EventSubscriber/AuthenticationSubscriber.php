@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserLoginBlock;
 use AppBundle\Manager\UserActionManager;
+use AppBundle\Manager\BruteForceManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -22,20 +23,15 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     protected $userActionManager;
     protected $requestStack;
     protected $session;
-    protected $bruteForceParameters;
 
     public function __construct(
         EntityManager $em,
         UserActionManager $userActionManager,
-        RequestStack $requestStack,
-        Session $session,
-        array $bruteForceParameters
+        BruteForceManager $bruteForceManager
     ) {
         $this->em = $em;
         $this->userActionManager = $userActionManager;
-        $this->requestStack = $requestStack;
-        $this->session = $session;
-        $this->bruteForceParameters = $bruteForceParameters;
+        $this->bruteForceManager = $bruteForceManager;
     }
 
     /**
@@ -58,63 +54,11 @@ class AuthenticationSubscriber implements EventSubscriberInterface
             $user
         );
 
-        $this->handleUserLoginBlocks(
-            $this->requestStack->getCurrentRequest(),
-            $this->session,
-            $user
+        $this->bruteForceManager->handleUserLoginBlocks(
+            $user,
+            'login',
+            'user.login.fail'
         );
-    }
-
-    /**
-     * @param Request $request
-     * @param Session $session
-     *
-     * @return bool
-     */
-    private function handleUserLoginBlocks(Request $request, Session $session, User $user = null)
-    {
-        $ip = $request->getClientIp();
-        $sessionId = $session->getId();
-        $userAgent = $request->headers->get('User-Agent');
-
-        $attemptsCount = $this->em
-            ->getRepository('AppBundle:UserAction')
-            ->getFailedLoginAttemptsCount(
-                $ip,
-                $sessionId,
-                $userAgent,
-                $this->bruteForceParameters
-            );
-
-        if ($attemptsCount > $this->bruteForceParameters['max_attempts_before_block']) {
-            $expiresAt = (new \Datetime())->add(
-                new \Dateinterval('PT'.$this->bruteForceParameters['block_time'].'S')
-            );
-
-            $userLoginBlock = $this->em
-                ->getRepository('AppBundle:UserLoginBlock')
-                ->getCurrentlyActive(
-                    $ip,
-                    $sessionId,
-                    $userAgent
-                );
-
-            if ($userLoginBlock === null) {
-                $userLoginBlock = new UserLoginBlock();
-                $userLoginBlock
-                    ->setType('login')
-                    ->setIp($ip)
-                    ->setUserAgent($userAgent)
-                    ->setSessionId($sessionId)
-                    ->setUser($user)
-                ;
-            }
-
-            $userLoginBlock->setExpiresAt($expiresAt);
-
-            $this->em->persist($userLoginBlock);
-            $this->em->flush();
-        }
     }
 
     /**

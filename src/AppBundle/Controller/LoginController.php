@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Utils\Helpers;
+use AppBundle\Exception\BruteForceAttemptException;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -100,11 +101,29 @@ class LoginController extends Controller
      */
     private function handleTwoFactorAuthenticationLogin($method, Request $request, Session $session)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        // Check if we are blocked
+        $dateTimeFormat = $this->container->getParameter('date_time_format');
+        $ip = $request->getClientIp();
+        $sessionId = $session->getId();
+        $userAgent = $request->headers->get('User-Agent');
+
+        $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
+            ->getCurrentlyActive(
+                $ip,
+                $sessionId,
+                $userAgent,
+                'login.2fa'
+            );
+        if ($userLoginBlock) {
+            // TODO: throw blocked login exception!
+
+            return false;
+        }
+
         if ($method === 'email') {
             if ($request->getMethod() === 'POST') {
-                // TODO: check if the user has tried to enter too many times
-
-                $em = $this->getDoctrine()->getManager();
                 $code = $request->request->get('code');
                 $isTrustedDevice = $request->request->get('is_trusted_device') === 'yes';
 
@@ -122,7 +141,19 @@ class LoginController extends Controller
                         )
                     );
 
-                    // TODO: log failed login attempt
+                    $this->get('app.user_action_manager')->add(
+                        'user.login.2fa.fail',
+                        $this->get('translator')->trans('my.login.2fa.fail.text'),
+                        [
+                            'code' => $code,
+                        ]
+                    );
+
+                    $this->get('app.brute_force_manager')->handleUserLoginBlocks(
+                        $this->getUser(),
+                        'login.2fa',
+                        'user.login.2fa.fail'
+                    );
 
                     return false;
                 }

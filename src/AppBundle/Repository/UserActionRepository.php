@@ -13,18 +13,19 @@ class UserActionRepository extends EntityRepository
      * @param string $ip
      * @param string $sessionId
      * @param string $userAgent
-     * @param array  $bruteForceParameters
+     * @param string $key
+     * @param int   $watchTime For how long back do we track the login attempts?
      */
-    public function getFailedLoginAttemptsCount($ip, $sessionId, $userAgent, $bruteForceParameters)
+    public function getFailedLoginAttemptsCount($ip, $sessionId, $userAgent, $key, $watchTime)
     {
         $createdAt = (new \Datetime())->sub(
-            new \Dateinterval('PT'.$bruteForceParameters['watch_time'].'S')
+            new \Dateinterval('PT'.$watchTime.'S')
         );
 
         return $this->createQueryBuilder('ua')
             ->select('COUNT(ua.id)')
             ->where('ua.key = :key AND ua.createdAt > :createdAt')
-            ->setParameter('key', 'user.login.fail')
+            ->setParameter('key', $key)
             ->setParameter('createdAt', $createdAt)
             ->getQuery()
             ->getSingleScalarResult();

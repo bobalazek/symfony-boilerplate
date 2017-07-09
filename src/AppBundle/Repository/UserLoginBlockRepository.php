@@ -13,14 +13,16 @@ class UserLoginBlockRepository extends EntityRepository
      * @param string $ip
      * @param string $sessionId
      * @param string $userAgent
+     * @param string $type
      */
-    public function getCurrentlyActive($ip, $sessionId, $userAgent)
+    public function getCurrentlyActive($ip, $sessionId, $userAgent, $type = 'login')
     {
         return $this->createQueryBuilder('ulb')
             ->where(implode(' AND ', [
                 'ulb.ip = :ip',
                 'ulb.sessionId = :sessionId',
                 'ulb.userAgent = :userAgent',
+                'ulb.type = :type',
                 'ulb.expiresAt > :expiresAt',
                 'ulb.deletedAt is NULL',
             ]))
@@ -28,6 +30,7 @@ class UserLoginBlockRepository extends EntityRepository
             ->setParameter('ip', $ip)
             ->setParameter('sessionId', $sessionId)
             ->setParameter('userAgent', $userAgent)
+            ->setParameter('type', $type)
             ->setParameter('expiresAt', new \Datetime())
             ->setMaxResults(1)
             ->getQuery()
