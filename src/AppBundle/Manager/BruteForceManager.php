@@ -20,6 +20,7 @@ class BruteForceManager
     {
         $session = $this->container->get('session');
         $em = $this->container->get('doctrine.orm.entity_manager');
+        $dateTimeFormat = $this->container->getParameter('date_time_format');
         $ip = $request->getClientIp();
         $sessionId = $session->getId();
         $userAgent = $request->headers->get('User-Agent');
@@ -30,16 +31,14 @@ class BruteForceManager
                 $sessionId,
                 $userAgent
             );
-        var_dump($userLoginBlock);exit;
         if ($userLoginBlock) {
             throw new BruteForceAttemptException(
-                $this->container->get('translator')
-                    ->trans(
-                        'Your account has been blocked. It will be released at %time%',
-                        [
-                            '%time%' => $userLoginBlock->expiresAt()->format(DATE_ATOM),
-                        ]
-                    )
+                $this->container->get('translator')->trans(
+                    'Your account has been blocked from logging it. The block will be released at %time%',
+                    [
+                        '%time%' => $userLoginBlock->getExpiresAt()->format($dateTimeFormat),
+                    ]
+                )
             );
         }
 

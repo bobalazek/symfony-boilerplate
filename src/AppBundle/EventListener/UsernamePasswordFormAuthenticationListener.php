@@ -23,6 +23,7 @@ class UsernamePasswordFormAuthenticationListener extends BaseListener
     {
         return $this->bruteForceManager;
     }
+
     /**
      * @param BruteForceManager $bruteForceManager
      */
