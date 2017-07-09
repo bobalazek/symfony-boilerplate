@@ -15,6 +15,9 @@ class ExceptionListener
 {
     use ContainerAwareTrait;
 
+    /**
+     * @param GetResponseForExceptionEvent $event
+     */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         if (strpos($event->getRequest()->getPathInfo(), '/api') !== false) {

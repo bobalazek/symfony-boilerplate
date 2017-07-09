@@ -5,12 +5,8 @@ namespace AppBundle\EventSubscriber;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
-use AppBundle\Entity\UserLoginBlock;
 use AppBundle\Manager\UserActionManager;
 use AppBundle\Manager\BruteForceManager;
 

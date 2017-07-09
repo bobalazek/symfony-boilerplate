@@ -14,7 +14,7 @@ class UserActionRepository extends EntityRepository
      * @param string $sessionId
      * @param string $userAgent
      * @param string $key
-     * @param int   $watchTime For how long back do we track the login attempts?
+     * @param int    $watchTime For how long back do we track the login attempts?
      */
     public function getFailedLoginAttemptsCount($ip, $sessionId, $userAgent, $key, $watchTime)
     {

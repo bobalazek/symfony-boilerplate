@@ -1,0 +1,7 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block main %}
+    <h1>{{ 'Errors 403' | trans }}</h1>
+    <h2>{{ exception.getMessages() | trans }}</h2>
+    {{dump()}}
+{% endblock %}

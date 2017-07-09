@@ -2,13 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Utils\Helpers;
-use AppBundle\Exception\BruteForceAttemptException;
+use AppBundle\Exception\BruteForceAttemptHttpException;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -55,6 +56,7 @@ class LoginController extends Controller
      */
     public function loginTwoFactorAuthenticationAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
 
         if (!$session->get('two_factor_authentication_in_progress')) {
@@ -66,11 +68,36 @@ class LoginController extends Controller
             return $this->redirectToRoute('home');
         }
 
+        // Check if we are blocked
+        $dateTimeFormat = $this->getParameter('date_time_format');
+        $ip = $request->getClientIp();
+        $sessionId = $session->getId();
+        $userAgent = $request->headers->get('User-Agent');
+
+        $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
+            ->getCurrentlyActive(
+                $ip,
+                $sessionId,
+                $userAgent,
+                'login.2fa'
+            );
+        if ($userLoginBlock) {
+            throw new BruteForceAttemptHttpException(
+                $this->get('translator')->trans(
+                    'Your account has been blocked from logging it. The block will be released at %time%',
+                    [
+                        '%time%' => $userLoginBlock->getExpiresAt()->format($dateTimeFormat),
+                    ]
+                )
+            );
+        }
+
         $method = $session->get('two_factor_authentication_method');
         $success = $this->handleTwoFactorAuthenticationLogin(
             $method,
             $request,
-            $session
+            $session,
+            $em
         );
         if ($success) {
             $this->addFlash(
@@ -93,35 +120,15 @@ class LoginController extends Controller
     }
 
     /**
-     * @param string  $method
-     * @param Request $request
-     * @param Session $session
+     * @param string        $method
+     * @param Request       $request
+     * @param Session       $session
+     * @param EntityManager $em
      *
      * @return bool Was the authorization successful?
      */
-    private function handleTwoFactorAuthenticationLogin($method, Request $request, Session $session)
+    private function handleTwoFactorAuthenticationLogin($method, Request $request, Session $session, EntityManager $em)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        // Check if we are blocked
-        $dateTimeFormat = $this->container->getParameter('date_time_format');
-        $ip = $request->getClientIp();
-        $sessionId = $session->getId();
-        $userAgent = $request->headers->get('User-Agent');
-
-        $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
-            ->getCurrentlyActive(
-                $ip,
-                $sessionId,
-                $userAgent,
-                'login.2fa'
-            );
-        if ($userLoginBlock) {
-            // TODO: throw blocked login exception!
-
-            return false;
-        }
-
         if ($method === 'email') {
             if ($request->getMethod() === 'POST') {
                 $code = $request->request->get('code');
