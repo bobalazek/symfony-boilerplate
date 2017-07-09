@@ -9,6 +9,9 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
 
+/**
+ * @author Borut Balazek <bobalazek124@gmail.com>
+ */
 class UserProvider implements UserProviderInterface
 {
     protected $em;
@@ -59,6 +62,9 @@ class UserProvider implements UserProviderInterface
         return $this->loadUserByUsername($user->getUsername());
     }
 
+    /**
+     * @return bool
+     */
     public function supportsClass($class)
     {
         return User::class === $class;

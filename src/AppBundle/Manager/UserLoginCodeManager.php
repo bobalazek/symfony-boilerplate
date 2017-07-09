@@ -40,7 +40,7 @@ class UserLoginCodeManager
         $userLoginCode = new UserLoginCode();
         $userLoginCode
             ->setCode($code)
-            ->setMethod($method)
+            ->setType($method)
             ->setIp($request->getClientIp())
             ->setUserAgent($request->headers->get('User-Agent'))
             ->setSessionId($sessionId)

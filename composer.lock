@@ -4,59 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "631057c2f61f10f037ce6366bd10036e",
+    "content-hash": "aa3a321f00897290f017a3b58b6650cc",
     "packages": [
-        {
-            "name": "anyx/login-gate-bundle",
-            "version": "0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/anyx/LoginGateBundle.git",
-                "reference": "12ebcef54c4cae5fb43443dce29c3da372b31ab0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/anyx/LoginGateBundle/zipball/12ebcef54c4cae5fb43443dce29c3da372b31ab0",
-                "reference": "12ebcef54c4cae5fb43443dce29c3da372b31ab0",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/symfony": "~2.8|~3.0"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "^1.6.3",
-                "doctrine/doctrine-fixtures-bundle": "^2.3",
-                "doctrine/mongodb-odm": "~1.0",
-                "doctrine/mongodb-odm-bundle": "~3.0",
-                "doctrine/orm": "^2.5.4",
-                "phpspec/phpspec": "^2.5",
-                "phpunit/phpunit": "^5.4",
-                "symfony/monolog-bundle": "^2.11"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Anyx\\LoginGateBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aleksandr Klimenkov",
-                    "email": "alx.devel@gmail.com"
-                }
-            ],
-            "description": "Checking brute force attacks on site",
-            "homepage": "https://github.com/anyx/LoginGateBundle",
-            "keywords": [
-                "brute-force",
-                "security"
-            ],
-            "time": "2016-07-29T00:25:54+00:00"
-        },
         {
             "name": "behat/transliterator",
             "version": "v1.2.0",

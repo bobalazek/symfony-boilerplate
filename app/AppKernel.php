@@ -46,9 +46,6 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Picoss\SonataExtraAdminBundle\PicossSonataExtraAdminBundle(),
 
-            // Login Gate
-            new Anyx\LoginGateBundle\LoginGateBundle(),
-
             // App
             new AppBundle\AppBundle(),
             new ApiBundle\ApiBundle(),

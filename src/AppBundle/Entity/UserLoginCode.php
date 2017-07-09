@@ -18,10 +18,11 @@ class UserLoginCode
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
-        ORMBehaviors\Timestampable\Timestampable
+        ORMBehaviors\Timestampable\Timestampable,
+        Shared\RequestMetaTrait
     ;
 
-    public static $methods = [
+    public static $types = [
         'email' => 'Email',
         'sms' => 'SMS',
     ];
@@ -45,30 +46,9 @@ class UserLoginCode
     /**
      * @var string
      *
-     * @ORM\Column(name="method", type="string", length=32, nullable=true)
+     * @ORM\Column(name="type", type="string", length=32, nullable=true)
      */
-    protected $method = 'email';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip", type="string", length=255, nullable=true)
-     */
-    protected $ip;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="user_agent", type="text", nullable=true)
-     */
-    protected $userAgent;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="session_id", type="text", nullable=true)
-     */
-    protected $sessionId;
+    protected $type = 'email';
 
     /**
      * @var \DateTime
@@ -95,7 +75,7 @@ class UserLoginCode
     /**
      * @param $id
      *
-     * @return UserEmailLogin
+     * @return UserLoginCode
      */
     public function setId($id)
     {
@@ -117,7 +97,7 @@ class UserLoginCode
     /**
      * @param $code
      *
-     * @return UserEmailLogin
+     * @return UserLoginCode
      */
     public function setCode($code)
     {
@@ -126,90 +106,24 @@ class UserLoginCode
         return $this;
     }
 
-    /*** Method ***/
+    /*** Type ***/
 
     /**
      * @return string
      */
-    public function getMethod()
+    public function getType()
     {
         return $this->code;
     }
 
     /**
-     * @param $method
-     *
-     * @return UserEmailLogin
-     */
-    public function setMethod($method)
-    {
-        $this->method = $method;
-
-        return $this;
-    }
-
-    /*** IP ***/
-
-    /**
-     * @return string
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
-     * @param $ip
-     *
-     * @return UserEmailLogin
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-
-        return $this;
-    }
-
-    /*** User agent ***/
-
-    /**
-     * @return string
-     */
-    public function getUserAgent()
-    {
-        return $this->userAgent;
-    }
-
-    /**
-     * @param $userAgent
-     *
-     * @return UserEmailLogin
-     */
-    public function setUserAgent($userAgent)
-    {
-        $this->userAgent = $userAgent;
-
-        return $this;
-    }
-
-    /*** Session ID ***/
-
-    /**
-     * @return string
-     */
-    public function getSessionId()
-    {
-        return $this->sessionId;
-    }
-
-    /**
-     * @param $sessionId
+     * @param $type
      *
      * @return UserLoginCode
      */
-    public function setSessionId($sessionId)
+    public function setType($type)
     {
-        $this->sessionId = $sessionId;
+        $this->type = $type;
 
         return $this;
     }
@@ -273,6 +187,7 @@ class UserLoginCode
     {
         return [
             'id' => $this->getId(),
+            'type' => $this->getType(),
             'code' => $this->getCode(),
             'ip' => $this->getIp(),
             'user_agent' => $this->getUserAgent(),

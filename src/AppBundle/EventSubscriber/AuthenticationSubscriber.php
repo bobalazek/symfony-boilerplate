@@ -4,6 +4,7 @@ namespace AppBundle\EventSubscriber;
 
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
 use AppBundle\Manager\UserActionManager;
@@ -24,7 +25,10 @@ class AuthenticationSubscriber implements EventSubscriberInterface
         $this->userActionManager = $userActionManager;
     }
 
-    public function onAuthenticationFailure($event)
+    /**
+     * @param AuthenticationFailureEvent $event
+     */
+    public function onAuthenticationFailure(AuthenticationFailureEvent $event)
     {
         $authenticationTokenUser = $event->getAuthenticationToken()->getUser();
 
@@ -42,6 +46,9 @@ class AuthenticationSubscriber implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [

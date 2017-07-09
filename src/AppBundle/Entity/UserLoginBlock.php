@@ -4,16 +4,18 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * User action Entity.
+ * User login block Entity.
  *
- * @ORM\Table(name="user_actions")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserActionRepository")
+ * @Gedmo\Loggable
+ * @ORM\Table(name="user_login_blocks")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserBackupCodeRepository")
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserAction
+class UserLoginBlock
 {
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
@@ -21,6 +23,11 @@ class UserAction
         ORMBehaviors\Timestampable\Timestampable,
         Shared\RequestMetaTrait
     ;
+
+    public static $methods = [
+        'login' => 'Login',
+        'login.2fa' => '2FA Login',
+    ];
 
     /**
      * @var int
@@ -34,26 +41,20 @@ class UserAction
     /**
      * @var string
      *
-     * @ORM\Column(name="`key`", type="text", nullable=true)
+     * @Gedmo\Versioned
+     * @ORM\Column(name="type", type="string", length=32)
      */
-    protected $key;
+    protected $type = 'login';
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="message", type="text", nullable=true)
+     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
      */
-    protected $message;
+    protected $expiresAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="data", type="json_array", nullable=true)
-     */
-    protected $data = [];
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userActions")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userLoginBlocks")
      */
     protected $user;
 
@@ -70,7 +71,7 @@ class UserAction
     /**
      * @param $id
      *
-     * @return UserAction
+     * @return UserBackupCode
      */
     public function setId($id)
     {
@@ -79,68 +80,46 @@ class UserAction
         return $this;
     }
 
-    /*** Key ***/
+    /*** Type ***/
 
     /**
      * @return string
      */
-    public function getKey()
+    public function getType()
     {
-        return $this->key;
+        return $this->type;
     }
 
     /**
-     * @param $key
+     * @param $type
      *
-     * @return UserAction
+     * @return UserLoginBlock
      */
-    public function setKey($key)
+    public function setType($type)
     {
-        $this->key = $key;
+        $this->type = $type;
 
         return $this;
     }
 
-    /*** Message ***/
+    /*** Expires at ***/
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getMessage()
+    public function getExpiresAt()
     {
-        return $this->message;
+        return $this->expiresAt;
     }
 
     /**
-     * @param $message
+     * @param \DateTime $expiresAt
      *
-     * @return UserAction
+     * @return UserBackupCode
      */
-    public function setMessage($message)
+    public function setExpiresAt(\DateTime $expiresAt = null)
     {
-        $this->message = $message;
-
-        return $this;
-    }
-
-    /*** Data ***/
-
-    /**
-     * @return array
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return UserAction
-     */
-    public function setData(array $data)
-    {
-        $this->data = $data;
+        $this->expiresAt = $expiresAt;
 
         return $this;
     }
@@ -158,7 +137,7 @@ class UserAction
     /**
      * @param User $user
      *
-     * @return UserAction
+     * @return UserBackupCode
      */
     public function setUser(User $user = null)
     {
@@ -172,7 +151,7 @@ class UserAction
      */
     public function __toString()
     {
-        return '['.$this->getKey().'] '.$this->getMessage();
+        return (string) $this->getId();
     }
 
     /**
@@ -182,11 +161,10 @@ class UserAction
     {
         return [
             'id' => $this->getId(),
-            'key' => $this->getKey(),
-            'message' => $this->getMessage(),
-            'ip' => $this->getIp(),
-            'user_agent' => $this->getUserAgent(),
-            'session_id' => $this->getSessionId(),
+            'type' => $this->getType(),
+            'expires_at' => $this->getExpiresAt()
+                ? $this->getExpiresAt()->format(DATE_ATOM)
+                : null,
             'created_at' => $this->getCreatedAt()->format(DATE_ATOM),
             'updated_at' => $this->getUpdatedAt()->format(DATE_ATOM),
         ];

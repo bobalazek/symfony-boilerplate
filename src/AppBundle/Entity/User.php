@@ -123,6 +123,13 @@ class User implements AdvancedUserInterface, \Serializable
     protected $userLoginCodes;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserLoginBlock", mappedBy="user", cascade={"all"})
+     */
+    protected $userLoginBlocks;
+
+    /**
      * Otherwise known as: userExpired / accountExpired.
      *
      * @var bool
@@ -158,6 +165,7 @@ class User implements AdvancedUserInterface, \Serializable
         $this->userBackupCodes = new ArrayCollection();
         $this->userTrustedDevices = new ArrayCollection();
         $this->userLoginCodes = new ArrayCollection();
+        $this->userLoginBlocks = new ArrayCollection();
 
         $this->prepareUserBackupCodes();
     }
@@ -440,6 +448,32 @@ class User implements AdvancedUserInterface, \Serializable
     public function setUserLoginCodes($userLoginCodes)
     {
         $this->userLoginCodes = $userLoginCodes;
+
+        return $this;
+    }
+
+    /*** User login blocks ***/
+
+    /**
+     * @return array
+     */
+    public function getUserLoginBlocks()
+    {
+        $criteria = Criteria::create()->orderBy([
+            'createdAt' => Criteria::DESC,
+        ]);
+
+        return $this->userLoginBlocks->matching($criteria)->toArray();
+    }
+
+    /**
+     * @param $userLoginBlocks
+     *
+     * @return User
+     */
+    public function setUserLoginBlocks($userLoginBlocks)
+    {
+        $this->userLoginBlocks = $userLoginBlocks;
 
         return $this;
     }

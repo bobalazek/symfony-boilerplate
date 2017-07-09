@@ -1,5 +1,5 @@
 services:
-    # General
+    # Services
     app.emogrifier:
         class: AppBundle\Service\EmogrifierService
         calls:
@@ -16,6 +16,7 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    # Managers
     app.user_action_manager:
         class: AppBundle\Manager\UserActionManager
         calls:
@@ -41,6 +42,20 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.brute_force_manager:
+        class: AppBundle\Manager\BruteForceManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    # Security
+    app.user_provider:
+        class: AppBundle\Security\UserProvider
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
+    app.token_authenticator:
+        class: AppBundle\Security\TokenAuthenticator
+
+    # Twig
     app.twig_core_extension:
         class: AppBundle\Twig\CoreExtension
         public: false
@@ -48,13 +63,6 @@ services:
             - { name: twig.extension }
         calls:
             - [setContainer, ["@service_container"]]
-
-    app.user_provider:
-        class: AppBundle\Security\UserProvider
-        arguments: [ "@doctrine.orm.entity_manager" ]
-
-    app.token_authenticator:
-        class: AppBundle\Security\TokenAuthenticator
 
     # Event Subscribers & Listeners
     app.authentication_subscriber:
@@ -91,11 +99,6 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
 
-    app.brute_force_listener:
-        class: AppBundle\EventListener\BruteForceAttemptListener
-        tags:
-            - { name: kernel.event_listener, event: security.brute_force_attempt, method: onBruteForceAttempt }
-
     # Form types
     app.form.type.user:
         class: AppBundle\Form\Type\UserType
@@ -106,15 +109,8 @@ services:
 
     # Session
     session.handler.pdo:
-        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-        public:    false
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        public: false
         arguments:
             - 'mysql:host=%database_host%;dbname=%database_name%'
             - { db_username: '%database_user%', db_password: '%database_password%' }
-
-    # Data fixtures
-    data_fixtures.processor.user:
-        class: AppBundle\DataFixtures\Processor\UserProcessor
-        arguments:
-            - '@security.password_encoder'
-        tags: [ { name: fidry_alice_data_fixtures.processor } ]

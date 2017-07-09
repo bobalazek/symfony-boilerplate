@@ -46,7 +46,6 @@
         "simplethings/entity-audit-bundle": "^1.0",
         "jenssegers/agent": "^2.5",
         "cravler/maxmind-geoip-bundle": "^1.1",
-        "anyx/login-gate-bundle": "^0.3.0",
         "sonata-project/google-authenticator": "^2.0"
     },
     "require-dev": {

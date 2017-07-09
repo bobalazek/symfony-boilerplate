@@ -18,7 +18,8 @@ class UserTrustedDevice
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
-        ORMBehaviors\Timestampable\Timestampable
+        ORMBehaviors\Timestampable\Timestampable,
+        Shared\RequestMetaTrait
     ;
 
     /**
@@ -50,27 +51,6 @@ class UserTrustedDevice
      * @ORM\Column(name="data", type="json_array", nullable=true)
      */
     protected $data = [];
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ip", type="string", length=255, nullable=true)
-     */
-    protected $ip;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="user_agent", type="text", nullable=true)
-     */
-    protected $userAgent;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="session_id", type="text", nullable=true)
-     */
-    protected $sessionId;
 
     /**
      * @var \DateTime
@@ -175,72 +155,6 @@ class UserTrustedDevice
     public function setData(array $data)
     {
         $this->data = $data;
-
-        return $this;
-    }
-
-    /*** IP ***/
-
-    /**
-     * @return string
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
-     * @param $ip
-     *
-     * @return UserTrustedDevice
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-
-        return $this;
-    }
-
-    /*** User agent ***/
-
-    /**
-     * @return string
-     */
-    public function getUserAgent()
-    {
-        return $this->userAgent;
-    }
-
-    /**
-     * @param $userAgent
-     *
-     * @return UserTrustedDevice
-     */
-    public function setUserAgent($userAgent)
-    {
-        $this->userAgent = $userAgent;
-
-        return $this;
-    }
-
-    /*** Session ID ***/
-
-    /**
-     * @return string
-     */
-    public function getSessionId()
-    {
-        return $this->sessionId;
-    }
-
-    /**
-     * @param $sessionId
-     *
-     * @return UserTrustedDevice
-     */
-    public function setSessionId($sessionId)
-    {
-        $this->sessionId = $sessionId;
 
         return $this;
     }

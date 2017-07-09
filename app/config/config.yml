@@ -25,7 +25,11 @@ parameters:
     trusted_devices:
         cookie_lifetime: 5184000 # in seconds; 60 days
         cookie_name: trusted_device
+    brute_force:
+        max_attempts_before_block: 10
+        block_time: 600 # in seconds; 10 minutes
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
+    app.security.authentication.listener.form.class: AppBundle\EventListener\UsernamePasswordFormAuthenticationListener
 
 framework:
     secret: "%secret%"
@@ -159,11 +163,3 @@ nelmio_cors:
 # Serializer
 jms_serializer:
     enable_short_alias: false
-
-# Login date
-login_gate:
-    storages: ['orm']
-    options:
-        max_count_attempts: 10
-        timeout: 600
-        watch_period: 3600
