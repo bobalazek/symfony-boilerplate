@@ -4,6 +4,9 @@ namespace Tests\AppBundle\Controller;
 
 use Tests\AppBundle\WebTestCase;
 
+/**
+ * @author Borut Balazek <bobalazek124@gmail.com>
+ */
 class MyControllerTest extends WebTestCase
 {
     public function testPages()
@@ -14,7 +17,7 @@ class MyControllerTest extends WebTestCase
             'my.actions',
         ];
 
-        $this->login('user@app.com');
+        $this->login('bobalazek124@gmail.com');
 
         foreach ($routes as $route) {
             // A hacky way to work around the KNP paginator bug

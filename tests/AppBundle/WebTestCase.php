@@ -9,6 +9,9 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Console\Input\StringInput;
 
+/**
+ * @author Borut Balazek <bobalazek124@gmail.com>
+ */
 class WebTestCase extends SymfonyWebTestCase
 {
     protected $client;
@@ -19,8 +22,10 @@ class WebTestCase extends SymfonyWebTestCase
         $this->client = static::createClient();
 
         // Update database schema in test database & load fixtures
+        $this->runCommand('doctrine:database:drop --force');
+        $this->runCommand('doctrine:database:create');
         $this->runCommand('doctrine:schema:update --force');
-        $this->runCommand('hautelook:fixtures:load --no-interaction');
+        $this->runCommand('doctrine:fixtures:load --no-interaction');
     }
 
     protected function login($username = 'user@app.com')
@@ -58,8 +63,10 @@ class WebTestCase extends SymfonyWebTestCase
             ->getEnvironment();
 
         $command = sprintf('%s --quiet --env=%s', $command, $env);
+        $input = new StringInput($command);
+        $input->setInteractive(false);
 
-        return $this->getApplication()->run(new StringInput($command));
+        return $this->getApplication()->run($input);
     }
 
     protected function getApplication()

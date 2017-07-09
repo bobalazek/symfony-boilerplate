@@ -4,6 +4,9 @@ namespace Tests\AppBundle\Controller;
 
 use Tests\AppBundle\WebTestCase;
 
+/**
+ * @author Borut Balazek <bobalazek124@gmail.com>
+ */
 class UserSystemControllerTest extends WebTestCase
 {
     public function testPages()
