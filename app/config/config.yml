@@ -22,6 +22,9 @@ parameters:
     deployment_emails: # to whom should the email be sent, after a successful deployment?
         bobalazek124@gmail.com: 'Borut'
     google_authenticator_secret: 'XVQ9UHNO75HRUKJ9'
+    trusted_devices:
+        cookie_lifetime: 5184000 # in seconds; 60 days
+        cookie_name: trusted_device
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
 
 framework:

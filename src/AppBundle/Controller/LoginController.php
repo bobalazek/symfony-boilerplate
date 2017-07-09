@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use AppBundle\Utils\Helpers;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -101,8 +102,11 @@ class LoginController extends Controller
     {
         if ($method === 'email') {
             if ($request->getMethod() === 'POST') {
+                // TODO: check if the user has tried to enter too many times
+
                 $em = $this->getDoctrine()->getManager();
                 $code = $request->request->get('code');
+                $isTrustedDevice = $request->request->get('is_trusted_device') === 'yes';
 
                 $userLoginCode = $em->getRepository('AppBundle:UserLoginCode')
                     ->findOneBy([
@@ -118,10 +122,17 @@ class LoginController extends Controller
                         )
                     );
 
+                    // TODO: log failed login attempt
+
                     return false;
                 }
 
-                // TODO: add to trusted computers
+                if ($isTrustedDevice) {
+                    $this->get('app.user_trusted_device_manager')->add(
+                        $this->getUser(),
+                        Helpers::getRandomString(64)
+                    );
+                }
 
                 $session->remove('two_factor_authentication_in_progress');
 

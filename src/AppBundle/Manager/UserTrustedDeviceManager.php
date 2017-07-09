@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 use Jenssegers\Agent\Agent;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserTrustedDevice;
@@ -16,8 +17,14 @@ class UserTrustedDeviceManager
 {
     use ContainerAwareTrait;
 
-    public $cookieLifetime = 5184000; // 60 days
-    public $cookieName = 'trusted_device';
+    public $cookieLifetime;
+    public $cookieName;
+
+    public function __construct()
+    {
+        $this->cookieLifetime = $this->container->getParameter('trusted_devices.cookie_lifetime');
+        $this->cookieName = $this->container->getParameter('trusted_devices.cookie_name');
+    }
 
     /**
      * Add a new trusted device for that user.
@@ -53,12 +60,12 @@ class UserTrustedDeviceManager
             ->setUser($user)
         ;
 
-        $em->persist($userAction);
+        $em->persist($userTrustedDevice);
         $em->flush();
 
-        $cookie = $this->createCookie($token);
+        $cookie = $this->createCookie($token, $request);
 
-        return $userAction;
+        return $userTrustedDevice;
     }
 
     /**
@@ -94,11 +101,12 @@ class UserTrustedDeviceManager
     /**
      * Creates the cookie for that trusted device.
      *
-     * @param string $token
+     * @param string  $token
+     * @param Request $request
      *
      * @return Cookie
      */
-    public function createCookie($token)
+    public function createCookie($token, Request $request)
     {
         $token = Helpers::getRandomString(32);
 
