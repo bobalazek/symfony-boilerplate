@@ -203,6 +203,18 @@ class UserTrustedDevice
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function isExpired()
+    {
+        if ($this->getExpiresAt() === null) {
+            return false;
+        }
+
+        return $this->getExpiresAt() < new \Datetime();
+    }
+
     /*** User ***/
 
     /**
@@ -245,6 +257,7 @@ class UserTrustedDevice
             'ip' => $this->getIp(),
             'user_agent' => $this->getUserAgent(),
             'session_id' => $this->getSessionId(),
+            'is_expired' => $this->isExpired(),
             'last_active_at' => $this->getLastActiveAt()
                 ? $this->getLastActiveAt()->format(DATE_ATOM)
                 : null,

@@ -91,7 +91,7 @@ class UserTrustedDeviceManager
 
                 if (
                     $userTrustedDevice !== null &&
-                    $userTrustedDevice->getExpiresAt() > new \Datetime() &&
+                    !$userTrustedDevice->isExpired() &&
                     !$userTrustedDevice->isDeleted()
                 ) {
                     return true;

@@ -124,6 +124,18 @@ class UserLoginBlock
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function isExpired()
+    {
+        if ($this->getExpiresAt() === null) {
+            return false;
+        }
+
+        return $this->getExpiresAt() < new \Datetime();
+    }
+
     /*** User ***/
 
     /**
@@ -162,6 +174,7 @@ class UserLoginBlock
         return [
             'id' => $this->getId(),
             'type' => $this->getType(),
+            'is_expired' => $this->isExpired(),
             'expires_at' => $this->getExpiresAt()
                 ? $this->getExpiresAt()->format(DATE_ATOM)
                 : null,
