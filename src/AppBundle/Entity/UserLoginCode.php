@@ -170,7 +170,7 @@ class UserLoginCode
     /**
      * @param \DateTime $expiresAt
      *
-     * @return UserBackupCode
+     * @return UserLoginCode
      */
     public function setExpiresAt(\DateTime $expiresAt = null)
     {

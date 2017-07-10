@@ -7,6 +7,6 @@ use Doctrine\ORM\EntityRepository;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserBackupCodeRepository extends EntityRepository
+class UserRecoveryCodeRepository extends EntityRepository
 {
 }

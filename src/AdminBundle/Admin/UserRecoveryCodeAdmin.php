@@ -13,7 +13,7 @@ use AppBundle\Entity\User;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserBackupCodeAdmin extends AbstractAdmin
+class UserRecoveryCodeAdmin extends AbstractAdmin
 {
     use ContainerAwareTrait;
 

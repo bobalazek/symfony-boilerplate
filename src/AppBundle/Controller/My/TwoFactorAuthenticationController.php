@@ -71,37 +71,4 @@ class TwoFactorAuthenticationController extends Controller
     {
         // TODO
     }
-
-    /**
-     * @Route("/my/two-factor-authentication/backup-codes", name="my.two_factor_authentication.backup_codes")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function twoFactorAuthenticationBackupCodesAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQueryBuilder()
-            ->select('ubc')
-            ->from('AppBundle:UserBackupCode', 'ubc')
-            ->where('ubc.user = ?1')
-            ->setParameter(1, $this->getUser())
-        ;
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            10,
-            [
-                'defaultSortFieldName' => 'ubc.createdAt',
-                'defaultSortDirection' => 'desc',
-            ]
-        );
-
-        return $this->render(
-            'AppBundle:Content:my/two_factor_authentication/backup_codes.html.twig',
-            [
-                'pagination' => $pagination,
-            ]
-        );
-    }
 }

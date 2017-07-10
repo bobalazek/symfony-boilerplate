@@ -37,17 +37,17 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_backup_code:
-        class: AdminBundle\Admin\UserBackupCodeAdmin
+    admin.user_recovery_code:
+        class: AdminBundle\Admin\UserRecoveryCodeAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserBackupCode
+            - AppBundle\Entity\UserRecoveryCode
             - ~
         tags:
             - name: sonata.admin
               manager_type: orm
               group: General
-              label: User Backup Codes
+              label: User Recovery Codes
         calls:
             - [setContainer, ["@service_container"]]
 

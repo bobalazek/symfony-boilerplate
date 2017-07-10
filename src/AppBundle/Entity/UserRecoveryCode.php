@@ -7,15 +7,15 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * User backup code Entity.
+ * User recovery code Entity.
  *
  * @Gedmo\Loggable
- * @ORM\Table(name="user_backup_codes")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserBackupCodeRepository")
+ * @ORM\Table(name="user_recovery_codes")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRecoveryCodeRepository")
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserBackupCode
+class UserRecoveryCode
 {
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
@@ -48,7 +48,7 @@ class UserBackupCode
     protected $usedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userBackupCodes")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userRecoveryCodes")
      */
     protected $user;
 
@@ -65,7 +65,7 @@ class UserBackupCode
     /**
      * @param $id
      *
-     * @return UserBackupCode
+     * @return UserRecoveryCode
      */
     public function setId($id)
     {
@@ -87,7 +87,7 @@ class UserBackupCode
     /**
      * @param $code
      *
-     * @return UserBackupCode
+     * @return UserRecoveryCode
      */
     public function setCode($code)
     {
@@ -109,7 +109,7 @@ class UserBackupCode
     /**
      * @param \DateTime $usedAt
      *
-     * @return UserBackupCode
+     * @return UserRecoveryCode
      */
     public function setUsedAt(\DateTime $usedAt = null)
     {
@@ -131,7 +131,7 @@ class UserBackupCode
     /**
      * @param User $user
      *
-     * @return UserBackupCode
+     * @return UserRecoveryCode
      */
     public function setUser(User $user = null)
     {

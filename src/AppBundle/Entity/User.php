@@ -104,9 +104,9 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserBackupCode", mappedBy="user", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserRecoveryCode", mappedBy="user", cascade={"all"})
      */
-    protected $userBackupCodes;
+    protected $userRecoveryCodes;
 
     /**
      * @var ArrayCollection
@@ -162,12 +162,10 @@ class User implements AdvancedUserInterface, \Serializable
         );
 
         $this->userActions = new ArrayCollection();
-        $this->userBackupCodes = new ArrayCollection();
+        $this->userRecoveryCodes = new ArrayCollection();
         $this->userTrustedDevices = new ArrayCollection();
         $this->userLoginCodes = new ArrayCollection();
         $this->userLoginBlocks = new ArrayCollection();
-
-        $this->prepareUserBackupCodes();
     }
 
     /*** Id ***/
@@ -330,7 +328,7 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** User backup codes ***/
+    /*** User recovery codes ***/
 
     /**
      * @param bool $onlyNonDeleted Show only active/non-deleted two-factor methods
@@ -338,7 +336,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return array
      */
-    public function getUserBackupCodes($onlyNonDeleted = false, $onlyNonUsed = false)
+    public function getUserRecoveryCodes($onlyNonDeleted = false, $onlyNonUsed = false)
     {
         $criteria = Criteria::create();
 
@@ -360,17 +358,17 @@ class User implements AdvancedUserInterface, \Serializable
             'createdAt' => Criteria::DESC,
         ]);
 
-        return $this->userBackupCodes->matching($criteria)->toArray();
+        return $this->userRecoveryCodes->matching($criteria)->toArray();
     }
 
     /**
-     * @param $userBackupCodes
+     * @param $userRecoveryCodes
      *
      * @return User
      */
-    public function setUserBackupCodes($userBackupCodes)
+    public function setUserRecoveryCodes($userRecoveryCodes)
     {
-        $this->userBackupCodes = $userBackupCodes;
+        $this->userRecoveryCodes = $userRecoveryCodes;
 
         return $this;
     }
@@ -378,16 +376,16 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return User
      */
-    public function prepareUserBackupCodes($count = 8)
+    public function prepareUserRecoveryCodes($count = 8)
     {
         for ($i = 0; $i < $count; ++$i) {
-            $userBackupCode = new UserBackupCode();
-            $userBackupCode
+            $userRecoveryCode = new UserRecoveryCode();
+            $userRecoveryCode
                 ->setCode(rand(10000000, 99999999))
                 ->setUser($this)
             ;
 
-            $this->userBackupCodes->add($userBackupCode);
+            $this->userRecoveryCodes->add($userRecoveryCode);
         }
     }
 

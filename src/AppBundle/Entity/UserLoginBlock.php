@@ -71,7 +71,7 @@ class UserLoginBlock
     /**
      * @param $id
      *
-     * @return UserBackupCode
+     * @return UserLoginBlock
      */
     public function setId($id)
     {
@@ -115,7 +115,7 @@ class UserLoginBlock
     /**
      * @param \DateTime $expiresAt
      *
-     * @return UserBackupCode
+     * @return UserLoginBlock
      */
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
@@ -149,7 +149,7 @@ class UserLoginBlock
     /**
      * @param User $user
      *
-     * @return UserBackupCode
+     * @return UserLoginBlock
      */
     public function setUser(User $user = null)
     {
