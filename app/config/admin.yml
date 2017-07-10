@@ -51,17 +51,17 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_trusted_device:
-        class: AdminBundle\Admin\UserTrustedDeviceAdmin
+    admin.user_login_block:
+        class: AdminBundle\Admin\UserLoginBlockAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserTrustedDevice
+            - AppBundle\Entity\UserLoginBlock
             - ~
         tags:
             - name: sonata.admin
               manager_type: orm
               group: General
-              label: User Trusted Devices
+              label: User Login Blocks
         calls:
             - [setContainer, ["@service_container"]]
 
@@ -76,5 +76,19 @@ services:
               manager_type: orm
               group: General
               label: User Login Codes
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    admin.user_trusted_device:
+        class: AdminBundle\Admin\UserTrustedDeviceAdmin
+        arguments:
+            - ~
+            - AppBundle\Entity\UserTrustedDevice
+            - ~
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User Trusted Devices
         calls:
             - [setContainer, ["@service_container"]]

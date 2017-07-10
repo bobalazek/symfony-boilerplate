@@ -24,7 +24,7 @@ class UserLoginBlock
         Shared\RequestMetaTrait
     ;
 
-    public static $methods = [
+    public static $types = [
         'login' => 'Login',
         'login.2fa' => '2FA Login',
     ];
