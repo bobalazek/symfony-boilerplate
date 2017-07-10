@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use AppBundle\Utils\Helpers;
 
 /**
  * User Entity.
@@ -374,14 +375,17 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * @param int $count
+     *
      * @return User
      */
     public function prepareUserRecoveryCodes($count = 8)
     {
         for ($i = 0; $i < $count; ++$i) {
+            $code = Helpers::getRandomString(8).'-'.Helpers::getRandomString(8);
             $userRecoveryCode = new UserRecoveryCode();
             $userRecoveryCode
-                ->setCode(rand(10000000, 99999999))
+                ->setCode($code)
                 ->setUser($this)
             ;
 

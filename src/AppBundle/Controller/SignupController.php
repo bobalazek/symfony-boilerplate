@@ -27,6 +27,8 @@ class SignupController extends Controller
             return $this->redirectToRoute('home');
         }
 
+        $recoveryCodesParameters = $this->getParameter('recovery_codes');
+
         $code = $request->query->has('code')
             ? $request->query->get('code')
             : false;
@@ -34,9 +36,14 @@ class SignupController extends Controller
         $alert = false;
         $alertMessage = '';
 
+        $user = new User();
+        $user->prepareUserRecoveryCodes(
+            $recoveryCodesParameters['count']
+        );
+
         $form = $this->createForm(
             SignupType::class,
-            new User()
+            $user
         );
 
         if ($isSignupConfirmation) {

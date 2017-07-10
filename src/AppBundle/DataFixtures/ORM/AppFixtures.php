@@ -26,6 +26,9 @@ class AppFixtures implements FixtureInterface, ContainerAwareInterface
 
     public function load(ObjectManager $manager)
     {
+        // Config
+        $recoveryCodesParameters = $this->container->getParameter('recovery_codes');
+
         // Profile
         $profile = new Profile();
         $profile
@@ -49,6 +52,10 @@ class AppFixtures implements FixtureInterface, ContainerAwareInterface
             ->verify()
             ->verifyEmail()
         ;
+
+        $user->prepareUserRecoveryCodes(
+            $recoveryCodesParameters['count']
+        );
 
         $manager->persist($user);
         $manager->flush();
