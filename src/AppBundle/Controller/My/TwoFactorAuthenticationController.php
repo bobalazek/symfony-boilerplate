@@ -62,13 +62,4 @@ class TwoFactorAuthenticationController extends Controller
             ]
         );
     }
-
-    /**
-     * @Route("/my/two-factor-authentication/login-codes", name="my.two_factor_authentication.login_codes")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function twoFactorAuthenticationLoginCodesAction(Request $request)
-    {
-        // TODO
-    }
 }

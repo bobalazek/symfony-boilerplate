@@ -10,6 +10,7 @@
                 <tr>
                     <th>{{ knp_pagination_sortable(pagination, 'Key', 'ua.key') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'IP', 'ua.ip') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'User Agent', 'ua.userAgent') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Time', 'ua.createdAt') }}</th>
                 </tr>
             </thead>
@@ -18,6 +19,7 @@
                     <tr>
                         <td>{{ userAction.getKey() }}</td>
                         <td>{{ userAction.getIp() }}</td>
+                        <td>{{ userAction.getUserAgent() }}</td>
                         <td>{{ userAction.getCreatedAt() | date(globals.date_time_format) }}</td>
                     </tr>
                 {% else %}
