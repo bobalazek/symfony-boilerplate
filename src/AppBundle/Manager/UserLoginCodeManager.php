@@ -22,6 +22,7 @@ class UserLoginCodeManager
      */
     public function add($code, $method = 'email', User $user = null)
     {
+        $loginCodeParameters = $this->container->getParameter('login_code');
         $em = $this->container->get('doctrine.orm.entity_manager');
         $token = $this->container->get('security.token_storage')->getToken();
         $session = $this->container->get('session');
@@ -36,6 +37,9 @@ class UserLoginCodeManager
 
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $sessionId = $session->getId();
+        $expiresAt = (new \Datetime())->add(
+            new \Dateinterval('PT'.$loginCodeParameters['expires_time'].'S')
+        );
 
         $userLoginCode = new UserLoginCode();
         $userLoginCode
@@ -44,6 +48,7 @@ class UserLoginCodeManager
             ->setIp($request->getClientIp())
             ->setUserAgent($request->headers->get('User-Agent'))
             ->setSessionId($sessionId)
+            ->setExpiresAt($expiresAt)
             ->setUser($user)
         ;
 
@@ -51,5 +56,32 @@ class UserLoginCodeManager
         $em->flush();
 
         return true;
+    }
+
+    /**
+     * If there is any valid user login code.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function exists($code, User $user)
+    {
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $userLoginCode = $em->getRepository('AppBundle:UserLoginCode')
+            ->findOneBy([
+                'code' => $code,
+                'user' => $user,
+            ]);
+
+        if (
+            $userLoginCode !== null &&
+            !$userLoginCode->isExpired() &&
+            !$userLoginCode->isDeleted()
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }

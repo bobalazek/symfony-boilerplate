@@ -66,6 +66,7 @@ class UserLoginCodeAdmin extends AbstractAdmin
             ->add('sessionId')
             ->add('createdAt')
             ->add('usedAt')
+            ->add('expiresAt')
             ->add('deletedAt')
             ->add('_action', 'actions', [
                 'actions' => [
@@ -88,6 +89,7 @@ class UserLoginCodeAdmin extends AbstractAdmin
                 ->add('sessionId')
                 ->add('createdAt')
                 ->add('usedAt')
+                ->add('expiresAt')
                 ->add('deletedAt')
             ->end()
             ->with('User', ['class' => 'col-md-6'])

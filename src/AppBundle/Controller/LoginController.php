@@ -139,13 +139,10 @@ class LoginController extends Controller
                 $code = $request->request->get('code');
                 $isTrustedDevice = $request->request->get('is_trusted_device') === 'yes';
 
-                $userLoginCode = $em->getRepository('AppBundle:UserLoginCode')
-                    ->findOneBy([
-                        'user' => $this->getUser(),
-                        'code' => $code,
-                    ]);
+                $userLoginCodeExists = $this->get('app.user_login_code_manager')
+                    ->exists($code, $this->getUser());
 
-                if (!$userLoginCode) {
+                if (!$userLoginCodeExists) {
                     $this->addFlash(
                         'danger',
                         $this->get('translator')->trans(

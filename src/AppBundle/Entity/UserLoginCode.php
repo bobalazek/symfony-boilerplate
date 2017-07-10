@@ -58,6 +58,13 @@ class UserLoginCode
     protected $usedAt;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
+     */
+    protected $expiresAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userLoginCodes")
      */
     protected $user;
@@ -148,6 +155,40 @@ class UserLoginCode
         $this->usedAt = $usedAt;
 
         return $this;
+    }
+
+    /*** Expires at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @param \DateTime $expiresAt
+     *
+     * @return UserBackupCode
+     */
+    public function setExpiresAt(\DateTime $expiresAt = null)
+    {
+        $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExpired()
+    {
+        if ($this->getExpiresAt() === null) {
+            return false;
+        }
+
+        return $this->getExpiresAt() < new \Datetime();
     }
 
     /*** User ***/
