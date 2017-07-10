@@ -104,37 +104,4 @@ class TwoFactorAuthenticationController extends Controller
             ]
         );
     }
-
-    /**
-     * @Route("/my/two-factor-authentication/trusted-devices", name="my.two_factor_authentication.trusted_devices")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function twoFactorAuthenticationTrustedDevicesAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQueryBuilder()
-            ->select('utd')
-            ->from('AppBundle:UserTrustedDevice', 'utd')
-            ->where('utd.user = ?1')
-            ->setParameter(1, $this->getUser())
-        ;
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            10,
-            [
-                'defaultSortFieldName' => 'utd.createdAt',
-                'defaultSortDirection' => 'desc',
-            ]
-        );
-
-        return $this->render(
-            'AppBundle:Content:my/two_factor_authentication/trusted_devices.html.twig',
-            [
-                'pagination' => $pagination,
-            ]
-        );
-    }
 }
