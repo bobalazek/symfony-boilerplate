@@ -90,21 +90,11 @@ class UserActionAdmin extends AbstractAdmin
     {
         $showMapper
             ->with('General', ['class' => 'col-md-6'])
-                ->add('key', null, [
-                    'label' => 'Key',
-                ])
-                ->add('message', null, [
-                    'label' => 'Message',
-                ])
-                ->add('ip', null, [
-                    'label' => 'IP',
-                ])
-                ->add('userAgent', null, [
-                    'label' => 'User Agent',
-                ])
-                ->add('sessionId', null, [
-                    'label' => 'Session ID',
-                ])
+                ->add('key')
+                ->add('message')
+                ->add('ip')
+                ->add('userAgent')
+                ->add('sessionId')
                 ->add('createdAt')
             ->end()
             ->with('User', ['class' => 'col-md-6'])

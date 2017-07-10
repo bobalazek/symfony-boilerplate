@@ -42,9 +42,8 @@ class UserLoginCodeAdmin extends AbstractAdmin
             ->add('user.profile.lastName', null, [
                 'label' => 'Last name',
             ])
-            ->add('code', null, [
-                'label' => 'Code',
-            ])
+            ->add('code')
+            ->add('type')
         ;
     }
 
@@ -61,6 +60,10 @@ class UserLoginCodeAdmin extends AbstractAdmin
                 'label' => 'Email',
             ])
             ->add('code')
+            ->add('type')
+            ->add('ip')
+            ->add('userAgent')
+            ->add('sessionId')
             ->add('createdAt')
             ->add('usedAt')
             ->add('deletedAt')
@@ -79,9 +82,10 @@ class UserLoginCodeAdmin extends AbstractAdmin
     {
         $showMapper
             ->with('General', ['class' => 'col-md-6'])
-                ->add('code', null, [
-                    'label' => 'Code',
-                ])
+                ->add('type')
+                ->add('ip')
+                ->add('userAgent')
+                ->add('sessionId')
                 ->add('createdAt')
                 ->add('usedAt')
                 ->add('deletedAt')
@@ -101,6 +105,18 @@ class UserLoginCodeAdmin extends AbstractAdmin
                 ])
                 ->add('user.profile.lastName', null, [
                     'label' => 'Last name',
+                ])
+            ->end()
+            ->with('User Agent', ['class' => 'col-md-6'])
+                ->add('userAgentData', 'html_template', [
+                    'label' => 'Data',
+                    'html' => "{% include 'AdminBundle:Shared:show__user_agent_table.html.twig' %}",
+                ])
+            ->end()
+            ->with('IP', ['class' => 'col-md-6'])
+                ->add('ipData', 'html_template', [
+                    'label' => 'Data',
+                    'html' => "{% include 'AdminBundle:Shared:show__ip_table.html.twig' %}",
                 ])
             ->end()
         ;

@@ -42,9 +42,7 @@ class UserBackupCodeAdmin extends AbstractAdmin
             ->add('user.profile.lastName', null, [
                 'label' => 'Last name',
             ])
-            ->add('code', null, [
-                'label' => 'Code',
-            ])
+            ->add('code')
         ;
     }
 
@@ -79,9 +77,7 @@ class UserBackupCodeAdmin extends AbstractAdmin
     {
         $showMapper
             ->with('General', ['class' => 'col-md-6'])
-                ->add('code', null, [
-                    'label' => 'Code',
-                ])
+                ->add('code')
                 ->add('createdAt')
                 ->add('usedAt')
                 ->add('deletedAt')

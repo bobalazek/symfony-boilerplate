@@ -42,21 +42,11 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
             ->add('user.profile.lastName', null, [
                 'label' => 'Last name',
             ])
-            ->add('name', null, [
-                'label' => 'Name',
-            ])
-            ->add('token', null, [
-                'label' => 'Token',
-            ])
-            ->add('ip', null, [
-                'label' => 'IP',
-            ])
-            ->add('userAgent', null, [
-                'label' => 'User Agent',
-            ])
-            ->add('sessionId', null, [
-                'label' => 'Session ID',
-            ])
+            ->add('name')
+            ->add('token')
+            ->add('ip')
+            ->add('userAgent')
+            ->add('sessionId')
         ;
     }
 
@@ -91,21 +81,11 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
     {
         $showMapper
             ->with('General', ['class' => 'col-md-6'])
-                ->add('name', null, [
-                    'label' => 'Name',
-                ])
-                ->add('token', null, [
-                    'label' => 'Token',
-                ])
-                ->add('ip', null, [
-                    'label' => 'IP',
-                ])
-                ->add('userAgent', null, [
-                    'label' => 'User Agent',
-                ])
-                ->add('sessionId', null, [
-                    'label' => 'Session ID',
-                ])
+                ->add('name')
+                ->add('token')
+                ->add('ip')
+                ->add('userAgent')
+                ->add('sessionId')
                 ->add('createdAt')
                 ->add('expiresAt')
                 ->add('deletedAt')

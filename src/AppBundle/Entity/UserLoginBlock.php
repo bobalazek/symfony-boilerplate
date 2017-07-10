@@ -163,7 +163,7 @@ class UserLoginBlock
      */
     public function __toString()
     {
-        return (string) $this->getId();
+        return $this->getIp();
     }
 
     /**
