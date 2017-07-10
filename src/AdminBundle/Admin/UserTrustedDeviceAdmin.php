@@ -42,7 +42,6 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
             ->add('user.profile.lastName', null, [
                 'label' => 'Last name',
             ])
-            ->add('name')
             ->add('token')
             ->add('ip')
             ->add('userAgent')
@@ -56,13 +55,15 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('user.username', null, [
+            ->add('user.username', 'html_template', [
                 'label' => 'Username',
             ])
             ->add('user.email', null, [
                 'label' => 'Email',
             ])
-            ->add('name')
+            ->add('name', 'html_template', [
+                'html' => '{{ object }}',
+            ])
             ->add('createdAt')
             ->add('expiresAt')
             ->add('deletedAt')
@@ -81,7 +82,9 @@ class UserTrustedDeviceAdmin extends AbstractAdmin
     {
         $showMapper
             ->with('General', ['class' => 'col-md-6'])
-                ->add('name')
+                ->add('name', 'html_template', [
+                    'html' => '{{ object }}',
+                ])
                 ->add('token')
                 ->add('ip')
                 ->add('userAgent')

@@ -4,10 +4,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * User email login Entity.
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="user_login_codes")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserLoginCodeRepository")
  *

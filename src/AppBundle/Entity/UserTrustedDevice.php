@@ -4,10 +4,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * User trusted device Entity.
  *
+ * @Gedmo\Loggable
  * @ORM\Table(name="user_trusted_devices")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserTrustedDeviceRepository")
  *
@@ -30,13 +32,6 @@ class UserTrustedDevice
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    protected $name;
 
     /**
      * @var string
@@ -89,28 +84,6 @@ class UserTrustedDevice
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    /*** Name ***/
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param $name
-     *
-     * @return UserTrustedDevice
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
 
         return $this;
     }
@@ -242,7 +215,9 @@ class UserTrustedDevice
      */
     public function __toString()
     {
-        return $this->getName();
+        $agent = $this->getUserAgentObject();
+
+        return $agent->platform().' - '.$agent->browser();
     }
 
     /**
@@ -252,7 +227,6 @@ class UserTrustedDevice
     {
         return [
             'id' => $this->getId(),
-            'name' => $this->getName(),
             'token' => $this->getToken(),
             'ip' => $this->getIp(),
             'user_agent' => $this->getUserAgent(),

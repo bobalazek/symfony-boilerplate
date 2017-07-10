@@ -112,6 +112,13 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserDevice", mappedBy="user", cascade={"all"})
+     */
+    protected $userDevices;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserTrustedDevice", mappedBy="user", cascade={"all"})
      */
     protected $userTrustedDevices;
@@ -164,6 +171,7 @@ class User implements AdvancedUserInterface, \Serializable
 
         $this->userActions = new ArrayCollection();
         $this->userRecoveryCodes = new ArrayCollection();
+        $this->userDevices = new ArrayCollection();
         $this->userTrustedDevices = new ArrayCollection();
         $this->userLoginCodes = new ArrayCollection();
         $this->userLoginBlocks = new ArrayCollection();
@@ -391,6 +399,41 @@ class User implements AdvancedUserInterface, \Serializable
 
             $this->userRecoveryCodes->add($userRecoveryCode);
         }
+    }
+
+    /*** User devices ***/
+
+    /**
+     * @param bool $onlyNonDeleted Show only active/non-deleted two-factor methods
+     *
+     * @return array
+     */
+    public function getUserDevices($onlyNonDeleted = false)
+    {
+        $criteria = Criteria::create()->orderBy([
+            'createdAt' => Criteria::DESC,
+        ]);
+
+        if ($onlyNonDeleted) {
+            $criteria->where(Criteria::expr()->eq(
+                'deletedAt',
+                null
+            ));
+        }
+
+        return $this->userDevices->matching($criteria)->toArray();
+    }
+
+    /**
+     * @param $userDevices
+     *
+     * @return User
+     */
+    public function setUserDevices($userDevices)
+    {
+        $this->userDevices = $userDevices;
+
+        return $this;
     }
 
     /*** User trusted devices ***/

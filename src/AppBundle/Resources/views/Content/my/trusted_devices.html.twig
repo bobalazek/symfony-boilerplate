@@ -8,7 +8,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>{{ knp_pagination_sortable(pagination, 'Name', 'utd.name') }}</th>
+                    <th>{{ 'Name' | trans }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'IP', 'utd.ip') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Last active', 'utd.lastActiveAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Expires', 'utd.expiresAt') }}</th>
@@ -18,7 +18,7 @@
             <tbody>
                 {% for userTrustedDevices in pagination %}
                     <tr>
-                        <td>{{ userTrustedDevices.getName() }}</td>
+                        <td>{{ userTrustedDevices }}</td>
                         <td>{{ userTrustedDevices.getIp() }}</td>
                         <td>{{ userTrustedDevices.getLastActiveAt()
                             ? userTrustedDevices.getLastActiveAt() | date(globals.date_time_format)
@@ -30,7 +30,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="3">
+                        <td colspan="5">
                             {{ 'my.trusted_devices.no_trusted_devices_yet' | trans }}
                         </td>
                     </tr>

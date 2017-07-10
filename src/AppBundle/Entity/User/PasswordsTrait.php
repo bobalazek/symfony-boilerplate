@@ -2,9 +2,10 @@
 
 namespace AppBundle\Entity\User;
 
-use AppBundle\Entity\User;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use AppBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>

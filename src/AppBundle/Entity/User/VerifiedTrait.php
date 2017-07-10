@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\User;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Entity\User;
 
 /**

@@ -48,11 +48,9 @@ class UserTrustedDeviceManager
             new \Dateinterval('PT'.$this->cookieLifetime.'S')
         );
         $agent->setUserAgent($userAgentString);
-        $name = $agent->platform().' - '.$agent->browser();
 
         $userTrustedDevice = new UserTrustedDevice();
         $userTrustedDevice
-            ->setName($name)
             ->setToken($token)
             ->setIp($request->getClientIp())
             ->setUserAgent($userAgentString)

@@ -7,15 +7,15 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * User action Entity.
+ * User device Entity.
  *
  * @Gedmo\Loggable
- * @ORM\Table(name="user_actions")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserActionRepository")
+ * @ORM\Table(name="user_devices")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserDeviceRepository")
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserAction
+class UserDevice
 {
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
@@ -36,16 +36,9 @@ class UserAction
     /**
      * @var string
      *
-     * @ORM\Column(name="`key`", type="text", nullable=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    protected $key;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="message", type="text", nullable=true)
-     */
-    protected $message;
+    protected $name;
 
     /**
      * @var string
@@ -55,7 +48,14 @@ class UserAction
     protected $data = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userActions")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_active_at", type="datetime", nullable=true)
+     */
+    protected $lastActiveAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userDevices")
      */
     protected $user;
 
@@ -72,55 +72,11 @@ class UserAction
     /**
      * @param $id
      *
-     * @return UserAction
+     * @return UserDevice
      */
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    /*** Key ***/
-
-    /**
-     * @return string
-     */
-    public function getKey()
-    {
-        return $this->key;
-    }
-
-    /**
-     * @param $key
-     *
-     * @return UserAction
-     */
-    public function setKey($key)
-    {
-        $this->key = $key;
-
-        return $this;
-    }
-
-    /*** Message ***/
-
-    /**
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * @param $message
-     *
-     * @return UserAction
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
 
         return $this;
     }
@@ -138,11 +94,33 @@ class UserAction
     /**
      * @param array $data
      *
-     * @return UserAction
+     * @return UserDevice
      */
     public function setData(array $data)
     {
         $this->data = $data;
+
+        return $this;
+    }
+
+    /*** Last active at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastActiveAt()
+    {
+        return $this->lastActiveAt;
+    }
+
+    /**
+     * @param \DateTime $lastActiveAt
+     *
+     * @return User
+     */
+    public function setLastActiveAt(\DateTime $lastActiveAt = null)
+    {
+        $this->lastActiveAt = $lastActiveAt;
 
         return $this;
     }
@@ -160,7 +138,7 @@ class UserAction
     /**
      * @param User $user
      *
-     * @return UserAction
+     * @return UserDevice
      */
     public function setUser(User $user = null)
     {
@@ -174,7 +152,9 @@ class UserAction
      */
     public function __toString()
     {
-        return '['.$this->getKey().'] '.$this->getMessage();
+        $agent = $this->getUserAgentObject();
+
+        return $agent->platform().' - '.$agent->browser();
     }
 
     /**
@@ -184,11 +164,13 @@ class UserAction
     {
         return [
             'id' => $this->getId(),
-            'key' => $this->getKey(),
-            'message' => $this->getMessage(),
+            'name' => $this->getName(),
             'ip' => $this->getIp(),
             'user_agent' => $this->getUserAgent(),
             'session_id' => $this->getSessionId(),
+            'last_active_at' => $this->getLastActiveAt()
+                ? $this->getLastActiveAt()->format(DATE_ATOM)
+                : null,
             'created_at' => $this->getCreatedAt()->format(DATE_ATOM),
             'updated_at' => $this->getUpdatedAt()->format(DATE_ATOM),
         ];

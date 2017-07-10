@@ -56,8 +56,11 @@ class BruteForceManager
      *
      * @return bool
      */
-    public function handleUserLoginBlocks(User $user = null, $type = 'login', $actionKey = 'user.login.fail')
-    {
+    public function handleUserLoginBlocks(
+        User $user = null,
+        $type = 'login',
+        $actionKey = 'user.login.fail'
+    ) {
         $em = $this->container->get('doctrine.orm.entity_manager');
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $session = $this->container->get('session');
