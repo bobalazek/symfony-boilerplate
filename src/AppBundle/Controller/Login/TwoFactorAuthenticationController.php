@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Utils\Helpers;
 use AppBundle\Exception\BruteForceAttemptException;
 
@@ -34,9 +33,6 @@ class TwoFactorAuthenticationController extends Controller
             return $this->redirectToRoute('home');
         }
 
-        // Check if we are blocked
-        $dateTimeFormat = $this->getParameter('date_time_format');
-
         $method = $session->get('two_factor_authentication_method');
         $response = $this->handleTwoFactorAuthenticationLogin(
             $method,
@@ -45,18 +41,6 @@ class TwoFactorAuthenticationController extends Controller
             $em
         );
         if ($response) {
-            $this->addFlash(
-                'success',
-                $this->get('translator')->trans(
-                    'login.two_factor_authentication.success'
-                )
-            );
-
-            $this->get('app.user_action_manager')->add(
-                'user.login.2fa',
-                'User has been logged in via Two-factor authentication!'
-            );
-
             return $response;
         }
 
@@ -85,8 +69,21 @@ class TwoFactorAuthenticationController extends Controller
     ) {
         if ($method === 'email') {
             if ($request->getMethod() === 'POST') {
+                try {
+                    $this->checkIfTooManyAttempts($request, $session, $em);
+                } catch (BruteForceAttemptException $e) {
+                    $this->addFlash(
+                        'danger',
+                        $e->getMessage()
+                    );
+
+                    return $this->redirectToRoute(
+                        'login.two_factor_authentication'
+                    );
+                }
+
                 $code = $request->request->get('code');
-                $isTrustedDevice = $request->request->get('is_trusted_device') === 'yes';
+                $isTrustedDevice = $request->request->has('is_trusted_device');
 
                 $userLoginCodeExists = $this->get('app.user_login_code_manager')
                     ->exists($code, $this->getUser());
@@ -101,17 +98,20 @@ class TwoFactorAuthenticationController extends Controller
 
                     $this->get('app.user_action_manager')->add(
                         'user.login.2fa.fail',
-                        $this->get('translator')->trans('my.login.2fa.fail.text'),
+                        $this->get('translator')->trans(
+                            'my.login.2fa.fail.text'
+                        ),
                         [
                             'code' => $code,
                         ]
                     );
 
-                    $this->get('app.brute_force_manager')->handleUserLoginBlocks(
-                        $this->getUser(),
-                        'login.2fa',
-                        'user.login.2fa.fail'
-                    );
+                    $this->get('app.brute_force_manager')
+                        ->handleUserLoginBlocks(
+                            $this->getUser(),
+                            'login.2fa',
+                            'user.login.2fa.fail'
+                        );
 
                     return null;
                 }
@@ -131,6 +131,18 @@ class TwoFactorAuthenticationController extends Controller
                     );
                     $response->headers->setcookie($cookie);
                 }
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'login.two_factor_authentication.success'
+                    )
+                );
+
+                $this->get('app.user_action_manager')->add(
+                    'user.login.2fa',
+                    'User has been logged in via Two-factor authentication!'
+                );
 
                 $session->remove('two_factor_authentication_in_progress');
 
@@ -156,6 +168,7 @@ class TwoFactorAuthenticationController extends Controller
         $ip = $request->getClientIp();
         $sessionId = $session->getId();
         $userAgent = $request->headers->get('User-Agent');
+        $dateTimeFormat = $this->getParameter('date_time_format');
 
         $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
             ->getCurrentlyActive(
