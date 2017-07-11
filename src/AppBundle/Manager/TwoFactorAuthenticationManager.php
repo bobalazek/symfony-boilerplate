@@ -48,7 +48,7 @@ class TwoFactorAuthenticationManager
             );
 
             $this->container->get('app.user_action_manager')->add(
-                'user.login.2fa',
+                'user.login.2fa.gate',
                 'User has been logged in, but still needs to confirm 2FA!'
             );
 
