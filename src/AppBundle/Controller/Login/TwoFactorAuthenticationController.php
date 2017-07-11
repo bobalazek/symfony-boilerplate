@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Exception\BruteForceAttemptException;
+use AppBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -33,6 +34,7 @@ class TwoFactorAuthenticationController extends Controller
         }
 
         $method = $session->get('two_factor_authentication_method');
+        $alternativeMethods = $this->getAlternativeMethods($method);
         $response = $this->handleTwoFactorAuthenticationLogin(
             $method,
             $request,
@@ -47,6 +49,7 @@ class TwoFactorAuthenticationController extends Controller
             'AppBundle:Content:login/two_factor_authentication.html.twig',
             [
                 'method' => $method,
+                'alternative_methods' => $alternativeMethods,
                 'code' => $request->query->get('code'),
             ]
         );
@@ -175,9 +178,21 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * @return array
      */
-    private function getAvailableMethods()
+    private function getAlternativeMethods($currentMethod)
     {
-        // TODO
-        return [];
+        $user = $this->getUser();
+        $isEmailEmailEnabled = $user->isTwoFactorAuthenticationEmailEnabled();
+        $availableMethods = User::$twoFactorAuthenticationMethods;
+
+        unset($availableMethods[$currentMethod]);
+
+        if (
+            isset($availableMethods['email']) &&
+            !$isEmailEmailEnabled
+        ) {
+            unset($availableMethods['email']);
+        }
+
+        return array_keys($availableMethods);
     }
 }
