@@ -1,0 +1,16 @@
+<form method="post">
+    <div class="form-group">
+        <label for="code-input">
+            {{ 'Code' | trans }}
+        </label>
+        <input id="code-input"
+            class="form-control input-lg text-center"
+            type="text"
+            name="code"
+            value="{{ code }}">
+    </div>
+    <button class="btn btn-block btn-lg btn-primary"
+        type="submit">
+        {{ 'Submit' | trans }}
+    </button>
+</form>

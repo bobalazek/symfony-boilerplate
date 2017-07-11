@@ -12,6 +12,8 @@ trait TwoFactorAuthenticationTrait
 {
     public static $twoFactorAuthenticationMethods = [
         'email' => 'Email',
+        'sms' => 'SMS',
+        'two_factor_authenticator' => 'Two-factor Authenticator',
     ];
 
     /**
