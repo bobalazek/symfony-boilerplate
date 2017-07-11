@@ -19,18 +19,6 @@
                         name="code"
                         value="{{ code }}">
                 </div>
-                <div class="checkbox">
-                    <input id="is-trusted-device-input"
-                        type="checkbox"
-                        name="is_trusted_device"
-                        value="yes">
-                    <label for="is-trusted-device-input">
-                        {{ 'Is trusted device?' | trans }}
-                    </label>
-                    <div class="help-block">
-                        {{ 'When you enable this option, you will not need to go through the two factor authentication step again with this device.' | trans }}
-                    </div>
-                </div>
                 <button class="btn btn-block btn-lg btn-primary"
                     type="submit">
                     {{ 'Submit' | trans }}

@@ -29,11 +29,6 @@ class TwoFactorAuthenticationManager
 
         $isEnabled = $user->isTwoFactorAuthenticationEnabled();
         if ($isEnabled) {
-            // If it's a trusted device, skip the 2 factor authentication
-            if ($this->container->get('app.user_trusted_device_manager')->is($user)) {
-                return true;
-            }
-
             $method = $user->getTwoFactorAuthenticationDefaultMethod();
 
             $this->handleMethod($method, $user);

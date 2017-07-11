@@ -83,8 +83,6 @@ class TwoFactorAuthenticationController extends Controller
                 }
 
                 $code = $request->request->get('code');
-                $isTrustedDevice = $request->request->has('is_trusted_device');
-
                 $userLoginCodeExists = $this->get('app.user_login_code_manager')
                     ->exists($code, $this->getUser());
 
@@ -117,20 +115,6 @@ class TwoFactorAuthenticationController extends Controller
                 }
 
                 $response = $this->redirectToRoute('home');
-                if ($isTrustedDevice) {
-                    $token = Helpers::getRandomString(64);
-                    $userTrustedDeviceManager = $this->get('app.user_trusted_device_manager');
-
-                    $userTrustedDeviceManager->add(
-                        $this->getUser(),
-                        $token
-                    );
-                    $cookie = $userTrustedDeviceManager->createCookie(
-                        $token,
-                        $request
-                    );
-                    $response->headers->setcookie($cookie);
-                }
 
                 $this->addFlash(
                     'success',
