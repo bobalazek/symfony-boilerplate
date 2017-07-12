@@ -18,7 +18,7 @@ class UserLoginCodeManager
      * @param string $method
      * @param User   $user
      *
-     * @return bool
+     * @return UserLoginCode
      */
     public function add($code, $method = 'email', User $user = null)
     {
@@ -55,7 +55,7 @@ class UserLoginCodeManager
         $em->persist($userLoginCode);
         $em->flush();
 
-        return true;
+        return $userLoginCode;
     }
 
     /**

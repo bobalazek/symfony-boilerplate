@@ -41,17 +41,16 @@ class TwoFactorAuthenticationManager
                 'two_factor_authentication_in_progress',
                 true
             );
-            $session->set(
-                'two_factor_authentication_method',
-                $method
-            );
 
-            $this->container->get('app.user_action_manager')->add(
-                'user.login.2fa.gate',
-                'User has been logged in, but still needs to confirm 2FA!'
-            );
+            $this->container
+                ->get('app.user_action_manager')
+                ->add(
+                    'user.login.2fa.gate',
+                    'User has been logged in, but still needs to confirm 2FA!'
+                );
 
-            $this->container->get('event_dispatcher')
+            $this->container
+                ->get('event_dispatcher')
                 ->addListener(
                     KernelEvents::RESPONSE,
                     [$this, 'onKernelResponse']
@@ -73,12 +72,20 @@ class TwoFactorAuthenticationManager
      */
     public function handleMethod($method, User $user)
     {
+        $session->set(
+            'two_factor_authentication_method',
+            $method
+        );
+
         if ($method === 'email') {
             $code = Helpers::getRandomString(8);
 
-            $this->container->get('app.user_login_code_manager')->add($code, $method);
+            $userLoginCode = $this->container
+                ->get('app.user_login_code_manager')
+                ->add($code, $method);
 
-            $this->container->get('app.mailer')
+            $this->container
+                ->get('app.mailer')
                 ->swiftMessageInitializeAndSend([
                     'subject' => $this->container->get('translator')->trans(
                         'login.2fa.email.subject',
@@ -90,7 +97,7 @@ class TwoFactorAuthenticationManager
                     'body' => 'AppBundle:Emails:User/login/2fa.html.twig',
                     'template_data' => [
                         'user' => $user,
-                        'code' => $code,
+                        'user_login_code' => $userLoginCode,
                     ],
                 ])
             ;
@@ -109,9 +116,10 @@ class TwoFactorAuthenticationManager
     public function onKernelResponse(FilterResponseEvent $event)
     {
         $router = $this->container->get('router');
-        $response = new RedirectResponse(
-            $router->generate('login.tfa')
+        $event->setResponse(
+            new RedirectResponse(
+                $router->generate('login.tfa')
+            )
         );
-        $event->setResponse($response);
     }
 }

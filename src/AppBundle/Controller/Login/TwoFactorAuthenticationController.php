@@ -24,17 +24,23 @@ class TwoFactorAuthenticationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
 
-        if (!$session->get('two_factor_authentication_in_progress')) {
+        if (!$session->get(
+            'two_factor_authentication_in_progress'
+        )) {
             $this->addFlash(
                 'info',
-                $this->get('translator')->trans('general.already_logged_in')
+                $this->get('translator')->trans(
+                    'general.already_logged_in'
+                )
             );
 
             return $this->redirectToRoute('home');
         }
 
         $user = $this->getUser();
-        $method = $session->get('two_factor_authentication_method');
+        $method = $session->get(
+            'two_factor_authentication_method'
+        );
         $alternativeMethods = $this->getAlternativeMethods(
             $user,
             $method
@@ -42,6 +48,7 @@ class TwoFactorAuthenticationController extends Controller
 
         // Check if the user has switched the 2FA method
         $methodSwitchResponse = $this->handleMethodSwitch(
+            $user,
             $request,
             $session,
             $method,
@@ -153,7 +160,11 @@ class TwoFactorAuthenticationController extends Controller
                 )
             );
 
-            $this->handleFailedLoginAttempt($user, $method, $code);
+            $this->handleFailedLoginAttempt(
+                $user,
+                $method,
+                $code
+            );
 
             return null;
         }
@@ -171,10 +182,11 @@ class TwoFactorAuthenticationController extends Controller
             'two_factor_authentication_in_progress'
         );
 
-        $this->get('app.user_action_manager')->add(
-            'user.login.2fa',
-            'User has been logged in via Two-factor authentication!'
-        );
+        $this->get('app.user_action_manager')
+            ->add(
+                'user.login.2fa',
+                'User has been logged in via Two-factor authentication!'
+            );
 
         return $response;
     }
@@ -200,7 +212,8 @@ class TwoFactorAuthenticationController extends Controller
         Session $session,
         EntityManager $em
     ) {
-        return $this->get('app.user_login_code_manager')
+        return $this
+            ->get('app.user_login_code_manager')
             ->exists($code, $user);
     }
 
@@ -222,7 +235,8 @@ class TwoFactorAuthenticationController extends Controller
         Session $session,
         EntityManager $em
     ) {
-        return $this->get('app.two_factor_authenticator_manager')
+        return $this
+            ->get('app.two_factor_authenticator_manager')
             ->checkCode(
                 $user,
                 $code
@@ -247,7 +261,8 @@ class TwoFactorAuthenticationController extends Controller
         Session $session,
         EntityManager $em
     ) {
-        $userRecoveryCode = $this->get('app.user_recovery_code_manager')
+        $userRecoveryCode = $this
+            ->get('app.user_recovery_code_manager')
             ->get($code, $user);
         if ($userRecoveryCode) {
             $userRecoveryCode->setUsedAt(new \Datetime());
@@ -278,7 +293,8 @@ class TwoFactorAuthenticationController extends Controller
         $userAgent = $request->headers->get('User-Agent');
         $dateTimeFormat = $this->getParameter('date_time_format');
 
-        $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
+        $userLoginBlock = $em
+            ->getRepository('AppBundle:UserLoginBlock')
             ->getCurrentlyActive(
                 $ip,
                 $sessionId,
@@ -298,6 +314,7 @@ class TwoFactorAuthenticationController extends Controller
     }
 
     /**
+     * @param User    $user
      * @param Request $request
      * @param Session $session
      * @param string  $currentMethod
@@ -306,6 +323,7 @@ class TwoFactorAuthenticationController extends Controller
      * @return Response|null
      */
     private function handleMethodSwitch(
+        User $user,
         Request $request,
         Session $session,
         $currentMethod,
@@ -314,23 +332,22 @@ class TwoFactorAuthenticationController extends Controller
         $method = $request->query->get('method');
 
         if (in_array($method, array_keys($alternativeMethods))) {
-            $session->set(
-                'two_factor_authentication_method',
-                $method
-            );
+            $this->get('app.two_factor_authentication_manager')
+                ->handleMethod($method, $user);
 
-            $this->get('app.user_action_manager')->add(
-                'user.login.2fa.method_switch',
-                $this->get('translator')->trans(
-                    'my.login.2fa.method_switch.text'
-                ),
-                [
-                    'current_method' => $currentMethod,
-                    'new_method' => $method,
-                ]
-            );
+            $this->get('app.user_action_manager')
+                ->add(
+                    'user.login.2fa.method_switch',
+                    $this->get('translator')->trans(
+                        'my.login.2fa.method_switch.text'
+                    ),
+                    [
+                        'current_method' => $currentMethod,
+                        'new_method' => $method,
+                    ]
+                );
 
-            return $response = $this->redirectToRoute(
+            return $this->redirectToRoute(
                 'login.tfa'
             );
         } elseif ($method !== null) {
@@ -356,16 +373,17 @@ class TwoFactorAuthenticationController extends Controller
      */
     private function handleFailedLoginAttempt(User $user, $method, $code)
     {
-        $this->get('app.user_action_manager')->add(
-            'user.login.2fa.fail',
-            $this->get('translator')->trans(
-                'my.login.2fa.fail.text'
-            ),
-            [
-                'method' => $method,
-                'code' => $code,
-            ]
-        );
+        $this->get('app.user_action_manager')
+            ->add(
+                'user.login.2fa.fail',
+                $this->get('translator')->trans(
+                    'my.login.2fa.fail.text'
+                ),
+                [
+                    'method' => $method,
+                    'code' => $code,
+                ]
+            );
 
         $this->get('app.brute_force_manager')
             ->handleUserLoginBlocks(

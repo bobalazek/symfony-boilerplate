@@ -7,18 +7,19 @@
                 <h4>{{ 'Hello %user_name%!' | trans({
                     '%user_name%': user.getName(),
                 }) }}</h4>
-                <p>{{ 'We detected a login request. Please click on the link below or enter the following code to into the form: %code%' | trans({
-                    '%code%': '<b>' ~ code ~ '</b>',
+                <p>{{ 'We detected a two-factor authentication login request. Please click on the link below or enter the following code to into the form: %code%. The link will expire at %expires_at%.' | trans({
+                    '%code%': '<b>' ~ user_login_code.getCode() ~ '</b>',
+                    '%expires_at%': '<b>' ~ user_login_code.getExpiresAt() | date(globals.date_time_format) ~ '</b>',
                 }) | raw }}</p>
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
                             <a href="{{ url('login.tfa', {
-                                code: code,
+                                code: user_login_code.getCode(),
                             }) }}"
                                 target="_blank">
                                 {{ url('login.tfa', {
-                                    code: code,
+                                    code: user_login_code.getCode(),
                                 }) }}
                             </a>
                         </td>
