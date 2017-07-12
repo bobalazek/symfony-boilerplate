@@ -40,7 +40,7 @@ class GeneralListener
                         return false;
                     }
 
-                    $twoFactorAuthenticationRoute = 'login.two_factor_authentication';
+                    $twoFactorAuthenticationRoute = 'login.tfa';
                     if ($twoFactorAuthenticationRoute === $event->getRequest()->get('_route')) {
                         return false;
                     }

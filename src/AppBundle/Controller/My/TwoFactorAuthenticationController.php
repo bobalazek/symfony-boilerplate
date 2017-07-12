@@ -14,11 +14,12 @@ use AppBundle\Form\Type\My\TwoFactorAuthenticationType;
 class TwoFactorAuthenticationController extends Controller
 {
     /**
-     * @Route("/my/two-factor-authentication", name="my.two_factor_authentication")
+     * @Route("/my/tfa", name="my.tfa")
      * @Security("has_role('ROLE_USER')")
      */
-    public function twoFactorAuthenticationAction(Request $request)
-    {
+    public function tfaAction(
+        Request $request
+    ) {
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(
@@ -48,15 +49,15 @@ class TwoFactorAuthenticationController extends Controller
             $this->addFlash(
                 'success',
                 $this->get('translator')->trans(
-                    'my.two_factor_authentication.save.flash_message'
+                    'my.tfa.save.flash_message'
                 )
             );
 
-            return $this->redirectToRoute('my.two_factor_authentication');
+            return $this->redirectToRoute('my.tfa');
         }
 
         return $this->render(
-            'AppBundle:Content:my/two_factor_authentication.html.twig',
+            'AppBundle:Content:my/tfa.html.twig',
             [
                 'form' => $form->createView(),
             ]

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\User;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Entity\User;
 
 /**
@@ -19,6 +20,7 @@ trait TimestampsTrait
     /**
      * @var \DateTime
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="reset_password_code_expires_at", type="datetime", nullable=true)
      */
     protected $resetPasswordCodeExpiresAt;
@@ -28,6 +30,7 @@ trait TimestampsTrait
      *
      * @var \DateTime
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="activated_at", type="datetime", nullable=true)
      */
     protected $activatedAt;
@@ -37,6 +40,7 @@ trait TimestampsTrait
      *
      * @var \DateTime
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="mobile_activated_at", type="datetime", nullable=true)
      */
     protected $mobileActivatedAt;
@@ -44,6 +48,7 @@ trait TimestampsTrait
     /**
      * @var \DateTime
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="mobile_activation_code_expires_at", type="datetime", nullable=true)
      */
     protected $mobileActivationCodeExpiresAt;

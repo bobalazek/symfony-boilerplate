@@ -3,12 +3,7 @@
 namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use AppBundle\Entity\User;
-use AppBundle\Utils\Helpers;
 
 /**
  * Some methods are taken from https://github.com/scheb/two-factor-bundle/blob/master/Security/TwoFactor/Provider/Google/GoogleAuthenticator.php.
@@ -47,7 +42,8 @@ class TwoFactorAuthenticatorManager
      */
     public function getUrl(User $user)
     {
-        $encoder = 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=';
+        $encoder = 'https://chart.googleapis.com'.
+            '/chart?chs=200x200&chld=M|0&cht=qr&chl=';
 
         return $encoder.urlencode($this->getQRContent($user));
     }

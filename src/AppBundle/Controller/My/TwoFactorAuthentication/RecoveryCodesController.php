@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\My;
+namespace AppBundle\Controller\My\TwoFactorAuthentication;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class RecoveryCodesController extends Controller
 {
     /**
-     * @Route("/my/recovery-codes", name="my.recovery_codes")
+     * @Route("/my/tfa/recovery-codes", name="my.tfa.recovery_codes")
      * @Security("has_role('ROLE_USER')")
      */
     public function recoveryCodesAction(Request $request)
@@ -38,7 +38,7 @@ class RecoveryCodesController extends Controller
         );
 
         return $this->render(
-            'AppBundle:Content:my/recovery_codes.html.twig',
+            'AppBundle:Content:my/tfa/recovery_codes.html.twig',
             [
                 'pagination' => $pagination,
             ]

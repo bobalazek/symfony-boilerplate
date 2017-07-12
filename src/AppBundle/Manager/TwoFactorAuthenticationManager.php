@@ -110,7 +110,7 @@ class TwoFactorAuthenticationManager
     {
         $router = $this->container->get('router');
         $response = new RedirectResponse(
-            $router->generate('login.two_factor_authentication')
+            $router->generate('login.tfa')
         );
         $event->setResponse($response);
     }

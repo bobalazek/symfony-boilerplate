@@ -15,7 +15,7 @@ class UserRecoveryCodeManager
 
     /**
      * @param string $code
-     * @param User $user
+     * @param User   $user
      *
      * @return UserRecoveryCode
      */
@@ -42,7 +42,7 @@ class UserRecoveryCodeManager
      * If there is any valid user recovery code.
      *
      * @param string $code
-     * @param User $user
+     * @param User   $user
      *
      * @return bool
      */

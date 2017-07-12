@@ -1,0 +1,47 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block title %}{{ 'Authenticator' | trans }} | {{ 'My Two-factor authentication' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>
+        {{ 'My Two-factor authentication' | trans }}
+        <a class="btn btn-default"
+            href="{{ url('my.tfa') }}">
+            {{ 'back' | trans }}
+        </a>
+    </h1>
+    <h2>{{ 'Authenticator' | trans }}</h2>
+    {% if app.user.isTFAAuthenticatorActivated() %}
+        <div class="alert alert-info">
+            {{ 'You have already activated your authenticator.' | trans }}
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ qr_code_url }}"
+                    alt="{{ 'QR Code' | trans }}">
+                <div>
+                    <b>{{ 'Secret:' | trans }}</b>
+                    {{ secret }}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="code-input">
+                            {{ 'Code:' | trans }}
+                        </label>
+                        <input id="code-input"
+                            class="form-control"
+                            type="text"
+                            name="code" />
+                    </div>
+                    <button class="btn btn-block btn-lg btn-primary"
+                        type="submit">
+                        {{ 'Activate' | trans }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

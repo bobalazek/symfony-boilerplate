@@ -1,0 +1,41 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block title %}{{ 'My Two-factor authentication' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'My Two-factor authentication' | trans }}</h1>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <h2>{{ 'Status' | trans }}</h2>
+        {{ form_row(form.tfaEnabled) }}
+        {{ form_row(form.tfaDefaultMethod) }}
+        <h3>{{ 'Email' | trans }}</h3>
+        {{ form_row(form.tfaEmailEnabled) }}
+        <h3>{{ 'Authenticator' | trans }}</h3>
+        {{ form_row(form.tfaAuthenticatorEnabled) }}
+        <div class="alert alert-info">
+            {% if app.user.isTFAAuthenticatorActivated() %}
+                {{ 'You have already activated your authenticator.' | trans }}
+            {% else %}
+                {{ 'In order to use the authenticator, you will need to activate it first.' | trans }}
+            {% endif %}
+        </div>
+        <a class="btn btn-default"
+            href="{{ url('my.tfa.authenticator') }}">
+            {{ 'Prepare authenticator' | trans }}
+        </a>
+        <h3>{{ 'Recovery codes' | trans }}</h3>
+        <p class="help-block">
+            {{ 'If you happen to loose access to your authenticator or email, you can still get access via the recovery codes, so keep them somewhere safe!' | trans }}
+        </p>
+        <a class="btn btn-default"
+            href="{{ url('my.tfa.recovery_codes') }}">
+            {{ 'Show codes' | trans }}
+        </a>
+        <hr />
+        <button type="submit"
+            class="btn btn-primary btn-lg btn-block" />
+            {{ 'Save' | trans }}
+        </button>
+    {{ form_end(form) }}
+{% endblock %}

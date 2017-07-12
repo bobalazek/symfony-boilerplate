@@ -1,9 +1,16 @@
 {% extends 'AppBundle:Layouts:default.html.twig' %}
 
-{% block title %}{{ 'Recovery codes' | trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'Recovery codes' | trans }} | {{ 'My Two-factor authentication' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
-    <h1>{{ 'Recovery codes' | trans }}</h1>
+    <h1>
+        {{ 'My Two-factor authentication' | trans }}
+        <a class="btn btn-default"
+            href="{{ url('my.tfa') }}">
+            {{ 'back' | trans }}
+        </a>
+    </h1>
+    <h2>{{ 'Recovery codes' | trans }}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -25,7 +32,7 @@
                 {% else %}
                     <tr>
                         <td colspan="3">
-                            {{ 'my.recovery_codes.no_recovery_codes_yet' | trans }}
+                            {{ 'my.tfa.recovery_codes.no_recovery_codes_yet' | trans }}
                         </td>
                     </tr>
                 {% endfor %}

@@ -34,10 +34,10 @@ trait TwoFactorAuthenticationTrait
 
         // Authenticator
         $isTFAAuthenticatorEnabled = $this->isTFAAuthenticatorEnabled();
-        $tfaAuthenticatorSecret = $this->getTFAAuthenticatorSecret();
+        $isTFAAuthenticatorActivated = $this->getTFAAuthenticatorActivated();
         if (
             !$isTFAAuthenticatorEnabled ||
-            $tfaAuthenticatorSecret === null
+            !$isTFAAuthenticatorActivated
         ) {
             unset($availableMethods['authenticator']);
         }
@@ -90,6 +90,13 @@ trait TwoFactorAuthenticationTrait
      * @ORM\Column(name="tfa_authenticator_secret", type="string", length=255, nullable=true)
      */
     protected $tfaAuthenticatorSecret;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="tfa_authenticator_activated_at", type="datetime", nullable=true)
+     */
+    protected $tfaAuthenticatorActivatedAt;
 
     /*** TFA Enabled ***/
 
@@ -259,5 +266,36 @@ trait TwoFactorAuthenticationTrait
         $this->tfaAuthenticatorSecret = $tfaAuthenticatorSecret;
 
         return $this;
+    }
+
+    /*** TFA Authenticator activated at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getTFAAuthenticatorActivatedAt()
+    {
+        return $this->tfaAuthenticatorActivatedAt;
+    }
+
+    /**
+     * @param \DateTime $tfaAuthenticatorActivatedAt
+     *
+     * @return User
+     */
+    public function setTFAAuthenticatorActivatedAt(
+        \DateTime $tfaAuthenticatorActivatedAt = null
+    ) {
+        $this->tfaAuthenticatorActivatedAt = $tfaAuthenticatorActivatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTFAAuthenticatorActivated()
+    {
+        return $this->getTFAAuthenticatorActivatedAt() !== null;
     }
 }

@@ -9,13 +9,13 @@
                 <h1>{{ 'Login' | trans }}</h1>
                 <h2>{{ 'Two-factor authentication' | trans }}</h2>
                 {% if method == 'email' %}
-                    {% include 'AppBundle:Content:login/two_factor_authentication/_method_email.html.twig' %}
+                    {% include 'AppBundle:Content:login/tfa/_method_email.html.twig' %}
                 {% elseif method == 'sms' %}
-                    {% include 'AppBundle:Content:login/two_factor_authentication/_method_sms.html.twig' %}
+                    {% include 'AppBundle:Content:login/tfa/_method_sms.html.twig' %}
                 {% elseif method == 'authenticator' %}
-                    {% include 'AppBundle:Content:login/two_factor_authentication/_method_authenticator.html.twig' %}
+                    {% include 'AppBundle:Content:login/tfa/_method_authenticator.html.twig' %}
                 {% elseif method == 'recovery_code' %}
-                    {% include 'AppBundle:Content:login/two_factor_authentication/_method_recovery_code.html.twig' %}
+                    {% include 'AppBundle:Content:login/tfa/_method_recovery_code.html.twig' %}
                 {% else %}
                     <div class="alert alert-danger">
                         {{ 'Oh, something strange happened. Please select one of the methods below.' | trans }}
@@ -27,7 +27,7 @@
                     <div class="list-group">
                         {% for alternative_method_key, alternative_method_label in alternative_methods %}
                             <a class="list-group-item"
-                                href="{{ url('login.two_factor_authentication', {
+                                href="{{ url('login.tfa', {
                                     method: alternative_method_key,
                                 }) }}">
                                 {{ alternative_method_label }}

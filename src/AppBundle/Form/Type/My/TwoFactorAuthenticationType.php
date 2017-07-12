@@ -36,6 +36,13 @@ class TwoFactorAuthenticationType extends AbstractType
                     'data-help-text' => 'On each login, you will get an email with a security code, that you will need to type in, before you will be able to fully log into your account.',
                 ],
             ])
+            ->add('tfaAuthenticatorEnabled', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Enable authenticator',
+                'attr' => [
+                    'data-help-text' => 'On each login, you will need to enter the code on your authenticator (Google Authenticator, Authy, ...).',
+                ],
+            ])
         ;
     }
 
@@ -43,7 +50,7 @@ class TwoFactorAuthenticationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\User',
-            'validation_groups' => ['my.two_factor_authentication'],
+            'validation_groups' => ['my.tfa'],
         ]);
     }
 }

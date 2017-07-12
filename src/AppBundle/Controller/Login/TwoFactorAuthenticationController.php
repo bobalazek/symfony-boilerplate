@@ -17,9 +17,9 @@ use AppBundle\Entity\User;
 class TwoFactorAuthenticationController extends Controller
 {
     /**
-     * @Route("/login/two-factor-authentication", name="login.two_factor_authentication")
+     * @Route("/login/tfa", name="login.tfa")
      */
-    public function loginTwoFactorAuthenticationAction(Request $request)
+    public function tfaAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
@@ -68,7 +68,7 @@ class TwoFactorAuthenticationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Content:login/two_factor_authentication.html.twig',
+            'AppBundle:Content:login/tfa.html.twig',
             [
                 'method' => $method,
                 'alternative_methods' => $alternativeMethods,
@@ -110,7 +110,7 @@ class TwoFactorAuthenticationController extends Controller
             );
 
             return $this->redirectToRoute(
-                'login.two_factor_authentication'
+                'login.tfa'
             );
         }
 
@@ -149,7 +149,7 @@ class TwoFactorAuthenticationController extends Controller
             $this->addFlash(
                 'danger',
                 $this->get('translator')->trans(
-                    'login.two_factor_authentication.code_invalid'
+                    'login.tfa.code_invalid'
                 )
             );
 
@@ -163,7 +163,7 @@ class TwoFactorAuthenticationController extends Controller
         $this->addFlash(
             'success',
             $this->get('translator')->trans(
-                'login.two_factor_authentication.success'
+                'login.tfa.success'
             )
         );
 
@@ -334,13 +334,13 @@ class TwoFactorAuthenticationController extends Controller
             );
 
             return $response = $this->redirectToRoute(
-                'login.two_factor_authentication'
+                'login.tfa'
             );
         } elseif ($method !== null) {
             $this->addFlash(
                 'info',
                 $this->get('translator')->trans(
-                    'login.two_factor_authentication.method_unavailable'
+                    'login.tfa.method_unavailable'
                 )
             );
         }

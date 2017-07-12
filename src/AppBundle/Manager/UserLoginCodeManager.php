@@ -62,7 +62,7 @@ class UserLoginCodeManager
      * If there is any valid user login code.
      *
      * @param string $code
-     * @param User $user
+     * @param User   $user
      *
      * @return bool
      */
