@@ -97,6 +97,10 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
 
+    # Other
+    google_authenticator:
+        class: Google\Authenticator\GoogleAuthenticator
+
     # Form types
     app.form.type.user:
         class: AppBundle\Form\Type\UserType

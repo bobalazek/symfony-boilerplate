@@ -180,17 +180,12 @@ class TwoFactorAuthenticationController extends Controller
      */
     private function getAlternativeMethods($currentMethod)
     {
-        $user = $this->getUser();
-        $isEmailEmailEnabled = $user->isTwoFactorAuthenticationEmailEnabled();
-        $availableMethods = User::$twoFactorAuthenticationMethods;
+        $availableMethods = $this->getUser()
+            ->getAvailableTwoFactorAuthenticationMethods();
 
-        unset($availableMethods[$currentMethod]);
-
-        if (
-            isset($availableMethods['email']) &&
-            !$isEmailEmailEnabled
-        ) {
-            unset($availableMethods['email']);
+        // Ignore the current method
+        if (isset($availableMethods[$currentMethod])) {
+            unset($availableMethods[$currentMethod]);
         }
 
         return array_keys($availableMethods);

@@ -12,8 +12,8 @@
                     {% include 'AppBundle:Content:login/two_factor_authentication/_method_email.html.twig' %}
                 {% elseif method == 'sms' %}
                     {% include 'AppBundle:Content:login/two_factor_authentication/_method_sms.html.twig' %}
-                {% elseif method == 'two_factor_authenticator' %}
-                    {% include 'AppBundle:Content:login/two_factor_authentication/_method_two_factor_authenticator.html.twig' %}
+                {% elseif method == 'authenticator' %}
+                    {% include 'AppBundle:Content:login/two_factor_authentication/_method_authenticator.html.twig' %}
                 {% endif %}
             </div>
         </div>

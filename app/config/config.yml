@@ -30,6 +30,9 @@ parameters:
         count: 8 # how many codes should be generated?
     login_code:
         expires_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
+    two_factor_authentication:
+        authenticator_hostname: example.com
+        authenticator_issuer: Issuer
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
     app.security.authentication.listener.form.class: AppBundle\EventListener\UsernamePasswordFormAuthenticationListener
 
