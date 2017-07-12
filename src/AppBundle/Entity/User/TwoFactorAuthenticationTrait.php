@@ -10,7 +10,7 @@ use AppBundle\Entity\User;
  */
 trait TwoFactorAuthenticationTrait
 {
-    public static $twoFactorAuthenticationMethods = [
+    public static $tfaMethods = [
         'email' => 'Email',
         // 'sms' => 'SMS', // not available for now
         'authenticator' => 'Authenticator',
@@ -22,17 +22,17 @@ trait TwoFactorAuthenticationTrait
      *
      * @return bool
      */
-    public function getAvailableTwoFactorAuthenticationMethods()
+    public function getAvailableTFAMethods()
     {
-        $availableMethods = self::$twoFactorAuthenticationMethods;
+        $availableMethods = self::$tfaMethods;
 
         // Email
-        $isEmailEmailEnabled = $user->isTwoFactorAuthenticationEmailEnabled();
+        $isEmailEmailEnabled = $user->isTFAEmailEnabled();
         if (!$isEmailEmailEnabled) {
             unset($availableMethods['email']);
         }
 
-        // Two-factor authenticator
+        // Authenticator
         // TODO
 
         // Recovery code
@@ -48,60 +48,60 @@ trait TwoFactorAuthenticationTrait
      * @var bool
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="two_factor_authentication_enabled", type="boolean")
+     * @ORM\Column(name="tfa_enabled", type="boolean")
      */
-    protected $twoFactorAuthenticationEnabled = false;
+    protected $tfaEnabled = false;
 
     /**
      * @var bool
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="two_factor_authentication_default_method", type="string", length=32, nullable=true)
+     * @ORM\Column(name="tfa_default_method", type="string", length=32, nullable=true)
      */
-    protected $twoFactorAuthenticationDefaultMethod = 'email';
+    protected $tfaDefaultMethod = 'email';
 
     /**
      * @var bool
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="two_factor_authentication_email_enabled", type="boolean")
+     * @ORM\Column(name="tfa_email_enabled", type="boolean")
      */
-    protected $twoFactorAuthenticationEmailEnabled = false;
+    protected $tfaEmailEnabled = false;
 
     /**
      * @var bool
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="two_factor_authentication_authenticator_enabled", type="boolean")
+     * @ORM\Column(name="tfa_authenticator_enabled", type="boolean")
      */
-    protected $twoFactorAuthenticationAuthenticatorEnabled = false;
+    protected $tfaAuthenticatorEnabled = false;
 
     /**
      * @var bool
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="two_factor_authentication_authenticator_secret", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tfa_authenticator_secret", type="string", length=255, nullable=true)
      */
-    protected $twoFactorAuthenticationAuthenticatorSecret;
+    protected $tfaAuthenticatorSecret;
 
-    /*** Two factor authentication Enabled ***/
+    /*** TFA Enabled ***/
 
     /**
      * @return bool
      */
-    public function isTwoFactorAuthenticationEnabled()
+    public function isTFAEnabled()
     {
-        return $this->twoFactorAuthenticationEnabled;
+        return $this->tfaEnabled;
     }
 
     /**
-     * @param $twoFactorAuthenticationEnabled
+     * @param $tfaEnabled
      *
      * @return User
      */
-    public function setTwoFactorAuthenticationEnabled($twoFactorAuthenticationEnabled)
+    public function setTFAEnabled($tfaEnabled)
     {
-        $this->twoFactorAuthenticationEnabled = $twoFactorAuthenticationEnabled;
+        $this->tfaEnabled = $tfaEnabled;
 
         return $this;
     }
@@ -109,9 +109,9 @@ trait TwoFactorAuthenticationTrait
     /**
      * @return User
      */
-    public function enableTwoFactorAuthentication()
+    public function enableTFA()
     {
-        $this->setTwoFactorAuthenticationEnabled(true);
+        $this->setTFAEnabled(true);
 
         return $this;
     }
@@ -119,53 +119,53 @@ trait TwoFactorAuthenticationTrait
     /**
      * @return User
      */
-    public function disableTwoFactorAuthentication()
+    public function disableTFA()
     {
-        $this->setTwoFactorAuthenticationEnabled(false);
+        $this->setTFAEnabled(false);
 
         return $this;
     }
 
-    /*** Two factor authentication default method ***/
+    /*** TFA default method ***/
 
     /**
      * @return string
      */
-    public function getTwoFactorAuthenticationDefaultMethod()
+    public function getTFADefaultMethod()
     {
-        return $this->twoFactorAuthenticationDefaultMethod;
+        return $this->tfaDefaultMethod;
     }
 
     /**
-     * @param $twoFactorAuthenticationDefaultMethod
+     * @param $tfaDefaultMethod
      *
      * @return User
      */
-    public function setTwoFactorAuthenticationDefaultMethod($twoFactorAuthenticationDefaultMethod)
+    public function setTFADefaultMethod($tfaDefaultMethod)
     {
-        $this->twoFactorAuthenticationDefaultMethod = $twoFactorAuthenticationDefaultMethod;
+        $this->tfaDefaultMethod = $tfaDefaultMethod;
 
         return $this;
     }
 
-    /*** Two factor authentication email enabled ***/
+    /*** TFA email enabled ***/
 
     /**
      * @return bool
      */
-    public function isTwoFactorAuthenticationEmailEnabled()
+    public function isTFAEmailEnabled()
     {
-        return $this->twoFactorAuthenticationEmailEnabled;
+        return $this->tfaEmailEnabled;
     }
 
     /**
-     * @param $twoFactorAuthenticationEmailEnabled
+     * @param $tfaEmailEnabled
      *
      * @return User
      */
-    public function setTwoFactorAuthenticationEmailEnabled($twoFactorAuthenticationEmailEnabled)
+    public function setTFAEmailEnabled($tfaEmailEnabled)
     {
-        $this->twoFactorAuthenticationEmailEnabled = $twoFactorAuthenticationEmailEnabled;
+        $this->tfaEmailEnabled = $tfaEmailEnabled;
 
         return $this;
     }
@@ -173,9 +173,9 @@ trait TwoFactorAuthenticationTrait
     /**
      * @return User
      */
-    public function enableTwoFactorAuthenticationEmail()
+    public function enableTFAEmail()
     {
-        $this->setTwoFactorAuthenticationEmailEnabled(true);
+        $this->setTFAEmailEnabled(true);
 
         return $this;
     }
@@ -183,31 +183,31 @@ trait TwoFactorAuthenticationTrait
     /**
      * @return User
      */
-    public function disableTwoFactorAuthenticationEmail()
+    public function disableTFAEmail()
     {
-        $this->setTwoFactorAuthenticationEmailEnabled(false);
+        $this->setTFAEmailEnabled(false);
 
         return $this;
     }
 
-    /*** Two factor authentication authenticator enabled ***/
+    /*** TFA authenticator enabled ***/
 
     /**
      * @return bool
      */
-    public function isTwoFactorAuthenticationAuthenticatorEnabled()
+    public function isTFAAuthenticatorEnabled()
     {
-        return $this->twoFactorAuthenticationAuthenticatorEnabled;
+        return $this->tfaAuthenticatorEnabled;
     }
 
     /**
-     * @param $twoFactorAuthenticationAuthenticatorEnabled
+     * @param $tfaAuthenticatorEnabled
      *
      * @return User
      */
-    public function setTwoFactorAuthenticationAuthenticatorEnabled($twoFactorAuthenticationAuthenticatorEnabled)
+    public function setTFAAuthenticatorEnabled($tfaAuthenticatorEnabled)
     {
-        $this->twoFactorAuthenticationAuthenticatorEnabled = $twoFactorAuthenticationAuthenticatorEnabled;
+        $this->tfaAuthenticatorEnabled = $tfaAuthenticatorEnabled;
 
         return $this;
     }
@@ -215,9 +215,9 @@ trait TwoFactorAuthenticationTrait
     /**
      * @return User
      */
-    public function enableTwoFactorAuthenticationAuthenticator()
+    public function enableTFAAuthenticator()
     {
-        $this->setTwoFactorAuthenticationAuthenticatorEnabled(true);
+        $this->setTFAAuthenticatorEnabled(true);
 
         return $this;
     }
@@ -225,31 +225,31 @@ trait TwoFactorAuthenticationTrait
     /**
      * @return User
      */
-    public function disableTwoFactorAuthenticationAuthenticator()
+    public function disableTFAAuthenticator()
     {
-        $this->setTwoFactorAuthenticationAuthenticatorEnabled(false);
+        $this->setTFAAuthenticatorEnabled(false);
 
         return $this;
     }
 
-    /*** Two factor authentication authenticator secret ***/
+    /*** TFA authenticator secret ***/
 
     /**
      * @return string
      */
-    public function getTwoFactorAuthenticationAuthenticatorSecret()
+    public function getTFAAuthenticatorSecret()
     {
-        return $this->twoFactorAuthenticationAuthenticatorSecret;
+        return $this->tfaAuthenticatorSecret;
     }
 
     /**
-     * @param $twoFactorAuthenticationAuthenticatorSecret
+     * @param $tfaAuthenticatorSecret
      *
      * @return User
      */
-    public function setTwoFactorAuthenticationAuthenticatorSecret($twoFactorAuthenticationAuthenticatorSecret)
+    public function setTFAAuthenticatorSecret($tfaAuthenticatorSecret)
     {
-        $this->twoFactorAuthenticationAuthenticatorSecret = $twoFactorAuthenticationAuthenticatorSecret;
+        $this->tfaAuthenticatorSecret = $tfaAuthenticatorSecret;
 
         return $this;
     }

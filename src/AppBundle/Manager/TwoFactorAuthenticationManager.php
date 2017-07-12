@@ -29,13 +29,13 @@ class TwoFactorAuthenticationManager
         $session = $this->container->get('session');
         $user = $event->getAuthenticationToken()->getUser();
 
-        $isEnabled = $user->isTwoFactorAuthenticationEnabled();
-        $availableMethods = $user->getAvailableTwoFactorAuthenticationMethods();
+        $isEnabled = $user->isTFAEnabled();
+        $availableMethods = $user->getAvailableTFAMethods();
         if (
             $isEnabled &&
             !empty($availableMethods)
         ) {
-            $method = $user->getTwoFactorAuthenticationDefaultMethod();
+            $method = $user->getTFADefaultMethod();
 
             $this->handleMethod($method, $user);
 
@@ -111,7 +111,7 @@ class TwoFactorAuthenticationManager
      */
     public function checkCode(User $user, $code)
     {
-        $secret = $user->getTwoFactorAuthenticationAuthenticatorSecret();
+        $secret = $user->getTFAAuthenticatorSecret();
         return $this->container->get('google_authenticator')
             ->checkCode(
                 $secret,
@@ -142,11 +142,11 @@ class TwoFactorAuthenticationManager
      */
     public function getQRContent(User $user)
     {
-        $twoFactorAuthenticationParameters = $this->container
+        $tfaParameters = $this->container
             ->getParameter('two_factor_authentication');
-        $hostname = $twoFactorAuthenticationParameters['authenticator_hostname'];
-        $issuer = $twoFactorAuthenticationParameters['authenticator_issuer'];
-        $secret = $user->getTwoFactorAuthenticationAuthenticatorSecret();
+        $hostname = $tfaParameters['authenticator_hostname'];
+        $issuer = $tfaParameters['authenticator_issuer'];
+        $secret = $user->getTFAAuthenticatorSecret();
 
         $userAndHost = rawurlencode($user->getUsername()).
             ($hostname ? '@'.rawurlencode($hostname) : '');
