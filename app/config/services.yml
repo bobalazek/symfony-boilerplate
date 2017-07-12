@@ -42,6 +42,11 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.two_factor_authenticator_manager:
+        class: AppBundle\Manager\TwoFactorAuthenticatorManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
     app.brute_force_manager:
         class: AppBundle\Manager\BruteForceManager
         calls:
