@@ -119,9 +119,32 @@ class TwoFactorAuthenticationController extends Controller
                 $session,
                 $em
             );
+        } elseif ($method === 'authenticator') {
+            $success = $this->handlePostAuthenticator(
+                $code,
+                $request,
+                $session,
+                $em
+            );
+        } elseif ($method === 'recovery_code') {
+            $success = $this->handlePostRecoveryCode(
+                $code,
+                $request,
+                $session,
+                $em
+            );
         }
 
         if (!$success) {
+            $this->addFlash(
+                'danger',
+                $this->get('translator')->trans(
+                    'login.two_factor_authentication.code_invalid'
+                )
+            );
+
+            $this->handleFailedLoginAttempt();
+
             return null;
         }
 
@@ -134,12 +157,14 @@ class TwoFactorAuthenticationController extends Controller
             )
         );
 
+        $session->remove(
+            'two_factor_authentication_in_progress'
+        );
+
         $this->get('app.user_action_manager')->add(
             'user.login.2fa',
             'User has been logged in via Two-factor authentication!'
         );
-
-        $session->remove('two_factor_authentication_in_progress');
 
         return $response;
     }
@@ -166,20 +191,53 @@ class TwoFactorAuthenticationController extends Controller
         $userLoginCodeExists = $this->get('app.user_login_code_manager')
             ->exists($code, $this->getUser());
 
-        if (!$userLoginCodeExists) {
-            $this->addFlash(
-                'danger',
-                $this->get('translator')->trans(
-                    'login.two_factor_authentication.login_code_not_found'
-                )
-            );
-
-            $this->handleFailedLoginAttempt();
-
-            return false;
+        if ($userLoginCodeExists) {
+            return true;
         }
 
-        return true;
+        return false;
+    }
+
+    /**
+     * Handle when a user tries to login with an authenticator.
+     *
+     * @param string        $code
+     * @param Request       $request
+     * @param Session       $session
+     * @param EntityManager $em
+     *
+     * @return bool Was it successfull?
+     */
+    private function handlePostAuthenticator(
+        $code,
+        Request $request,
+        Session $session,
+        EntityManager $em
+    ) {
+        // TODO
+
+        return false;
+    }
+
+    /**
+     * Handle when a user tries to login via a recovery code.
+     *
+     * @param string        $code
+     * @param Request       $request
+     * @param Session       $session
+     * @param EntityManager $em
+     *
+     * @return bool Was it successfull?
+     */
+    private function handlePostRecoveryCode(
+        $code,
+        Request $request,
+        Session $session,
+        EntityManager $em
+    ) {
+        // TODO
+
+        return false;
     }
 
     /**
