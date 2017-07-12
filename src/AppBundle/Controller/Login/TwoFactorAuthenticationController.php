@@ -130,6 +130,7 @@ class TwoFactorAuthenticationController extends Controller
         } elseif ($method === 'authenticator') {
             $success = $this->handlePostAuthenticator(
                 $code,
+                $user,
                 $request,
                 $session,
                 $em
@@ -137,6 +138,7 @@ class TwoFactorAuthenticationController extends Controller
         } elseif ($method === 'recovery_code') {
             $success = $this->handlePostRecoveryCode(
                 $code,
+                $user,
                 $request,
                 $session,
                 $em
@@ -151,7 +153,7 @@ class TwoFactorAuthenticationController extends Controller
                 )
             );
 
-            $this->handleFailedLoginAttempt($user);
+            $this->handleFailedLoginAttempt($user, $code);
 
             return null;
         }
@@ -200,7 +202,6 @@ class TwoFactorAuthenticationController extends Controller
     ) {
         $userLoginCodeExists = $this->get('app.user_login_code_manager')
             ->exists($code, $user);
-
         if ($userLoginCodeExists) {
             return true;
         }
@@ -249,7 +250,16 @@ class TwoFactorAuthenticationController extends Controller
         Session $session,
         EntityManager $em
     ) {
-        // TODO
+        $userRecoveryCode = $this->get('app.user_recovery_code_manager')
+            ->get($code, $user);
+        if ($userRecoveryCode) {
+            $userRecoveryCode->setUsedAt(new \Datetime());
+
+            $em->persist($userRecoveryCode);
+            $em->flush();
+
+            return true;
+        }
 
         return false;
     }
@@ -343,9 +353,10 @@ class TwoFactorAuthenticationController extends Controller
      * and adding a user block if the user has actually
      * too many login attempts already.
      *
-     * @param User $user
+     * @param User   $user
+     * @param string $code
      */
-    private function handleFailedLoginAttempt(User $user)
+    private function handleFailedLoginAttempt(User $user, $code)
     {
         $this->get('app.user_action_manager')->add(
             'user.login.2fa.fail',

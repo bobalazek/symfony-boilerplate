@@ -118,6 +118,14 @@ class UserRecoveryCode
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function isUsed()
+    {
+        return $this->getUsedAt() !== null;
+    }
+
     /*** User ***/
 
     /**

@@ -27,6 +27,11 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.user_recovery_code_manager:
+        class: AppBundle\Manager\UserRecoveryCodeManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
     app.user_manager:
         class: AppBundle\Manager\UserManager
         calls:

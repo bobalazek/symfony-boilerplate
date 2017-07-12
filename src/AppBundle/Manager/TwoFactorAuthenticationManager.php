@@ -76,7 +76,7 @@ class TwoFactorAuthenticationManager
     public function handleMethod($method, User $user)
     {
         if ($method === 'email') {
-            $code = Helpers::getRandomString(16);
+            $code = Helpers::getRandomString(8);
 
             $this->container->get('app.user_login_code_manager')->add($code, $method);
 
