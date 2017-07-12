@@ -48,8 +48,11 @@ class TwoFactorAuthenticationController extends Controller
         }
 
         if ($request->getMethod() === 'POST') {
+            $code = $request->request->get('code');
+
             $postResponse = $this->handlePost(
                 $method,
+                $code,
                 $request,
                 $session,
                 $em
@@ -69,8 +72,11 @@ class TwoFactorAuthenticationController extends Controller
         );
     }
 
+    /***** Handle post methods *****/
+
     /**
      * @param string        $method
+     * @param string        $code
      * @param Request       $request
      * @param Session       $session
      * @param EntityManager $em
@@ -79,76 +85,101 @@ class TwoFactorAuthenticationController extends Controller
      */
     private function handlePost(
         $method,
+        $code,
         Request $request,
         Session $session,
         EntityManager $em
     ) {
-        if ($method === 'email') {
-            try {
-                $this->checkIfTooManyAttempts($request, $session, $em);
-            } catch (BruteForceAttemptException $e) {
-                $this->addFlash(
-                    'danger',
-                    $e->getMessage()
-                );
-
-                return $this->redirectToRoute(
-                    'login.two_factor_authentication'
-                );
-            }
-
-            $code = $request->request->get('code');
-            $userLoginCodeExists = $this->get('app.user_login_code_manager')
-                ->exists($code, $this->getUser());
-
-            if (!$userLoginCodeExists) {
-                $this->addFlash(
-                    'danger',
-                    $this->get('translator')->trans(
-                        'login.two_factor_authentication.code_not_found'
-                    )
-                );
-
-                $this->get('app.user_action_manager')->add(
-                    'user.login.2fa.fail',
-                    $this->get('translator')->trans(
-                        'my.login.2fa.fail.text'
-                    ),
-                    [
-                        'code' => $code,
-                    ]
-                );
-
-                $this->get('app.brute_force_manager')
-                    ->handleUserLoginBlocks(
-                        $this->getUser(),
-                        'login.2fa',
-                        'user.login.2fa.fail'
-                    );
-
-                return null;
-            }
-
-            $response = $this->redirectToRoute('home');
-
+        try {
+            $this->handleTooManyAttempts(
+                $request,
+                $session,
+                $em
+            );
+        } catch (BruteForceAttemptException $e) {
             $this->addFlash(
-                'success',
+                'danger',
+                $e->getMessage()
+            );
+
+            return $this->redirectToRoute(
+                'login.two_factor_authentication'
+            );
+        }
+
+        $success = false;
+        if (
+            $method === 'email' ||
+            $method === 'sms'
+        ) {
+            $success = $this->handlePostLoginCode(
+                $method,
+                $code,
+                $request,
+                $session,
+                $em
+            );
+        }
+
+        if (!$success) {
+            return null;
+        }
+
+        $response = $this->redirectToRoute('home');
+
+        $this->addFlash(
+            'success',
+            $this->get('translator')->trans(
+                'login.two_factor_authentication.success'
+            )
+        );
+
+        $this->get('app.user_action_manager')->add(
+            'user.login.2fa',
+            'User has been logged in via Two-factor authentication!'
+        );
+
+        $session->remove('two_factor_authentication_in_progress');
+
+        return $response;
+    }
+
+    /**
+     * Handle the post request, if it is the email method.
+     * We use the same function for email & sms 2FA methods.
+     *
+     * @param string        $method
+     * @param string        $code
+     * @param Request       $request
+     * @param Session       $session
+     * @param EntityManager $em
+     *
+     * @return bool Was it successfull?
+     */
+    private function handlePostLoginCode(
+        $method,
+        $code,
+        Request $request,
+        Session $session,
+        EntityManager $em
+    ) {
+        $userLoginCodeExists = $this->get('app.user_login_code_manager')
+            ->exists($code, $this->getUser());
+
+        if (!$userLoginCodeExists) {
+            $this->addFlash(
+                'danger',
                 $this->get('translator')->trans(
-                    'login.two_factor_authentication.success'
+                    'login.two_factor_authentication.login_code_not_found'
                 )
             );
 
-            $this->get('app.user_action_manager')->add(
-                'user.login.2fa',
-                'User has been logged in via Two-factor authentication!'
-            );
+            $this->handleFailedLoginAttempt();
 
-            $session->remove('two_factor_authentication_in_progress');
-
-            return $response;
+            return false;
         }
 
-        return null;
+        return true;
     }
 
     /**
@@ -158,7 +189,7 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @throws BruteForceAttemptHttpException
      */
-    private function checkIfTooManyAttempts(
+    private function handleTooManyAttempts(
         Request $request,
         Session $session,
         EntityManager $em
@@ -233,6 +264,30 @@ class TwoFactorAuthenticationController extends Controller
         }
 
         return null;
+    }
+
+    /**
+     * Logs the failed login attempt by adding a user action,
+     * and adding a user block if the user has actually
+     * too many login attempts already.
+     */
+    private function handleFailedLoginAttempt() {
+        $this->get('app.user_action_manager')->add(
+            'user.login.2fa.fail',
+            $this->get('translator')->trans(
+                'my.login.2fa.fail.text'
+            ),
+            [
+                'code' => $code,
+            ]
+        );
+
+        $this->get('app.brute_force_manager')
+            ->handleUserLoginBlocks(
+                $this->getUser(),
+                'login.2fa',
+                'user.login.2fa.fail'
+            );
     }
 
     /**
