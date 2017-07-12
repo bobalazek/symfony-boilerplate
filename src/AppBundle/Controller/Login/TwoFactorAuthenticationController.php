@@ -183,7 +183,7 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @param string        $method
      * @param string        $code
-     * @param User $user
+     * @param User          $user
      * @param Request       $request
      * @param Session       $session
      * @param EntityManager $em
@@ -212,7 +212,7 @@ class TwoFactorAuthenticationController extends Controller
      * Handle when a user tries to login with an authenticator.
      *
      * @param string        $code
-     * @param User $user
+     * @param User          $user
      * @param Request       $request
      * @param Session       $session
      * @param EntityManager $em
@@ -345,7 +345,8 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @param User $user
      */
-    private function handleFailedLoginAttempt(User $user) {
+    private function handleFailedLoginAttempt(User $user)
+    {
         $this->get('app.user_action_manager')->add(
             'user.login.2fa.fail',
             $this->get('translator')->trans(
@@ -365,7 +366,7 @@ class TwoFactorAuthenticationController extends Controller
     }
 
     /**
-     * @param User $User
+     * @param User   $User
      * @param string $currentMethod
      *
      * @return array
