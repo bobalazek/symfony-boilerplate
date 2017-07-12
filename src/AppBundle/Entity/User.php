@@ -337,8 +337,10 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return array
      */
-    public function getUserRecoveryCodes($onlyNonDeleted = false, $onlyNonUsed = false)
-    {
+    public function getUserRecoveryCodes(
+        $onlyNonDeleted = false,
+        $onlyNonUsed = false
+    ) {
         $criteria = Criteria::create();
 
         if ($onlyNonDeleted) {

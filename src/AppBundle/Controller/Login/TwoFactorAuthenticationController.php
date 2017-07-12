@@ -35,14 +35,28 @@ class TwoFactorAuthenticationController extends Controller
 
         $method = $session->get('two_factor_authentication_method');
         $alternativeMethods = $this->getAlternativeMethods($method);
-        $response = $this->handleTwoFactorAuthenticationLogin(
-            $method,
+
+        // Check if the user has switched the 2FA method
+        $methodSwitchResponse = $this->handleMethodSwitch(
             $request,
             $session,
-            $em
+            $method,
+            $alternativeMethods
         );
-        if ($response) {
-            return $response;
+        if ($methodSwitchResponse) {
+            return $methodSwitchResponse;
+        }
+
+        if ($request->getMethod() === 'POST') {
+            $postResponse = $this->handlePost(
+                $method,
+                $request,
+                $session,
+                $em
+            );
+            if ($postResponse) {
+                return $postResponse;
+            }
         }
 
         return $this->render(
@@ -61,79 +75,77 @@ class TwoFactorAuthenticationController extends Controller
      * @param Session       $session
      * @param EntityManager $em
      *
-     * @return Response
+     * @return Response|null
      */
-    private function handleTwoFactorAuthenticationLogin(
+    private function handlePost(
         $method,
         Request $request,
         Session $session,
         EntityManager $em
     ) {
         if ($method === 'email') {
-            if ($request->getMethod() === 'POST') {
-                try {
-                    $this->checkIfTooManyAttempts($request, $session, $em);
-                } catch (BruteForceAttemptException $e) {
-                    $this->addFlash(
-                        'danger',
-                        $e->getMessage()
-                    );
-
-                    return $this->redirectToRoute(
-                        'login.two_factor_authentication'
-                    );
-                }
-
-                $code = $request->request->get('code');
-                $userLoginCodeExists = $this->get('app.user_login_code_manager')
-                    ->exists($code, $this->getUser());
-
-                if (!$userLoginCodeExists) {
-                    $this->addFlash(
-                        'danger',
-                        $this->get('translator')->trans(
-                            'login.two_factor_authentication.code_not_found'
-                        )
-                    );
-
-                    $this->get('app.user_action_manager')->add(
-                        'user.login.2fa.fail',
-                        $this->get('translator')->trans(
-                            'my.login.2fa.fail.text'
-                        ),
-                        [
-                            'code' => $code,
-                        ]
-                    );
-
-                    $this->get('app.brute_force_manager')
-                        ->handleUserLoginBlocks(
-                            $this->getUser(),
-                            'login.2fa',
-                            'user.login.2fa.fail'
-                        );
-
-                    return null;
-                }
-
-                $response = $this->redirectToRoute('home');
-
+            try {
+                $this->checkIfTooManyAttempts($request, $session, $em);
+            } catch (BruteForceAttemptException $e) {
                 $this->addFlash(
-                    'success',
+                    'danger',
+                    $e->getMessage()
+                );
+
+                return $this->redirectToRoute(
+                    'login.two_factor_authentication'
+                );
+            }
+
+            $code = $request->request->get('code');
+            $userLoginCodeExists = $this->get('app.user_login_code_manager')
+                ->exists($code, $this->getUser());
+
+            if (!$userLoginCodeExists) {
+                $this->addFlash(
+                    'danger',
                     $this->get('translator')->trans(
-                        'login.two_factor_authentication.success'
+                        'login.two_factor_authentication.code_not_found'
                     )
                 );
 
                 $this->get('app.user_action_manager')->add(
-                    'user.login.2fa',
-                    'User has been logged in via Two-factor authentication!'
+                    'user.login.2fa.fail',
+                    $this->get('translator')->trans(
+                        'my.login.2fa.fail.text'
+                    ),
+                    [
+                        'code' => $code,
+                    ]
                 );
 
-                $session->remove('two_factor_authentication_in_progress');
+                $this->get('app.brute_force_manager')
+                    ->handleUserLoginBlocks(
+                        $this->getUser(),
+                        'login.2fa',
+                        'user.login.2fa.fail'
+                    );
 
-                return $response;
+                return null;
             }
+
+            $response = $this->redirectToRoute('home');
+
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'login.two_factor_authentication.success'
+                )
+            );
+
+            $this->get('app.user_action_manager')->add(
+                'user.login.2fa',
+                'User has been logged in via Two-factor authentication!'
+            );
+
+            $session->remove('two_factor_authentication_in_progress');
+
+            return $response;
         }
 
         return null;
@@ -176,6 +188,54 @@ class TwoFactorAuthenticationController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Session $session
+     * @param string  $currentMethod
+     * @param array   $alternativeMethods
+     *
+     * @return Response|null
+     */
+    private function handleMethodSwitch(
+        Request $request,
+        Session $session,
+        $currentMethod,
+        $alternativeMethods
+    ) {
+        $method = $request->query->get('method');
+
+        if (in_array($method, array_keys($alternativeMethods))) {
+            $session->set(
+                'two_factor_authentication_method',
+                $method
+            );
+
+            $this->get('app.user_action_manager')->add(
+                'user.login.2fa.method_switch',
+                $this->get('translator')->trans(
+                    'my.login.2fa.method_switch.text'
+                ),
+                [
+                    'current_method' => $currentMethod,
+                    'new_method' => $method,
+                ]
+            );
+
+            return $response = $this->redirectToRoute(
+                'login.two_factor_authentication'
+            );
+        } elseif ($method !== null) {
+            $this->addFlash(
+                'info',
+                $this->get('translator')->trans(
+                    'login.two_factor_authentication.method_unavailable'
+                )
+            );
+        }
+
+        return null;
+    }
+
+    /**
      * @return array
      */
     private function getAlternativeMethods($currentMethod)
@@ -188,6 +248,6 @@ class TwoFactorAuthenticationController extends Controller
             unset($availableMethods[$currentMethod]);
         }
 
-        return array_keys($availableMethods);
+        return $availableMethods;
     }
 }

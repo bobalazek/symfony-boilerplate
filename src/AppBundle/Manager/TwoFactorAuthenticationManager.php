@@ -11,7 +11,7 @@ use AppBundle\Entity\User;
 use AppBundle\Utils\Helpers;
 
 /**
- * Some methods are taken from https://github.com/scheb/two-factor-bundle/blob/master/Security/TwoFactor/Provider/Google/GoogleAuthenticator.php
+ * Some methods are taken from https://github.com/scheb/two-factor-bundle/blob/master/Security/TwoFactor/Provider/Google/GoogleAuthenticator.php.
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
@@ -112,6 +112,7 @@ class TwoFactorAuthenticationManager
     public function checkCode(User $user, $code)
     {
         $secret = $user->getTFAAuthenticatorSecret();
+
         return $this->container->get('google_authenticator')
             ->checkCode(
                 $secret,
@@ -129,12 +130,13 @@ class TwoFactorAuthenticationManager
     public function getUrl(User $user)
     {
         $encoder = 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=';
+
         return $encoder.urlencode($this->getQRContent($user));
     }
 
     /**
      * Generate the content for a QR-Code to be scanned by the tow-factor authenticator.
-     * Use this method if you don't want to use google charts to display the qr-code
+     * Use this method if you don't want to use google charts to display the qr-code.
      *
      * @param User $user
      *
