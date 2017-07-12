@@ -27,17 +27,24 @@ trait TwoFactorAuthenticationTrait
         $availableMethods = self::$tfaMethods;
 
         // Email
-        $isEmailEmailEnabled = $user->isTFAEmailEnabled();
-        if (!$isEmailEmailEnabled) {
+        $isTFAEmailEnabled = $this->isTFAEmailEnabled();
+        if (!$isTFAEmailEnabled) {
             unset($availableMethods['email']);
         }
 
         // Authenticator
-        // TODO
+        $isTFAAuthenticatorEnabled = $this->isTFAAuthenticatorEnabled();
+        $tfaAuthenticatorSecret = $this->getTFAAuthenticatorSecret();
+        if (
+            !$isTFAAuthenticatorEnabled ||
+            $tfaAuthenticatorSecret === null
+        ) {
+            unset($availableMethods['authenticator']);
+        }
 
         // Recovery code
-        $userRecoveryCodes = $this->getUserRecoveryCodes();
-        if (empty($userRecoveryCodes)) {
+        $recoveryCodes = $this->getUserRecoveryCodes();
+        if (empty($recoveryCodes)) {
             unset($availableMethods['recovery_code']);
         }
 

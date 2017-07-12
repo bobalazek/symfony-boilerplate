@@ -181,7 +181,7 @@ class TwoFactorAuthenticationController extends Controller
     private function getAlternativeMethods($currentMethod)
     {
         $availableMethods = $this->getUser()
-            ->getAvailableTwoFactorAuthenticationMethods();
+            ->getAvailableTFAMethods();
 
         // Ignore the current method
         if (isset($availableMethods[$currentMethod])) {

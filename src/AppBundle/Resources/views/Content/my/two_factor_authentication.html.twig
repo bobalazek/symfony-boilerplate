@@ -7,10 +7,10 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
         <h2>{{ 'Status' | trans }}</h2>
-        {{ form_row(form.twoFactorAuthenticationEnabled) }}
-        {{ form_row(form.twoFactorAuthenticationDefaultMethod) }}
+        {{ form_row(form.tfaEnabled) }}
+        {{ form_row(form.tfaDefaultMethod) }}
         <h3>{{ 'Email' | trans }}</h3>
-        {{ form_row(form.twoFactorAuthenticationEmailEnabled) }}
+        {{ form_row(form.tfaEmailEnabled) }}
         <hr />
         <button type="submit"
             class="btn btn-primary btn-lg btn-block" />

@@ -16,20 +16,20 @@ class TwoFactorAuthenticationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('twoFactorAuthenticationEnabled', CheckboxType::class, [
+            ->add('tfaEnabled', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Enabled',
                 'attr' => [
                     'data-help-text' => 'If you want to have the 2FA protection enabled. Note: it will only work, if you have on the the methods set up.',
                 ],
             ])
-            ->add('twoFactorAuthenticationDefaultMethod', TwoFactorMethodType::class, [
+            ->add('tfaDefaultMethod', TwoFactorMethodType::class, [
                 'label' => 'Default method',
                 'attr' => [
                     'data-help-text' => 'Which is the default method on the 2FA?',
                 ],
             ])
-            ->add('twoFactorAuthenticationEmailEnabled', CheckboxType::class, [
+            ->add('tfaEmailEnabled', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Enable email authentication',
                 'attr' => [
