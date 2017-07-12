@@ -33,8 +33,12 @@ class TwoFactorAuthenticationController extends Controller
             return $this->redirectToRoute('home');
         }
 
+        $user = $this->getUser();
         $method = $session->get('two_factor_authentication_method');
-        $alternativeMethods = $this->getAlternativeMethods($method);
+        $alternativeMethods = $this->getAlternativeMethods(
+            $user,
+            $method
+        );
 
         // Check if the user has switched the 2FA method
         $methodSwitchResponse = $this->handleMethodSwitch(
@@ -53,6 +57,7 @@ class TwoFactorAuthenticationController extends Controller
             $postResponse = $this->handlePost(
                 $method,
                 $code,
+                $user,
                 $request,
                 $session,
                 $em
@@ -77,6 +82,7 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * @param string        $method
      * @param string        $code
+     * @param User          $user
      * @param Request       $request
      * @param Session       $session
      * @param EntityManager $em
@@ -86,6 +92,7 @@ class TwoFactorAuthenticationController extends Controller
     private function handlePost(
         $method,
         $code,
+        $user,
         Request $request,
         Session $session,
         EntityManager $em
@@ -115,6 +122,7 @@ class TwoFactorAuthenticationController extends Controller
             $success = $this->handlePostLoginCode(
                 $method,
                 $code,
+                $user,
                 $request,
                 $session,
                 $em
@@ -143,7 +151,7 @@ class TwoFactorAuthenticationController extends Controller
                 )
             );
 
-            $this->handleFailedLoginAttempt();
+            $this->handleFailedLoginAttempt($user);
 
             return null;
         }
@@ -175,6 +183,7 @@ class TwoFactorAuthenticationController extends Controller
      *
      * @param string        $method
      * @param string        $code
+     * @param User $user
      * @param Request       $request
      * @param Session       $session
      * @param EntityManager $em
@@ -184,12 +193,13 @@ class TwoFactorAuthenticationController extends Controller
     private function handlePostLoginCode(
         $method,
         $code,
+        User $user,
         Request $request,
         Session $session,
         EntityManager $em
     ) {
         $userLoginCodeExists = $this->get('app.user_login_code_manager')
-            ->exists($code, $this->getUser());
+            ->exists($code, $user);
 
         if ($userLoginCodeExists) {
             return true;
@@ -202,6 +212,7 @@ class TwoFactorAuthenticationController extends Controller
      * Handle when a user tries to login with an authenticator.
      *
      * @param string        $code
+     * @param User $user
      * @param Request       $request
      * @param Session       $session
      * @param EntityManager $em
@@ -210,6 +221,7 @@ class TwoFactorAuthenticationController extends Controller
      */
     private function handlePostAuthenticator(
         $code,
+        User $user,
         Request $request,
         Session $session,
         EntityManager $em
@@ -223,6 +235,7 @@ class TwoFactorAuthenticationController extends Controller
      * Handle when a user tries to login via a recovery code.
      *
      * @param string        $code
+     * @param User          $user
      * @param Request       $request
      * @param Session       $session
      * @param EntityManager $em
@@ -231,6 +244,7 @@ class TwoFactorAuthenticationController extends Controller
      */
     private function handlePostRecoveryCode(
         $code,
+        User $user,
         Request $request,
         Session $session,
         EntityManager $em
@@ -328,8 +342,10 @@ class TwoFactorAuthenticationController extends Controller
      * Logs the failed login attempt by adding a user action,
      * and adding a user block if the user has actually
      * too many login attempts already.
+     *
+     * @param User $user
      */
-    private function handleFailedLoginAttempt() {
+    private function handleFailedLoginAttempt(User $user) {
         $this->get('app.user_action_manager')->add(
             'user.login.2fa.fail',
             $this->get('translator')->trans(
@@ -342,19 +358,21 @@ class TwoFactorAuthenticationController extends Controller
 
         $this->get('app.brute_force_manager')
             ->handleUserLoginBlocks(
-                $this->getUser(),
+                $user,
                 'login.2fa',
                 'user.login.2fa.fail'
             );
     }
 
     /**
+     * @param User $User
+     * @param string $currentMethod
+     *
      * @return array
      */
-    private function getAlternativeMethods($currentMethod)
+    private function getAlternativeMethods(User $user, $currentMethod)
     {
-        $availableMethods = $this->getUser()
-            ->getAvailableTFAMethods();
+        $availableMethods = $user->getAvailableTFAMethods();
 
         // Ignore the current method
         if (isset($availableMethods[$currentMethod])) {
