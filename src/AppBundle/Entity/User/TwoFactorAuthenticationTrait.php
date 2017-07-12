@@ -34,7 +34,7 @@ trait TwoFactorAuthenticationTrait
 
         // Authenticator
         $isTFAAuthenticatorEnabled = $this->isTFAAuthenticatorEnabled();
-        $isTFAAuthenticatorActivated = $this->getTFAAuthenticatorActivated();
+        $isTFAAuthenticatorActivated = $this->isTFAAuthenticatorActivated();
         if (
             !$isTFAAuthenticatorEnabled ||
             !$isTFAAuthenticatorActivated

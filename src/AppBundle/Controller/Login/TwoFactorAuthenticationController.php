@@ -200,13 +200,8 @@ class TwoFactorAuthenticationController extends Controller
         Session $session,
         EntityManager $em
     ) {
-        $userLoginCodeExists = $this->get('app.user_login_code_manager')
+        return $this->get('app.user_login_code_manager')
             ->exists($code, $user);
-        if ($userLoginCodeExists) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -227,9 +222,11 @@ class TwoFactorAuthenticationController extends Controller
         Session $session,
         EntityManager $em
     ) {
-        // TODO
-
-        return false;
+        return $this->get('app.two_factor_authenticator_manager')
+            ->checkCode(
+                $user,
+                $code
+            );
     }
 
     /**
