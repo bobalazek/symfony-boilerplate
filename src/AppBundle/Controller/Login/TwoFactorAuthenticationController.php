@@ -332,6 +332,11 @@ class TwoFactorAuthenticationController extends Controller
         $method = $request->query->get('method');
 
         if (in_array($method, array_keys($alternativeMethods))) {
+            $session->set(
+                'two_factor_authentication_method',
+                $method
+            );
+
             $this->get('app.two_factor_authentication_manager')
                 ->handleMethod($method, $user);
 

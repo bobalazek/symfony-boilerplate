@@ -35,6 +35,11 @@ class TwoFactorAuthenticationManager
         ) {
             $method = $user->getTFADefaultMethod();
 
+            $session->set(
+                'two_factor_authentication_method',
+                $method
+            );
+
             $this->handleMethod($method, $user);
 
             $session->set(
@@ -72,11 +77,6 @@ class TwoFactorAuthenticationManager
      */
     public function handleMethod($method, User $user)
     {
-        $session->set(
-            'two_factor_authentication_method',
-            $method
-        );
-
         if ($method === 'email') {
             $code = Helpers::getRandomString(8);
 
