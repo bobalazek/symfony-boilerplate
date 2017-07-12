@@ -153,7 +153,7 @@ class TwoFactorAuthenticationController extends Controller
                 )
             );
 
-            $this->handleFailedLoginAttempt($user, $code);
+            $this->handleFailedLoginAttempt($user, $method, $code);
 
             return null;
         }
@@ -351,9 +351,10 @@ class TwoFactorAuthenticationController extends Controller
      * too many login attempts already.
      *
      * @param User   $user
+     * @param string $method
      * @param string $code
      */
-    private function handleFailedLoginAttempt(User $user, $code)
+    private function handleFailedLoginAttempt(User $user, $method, $code)
     {
         $this->get('app.user_action_manager')->add(
             'user.login.2fa.fail',
@@ -361,6 +362,7 @@ class TwoFactorAuthenticationController extends Controller
                 'my.login.2fa.fail.text'
             ),
             [
+                'method' => $method,
                 'code' => $code,
             ]
         );
