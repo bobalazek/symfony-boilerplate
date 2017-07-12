@@ -14,7 +14,7 @@ trait MobileTrait
      * @var string
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="mobile", type="string", length=255, nullable=true)
+     * @ORM\Column(name="mobile", type="phone_number", nullable=true)
      */
     protected $mobile;
 
@@ -24,7 +24,7 @@ trait MobileTrait
      * @var string
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="new_mobile", type="string", length=255, nullable=true)
+     * @ORM\Column(name="new_mobile", type="phone_number", nullable=true)
      */
     protected $newMobile;
 

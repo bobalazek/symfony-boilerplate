@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use AppBundle\Form\Type\ProfileType;
 
 /**
@@ -27,6 +28,10 @@ class SettingsType extends AbstractType
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
             ->add('locale', LocaleType::class)
+            ->add('mobile', PhoneNumberType::class, [
+                'required' => false,
+                'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
+            ])
         ;
     }
 

@@ -39,6 +39,9 @@ class AppKernel extends Kernel
             // GeoIP
             new Cravler\MaxMindGeoIpBundle\CravlerMaxMindGeoIpBundle(),
 
+            // MISD
+            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
+
             // Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),

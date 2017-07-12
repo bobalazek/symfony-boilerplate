@@ -101,6 +101,14 @@ class TwoFactorAuthenticationManager
                     ],
                 ])
             ;
+        } elseif ($method === 'sms') {
+            $code = Helpers::getRandomString(8);
+
+            $userLoginCode = $this->container
+                ->get('app.user_login_code_manager')
+                ->add($code, $method);
+
+            // TODO: send SMS
         }
 
         return true;
