@@ -14,10 +14,11 @@ class UserManager
 
     /**
      * @param User $user
+     * @param string $route To which route should the user be redirected?
      *
      * @return bool
      */
-    public function signup(User $user)
+    public function signup(User $user, $route = 'signup')
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
@@ -45,9 +46,9 @@ class UserManager
                 'body' => 'AppBundle:Emails:User/signup.html.twig',
                 'template_data' => [
                     'user' => $user,
+                    'route' => $route,
                 ],
-            ])
-        ;
+            ]);
 
         return true;
     }
@@ -83,8 +84,7 @@ class UserManager
                 'template_data' => [
                     'user' => $user,
                 ],
-            ])
-        ;
+            ]);
 
         return true;
     }
@@ -105,8 +105,7 @@ class UserManager
             ->setPlainPassword(
                 $formUser->getPlainPassword(),
                 $this->container->get('security.password_encoder')
-            )
-        ;
+            );
 
         $em->persist($user);
         $em->flush();
@@ -153,8 +152,7 @@ class UserManager
             ->setResetPasswordCodeExpiresAt(
                 new \Datetime(
                     'now +'.$this->container->getParameter('reset_password_expiry_time')
-            ))
-        ;
+            ));
 
         $em->persist($user);
         $em->flush();

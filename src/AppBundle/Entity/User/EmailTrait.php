@@ -35,7 +35,7 @@ trait EmailTrait
      *     groups={"my.settings"}
      * )
      *
-     * @ORM\Column(name="new_email", type="string", length=128, nullable=true)
+     * @ORM\Column(name="new_email", type="string", length=255, nullable=true)
      */
     protected $newEmail;
 

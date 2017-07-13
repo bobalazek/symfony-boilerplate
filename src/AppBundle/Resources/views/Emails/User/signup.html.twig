@@ -1,5 +1,10 @@
 {% extends 'AppBundle:Layouts:email.html.twig' %}
 
+{% set activation_url = url(route, {
+    id: user.getId(),
+    email_activation_code: user.getEmailActivationCode(),
+}) %}
+
 {% block main %}
     <table class="row note">
         <tr>
@@ -15,15 +20,9 @@
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
-                            <a href="{{ url('signup', {
-                                id: user.getId(),
-                                email_activation_code: user.getEmailActivationCode(),
-                            }) }}"
+                            <a href="{{ activation_url }}"
                                 target="_blank">
-                                {{ url('signup', {
-                                    id: user.getId(),
-                                    email_activation_code: user.getEmailActivationCode(),
-                                }) }}
+                                {{ activation_url }}
                             </a>
                         </td>
                         <td class="expander"></td>

@@ -138,17 +138,19 @@ class SettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        // Email code
         $emailActivationCode = $request->query->get('email_activation_code');
-        if ($emailActivationCode) {
-            $userEmailActivationCode = $em
-                ->getRepository('AppBundle:User')
-                ->findOneByEmailActivationCode($emailActivationCode);
+        $newEmailCode = $request->query->get('new_email_code');
 
-            if (
-                $userEmailActivationCode &&
-                $userEmailActivationCode === $user
-            ) {
+        // Email code
+        if ($emailActivationCode) {
+            $userByEmailActivationCode = $em
+                ->getRepository('AppBundle:User')
+                ->findOneBy([
+                    'id' => $user->getId(),
+                    'emailActivationCode' => $emailActivationCode,
+                ]);
+
+            if ($userByEmailActivationCode) {
                 $this->get('app.user_manager')->signupConfirmation($user);
 
                 $this->addFlash(
@@ -170,16 +172,15 @@ class SettingsController extends Controller
         }
 
         // New email code
-        $newEmailCode = $request->query->get('new_email_code');
         if ($newEmailCode) {
             $userByNewEmailCode = $em
                 ->getRepository('AppBundle:User')
-                ->findOneByNewEmailCode($newEmailCode);
+                ->findOneBy([
+                    'id' => $user->getId(),
+                    'newEmailCode' => $newEmailCode,
+                ]);
 
-            if (
-                $userByNewEmailCode &&
-                $userByNewEmailCode === $user
-            ) {
+            if ($userByNewEmailCode) {
                 $oldEmail = $user->getEmail();
 
                 $user
