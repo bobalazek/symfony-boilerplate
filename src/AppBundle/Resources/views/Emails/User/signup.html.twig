@@ -17,12 +17,12 @@
                         <td class="panel">
                             <a href="{{ url('signup', {
                                 id: user.getId(),
-                                code: user.getActivationCode(),
+                                email_activation_code: user.getEmailActivationCode(),
                             }) }}"
                                 target="_blank">
                                 {{ url('signup', {
                                     id: user.getId(),
-                                    code: user.getActivationCode(),
+                                    email_activation_code: user.getEmailActivationCode(),
                                 }) }}
                             </a>
                         </td>

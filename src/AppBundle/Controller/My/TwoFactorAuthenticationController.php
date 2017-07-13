@@ -17,9 +17,7 @@ class TwoFactorAuthenticationController extends Controller
      * @Route("/my/tfa", name="my.tfa")
      * @Security("has_role('ROLE_USER')")
      */
-    public function tfaAction(
-        Request $request
-    ) {
+    public function tfaAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(
@@ -39,7 +37,9 @@ class TwoFactorAuthenticationController extends Controller
 
             $this->get('app.user_action_manager')->add(
                 'user.settings.change',
-                $this->get('translator')->trans('my.settings.user_action.text'),
+                $this->get('translator')->trans(
+                    'my.settings.user_action.text'
+                ),
                 [
                     'old' => $userOldArray,
                     'new' => $user->toArray(),

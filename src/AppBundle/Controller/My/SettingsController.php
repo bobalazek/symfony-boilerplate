@@ -32,7 +32,10 @@ class SettingsController extends Controller
         $userOld = clone $this->getUser();
         $userOldArray = $userOld->toArray();
 
-        $newEmailCodeResponse = $this->handleEmailCodes($request, $this->getUser());
+        $newEmailCodeResponse = $this->handleEmailCodes(
+            $request,
+            $this->getUser()
+        );
         if ($newEmailCodeResponse) {
             return $newEmailCodeResponse;
         }
@@ -56,7 +59,7 @@ class SettingsController extends Controller
                 $this->get('app.user_action_manager')->add(
                     'user.settings.email.change.request',
                     $this->get('translator')->trans(
-                        'my.settings.new_email_request.user_action.text'
+                        'my.settings.new_email.user_action.text'
                     ),
                     [
                         'current' => $user->getEmail(),
@@ -83,7 +86,7 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.new_email_request.success.flash_message.text'
+                        'my.settings.new_email.success.flash_message.text'
                     )
                 );
             }
@@ -136,11 +139,11 @@ class SettingsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // Email code
-        $emailCode = $request->query->get('email_code');
-        if ($emailCode) {
+        $emailActivationCode = $request->query->get('email_activation_code');
+        if ($emailActivationCode) {
             $userEmailActivationCode = $em
                 ->getRepository('AppBundle:User')
-                ->findOneByEmailActivationCode($emailCode);
+                ->findOneByEmailActivationCode($emailActivationCode);
 
             if (
                 $userEmailActivationCode &&
@@ -224,7 +227,7 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.new_email.success.code_invalid.flash_message.text'
+                        'my.settings.new_email.code_invalid.flash_message.text'
                     )
                );
             }

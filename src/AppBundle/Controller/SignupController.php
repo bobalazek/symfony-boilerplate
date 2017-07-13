@@ -31,9 +31,9 @@ class SignupController extends Controller
         $recoveryCodesParameters = $this->getParameter('recovery_codes');
 
         $id = $request->query->get('id');
-        $code = $request->query->get('code');
+        $emailActivationCode = $request->query->get('email_activation_code');
 
-        $isSignupConfirmation = !empty($id) && !empty($code);
+        $isSignupConfirmation = !empty($id) && !empty($emailActivationCode);
         $alert = false;
         $alertMessage = '';
 
@@ -50,7 +50,7 @@ class SignupController extends Controller
         if ($isSignupConfirmation) {
             $this->handleSignupConfirmation(
                 $id,
-                $code,
+                $emailActivationCode,
                 $alert,
                 $alertMessage
             );
@@ -75,18 +75,18 @@ class SignupController extends Controller
 
     /**
      * @param string $id
-     * @param string $code
+     * @param string $emailActivationCode
      * @param string $alert
      * @param string $alertMessage
      */
-    protected function handleSignupConfirmation($id, $code, &$alert, &$alertMessage)
+    protected function handleSignupConfirmation($id, $emailActivationCode, &$alert, &$alertMessage)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em
             ->getRepository('AppBundle:User')
             ->findOneBy([
                 'id' => $id,
-                'emailActivationCode' => $code,
+                'emailActivationCode' => $emailActivationCode,
             ]);
 
         if ($user) {
