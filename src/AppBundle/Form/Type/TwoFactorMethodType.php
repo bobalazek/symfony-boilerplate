@@ -12,6 +12,9 @@ use AppBundle\Entity\User;
  */
 class TwoFactorMethodType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -19,6 +22,9 @@ class TwoFactorMethodType extends AbstractType
         ]);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function getParent()
     {
         return ChoiceType::class;

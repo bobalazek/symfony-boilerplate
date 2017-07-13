@@ -12,6 +12,9 @@ use AppBundle\Entity\Profile;
  */
 class GenderType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -22,6 +25,9 @@ class GenderType extends AbstractType
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function getParent()
     {
         return ChoiceType::class;

@@ -16,6 +16,10 @@ use AppBundle\Form\Type\ProfileType;
  */
 class SettingsType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -31,10 +35,14 @@ class SettingsType extends AbstractType
             ->add('mobile', PhoneNumberType::class, [
                 'required' => false,
                 'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
+                'preferred_country_choices' => ['DE', 'AT', 'CH'],
             ])
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('authorization_checker');
