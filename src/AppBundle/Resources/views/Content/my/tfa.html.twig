@@ -8,11 +8,23 @@
         {{ form_errors(form) }}
         <h2>{{ 'Status' | trans }}</h2>
         {{ form_row(form.tfaEnabled) }}
+        <div class="help-block">
+            {{ 'my.tfa.form.enabled.help.text' | trans }}
+        </div>
         {{ form_row(form.tfaDefaultMethod) }}
+        <div class="help-block">
+            {{ 'my.tfa.form.default_method.help.text' | trans }}
+        </div>
         <h3>{{ 'Email' | trans }}</h3>
         {{ form_row(form.tfaEmailEnabled) }}
+        <div class="help-block">
+            {{ 'my.tfa.form.email_enabled.help.text' | trans }}
+        </div>
         <h3>{{ 'Authenticator' | trans }}</h3>
         {{ form_row(form.tfaAuthenticatorEnabled) }}
+        <div class="help-block">
+            {{ 'my.tfa.form.authenticator_enabled.help.text' | trans }}
+        </div>
         <div class="alert alert-info">
             {% if app.user.isTFAAuthenticatorActivated() %}
                 {{ 'my.tfa.authenticator.already_activated.text' | trans }}
