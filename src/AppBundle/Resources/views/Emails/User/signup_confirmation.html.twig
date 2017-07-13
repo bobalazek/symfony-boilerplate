@@ -4,10 +4,10 @@
     <table class="row note">
         <tr>
             <td class="wrapper last">
-                <h4>{{ 'Hello %user_name%!' | trans({
+                <h4>{{ 'emails.general.greeting' | trans({
                     '%user_name%': user.getName(),
                 }) }}</h4>
-                <p>{{ 'Thank you for your registration. Have fun using %app_name%!' | trans({
+                <p>{{ 'emails.user.signup_confirmation.text' | trans({
                     '%app_name%': globals.app_name,
                 }) }}</p>
             </td>

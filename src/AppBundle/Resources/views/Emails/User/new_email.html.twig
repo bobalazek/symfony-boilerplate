@@ -4,10 +4,10 @@
     <table class="row note">
         <tr>
             <td class="wrapper last">
-                <h4>{{ 'Hello %user_name%!' | trans({
+                <h4>{{ 'emails.general.greeting' | trans({
                     '%user_name%': user.getName(),
                 }) }}</h4>
-                <p>{{ 'Please click on the link below to confirm your email address.' | trans }}</p>
+                <p>{{ 'emails.user.new_email.click_link_below_to_confirm_new_email.text' | trans }}</p>
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
@@ -18,7 +18,7 @@
                         <td class="expander"></td>
                     </tr>
                 </table>
-                <p>{{ 'If the link does not work, copy and paste it into your browser window.' | trans }}</p>
+                <p>{{ 'emails.general.copy_paste_link_into_browser.text' | trans }}</p>
             </td>
         </tr>
     </table>

@@ -15,9 +15,9 @@
         {{ form_row(form.tfaAuthenticatorEnabled) }}
         <div class="alert alert-info">
             {% if app.user.isTFAAuthenticatorActivated() %}
-                {{ 'You have already activated your authenticator.' | trans }}
+                {{ 'my.tfa.authenticator.already_activated.text' | trans }}
             {% else %}
-                {{ 'In order to use the authenticator, you will need to activate it first.' | trans }}
+                {{ 'my.tfa.authenticator.not_yet_activated.text' | trans }}
             {% endif %}
         </div>
         <a class="btn btn-default"
@@ -26,7 +26,7 @@
         </a>
         <h3>{{ 'Recovery codes' | trans }}</h3>
         <p class="help-block">
-            {{ 'If you happen to lose the access to your authenticator or email, you can still get access via the recovery codes, so keep them somewhere safe!' | trans }}
+            {{ 'my.tfa.recovery_codes.message.text' | trans }}
         </p>
         <a class="btn btn-default"
             href="{{ url('my.tfa.recovery_codes') }}">

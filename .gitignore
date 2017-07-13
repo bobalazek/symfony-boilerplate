@@ -43,5 +43,8 @@
 # MacOS
 ._*
 
+# Linux
+*~
+
 # Deployer
 /deployer/hosts-local.php

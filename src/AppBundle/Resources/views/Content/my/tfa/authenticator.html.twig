@@ -13,7 +13,7 @@
     <h2>{{ 'Authenticator' | trans }}</h2>
     {% if app.user.isTFAAuthenticatorActivated() %}
         <div class="alert alert-info">
-            {{ 'You have already activated your authenticator.' | trans }}
+            {{ 'my.tfa.authenticator.already_activated.text' | trans }}
         </div>
     {% else %}
         <div class="row">

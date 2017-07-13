@@ -18,7 +18,7 @@
                     {% include 'AppBundle:Content:login/tfa/_method_recovery_code.html.twig' %}
                 {% else %}
                     <div class="alert alert-danger">
-                        {{ 'Oh, something strange happened. Please select one of the methods below.' | trans }}
+                        {{ 'login.tfa.invalid_method.text' | trans }}
                     </div>
                 {% endif %}
                 {% if alternative_methods is not empty %}
