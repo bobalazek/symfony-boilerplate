@@ -155,10 +155,6 @@ class User implements AdvancedUserInterface, \Serializable
             md5(uniqid(null, true))
         );
 
-        $this->setEmailActivationCode(
-            md5(uniqid(null, true))
-        );
-
         $this->userActions = new ArrayCollection();
         $this->userRecoveryCodes = new ArrayCollection();
         $this->userDevices = new ArrayCollection();

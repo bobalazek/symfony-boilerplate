@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormBuilder;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\SignupType;
 
@@ -29,10 +30,10 @@ class SignupController extends Controller
 
         $recoveryCodesParameters = $this->getParameter('recovery_codes');
 
-        $code = $request->query->has('code')
-            ? $request->query->get('code')
-            : false;
-        $isSignupConfirmation = !empty($code);
+        $id = $request->query->get('id');
+        $code = $request->query->get('code');
+
+        $isSignupConfirmation = !empty($id) && !empty($code);
         $alert = false;
         $alertMessage = '';
 
@@ -47,9 +48,19 @@ class SignupController extends Controller
         );
 
         if ($isSignupConfirmation) {
-            $this->handleSignupConfirmation($code, $alert, $alertMessage);
+            $this->handleSignupConfirmation(
+                $id,
+                $code,
+                $alert,
+                $alertMessage
+            );
         } else {
-            $this->handleSignup($form, $request, $alert, $alertMessage);
+            $this->handleSignup(
+                $form,
+                $request,
+                $alert,
+                $alertMessage
+            );
         }
 
         return $this->render(
@@ -62,13 +73,21 @@ class SignupController extends Controller
         );
     }
 
-    private function handleSignupConfirmation($code, &$alert, &$alertMessage)
+    /**
+     * @param string $id
+     * @param string $code
+     * @param string $alert
+     * @param string $alertMessage
+     */
+    protected function handleSignupConfirmation($id, $code, &$alert, &$alertMessage)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em
             ->getRepository('AppBundle:User')
-            ->findOneByEmailActivationCode($code)
-        ;
+            ->findOneBy([
+                'id' => $id,
+                'emailActivationCode' => $code,
+            ]);
 
         if ($user) {
             $this->get('app.user_manager')->signupConfirmation($user);
@@ -85,7 +104,13 @@ class SignupController extends Controller
         }
     }
 
-    private function handleSignup(&$form, Request $request, &$alert, &$alertMessage)
+    /**
+     * @param FormBuilder $form
+     * @param Request     $request
+     * @param string      $alert
+     * @param string      $alertMessage
+     */
+    protected function handleSignup(FormBuilder &$form, Request $request, &$alert, &$alertMessage)
     {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

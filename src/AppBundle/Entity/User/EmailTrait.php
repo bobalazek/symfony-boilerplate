@@ -42,14 +42,14 @@ trait EmailTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="new_email_code", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="new_email_code", type="string", length=255, nullable=true)
      */
     protected $newEmailCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email_activation_code", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="email_activation_code", type="string", length=255, nullable=true)
      */
     protected $emailActivationCode;
 

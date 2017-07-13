@@ -14,15 +14,21 @@ class UserManager
 
     /**
      * @param User $user
+     *
+     * @return bool
      */
     public function signup(User $user)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $user->setPlainPassword(
-            $user->getPlainPassword(),
-            $this->container->get('security.password_encoder')
-        );
+        $user
+            ->setEmailActivationCode(
+                md5(uniqid(null, true))
+            )
+            ->setPlainPassword(
+                $user->getPlainPassword(),
+                $this->container->get('security.password_encoder')
+            );
 
         $em->persist($user);
         $em->flush();
@@ -48,6 +54,8 @@ class UserManager
 
     /**
      * @param User $user
+     *
+     * @return bool
      */
     public function signupConfirmation(User $user)
     {
@@ -57,7 +65,6 @@ class UserManager
             ->setEmailActivationCode(null)
             ->setEmailActivatedAt(new \DateTime())
             ->enable()
-            ->verifyEmail()
         ;
 
         $em->persist($user);
@@ -85,6 +92,8 @@ class UserManager
     /**
      * @param User $user
      * @param User $formUser
+     *
+     * @return bool
      */
     public function resetPassword(User $user, User $formUser)
     {
@@ -132,6 +141,8 @@ class UserManager
 
     /**
      * @param User $user
+     *
+     * @return bool
      */
     public function resetPasswordRequest(User $user)
     {

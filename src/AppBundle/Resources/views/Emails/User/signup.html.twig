@@ -16,10 +16,12 @@
                     <tr>
                         <td class="panel">
                             <a href="{{ url('signup', {
+                                id: user.getId(),
                                 code: user.getActivationCode(),
                             }) }}"
                                 target="_blank">
                                 {{ url('signup', {
+                                    id: user.getId(),
                                     code: user.getActivationCode(),
                                 }) }}
                             </a>

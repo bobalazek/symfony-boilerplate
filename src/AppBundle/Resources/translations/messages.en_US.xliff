@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-13T22:57:08Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-14T00:05:41Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -355,7 +355,7 @@
         <jms:reference-file line="29">/../src/AppBundle/Resources/views/Emails/User/login/2fa.html.twig</jms:reference-file>
         <jms:reference-file line="21">/../src/AppBundle/Resources/views/Emails/User/new_email.html.twig</jms:reference-file>
         <jms:reference-file line="26">/../src/AppBundle/Resources/views/Emails/User/reset_password.html.twig</jms:reference-file>
-        <jms:reference-file line="30">/../src/AppBundle/Resources/views/Emails/User/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/../src/AppBundle/Resources/views/Emails/User/signup.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="92ab1f0759a9f8b5ad2ad934708b7d222b60202e" resname="emails.general.greeting">
         <source>emails.general.greeting</source>
@@ -386,12 +386,12 @@
       <trans-unit id="7ecc12a6d749d81ed77460a9e00999430b1a41aa" resname="emails.user.new_email.subject">
         <source>emails.user.new_email.subject</source>
         <target>[%app_name%] New email request</target>
-        <jms:reference-file line="64">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="69">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2ecfb36866dc97b6ac2490ad657c451e3d55bf75" resname="emails.user.new_email_confirmation.subject">
         <source>emails.user.new_email_confirmation.subject</source>
         <target>[%app_name%] New email confirmation</target>
-        <jms:reference-file line="150">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="192">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b6f7ea9d9d76c447826d792e4e21988d18279ee0" resname="emails.user.new_email_confirmation.text">
         <source>emails.user.new_email_confirmation.text</source>
@@ -401,7 +401,7 @@
       <trans-unit id="58fe3179877e9b76ff31644a22587c6118070db3" resname="emails.user.request_password.subject">
         <source>emails.user.request_password.subject</source>
         <target>[%app_name%] New password request</target>
-        <jms:reference-file line="160">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="171">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a7caa149d42c8f32bb01625ac9084ee5cb5eb976" resname="emails.user.reset_password.click_link_below_to_reset_password.text">
         <source>emails.user.reset_password.click_link_below_to_reset_password.text</source>
@@ -411,7 +411,7 @@
       <trans-unit id="8d54e36f6391d6ebe0d457ea730a9d54b950f881" resname="emails.user.reset_password_confirmation.subject">
         <source>emails.user.reset_password_confirmation.subject</source>
         <target>[%app_name%] New password confirmation</target>
-        <jms:reference-file line="116">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="125">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e14ed18dc502bae8ce0da274195822af91397aff" resname="emails.user.reset_password_confirmation.text">
         <source>emails.user.reset_password_confirmation.text</source>
@@ -426,7 +426,7 @@
       <trans-unit id="833c486f3a37973f1a6cbdfa150774a2f3704c6b" resname="emails.user.signup_confirmation.subject">
         <source>emails.user.signup_confirmation.subject</source>
         <target>[%app_name%] You have successfully signed up</target>
-        <jms:reference-file line="68">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="75">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="18ae8c5284c622e58f18dffd983cb4e3e5c3ea70" resname="emails.user.signup_confirmation.text">
         <source>emails.user.signup_confirmation.text</source>
@@ -439,7 +439,7 @@
         <jms:reference-file line="32">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
         <jms:reference-file line="30">/../src/AppBundle/Controller/LoginController.php</jms:reference-file>
         <jms:reference-file line="26">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
-        <jms:reference-file line="24">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+        <jms:reference-file line="25">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3a226b0c720df7aedc885666da3b04fc6d0ef4ab" resname="general.something_went_wrong">
         <source>general.something_went_wrong</source>
@@ -527,6 +527,16 @@
         <target><![CDATA[Your email address is not yet activated. Please click <a href="%resend_link%">here</a>, to activate your email address.]]></target>
         <jms:reference-file line="41">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="531da879aca607ade2e2c1eb411e8d651c46eb7d" resname="my.settings.email_activation.success.code_invalid.flash_message.text">
+        <source>my.settings.email_activation.success.code_invalid.flash_message.text</source>
+        <target state="new">my.settings.email_activation.success.code_invalid.flash_message.text</target>
+        <jms:reference-file line="160">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f397dee61b2833f8d27a422e561f6b0167afcfd8" resname="my.settings.email_activation.success.flash_message.text">
+        <source>my.settings.email_activation.success.flash_message.text</source>
+        <target state="new">my.settings.email_activation.success.flash_message.text</target>
+        <jms:reference-file line="153">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="a805d803ee7714c416293f6d8b2ec75bd16db361" resname="my.settings.mobile.is_activated.text">
         <source>my.settings.mobile.is_activated.text</source>
         <target>The mobile number was activated at %activated_at%</target>
@@ -534,8 +544,13 @@
       </trans-unit>
       <trans-unit id="9246773e15086260975c7d17eb79e303b2c71243" resname="my.settings.mobile.is_not_activated_yet.text">
         <source>my.settings.mobile.is_not_activated_yet.text</source>
-        <target><![CDATA[Your mobile number is not yet activated. Please click <a href="%resend_link%">here</a>, to activate your email address.]]></target>
+        <target><![CDATA[Your mobile number is not yet activated. Please click <a href="%resend_link%">here</a>, to activate your mobile number.]]></target>
         <jms:reference-file line="72">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="508af05c3c73489da2df81b59ad492e6954bde7a" resname="my.settings.new_email.confirmation.user_action.text">
+        <source>my.settings.new_email.confirmation.user_action.text</source>
+        <target state="new">my.settings.new_email.confirmation.user_action.text</target>
+        <jms:reference-file line="208">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b001c9a460083c54d0aff0ace505e3a44fb50a9c" resname="my.settings.new_email.request.text">
         <source>my.settings.new_email.request.text</source>
@@ -545,27 +560,22 @@
       <trans-unit id="fc8c6e99f6a93c6574ab89795d09d45642d54c9b" resname="my.settings.new_email.success.code_invalid.flash_message.text">
         <source>my.settings.new_email.success.code_invalid.flash_message.text</source>
         <target>The new email code was invalid.</target>
-        <jms:reference-file line="184">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="226">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ee6098169ff727edb557c1b6cef611734b53024d" resname="my.settings.new_email.success.flash_message.text">
         <source>my.settings.new_email.success.flash_message.text</source>
         <target>You have successfully changed to your new email!</target>
-        <jms:reference-file line="177">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="685f0b078ea2d0026716ef931b9b5714e6558aa8" resname="my.settings.new_email.user_action.text">
-        <source>my.settings.new_email.user_action.text</source>
-        <target>The user has successfully changed to a new password.</target>
-        <jms:reference-file line="166">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="219">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2bf9dd55bd779f92a9ce52a946d4a9380602179c" resname="my.settings.new_email_request.success.flash_message.text">
         <source>my.settings.new_email_request.success.flash_message.text</source>
         <target>We have sent a confirmation code to your new email address. Please confirm it first, before your email can be changed here.</target>
-        <jms:reference-file line="80">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="85">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6db1b2c12084d807caf82fa4cb269a5dbf6abcb4" resname="my.settings.new_email_request.user_action.text">
         <source>my.settings.new_email_request.user_action.text</source>
         <target>The user has requested to change his password.</target>
-        <jms:reference-file line="53">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="58">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="37fdb8c1e24026694172700324eda7d2b87d4b3a" resname="my.settings.new_mobile.request.text">
         <source>my.settings.new_mobile.request.text</source>
@@ -575,12 +585,12 @@
       <trans-unit id="00abbec280c60dd1174b1124f863ae5309e2e0bd" resname="my.settings.save.success.flash_message.text">
         <source>my.settings.save.success.flash_message.text</source>
         <target>The settings were successfully changed.</target>
-        <jms:reference-file line="102">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="107">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d13562d3f339486ef84b801171f5776bea9d4c5c" resname="my.settings.user_action.text">
         <source>my.settings.user_action.text</source>
         <target>The user has changed his settings successfully.</target>
-        <jms:reference-file line="91">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="96">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
         <jms:reference-file line="42">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e22cfdb333b5d82b6ce17ebfce1f2200ac09ac5b" resname="my.tfa.authenticator.already_activated.text">
@@ -667,7 +677,7 @@
       <trans-unit id="5135a85afdf1c78210e31ff768dfeaf562aa65e1" resname="reset_password.request.user_action.text">
         <source>reset_password.request.user_action.text</source>
         <target>The user requested a password change.</target>
-        <jms:reference-file line="153">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="164">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2c5f408be9201a6daad17730320ceb0986bfd91c" resname="reset_password.success.text">
         <source>reset_password.success.text</source>
@@ -677,22 +687,22 @@
       <trans-unit id="1d9342b334eb3ac30901ea5cb78914d5196dd56a" resname="reset_password.user_action.text">
         <source>reset_password.user_action.text</source>
         <target>reset_password.user_action.text</target>
-        <jms:reference-file line="107">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="116">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="35ff612d820c9c3c2cedead213c1929240a8cf84" resname="signup.confirmation.code_not_found.text">
         <source>signup.confirmation.code_not_found.text</source>
         <target>This confirmation code was not found.</target>
-        <jms:reference-file line="82">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+        <jms:reference-file line="101">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cb37230bb66f44a9609088dddc6af527d8d5dbd9" resname="signup.confirmation.success.text">
         <source>signup.confirmation.success.text</source>
         <target>Your account is now successfully confirmed.</target>
-        <jms:reference-file line="77">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+        <jms:reference-file line="96">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3c97f7d5ecd0f4e669accc4676339b890f293bfb" resname="signup.email.subject">
         <source>signup.email.subject</source>
         <target>The user has reset his password.</target>
-        <jms:reference-file line="32">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="38">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3ace1170572c91f278cbd25188e07206307282b1" resname="signup.form.terms.label">
         <source>signup.form.terms.label</source>
@@ -702,7 +712,7 @@
       <trans-unit id="f156f43b76b39a7b1396097f76a37f424fea8db0" resname="signup.success.text">
         <source>signup.success.text</source>
         <target>You have successfully signed up.</target>
-        <jms:reference-file line="97">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+        <jms:reference-file line="122">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>
