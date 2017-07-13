@@ -104,7 +104,9 @@ class UserManager
 
         $this->get('app.user_action_manager')->add(
             'user.password_reset',
-            $this->container->get('translator')->trans('reset_password.user_action.text'),
+            $this->container->get('translator')->trans(
+                'reset_password.user_action.text'
+            ),
             [],
             $user
         );
