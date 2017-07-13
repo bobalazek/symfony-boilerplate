@@ -37,7 +37,7 @@ class SignupType extends AbstractType
                 'invalid_message' => 'Invalid Password.',
             ])
             ->add('terms', CheckboxType::class, [
-                'label' => 'signup.terms_text',
+                'label' => 'signup.form.terms.label',
                 'required' => true,
                 'mapped' => false,
             ])

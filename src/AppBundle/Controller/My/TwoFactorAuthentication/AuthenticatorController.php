@@ -52,7 +52,7 @@ class AuthenticatorController extends Controller
                 $this->addFlash(
                     'danger',
                     $this->get('translator')->trans(
-                        'my.tfa.authenticator.invalid_code'
+                        'my.tfa.authenticator.invalid_code.text'
                     )
                 );
 
@@ -62,7 +62,7 @@ class AuthenticatorController extends Controller
             $this->addFlash(
                 'success',
                 $this->get('translator')->trans(
-                    'my.tfa.authenticator.success'
+                    'my.tfa.authenticator.success.text'
                 )
             );
 

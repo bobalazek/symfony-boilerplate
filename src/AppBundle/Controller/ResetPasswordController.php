@@ -23,7 +23,9 @@ class ResetPasswordController extends Controller
         if ($this->isGranted('ROLE_USER')) {
             $this->addFlash(
                 'info',
-                $this->get('translator')->trans('general.already_logged_in')
+                $this->get('translator')->trans(
+                    'general.already_logged_in'
+                )
             );
 
             return $this->redirectToRoute('home');
@@ -87,22 +89,30 @@ class ResetPasswordController extends Controller
                     && new \DateTime() < $user->getResetPasswordCodeExpiresAt();
                 if ($isPasswordCodeAlreadySent) {
                     $alert = 'info';
-                    $alertMessage = $this->get('translator')->trans('reset_password.request.already_requested');
+                    $alertMessage = $this->get('translator')->trans(
+                        'reset_password.request.already_requested.text'
+                    );
                 } else {
                     // In the REALLY unlikely case that the reset password code wouldn't be unique
                     try {
                         $this->get('app.user_manager')->resetPasswordRequest($user);
 
                         $alert = 'success';
-                        $alertMessage = $this->get('translator')->trans('reset_password.request.success');
+                        $alertMessage = $this->get('translator')->trans(
+                            'reset_password.request.success.text'
+                        );
                     } catch (\Exception $e) {
                         $alert = 'danger';
-                        $alertMessage = $this->get('translator')->trans('general.something_went_wrong');
+                        $alertMessage = $this->get('translator')->trans(
+                            'general.something_went_wrong'
+                        );
                     }
                 }
             } else {
                 $alert = 'danger';
-                $alertMessage = $this->get('translator')->trans('reset_password.request.email_not_found');
+                $alertMessage = $this->get('translator')->trans(
+                    'reset_password.request.email_not_found.text'
+                );
             }
         }
     }
@@ -125,7 +135,9 @@ class ResetPasswordController extends Controller
             $isResetPasswordCodeExpired = new \DateTime() > $user->getResetPasswordCodeExpiresAt();
             if ($isResetPasswordCodeExpired) {
                 $alert = 'danger';
-                $alertMessage = $this->get('translator')->trans('reset_password.code_expired');
+                $alertMessage = $this->get('translator')->trans(
+                    'reset_password.code_expired.text'
+                );
             } else {
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
@@ -134,12 +146,16 @@ class ResetPasswordController extends Controller
                     $this->get('app.user_manager')->resetPassword($user, $formUser);
 
                     $alert = 'success';
-                    $alertMessage = $this->get('translator')->trans('reset_password.success');
+                    $alertMessage = $this->get('translator')->trans(
+                        'reset_password.success.text'
+                    );
                 }
             }
         } else {
             $alert = 'danger';
-            $alertMessage = $this->get('translator')->trans('reset_password.code_not_found');
+            $alertMessage = $this->get('translator')->trans(
+                'reset_password.code_not_found.text'
+            );
         }
     }
 }

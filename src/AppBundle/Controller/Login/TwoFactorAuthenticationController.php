@@ -156,7 +156,7 @@ class TwoFactorAuthenticationController extends Controller
             $this->addFlash(
                 'danger',
                 $this->get('translator')->trans(
-                    'login.tfa.code_invalid'
+                    'login.tfa.code_invalid.text'
                 )
             );
 

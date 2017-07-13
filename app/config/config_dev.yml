@@ -26,16 +26,16 @@ monolog:
                 - "!doctrine"
 
 jms_translation:
+    locales: "%locales%"
+    source_language: "%locale%"
     configs:
-        app:
-            dir: "%kernel.root_dir%/../src/AppBundle"
-            output_dir: "%kernel.root_dir%/Resources/AppBundle/translations"
-            ignored_domains:
-                - routes
-            excluded_names:
-                - "*TestCase.php"
-                - "*Test.php"
-            excluded_dirs:
-                - "cache"
-                - "data"
-                - "logs"
+        AppBundle:
+            dirs:
+                - "%kernel.root_dir%/../src/AppBundle"
+            output_dir: "%kernel.root_dir%/../src/AppBundle/Resources/translations"
+            default_output_format: xliff
+        DevBundle:
+            dirs:
+                - "%kernel.root_dir%/../src/DevBundle"
+            output_dir: "%kernel.root_dir%/../src/DevBundle/Resources/translations"
+            default_output_format: xliff

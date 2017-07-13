@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-13T20:45:55Z" source-language="en" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-13T21:05:38Z" source-language="en" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -73,7 +73,7 @@
       </trans-unit>
       <trans-unit id="a160600d3c5320f51ebd8da6eaa89f5f0d2a2df5" resname="emails.deployment.subject">
         <source>emails.deployment.subject</source>
-        <target>emails.deployment.subject</target>
+        <target>[%app_name%] New deployment</target>
         <jms:reference-file line="120">/../src/DevBundle/Command/DeploymentSuccessCommand.php</jms:reference-file>
       </trans-unit>
     </body>

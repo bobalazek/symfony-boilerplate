@@ -6,6 +6,9 @@ imports:
 
 parameters:
     locale: en_US
+    locales:
+        - en_US
+        - de_DE
     app_name: SymfonyBoilerplate
     description: My personal symfony boilerplate.
     author: Borut Balazek
@@ -60,7 +63,10 @@ framework:
         version: "%assets_version%"
     php_errors:
         log: true
-    translator: { fallbacks: [ '%locale%' ] }
+    translator:
+        fallbacks: [ '%locale%' ]
+        paths:
+            - "%kernel.root_dir%/../src"
 
 # Twig Configuration
 twig:

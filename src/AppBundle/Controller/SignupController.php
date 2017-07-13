@@ -74,10 +74,14 @@ class SignupController extends Controller
             $this->get('app.user_manager')->signupConfirmation($user);
 
             $alert = 'success';
-            $alertMessage = $this->get('translator')->trans('signup.confirmation.success');
+            $alertMessage = $this->get('translator')->trans(
+                'signup.confirmation.success.text'
+            );
         } else {
             $alert = 'danger';
-            $alertMessage = $this->get('translator')->trans('signup.confirmation.code_not_found');
+            $alertMessage = $this->get('translator')->trans(
+                'signup.confirmation.code_not_found.text'
+            );
         }
     }
 
@@ -90,7 +94,9 @@ class SignupController extends Controller
             $this->get('app.user_manager')->signup($user);
 
             $alert = 'success';
-            $alertMessage = $this->get('translator')->trans('signup.success');
+            $alertMessage = $this->get('translator')->trans(
+                'signup.success.text'
+            );
         }
     }
 }
