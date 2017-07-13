@@ -88,7 +88,7 @@ class TwoFactorAuthenticationManager
                 ->get('app.mailer')
                 ->swiftMessageInitializeAndSend([
                     'subject' => $this->container->get('translator')->trans(
-                        'login.2fa.email.subject',
+                        'emails.user.login.2fa.subject',
                         [
                             '%app_name%' => $this->container->getParameter('app_name'),
                         ]

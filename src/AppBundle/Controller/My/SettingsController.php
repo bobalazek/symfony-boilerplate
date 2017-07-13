@@ -62,7 +62,7 @@ class SettingsController extends Controller
                 $this->get('app.mailer')
                     ->swiftMessageInitializeAndSend([
                         'subject' => $this->get('translator')->trans(
-                            'my.settings.new_email_request.email.subject',
+                            'emails.user.new_email.subject',
                             [
                                 '%app_name%' => $this->getParameter('app_name'),
                             ]
@@ -78,7 +78,7 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.new_email_request.flash_message'
+                        'my.settings.new_email_request.success.flash_message.text'
                     )
                 );
             }
@@ -100,7 +100,7 @@ class SettingsController extends Controller
             $this->addFlash(
                 'success',
                 $this->get('translator')->trans(
-                    'my.settings.save.flash_message'
+                    'my.settings.save.success.flash_message.text'
                 )
             );
 
@@ -148,7 +148,7 @@ class SettingsController extends Controller
                 $this->get('app.mailer')
                     ->swiftMessageInitializeAndSend([
                         'subject' => $this->get('translator')->trans(
-                            'my.settings.new_email.email.subject',
+                            'emails.user.new_email_confirmation.subject',
                             [
                                 '%app_name%' => $this->getParameter('app_name'),
                             ]
@@ -175,14 +175,14 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.new_email.flash_message'
+                        'my.settings.new_email.success.flash_message.text'
                     )
                 );
             } else {
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.new_email.code_invalid.flash_message'
+                        'my.settings.new_email.success.code_invalid.flash_message.text'
                     )
                );
             }

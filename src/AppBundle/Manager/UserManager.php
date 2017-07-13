@@ -66,7 +66,7 @@ class UserManager
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
                 'subject' => $this->container->get('translator')->trans(
-                    'signup.confirmation.email.subject',
+                    'emails.user.signup_confirmation.subject',
                     [
                         '%app_name%' => $this->container->getParameter('app_name'),
                     ]
@@ -112,7 +112,7 @@ class UserManager
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
                 'subject' => $this->container->get('translator')->trans(
-                    'reset_password.email.subject',
+                    'emails.user.reset_password_confirmation.subject',
                     [
                         '%app_name%' => $this->container->getParameter('app_name'),
                     ]
@@ -156,7 +156,7 @@ class UserManager
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
                 'subject' => $this->container->get('translator')->trans(
-                    'reset_password.request.email.subject',
+                    'emails.user.request_password.subject',
                     [
                         '%app_name%' => $this->container->getParameter('app_name'),
                     ]

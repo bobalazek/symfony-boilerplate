@@ -57,7 +57,7 @@ class MyController extends Controller
 
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('my.password.flash_message')
+                    $this->get('translator')->trans('my.password.success.flash_message.text')
                 );
             }
 

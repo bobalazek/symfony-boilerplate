@@ -118,7 +118,7 @@ class DeploymentSuccessCommand extends ContainerAwareCommand
         $container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
                 'subject' => $container->get('translator')->trans(
-                    'deployment.email.subject',
+                    'emails.deployment.subject',
                     [
                         '%app_name%' => $container->getParameter('app_name'),
                     ]

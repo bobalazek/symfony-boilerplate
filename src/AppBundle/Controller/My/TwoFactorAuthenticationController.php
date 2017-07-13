@@ -49,7 +49,7 @@ class TwoFactorAuthenticationController extends Controller
             $this->addFlash(
                 'success',
                 $this->get('translator')->trans(
-                    'my.tfa.save.flash_message'
+                    'my.tfa.save.success.flash_message.text'
                 )
             );
 

@@ -17,16 +17,25 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-            channels: ["!event"]
+            channels:
+                - "!event"
         console:
-            type:   console
-            channels: ["!event", "!doctrine"]
+            type: console
+            channels:
+                - "!event"
+                - "!doctrine"
 
 jms_translation:
     configs:
         app:
-            dirs: [%kernel.root_dir%/../src/AppBundle]
-            output_dir: %kernel.root_dir%/Resources/AppBundle/translations
-            ignored_domains: [routes]
-            excluded_names: ["*TestCase.php", "*Test.php"]
-            excluded_dirs: [cache, data, logs]
+            dir: "%kernel.root_dir%/../src/AppBundle"
+            output_dir: "%kernel.root_dir%/Resources/AppBundle/translations"
+            ignored_domains:
+                - routes
+            excluded_names:
+                - "*TestCase.php"
+                - "*Test.php"
+            excluded_dirs:
+                - "cache"
+                - "data"
+                - "logs"
