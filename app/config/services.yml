@@ -65,9 +65,14 @@ services:
         class: AppBundle\Twig\CoreExtension
         public: false
         tags:
-            - { name: twig.extension }
+            - name: twig.extension
         calls:
             - [setContainer, ["@service_container"]]
+
+    twig.text_extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - name: twig.extension
 
     # Event Subscribers & Listeners
     app.authentication_subscriber:

@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-07-13T20:26:52Z" source-language="en" target-language="en_US" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="e8442a3a9ebf7bb5cc78ffdb8fc26d539e2ab168" resname="2FA">
+        <source>2FA</source>
+        <target>2FA</target>
+        <jms:reference-file line="80">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="85dfa32c97d8618d1bea083609e2c8a29845abe5" resname="Account">
+        <source>Account</source>
+        <target>Account</target>
+        <jms:reference-file line="19">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c3cd636a585b20c40ac2df5ffb403e83cb2eef51" resname="Actions">
+        <source>Actions</source>
+        <target>Actions</target>
+        <jms:reference-file line="75">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="92ef08325a4813563a3110359906076374683282" resname="Activate">
+        <source>Activate</source>
+        <target>Activate</target>
+        <jms:reference-file line="41">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4e7afebcfbae000b22c7c85e5560f89a2a0280b4" resname="Admin">
+        <source>Admin</source>
+        <target>Admin</target>
+        <jms:reference-file line="35">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2f72382de5b583671e3070aa8dd00f5026d3ab86" resname="Alternative methods">
+        <source>Alternative methods</source>
+        <target>Alternative methods</target>
+        <jms:reference-file line="26">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4853c808b11b9b67738f58bbcfad661b3344e999" resname="Authenticator">
+        <source>Authenticator</source>
+        <target>Authenticator</target>
+        <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_authenticator.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="13">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6a30309018ae077d196d6ab813ea4dbf0ea0308e" resname="Back to admin">
+        <source>Back to admin</source>
+        <target>Back to admin</target>
+        <jms:reference-file line="45">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="adac69379a626c2436948a4ef1792c7d719ef929" resname="Code">
+        <source>Code</source>
+        <target>Code</target>
+        <jms:reference-file line="4">/../src/AppBundle/Resources/views/Content/login/tfa/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ca567dda33cdf7058994a40bb9ef4db135c7d283" resname="Code:">
+        <source>Code:</source>
+        <target>Code:</target>
+        <jms:reference-file line="32">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b37456c4530be810dc040f50da72eda09addfb0a" resname="Contact">
+        <source>Contact</source>
+        <target>Contact</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/pages/contact.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/contact.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="be35340599bb31d522ed409e731f2ead77c06339" resname="Default method">
+        <source>Default method</source>
+        <target>Default method</target>
+        <jms:reference-file line="31">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4c4a2e80cc873135b3d277a22b6e85110c509731" resname="Disclaimer">
+        <source>Disclaimer</source>
+        <target>Disclaimer</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/pages/disclaimer.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/disclaimer.html.twig</jms:reference-file>
+        <jms:reference-file line="11">/../src/AppBundle/Resources/views/Layouts/default/_footer.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="84add5b2952787581cb9a8851eef63d1ec75d22b" resname="Email">
+        <source>Email</source>
+        <target>Email</target>
+        <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_email.html.twig</jms:reference-file>
+        <jms:reference-file line="26">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="12">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="40e8787de5dcd48dedbc847de4fa8d4877e84c25" resname="Enable authenticator">
+        <source>Enable authenticator</source>
+        <target>Enable authenticator</target>
+        <jms:reference-file line="45">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ec0ae6116dd1c5180f9f2ae12a8183ccdefae184" resname="Enable email authentication">
+        <source>Enable email authentication</source>
+        <target>Enable email authentication</target>
+        <jms:reference-file line="38">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="df174a3f2faa31814e06540acda7af8825403fac" resname="Enabled">
+        <source>Enabled</source>
+        <target>Enabled</target>
+        <jms:reference-file line="25">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c47ae15370cfe1ed2781eedc1dc2547d12d9e972" resname="Help">
+        <source>Help</source>
+        <target>Help</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/pages/help.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/help.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="70f8bb9a8a5393ef080507a89e4b98d139000d65" resname="Home">
+        <source>Home</source>
+        <target>Home</target>
+        <jms:reference-file line="29">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="db71e0bfdd6b22014556039ac1d59c60c65b4e4e" resname="Imprint">
+        <source>Imprint</source>
+        <target>Imprint</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/pages/imprint.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/imprint.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Layouts/default/_footer.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4e5a2893bdcc7d239c1db72e4c4ffbe4bea73174" resname="Login">
+        <source>Login</source>
+        <target>Login</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="57">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="94">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e43d612e11f1568f2373e719d4c4b08dcecdc7cc" resname="Logout">
+        <source>Logout</source>
+        <target>Logout</target>
+        <jms:reference-file line="86">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b1d702459399a2512fba5a402d4d5f26aee34693" resname="Mobile">
+        <source>Mobile</source>
+        <target>Mobile</target>
+        <jms:reference-file line="57">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4bf8c70526a411e6204aab4fb43243af3c0bacb5" resname="My Actions">
+        <source>My Actions</source>
+        <target>My Actions</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="933257a3349a248d1e0fb19d7c953a00ff004a1d" resname="My Password">
+        <source>My Password</source>
+        <target>My Password</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/password.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/my/password.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9ba8d391c59aeb246fa3938363866f5e153da58a" resname="My Profile">
+        <source>My Profile</source>
+        <target>My Profile</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/profile.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/my/profile.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d06936af612eda7518cd59482caeb7e9d8132321" resname="My Settings">
+        <source>My Settings</source>
+        <target>My Settings</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2ba6011b663fe67c49d295756d29635501ff66df" resname="My Two-factor authentication">
+        <source>My Two-factor authentication</source>
+        <target>My Two-factor authentication</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8be3c943b1609fffbfc51aad666d0a04adf83c9d" resname="Password">
+        <source>Password</source>
+        <target>Password</target>
+        <jms:reference-file line="27">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="70">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5e56087ce5efcc3849a19a13a548bd7b4a7aa88a" resname="Prepare authenticator">
+        <source>Prepare authenticator</source>
+        <target>Prepare authenticator</target>
+        <jms:reference-file line="25">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cf01481f626d5127ec7732fcbdb29504f08abefd" resname="Privacy">
+        <source>Privacy</source>
+        <target>Privacy</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/pages/privacy.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/privacy.html.twig</jms:reference-file>
+        <jms:reference-file line="21">/../src/AppBundle/Resources/views/Layouts/default/_footer.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ff4fc0276e960c348647b647235f68200887c9d2" resname="Profile">
+        <source>Profile</source>
+        <target>Profile</target>
+        <jms:reference-file line="11">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="44742187d5d4b1a7e4e19010eba9fbbc91ffcaac" resname="QR Code">
+        <source>QR Code</source>
+        <target>QR Code</target>
+        <jms:reference-file line="22">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3cb5fd8e47c4fe5e7de3b35552b3ee19efd0605c" resname="Recovery code">
+        <source>Recovery code</source>
+        <target>Recovery code</target>
+        <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_recovery_code.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b3f5f8ca4dc4584c290193d2e6420128c8fd65b4" resname="Recovery codes">
+        <source>Recovery codes</source>
+        <target>Recovery codes</target>
+        <jms:reference-file line="27">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="13">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ced7b308a348567fbf21dd775ee496dd01207f24" resname="Remember me">
+        <source>Remember me</source>
+        <target>Remember me</target>
+        <jms:reference-file line="41">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3fb75e3bfe4de94eb5198656fa9de95352dab915" resname="Reset Password">
+        <source>Reset Password</source>
+        <target>Reset Password</target>
+        <jms:reference-file line="48">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9e10d4517d5a2f4e8e567950c34d021599f90fe2" resname="SMS">
+        <source>SMS</source>
+        <target>SMS</target>
+        <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_sms.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="efc007a393f66cdb14d57d385822a3d9e36ef873" resname="Save">
+        <source>Save</source>
+        <target>Save</target>
+        <jms:reference-file line="13">/../src/AppBundle/Resources/views/Content/my/password.html.twig</jms:reference-file>
+        <jms:reference-file line="91">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="38">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5c7fcfc75a01016412fdd3913c1f7fc446d458ce" resname="Secret:">
+        <source>Secret:</source>
+        <target>Secret:</target>
+        <jms:reference-file line="24">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c7f73bb54d928922c3838bb789ee9fb8a5b1eb37" resname="Settings">
+        <source>Settings</source>
+        <target>Settings</target>
+        <jms:reference-file line="65">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1c49eb247ad87dc49993e65f0affe1836fb1fa88" resname="Show codes">
+        <source>Show codes</source>
+        <target>Show codes</target>
+        <jms:reference-file line="33">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="894bc414e6b716730609cecece10977501d4d3dc" resname="Signup">
+        <source>Signup</source>
+        <target>Signup</target>
+        <jms:reference-file line="62">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="49">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bae7d5be70820ed56467bd9a63744e23b47bd711" resname="Status">
+        <source>Status</source>
+        <target>Status</target>
+        <jms:reference-file line="9">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2dacf65959849884a011f36f76a04eebea94c5ea" resname="Submit">
+        <source>Submit</source>
+        <target>Submit</target>
+        <jms:reference-file line="14">/../src/AppBundle/Resources/views/Content/login/tfa/_form.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a55a275aa676930d9258569485d5b38eb1196630" resname="Terms">
+        <source>Terms</source>
+        <target>Terms</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/pages/terms.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/terms.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1ec0b00d7e4a7ebd7e91c21e91a99ece12fa858a" resname="Toggle navigation">
+        <source>Toggle navigation</source>
+        <target>Toggle navigation</target>
+        <jms:reference-file line="11">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="edfd617aa53e034bf19dce690f417b00bc824fa9" resname="Two-factor authentication">
+        <source>Two-factor authentication</source>
+        <target>Two-factor authentication</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="84c29015de33e5d22422382a372caba5c58f8c01" resname="Username">
+        <source>Username</source>
+        <target>Username</target>
+        <jms:reference-file line="11">/../src/AppBundle/Resources/views/Emails/User/signup.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2c7ab350b329cfbb1942cfa52094f9852c4442a3" resname="Username or email">
+        <source>Username or email</source>
+        <target>Username or email</target>
+        <jms:reference-file line="17">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f8eb8f2f7c3c6f61a2c8d9dbcd580febee716a50" resname="Welcome to %app_name%.">
+        <source>Welcome to %app_name%.</source>
+        <target>Welcome to %app_name%.</target>
+        <jms:reference-file line="4">/../src/AppBundle/Resources/views/Content/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bdb8894a18982bc4aca31953ca7923cdfa7cde0e" resname="Your account has been blocked from logging in. The block will be released at %time%.">
+        <source>Your account has been blocked from logging in. The block will be released at %time%.</source>
+        <target>Your account has been blocked from logging in. The block will be released at %time%.</target>
+        <jms:reference-file line="306">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/AppBundle/Manager/BruteForceManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="61bb8d29b5be7db307cb29005bff087ebe300454" resname="back">
+        <source>back</source>
+        <target>back</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1f88ab91c9722ac53363e84cfb22f3a4cfbb7113" resname="emails.general.copy_paste_link_into_browser.text">
+        <source>emails.general.copy_paste_link_into_browser.text</source>
+        <target>If the link does not work, copy and paste it into your browser window.</target>
+        <jms:reference-file line="29">/../src/AppBundle/Resources/views/Emails/User/login/2fa.html.twig</jms:reference-file>
+        <jms:reference-file line="21">/../src/AppBundle/Resources/views/Emails/User/new_email.html.twig</jms:reference-file>
+        <jms:reference-file line="26">/../src/AppBundle/Resources/views/Emails/User/reset_password.html.twig</jms:reference-file>
+        <jms:reference-file line="30">/../src/AppBundle/Resources/views/Emails/User/signup.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="92ab1f0759a9f8b5ad2ad934708b7d222b60202e" resname="emails.general.greeting">
+        <source>emails.general.greeting</source>
+        <target>Hello %user_name%!</target>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/login/2fa.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/new_email.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/new_email_confirmation.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/reset_password.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/reset_password_confirmation.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/signup_confirmation.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b363c7b79812609124ba1bf612589e00f469edb8" resname="emails.user.login.tfa.text">
+        <source>emails.user.login.tfa.text</source>
+        <target>We detected a two-factor authentication login request. Please click on the link below or enter the following code to into the form: %code%. The link will expire at %expires_at%.</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/login/2fa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bd762025fa08a85a7112a6a704d0717832d97f62" resname="emails.user.new_email.click_link_below_to_confirm_new_email.text">
+        <source>emails.user.new_email.click_link_below_to_confirm_new_email.text</source>
+        <target>Please click on the link below to confirm your email address.</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/new_email.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b6f7ea9d9d76c447826d792e4e21988d18279ee0" resname="emails.user.new_email_confirmation.text">
+        <source>emails.user.new_email_confirmation.text</source>
+        <target>Your email was successfully changed!</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/new_email_confirmation.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a7caa149d42c8f32bb01625ac9084ee5cb5eb976" resname="emails.user.reset_password.click_link_below_to_reset_password.text">
+        <source>emails.user.reset_password.click_link_below_to_reset_password.text</source>
+        <target>Please click on the link below to reset your password.</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/reset_password.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e14ed18dc502bae8ce0da274195822af91397aff" resname="emails.user.reset_password_confirmation.text">
+        <source>emails.user.reset_password_confirmation.text</source>
+        <target>Your password was successfully changed!</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/reset_password_confirmation.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4d5d4f9ab440b10a92fda80fecf198cdcebf204a" resname="emails.user.signup.click_link_below_to_activate_account.text">
+        <source>emails.user.signup.click_link_below_to_activate_account.text</source>
+        <target>Please click on the link below to activate your account.</target>
+        <jms:reference-file line="14">/../src/AppBundle/Resources/views/Emails/User/signup.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="18ae8c5284c622e58f18dffd983cb4e3e5c3ea70" resname="emails.user.signup_confirmation.text">
+        <source>emails.user.signup_confirmation.text</source>
+        <target>Thank you for your registration. Have fun using %app_name%!</target>
+        <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/signup_confirmation.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6d5a377cec1ee692ae89e34217898e6296a00d82" resname="general.already_logged_in">
+        <source>general.already_logged_in</source>
+        <target>general.already_logged_in</target>
+        <jms:reference-file line="32">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="30">/../src/AppBundle/Controller/LoginController.php</jms:reference-file>
+        <jms:reference-file line="26">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="24">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3a226b0c720df7aedc885666da3b04fc6d0ef4ab" resname="general.something_went_wrong">
+        <source>general.something_went_wrong</source>
+        <target>general.something_went_wrong</target>
+        <jms:reference-file line="100">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="59">/../src/AppBundle/Service/ApifierService.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3da7669813faae9552b57532be5cc9d2156881df" resname="general.wildcard_searches.text">
+        <source>general.wildcard_searches.text</source>
+        <target>For wildcard searches use the asterisk (*), for example: info@*.com, *@gmail.com, ...</target>
+        <jms:reference-file line="31">/../src/AppBundle/Resources/views/Pagination/filtration.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a21e5e55c71cc8490e2b55c09bb81e92dd437bc6" resname="login.2fa.email.subject">
+        <source>login.2fa.email.subject</source>
+        <target>login.2fa.email.subject</target>
+        <jms:reference-file line="90">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="98bf9886653690d1220102a0020bb16643ca5a84" resname="login.tfa.code_invalid">
+        <source>login.tfa.code_invalid</source>
+        <target>login.tfa.code_invalid</target>
+        <jms:reference-file line="158">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="94b90cd6079769f1eec94b6cd4b69ac755e909a4" resname="login.tfa.invalid_method.text">
+        <source>login.tfa.invalid_method.text</source>
+        <target>Oh, something strange happened. Please select one of the methods below.</target>
+        <jms:reference-file line="21">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e58b86d8b8a6d4e3416816338c2159fb67febaf1" resname="login.tfa.method.authenticator.message.text">
+        <source>login.tfa.method.authenticator.message.text</source>
+        <target>Enter the code from your two-factor authenticator (Google Authenticator, Authy, ...) down below:</target>
+        <jms:reference-file line="2">/../src/AppBundle/Resources/views/Content/login/tfa/_method_authenticator.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="874c11a43ee95873e209b804be6be4f2f9c9748f" resname="login.tfa.method.email.message.text">
+        <source>login.tfa.method.email.message.text</source>
+        <target>Please enter the code we just sent to your email down below:</target>
+        <jms:reference-file line="2">/../src/AppBundle/Resources/views/Content/login/tfa/_method_email.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="16c573ee4ff00d4fc9d1256a099050a0b88c92ed" resname="login.tfa.method.recovery_code.message.text">
+        <source>login.tfa.method.recovery_code.message.text</source>
+        <target>Please enter one of your recovery codes below:</target>
+        <jms:reference-file line="2">/../src/AppBundle/Resources/views/Content/login/tfa/_method_recovery_code.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a61254f73fb25033235ae8f42dccd648987dbfe7" resname="login.tfa.method.sms.message.text">
+        <source>login.tfa.method.sms.message.text</source>
+        <target>Please enter the code we just sent to your SMS down below:</target>
+        <jms:reference-file line="2">/../src/AppBundle/Resources/views/Content/login/tfa/_method_sms.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8e5034fda4ef1c99b10f3c6c40e976c880f5d182" resname="login.tfa.method_unavailable">
+        <source>login.tfa.method_unavailable</source>
+        <target>This method is unavailable. Please select one down below.</target>
+        <jms:reference-file line="361">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ae4ba11cb1cc97b1d89ecd1190ee772cebad2852" resname="login.tfa.success">
+        <source>login.tfa.success</source>
+        <target>You are now successfully logged in.</target>
+        <jms:reference-file line="176">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7730d407b397dfafe3dcced6f2d931d62ad93195" resname="my.actions.no_actions_yet.text">
+        <source>my.actions.no_actions_yet.text</source>
+        <target>No actions yet.</target>
+        <jms:reference-file line="28">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1906fd12218c22c35404bf21bd46c00cbbdf3101" resname="my.login.2fa.fail.text">
+        <source>my.login.2fa.fail.text</source>
+        <target>Your login attempts failed. Please try again.</target>
+        <jms:reference-file line="384">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bfb3100e3789eebce88a3ba3055ada080ff01b18" resname="my.login.2fa.method_switch.user_action.text">
+        <source>my.login.2fa.method_switch.user_action.text</source>
+        <target>The user has switched the 2FA method.</target>
+        <jms:reference-file line="346">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2a0202823519e8ad1af92c7681a6fb4e611723f9" resname="my.password.flash_message">
+        <source>my.password.flash_message</source>
+        <target>my.password.flash_message</target>
+        <jms:reference-file line="60">/../src/AppBundle/Controller/MyController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ed04ad32d2c7115f44b7ec60496f8bd954f72be3" resname="my.password.user_action.text">
+        <source>my.password.user_action.text</source>
+        <target>my.password.user_action.text</target>
+        <jms:reference-file line="55">/../src/AppBundle/Controller/MyController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c9bf56f8382656f4a5af4643712ea1303ae460c8" resname="my.settings.email.is_activated.text">
+        <source>my.settings.email.is_activated.text</source>
+        <target>The email address was activated at %activated_at%</target>
+        <jms:reference-file line="30">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0cb04de2e12bc9826d5022846465b3883c33e0bf" resname="my.settings.email.is_not_activated_yet.text">
+        <source>my.settings.email.is_not_activated_yet.text</source>
+        <target><![CDATA[Your email address is not yet activated. Please click <a href="%resend_link%">here</a>, to activate your email address.]]></target>
+        <jms:reference-file line="41">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a805d803ee7714c416293f6d8b2ec75bd16db361" resname="my.settings.mobile.is_activated.text">
+        <source>my.settings.mobile.is_activated.text</source>
+        <target>The mobile number was activated at %activated_at%</target>
+        <jms:reference-file line="61">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9246773e15086260975c7d17eb79e303b2c71243" resname="my.settings.mobile.is_not_activated_yet.text">
+        <source>my.settings.mobile.is_not_activated_yet.text</source>
+        <target><![CDATA[Your mobile number is not yet activated. Please click <a href="%resend_link%">here</a>, to activate your email address.]]></target>
+        <jms:reference-file line="72">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2697b3cd94c4bc3d16af2be3ad3e3b3a35dea3aa" resname="my.settings.new_email.code_invalid.flash_message">
+        <source>my.settings.new_email.code_invalid.flash_message</source>
+        <target>my.settings.new_email.code_invalid.flash_message</target>
+        <jms:reference-file line="184">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="75f96b8de93d471ca1abc3d0f38e920acb86423b" resname="my.settings.new_email.email.subject">
+        <source>my.settings.new_email.email.subject</source>
+        <target>my.settings.new_email.email.subject</target>
+        <jms:reference-file line="150">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7f39fcc70583a452d8195418e674465fd1c36c40" resname="my.settings.new_email.flash_message">
+        <source>my.settings.new_email.flash_message</source>
+        <target>my.settings.new_email.flash_message</target>
+        <jms:reference-file line="177">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b001c9a460083c54d0aff0ace505e3a44fb50a9c" resname="my.settings.new_email.request.text">
+        <source>my.settings.new_email.request.text</source>
+        <target>We have sent you a confirmation email to the new email address (%email%). Please click the link inside to confirm it.</target>
+        <jms:reference-file line="50">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="685f0b078ea2d0026716ef931b9b5714e6558aa8" resname="my.settings.new_email.user_action.text">
+        <source>my.settings.new_email.user_action.text</source>
+        <target>my.settings.new_email.user_action.text</target>
+        <jms:reference-file line="166">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c266d676d968cb3a88708a8f9de2fb3878078598" resname="my.settings.new_email_request.email.subject">
+        <source>my.settings.new_email_request.email.subject</source>
+        <target>my.settings.new_email_request.email.subject</target>
+        <jms:reference-file line="64">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d7cc9af6b81825a691f0e481e6a21ceaeea9c593" resname="my.settings.new_email_request.flash_message">
+        <source>my.settings.new_email_request.flash_message</source>
+        <target>my.settings.new_email_request.flash_message</target>
+        <jms:reference-file line="80">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6db1b2c12084d807caf82fa4cb269a5dbf6abcb4" resname="my.settings.new_email_request.user_action.text">
+        <source>my.settings.new_email_request.user_action.text</source>
+        <target>my.settings.new_email_request.user_action.text</target>
+        <jms:reference-file line="53">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="37fdb8c1e24026694172700324eda7d2b87d4b3a" resname="my.settings.new_mobile.request.text">
+        <source>my.settings.new_mobile.request.text</source>
+        <target>We have sent you a confirmation sms to the new mobile number (%mobile%). Please enter the code we sent you to the new number below:</target>
+        <jms:reference-file line="81">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6a1ba9677b6aa4bdaf153f09250260183fe22c72" resname="my.settings.save.flash_message">
+        <source>my.settings.save.flash_message</source>
+        <target>my.settings.save.flash_message</target>
+        <jms:reference-file line="102">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d13562d3f339486ef84b801171f5776bea9d4c5c" resname="my.settings.user_action.text">
+        <source>my.settings.user_action.text</source>
+        <target>my.settings.user_action.text</target>
+        <jms:reference-file line="91">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="42">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e22cfdb333b5d82b6ce17ebfce1f2200ac09ac5b" resname="my.tfa.authenticator.already_activated.text">
+        <source>my.tfa.authenticator.already_activated.text</source>
+        <target>You have already activated your authenticator.</target>
+        <jms:reference-file line="18">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="61be2e1ecd119b1ee6de4be291f47f6a51da8979" resname="my.tfa.authenticator.invalid_code">
+        <source>my.tfa.authenticator.invalid_code</source>
+        <target>my.tfa.authenticator.invalid_code</target>
+        <jms:reference-file line="54">/../src/AppBundle/Controller/My/TwoFactorAuthentication/AuthenticatorController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e00f06b80b443e053595323c8705aa745fab64d8" resname="my.tfa.authenticator.not_yet_activated.text">
+        <source>my.tfa.authenticator.not_yet_activated.text</source>
+        <target>In order to use the authenticator, you will need to activate it first.</target>
+        <jms:reference-file line="20">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="93f6c2e9aebbcbb77c571e2c7f112637a880687e" resname="my.tfa.authenticator.success">
+        <source>my.tfa.authenticator.success</source>
+        <target>my.tfa.authenticator.success</target>
+        <jms:reference-file line="64">/../src/AppBundle/Controller/My/TwoFactorAuthentication/AuthenticatorController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8f4e52c307b1734e735417afbea37ed08abe3f5a" resname="my.tfa.recovery_codes.message.text">
+        <source>my.tfa.recovery_codes.message.text</source>
+        <target>If you happen to lose the access to your authenticator or email, you can still get access via the recovery codes, so keep them somewhere safe!</target>
+        <jms:reference-file line="29">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aeeb4bf85db7392d93c7e77839db0c4f24e764fc" resname="my.tfa.recovery_codes.no_recovery_codes_yet.text">
+        <source>my.tfa.recovery_codes.no_recovery_codes_yet.text</source>
+        <target>No recovery codes yet</target>
+        <jms:reference-file line="35">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6eb08256985c4ca9503c13bab97d3f1d6d619a9e" resname="my.tfa.save.flash_message">
+        <source>my.tfa.save.flash_message</source>
+        <target>my.tfa.save.flash_message</target>
+        <jms:reference-file line="51">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3e709e0980e50dc169e9fee99ad31e68c2f405bb" resname="reset_password.code_expired">
+        <source>reset_password.code_expired</source>
+        <target>reset_password.code_expired</target>
+        <jms:reference-file line="128">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="57c13d404607872db516f47433155f69b3a13f48" resname="reset_password.code_not_found">
+        <source>reset_password.code_not_found</source>
+        <target>reset_password.code_not_found</target>
+        <jms:reference-file line="142">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="13e4539d842e249fd92d7ca9101113f1d680daae" resname="reset_password.email.subject">
+        <source>reset_password.email.subject</source>
+        <target>reset_password.email.subject</target>
+        <jms:reference-file line="114">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a0e715d53639186117546f16364732c743b00317" resname="reset_password.request.already_requested">
+        <source>reset_password.request.already_requested</source>
+        <target>reset_password.request.already_requested</target>
+        <jms:reference-file line="90">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4b288c512dca5fe7cc1864a57e4bd6bba29257b4" resname="reset_password.request.email.subject">
+        <source>reset_password.request.email.subject</source>
+        <target>reset_password.request.email.subject</target>
+        <jms:reference-file line="158">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9aec95e47dd523f685d2377532598577b81ad088" resname="reset_password.request.email_not_found">
+        <source>reset_password.request.email_not_found</source>
+        <target>reset_password.request.email_not_found</target>
+        <jms:reference-file line="105">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1377c1522693638cf601afadd3f2141b26ba5c0d" resname="reset_password.request.success">
+        <source>reset_password.request.success</source>
+        <target>reset_password.request.success</target>
+        <jms:reference-file line="97">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5135a85afdf1c78210e31ff768dfeaf562aa65e1" resname="reset_password.request.user_action.text">
+        <source>reset_password.request.user_action.text</source>
+        <target>reset_password.request.user_action.text</target>
+        <jms:reference-file line="151">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9231aa8e4dc5aa4fe692ec12a5b03dbbf336c377" resname="reset_password.success">
+        <source>reset_password.success</source>
+        <target>reset_password.success</target>
+        <jms:reference-file line="137">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1d9342b334eb3ac30901ea5cb78914d5196dd56a" resname="reset_password.user_action.text">
+        <source>reset_password.user_action.text</source>
+        <target>reset_password.user_action.text</target>
+        <jms:reference-file line="107">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="72926bdae554980f4d1d8f8e8798531c1131911a" resname="signup.confirmation.code_not_found">
+        <source>signup.confirmation.code_not_found</source>
+        <target>signup.confirmation.code_not_found</target>
+        <jms:reference-file line="80">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7405692bc9daaa0e715e5af0c035fb8b213b605e" resname="signup.confirmation.email.subject">
+        <source>signup.confirmation.email.subject</source>
+        <target>signup.confirmation.email.subject</target>
+        <jms:reference-file line="68">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="dd92a30ff037bbbafd49856f3b1c0d1d805d2f1b" resname="signup.confirmation.success">
+        <source>signup.confirmation.success</source>
+        <target>signup.confirmation.success</target>
+        <jms:reference-file line="77">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3c97f7d5ecd0f4e669accc4676339b890f293bfb" resname="signup.email.subject">
+        <source>signup.email.subject</source>
+        <target>signup.email.subject</target>
+        <jms:reference-file line="32">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="685d5ccc8a2d98841eabbe7bd6a8ddf53bb8bc5d" resname="signup.success">
+        <source>signup.success</source>
+        <target>signup.success</target>
+        <jms:reference-file line="93">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5d43772e4a0259851a2c17ff3e7a0c0f5ec04e9e" resname="signup.terms_text">
+        <source>signup.terms_text</source>
+        <target>signup.terms_text</target>
+        <jms:reference-file line="40">/../src/AppBundle/Form/Type/SignupType.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

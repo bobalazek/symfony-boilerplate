@@ -77,6 +77,12 @@
   * Other stuff: `sudo apt-get install zip unzip wget curl`
 
 
+## Translations
+
+* Generate translations: `php bin/console translation:extract en_US --dir=./src/AppBundle --output-dir=./app/Resources/AppBundle/translations` (or alternatively: `php bin/console translation:update en_US AppBundle --force` if you only want to generate translations from twig files)
+* View translations from twig files: `php bin/console debug:translation en_US AppBundle`
+
+
 ## Commands
 
 * Coding Standard fixes: `gulp csfix`

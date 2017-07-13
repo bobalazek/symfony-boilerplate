@@ -38,7 +38,7 @@ class BruteForceManager
         if ($userLoginBlock) {
             throw new BruteForceAttemptException(
                 $this->container->get('translator')->trans(
-                    'Your account has been blocked from logging it. The block will be released at %time%',
+                    'Your account has been blocked from logging in. The block will be released at %time%.',
                     [
                         '%time%' => $userLoginBlock->getExpiresAt()->format($dateTimeFormat),
                     ]

@@ -28,9 +28,10 @@ class ApifierService
         $errorsWithPaths = [];
 
         foreach ($errors as $error) {
-            $errorsWithPaths[$error->getPropertyPath()] = $this->container->get('translator')->trans(
-                $error->getMessage()
-            );
+            /** @Ignore */
+            $translation = $this->container->get('translator')
+                ->trans($error->getMessage());
+            $errorsWithPaths[$error->getPropertyPath()] = $translation;
         }
 
         return [
