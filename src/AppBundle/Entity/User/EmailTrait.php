@@ -49,9 +49,9 @@ trait EmailTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="activation_code", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="email_activation_code", type="string", length=255, nullable=true, unique=true)
      */
-    protected $activationCode;
+    protected $emailActivationCode;
 
     /**
      * When the email was activated at?
@@ -144,24 +144,24 @@ trait EmailTrait
         return $this;
     }
 
-    /*** Activation code ***/
+    /*** Email activation code ***/
 
     /**
      * @return string
      */
-    public function getActivationCode()
+    public function getEmailActivationCode()
     {
-        return $this->activationCode;
+        return $this->emailActivationCode;
     }
 
     /**
-     * @param $activationCode
+     * @param $emailActivationCode
      *
      * @return User
      */
-    public function setActivationCode($activationCode)
+    public function setEmailActivationCode($emailActivationCode)
     {
-        $this->activationCode = $activationCode;
+        $this->emailActivationCode = $emailActivationCode;
 
         return $this;
     }
@@ -186,6 +186,14 @@ trait EmailTrait
         $this->emailActivatedAt = $emailActivatedAt;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmailActivated()
+    {
+        return $this->getEmailActivatedAt() !== null;
     }
 
     /*** Reset password code ***/

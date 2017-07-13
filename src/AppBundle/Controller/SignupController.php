@@ -67,7 +67,7 @@ class SignupController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $em
             ->getRepository('AppBundle:User')
-            ->findOneByActivationCode($code)
+            ->findOneByEmailActivationCode($code)
         ;
 
         if ($user) {

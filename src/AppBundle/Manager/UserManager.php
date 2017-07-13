@@ -54,7 +54,7 @@ class UserManager
         $em = $this->container->get('doctrine.orm.entity_manager');
 
         $user
-            ->setActivationCode(null)
+            ->setEmailActivationCode(null)
             ->setEmailActivatedAt(new \DateTime())
             ->enable()
             ->verifyEmail()

@@ -73,8 +73,6 @@ class UserAdmin extends AbstractAdmin
                 ->add('warnedReason')
                 ->add('locked')
                 ->add('lockedReason')
-                ->add('emailVerified')
-                ->add('mobileVerified')
             ->end()
         ;
     }
@@ -188,8 +186,6 @@ class UserAdmin extends AbstractAdmin
                 ->add('locked')
                 ->add('lockedReason')
                 ->add('newsletter')
-                ->add('emailVerified')
-                ->add('mobileVerified')
             ->end()
             ->with('Actions')
                 ->add('userActions', 'html_template', [

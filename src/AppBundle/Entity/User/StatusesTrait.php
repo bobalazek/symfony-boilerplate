@@ -59,6 +59,14 @@ trait StatusesTrait
     protected $newsletter = false;
 
     /**
+     * @var bool
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="verified", type="boolean")
+     */
+    protected $verified = false;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="last_active_at", type="datetime", nullable=true)
@@ -279,6 +287,48 @@ trait StatusesTrait
     public function setNewsletter($newsletter)
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /*** Verified ***/
+
+    /**
+     * @return bool
+     */
+    public function isVerified()
+    {
+        return $this->verified;
+    }
+
+    /**
+     * @param $verified
+     *
+     * @return User
+     */
+    public function setVerified($verified)
+    {
+        $this->verified = $verified;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function verify()
+    {
+        $this->setVerified(true);
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function unverify()
+    {
+        $this->setVerified(false);
 
         return $this;
     }

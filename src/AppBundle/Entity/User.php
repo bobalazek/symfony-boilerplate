@@ -39,7 +39,6 @@ class User implements AdvancedUserInterface, \Serializable
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable,
-        User\VerifiedTrait,
         User\StatusesTrait,
         User\TwoFactorAuthenticationTrait,
         User\RolesTrait,
@@ -156,7 +155,7 @@ class User implements AdvancedUserInterface, \Serializable
             md5(uniqid(null, true))
         );
 
-        $this->setActivationCode(
+        $this->setEmailActivationCode(
             md5(uniqid(null, true))
         );
 
@@ -619,8 +618,6 @@ class User implements AdvancedUserInterface, \Serializable
             'warned_reason' => $this->getWarnedReason(),
             'is_locked' => $this->isLocked(),
             'locked_reason' => $this->getLockedReason(),
-            'is_email_verified' => $this->isEmailVerified(),
-            'is_mobile_verified' => $this->isMobileVerified(),
             'is_super_admin' => $this->isSuperAdmin(),
             'is_admin' => $this->isAdmin(),
             'profile' => $this->getProfile()->toArray(),
