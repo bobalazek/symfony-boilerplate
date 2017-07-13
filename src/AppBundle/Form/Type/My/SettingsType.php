@@ -30,8 +30,8 @@ class SettingsType extends AbstractType
                 'validation_groups' => ['my.settings'],
             ])
             ->add('username', TextType::class)
-            ->add('email', EmailType::class)
             ->add('locale', LocaleType::class)
+            ->add('email', EmailType::class)
             ->add('mobile', PhoneNumberType::class, [
                 'required' => false,
                 'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,

@@ -18,18 +18,74 @@
             <div class="col-md-6">
                 <h3>{{ 'Account' | trans }}</h3>
                 {{ form_row(form.username) }}
-                {{ form_row(form.email) }}
+                {{ form_row(form.locale) }}
+            </div>
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{ 'Email' | trans }}</h3>
+                <div class="form-group">
+                    {% if app.user.isEmailActivated() %}
+                        <i class="fa fa-check-circle-o"
+                            title="{{ 'my.settings.email.was_activated.text' | trans({
+                                '%activated_at%': app.user.getEmailActivatedAt() | date(globals.date_time_format)
+                            }) }}"
+                        ></i>
+                    {% endif %}
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                {% if app.user.isEmailActivated() == false %}
+                    <div class="alert alert-info">
+                        {{ 'my.settings.email.not_activated_yet.text' | trans({
+                            '%resend_link%': url('my.settings', {
+                                action: 'resend_activation_email',
+                            })
+                        }) }}
+                    </div>
+                {% endif %}
                 {% if app.user.getNewEmail() %}
                     <div class="alert alert-info">
-                        {{ 'my.settings.new_email_request.form_text' | trans({
+                        {{ 'my.settings.new_email.request.text' | trans({
                             '%email%': app.user.getNewEmail(),
                         }) }}
                     </div>
                 {% endif %}
-                {{ form_row(form.locale) }}
-                {{ form_row(form.mobile) }}
             </div>
-        </div>
+            <div class="col-md-6">
+                <h3>{{ 'Mobile' | trans }}</h3>
+                <div class="form-group">
+                    {% if app.user.isMobileActivated() %}
+                        <i class="fa fa-check-circle-o"
+                            title="{{ 'my.settings.mobile.was_activated.text' | trans({
+                                '%activated_at%': app.user.getMobileActivatedAt() | date(globals.date_time_format)
+                            }) }}"
+                        ></i>
+                    {% endif %}
+                    {{ form_label(form.mobile) }}
+                    {{ form_widget(form.mobile) }}
+                    {{ form_errors(form.mobile) }}
+                </div>
+                {% if app.user.isMobileActivated() == false %}
+                    <div class="alert alert-warning">
+                        {{ 'my.settings.mobile.not_activated_yet.text' | trans({
+                            '%resend_link%': url('my.settings', {
+                                action: 'resend_activation_mobile',
+                            })
+                        }) }}
+                        {# TODO: resend activation link? #}
+                    </div>
+                {% endif %}
+                {% if app.user.getNewMobile() %}
+                    <div class="alert alert-info">
+                        {{ 'my.settings.new_mobile.request.text' | trans({
+                            '%mobile%': app.user.getNewMobile(),
+                        }) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div> <!-- /.row -->
         <button type="submit"
             class="btn btn-primary btn-lg btn-block" />
             {{ 'Save' | trans }}
