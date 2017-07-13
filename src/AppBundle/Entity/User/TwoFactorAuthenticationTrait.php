@@ -32,12 +32,20 @@ trait TwoFactorAuthenticationTrait
             unset($availableMethods['email']);
         }
 
+        // SMS
+        $isTFASmsEnabled = $this->isTFASmsEnabled();
+        if (!$isTFASmsEnabled) {
+            unset($availableMethods['sms']);
+        }
+
         // Authenticator
         $isTFAAuthenticatorEnabled = $this->isTFAAuthenticatorEnabled();
         $isTFAAuthenticatorActivated = $this->isTFAAuthenticatorActivated();
+        $tfaAuthenticatorSecret = $this->getTFAAuthenticatorSecret();
         if (
             !$isTFAAuthenticatorEnabled ||
-            !$isTFAAuthenticatorActivated
+            !$isTFAAuthenticatorActivated ||
+            empty($tfaAuthenticatorSecret)
         ) {
             unset($availableMethods['authenticator']);
         }
@@ -74,6 +82,14 @@ trait TwoFactorAuthenticationTrait
      * @ORM\Column(name="tfa_email_enabled", type="boolean")
      */
     protected $tfaEmailEnabled = false;
+
+    /**
+     * @var bool
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="tfa_sms_enabled", type="boolean")
+     */
+    protected $tfaSmsEnabled = false;
 
     /**
      * @var bool
@@ -200,6 +216,48 @@ trait TwoFactorAuthenticationTrait
     public function disableTFAEmail()
     {
         $this->setTFAEmailEnabled(false);
+
+        return $this;
+    }
+
+    /*** TFA SMS enabled ***/
+
+    /**
+     * @return bool
+     */
+    public function isTFASmsEnabled()
+    {
+        return $this->tfaSmsEnabled;
+    }
+
+    /**
+     * @param $tfaSmsEnabled
+     *
+     * @return User
+     */
+    public function setTFASmsEnabled($tfaSmsEnabled)
+    {
+        $this->tfaSmsEnabled = $tfaSmsEnabled;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function enableTFASms()
+    {
+        $this->setTFASmsEnabled(true);
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function disableTFASms()
+    {
+        $this->setTFASmsEnabled(false);
 
         return $this;
     }

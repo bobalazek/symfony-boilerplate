@@ -58,6 +58,13 @@ trait StatusesTrait
      */
     protected $newsletter = false;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_active_at", type="datetime", nullable=true)
+     */
+    protected $lastActiveAt;
+
     /*** Enabled ***/
 
     /**
@@ -272,6 +279,28 @@ trait StatusesTrait
     public function setNewsletter($newsletter)
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /*** Last active at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastActiveAt()
+    {
+        return $this->lastActiveAt;
+    }
+
+    /**
+     * @param \DateTime $lastActiveAt
+     *
+     * @return User
+     */
+    public function setLastActiveAt(\DateTime $lastActiveAt = null)
+    {
+        $this->lastActiveAt = $lastActiveAt;
 
         return $this;
     }

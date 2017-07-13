@@ -55,7 +55,7 @@ class UserManager
 
         $user
             ->setActivationCode(null)
-            ->setActivatedAt(new \DateTime())
+            ->setEmailActivatedAt(new \DateTime())
             ->enable()
             ->verifyEmail()
         ;

@@ -39,6 +39,45 @@ trait EmailTrait
      */
     protected $newEmail;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="new_email_code", type="string", length=255, nullable=true, unique=true)
+     */
+    protected $newEmailCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="activation_code", type="string", length=255, nullable=true, unique=true)
+     */
+    protected $activationCode;
+
+    /**
+     * When the email was activated at?
+     *
+     * @var \DateTime
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="email_activated_at", type="datetime", nullable=true)
+     */
+    protected $emailActivatedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reset_password_code", type="string", length=255, nullable=true, unique=true)
+     */
+    protected $resetPasswordCode;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="reset_password_code_expires_at", type="datetime", nullable=true)
+     */
+    protected $resetPasswordCodeExpiresAt;
+
     /*** Email ***/
 
     /**
@@ -79,6 +118,116 @@ trait EmailTrait
     public function setNewEmail($newEmail)
     {
         $this->newEmail = $newEmail;
+
+        return $this;
+    }
+
+    /*** New email code ***/
+
+    /**
+     * @return string
+     */
+    public function getNewEmailCode()
+    {
+        return $this->newEmailCode;
+    }
+
+    /**
+     * @param $newEmailCode
+     *
+     * @return User
+     */
+    public function setNewEmailCode($newEmailCode)
+    {
+        $this->newEmailCode = $newEmailCode;
+
+        return $this;
+    }
+
+    /*** Activation code ***/
+
+    /**
+     * @return string
+     */
+    public function getActivationCode()
+    {
+        return $this->activationCode;
+    }
+
+    /**
+     * @param $activationCode
+     *
+     * @return User
+     */
+    public function setActivationCode($activationCode)
+    {
+        $this->activationCode = $activationCode;
+
+        return $this;
+    }
+
+    /*** Email activated at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getEmailActivatedAt()
+    {
+        return $this->emailActivatedAt;
+    }
+
+    /**
+     * @param \DateTime $emailActivatedAt
+     *
+     * @return User
+     */
+    public function setEmailActivatedAt(\DateTime $emailActivatedAt = null)
+    {
+        $this->emailActivatedAt = $emailActivatedAt;
+
+        return $this;
+    }
+
+    /*** Reset password code ***/
+
+    /**
+     * @return string
+     */
+    public function getResetPasswordCode()
+    {
+        return $this->resetPasswordCode;
+    }
+
+    /**
+     * @param $resetPasswordCode
+     *
+     * @return User
+     */
+    public function setResetPasswordCode($resetPasswordCode)
+    {
+        $this->resetPasswordCode = $resetPasswordCode;
+
+        return $this;
+    }
+
+    /*** Reset Password Code Expires at ***/
+
+    /**
+     * @return \DateTime
+     */
+    public function getResetPasswordCodeExpiresAt()
+    {
+        return $this->resetPasswordCodeExpiresAt;
+    }
+
+    /**
+     * @param \DateTime $resetPasswordCodeExpiresAt
+     *
+     * @return User
+     */
+    public function setResetPasswordCodeExpiresAt(\DateTime $resetPasswordCodeExpiresAt = null)
+    {
+        $this->resetPasswordCodeExpiresAt = $resetPasswordCodeExpiresAt;
 
         return $this;
     }
