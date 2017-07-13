@@ -4,10 +4,10 @@
     <table class="row note">
         <tr>
             <td class="wrapper last">
-                <h4>{{ 'Hello %user_name%!' | trans({
+                <h4>{{ 'emails.general.greeting' | trans({
                     '%user_name%': user.getName(),
                 }) }}</h4>
-                <p>{{ 'We detected a two-factor authentication login request. Please click on the link below or enter the following code to into the form: %code%. The link will expire at %expires_at%.' | trans({
+                <p>{{ 'emails.user.login.tfa.text' | trans({
                     '%code%': '<b>' ~ user_login_code.getCode() ~ '</b>',
                     '%expires_at%': '<b>' ~ user_login_code.getExpiresAt() | date(globals.date_time_format) ~ '</b>',
                 }) | raw }}</p>
@@ -26,7 +26,7 @@
                         <td class="expander"></td>
                     </tr>
                 </table>
-                <p>{{ 'If the link does not work, copy and paste it into your browser window.' | trans }}</p>
+                <p>{{ 'emails.general.copy_paste_link_into_browser.text' | trans }}</p>
             </td>
         </tr>
     </table>
