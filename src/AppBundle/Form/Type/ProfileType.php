@@ -20,12 +20,21 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TitleType::class)
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('gender', GenderType::class)
+            ->add('title', TitleType::class, [
+                'label' => 'Title',
+            ])
+            ->add('firstName', TextType::class, [
+                'label' => 'First name',
+            ])
+            ->add('lastName', TextType::class, [
+                'label' => 'Last name',
+            ])
+            ->add('gender', GenderType::class, [
+                'label' => 'Gender',
+            ])
             ->add('birthday', BirthdayType::class, [
                 'required' => false,
+                'label' => 'Birthday',
                 'years' => range(
                     date('Y'),
                     date('Y') - 120

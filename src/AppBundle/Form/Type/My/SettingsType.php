@@ -29,11 +29,18 @@ class SettingsType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Profile',
                 'validation_groups' => ['my.settings'],
             ])
-            ->add('username', TextType::class)
-            ->add('locale', LocaleType::class)
-            ->add('email', EmailType::class)
+            ->add('username', TextType::class, [
+                'label' => 'Username',
+            ])
+            ->add('locale', LocaleType::class, [
+                'label' => 'Locale',
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+            ])
             ->add('mobile', PhoneNumberType::class, [
                 'required' => false,
+                'label' => 'Mobile',
                 'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
                 'preferred_country_choices' => ['DE', 'AT', 'CH'],
             ])

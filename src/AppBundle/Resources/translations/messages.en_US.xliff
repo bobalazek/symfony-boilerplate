@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-13T22:37:39Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-13T22:57:08Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -50,6 +50,11 @@
         <target>Back to admin</target>
         <jms:reference-file line="45">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="a6b9d69f57d94a826930e45360e373533bfd130d" resname="Birthday">
+        <source>Birthday</source>
+        <target>Birthday</target>
+        <jms:reference-file line="37">/../src/AppBundle/Form/Type/ProfileType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="adac69379a626c2436948a4ef1792c7d719ef929" resname="Code">
         <source>Code</source>
         <target>Code</target>
@@ -69,7 +74,7 @@
       <trans-unit id="be35340599bb31d522ed409e731f2ead77c06339" resname="Default method">
         <source>Default method</source>
         <target>Default method</target>
-        <jms:reference-file line="31">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="28">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c4a2e80cc873135b3d277a22b6e85110c509731" resname="Disclaimer">
         <source>Disclaimer</source>
@@ -81,6 +86,7 @@
       <trans-unit id="84add5b2952787581cb9a8851eef63d1ec75d22b" resname="Email">
         <source>Email</source>
         <target>Email</target>
+        <jms:reference-file line="39">/../src/AppBundle/Form/Type/My/SettingsType.php</jms:reference-file>
         <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_email.html.twig</jms:reference-file>
         <jms:reference-file line="26">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
         <jms:reference-file line="18">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
@@ -88,17 +94,27 @@
       <trans-unit id="40e8787de5dcd48dedbc847de4fa8d4877e84c25" resname="Enable authenticator">
         <source>Enable authenticator</source>
         <target>Enable authenticator</target>
-        <jms:reference-file line="45">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="36">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ec0ae6116dd1c5180f9f2ae12a8183ccdefae184" resname="Enable email authentication">
         <source>Enable email authentication</source>
         <target>Enable email authentication</target>
-        <jms:reference-file line="38">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="32">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="df174a3f2faa31814e06540acda7af8825403fac" resname="Enabled">
         <source>Enabled</source>
         <target>Enabled</target>
         <jms:reference-file line="25">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7e568a90221d853052b3466e581eb5f7c030b901" resname="First name">
+        <source>First name</source>
+        <target>First name</target>
+        <jms:reference-file line="27">/../src/AppBundle/Form/Type/ProfileType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8a754c61c2ced0c5ff79a1827e02c9d643d6d926" resname="Gender">
+        <source>Gender</source>
+        <target>Gender</target>
+        <jms:reference-file line="33">/../src/AppBundle/Form/Type/ProfileType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c47ae15370cfe1ed2781eedc1dc2547d12d9e972" resname="Help">
         <source>Help</source>
@@ -118,6 +134,16 @@
         <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/imprint.html.twig</jms:reference-file>
         <jms:reference-file line="16">/../src/AppBundle/Resources/views/Layouts/default/_footer.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="adec36a821f81a6990b1e65d9e4ac5fb8ee2a205" resname="Last name">
+        <source>Last name</source>
+        <target>Last name</target>
+        <jms:reference-file line="30">/../src/AppBundle/Form/Type/ProfileType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8970f0e691a0a23a47517698017c997507efd496" resname="Locale">
+        <source>Locale</source>
+        <target>Locale</target>
+        <jms:reference-file line="36">/../src/AppBundle/Form/Type/My/SettingsType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="4e5a2893bdcc7d239c1db72e4c4ffbe4bea73174" resname="Login">
         <source>Login</source>
         <target>Login</target>
@@ -136,6 +162,7 @@
       <trans-unit id="b1d702459399a2512fba5a402d4d5f26aee34693" resname="Mobile">
         <source>Mobile</source>
         <target>Mobile</target>
+        <jms:reference-file line="43">/../src/AppBundle/Form/Type/My/SettingsType.php</jms:reference-file>
         <jms:reference-file line="57">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4bf8c70526a411e6204aab4fb43243af3c0bacb5" resname="My Actions">
@@ -278,6 +305,11 @@
         <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/pages/terms.html.twig</jms:reference-file>
         <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/pages/terms.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="768e0c1c69573fb588f61f1308a015c11468e05f" resname="Title">
+        <source>Title</source>
+        <target>Title</target>
+        <jms:reference-file line="24">/../src/AppBundle/Form/Type/ProfileType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="1ec0b00d7e4a7ebd7e91c21e91a99ece12fa858a" resname="Toggle navigation">
         <source>Toggle navigation</source>
         <target>Toggle navigation</target>
@@ -292,6 +324,7 @@
       <trans-unit id="84c29015de33e5d22422382a372caba5c58f8c01" resname="Username">
         <source>Username</source>
         <target>Username</target>
+        <jms:reference-file line="33">/../src/AppBundle/Form/Type/My/SettingsType.php</jms:reference-file>
         <jms:reference-file line="11">/../src/AppBundle/Resources/views/Emails/User/signup.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2c7ab350b329cfbb1942cfa52094f9852c4442a3" resname="Username or email">
