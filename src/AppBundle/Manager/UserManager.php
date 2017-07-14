@@ -15,13 +15,12 @@ class UserManager
     /**
      * @param User   $user
      * @param string $route To which route should the user be redirected?
+     * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
-    public function signupRequest(User $user, $route = 'signup')
+    public function signupRequest(User $user, $route = 'signup', $persist = true)
     {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-
         $user
             ->setEmailActivationCode(
                 md5(uniqid(null, true))
@@ -32,8 +31,11 @@ class UserManager
             )
         ;
 
-        $em->persist($user);
-        $em->flush();
+        if ($persist) {
+            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em->persist($user);
+            $em->flush();
+        }
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
@@ -57,10 +59,11 @@ class UserManager
 
     /**
      * @param User $user
+     * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
-    public function signupConfirmation(User $user)
+    public function signupConfirmation(User $user, $persist = true)
     {
         $user
             ->setEmailActivationCode(null)
@@ -68,9 +71,11 @@ class UserManager
             ->enable()
         ;
 
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $em->persist($user);
-        $em->flush();
+        if ($persist) {
+            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em->persist($user);
+            $em->flush();
+        }
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
@@ -94,10 +99,11 @@ class UserManager
     /**
      * @param User   $user
      * @param string $plainPassword
+     * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
-    public function resetPasswordConfirmation(User $user, $plainPassword)
+    public function resetPasswordConfirmation(User $user, $plainPassword, $persist = true)
     {
         $user
             ->setResetPasswordCode(null)
@@ -108,9 +114,11 @@ class UserManager
             )
         ;
 
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $em->persist($user);
-        $em->flush();
+        if ($persist) {
+            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em->persist($user);
+            $em->flush();
+        }
 
         $this->get('app.user_action_manager')->add(
             'user.reset_password.confirmation',
@@ -142,10 +150,11 @@ class UserManager
 
     /**
      * @param User $user
+     * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
-    public function resetPasswordRequest(User $user)
+    public function resetPasswordRequest(User $user, $persist = true)
     {
         $user
             ->setResetPasswordCode(md5(uniqid(null, true)))
@@ -155,9 +164,11 @@ class UserManager
             ))
         ;
 
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $em->persist($user);
-        $em->flush();
+        if ($persist) {
+            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em->persist($user);
+            $em->flush();
+        }
 
         $this->container->get('app.user_action_manager')->add(
             'user.reset_password.request',
