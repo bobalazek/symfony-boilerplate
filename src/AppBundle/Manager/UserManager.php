@@ -14,8 +14,8 @@ class UserManager
 
     /**
      * @param User   $user
-     * @param string $route To which route should the user be redirected?
-     * @param bool $persist Should the changes to the user entity be persisted to the database?
+     * @param string $route   To which route should the user be redirected?
+     * @param bool   $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
@@ -99,7 +99,7 @@ class UserManager
     /**
      * @param User   $user
      * @param string $plainPassword
-     * @param bool $persist Should the changes to the user entity be persisted to the database?
+     * @param bool   $persist       Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
