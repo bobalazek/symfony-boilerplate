@@ -1,5 +1,10 @@
 {% extends 'AppBundle:Layouts:email.html.twig' %}
 
+{% set activation_url = url(route, {
+    id: user.getId(),
+    email_activation_code: user.getEmailActivationCode(),
+}) %}
+
 {% block main %}
     <table class="row note">
         <tr>
@@ -7,17 +12,17 @@
                 <h4>{{ 'emails.general.greeting' | trans({
                     '%user_name%': user.getName(),
                 }) }}</h4>
-                <p>{{ 'emails.user.reset_password.click_link_below_to_reset_password.text' | trans }}</p>
+                <p>
+                     <b>{{ 'Username' | trans }}:</b>
+                     {{ user.getUsername() }}
+                </p>
+                <p>{{ 'emails.user.signup.request.click_link_below_to_activate_account.text' | trans }}</p>
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
-                            <a href="{{ url('reset_password', {
-                                code: user.getResetPasswordCode(),
-                            }) }}"
+                            <a href="{{ activation_url }}"
                                 target="_blank">
-                                {{ url('reset_password', {
-                                    code: user.getResetPasswordCode(),
-                                }) }}
+                                {{ activation_url }}
                             </a>
                         </td>
                         <td class="expander"></td>

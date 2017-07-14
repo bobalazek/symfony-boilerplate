@@ -33,7 +33,7 @@ class SignupController extends Controller
         $id = $request->query->get('id');
         $emailActivationCode = $request->query->get('email_activation_code');
 
-        $isSignupConfirmation = !empty($id) && !empty($emailActivationCode);
+        $isConfirmation = !empty($id) && !empty($emailActivationCode);
         $alert = false;
         $alertMessage = '';
 
@@ -47,7 +47,7 @@ class SignupController extends Controller
             $user
         );
 
-        if ($isSignupConfirmation) {
+        if ($isConfirmation) {
             $this->handleSignupConfirmation(
                 $id,
                 $emailActivationCode,
@@ -55,7 +55,7 @@ class SignupController extends Controller
                 $alertMessage
             );
         } else {
-            $this->handleSignup(
+            $this->handleSignupRequest(
                 $form,
                 $request,
                 $alert,
@@ -110,17 +110,17 @@ class SignupController extends Controller
      * @param string      $alert
      * @param string      $alertMessage
      */
-    protected function handleSignup(FormBuilder &$form, Request $request, &$alert, &$alertMessage)
+    protected function handleSignupRequest(FormBuilder &$form, Request $request, &$alert, &$alertMessage)
     {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $this->get('app.user_manager')->signup($user);
+            $this->get('app.user_manager')->signupRequest($user);
 
             $alert = 'success';
             $alertMessage = $this->get('translator')->trans(
-                'signup.success.text'
+                'signup.request.success.text'
             );
         }
     }

@@ -50,38 +50,13 @@ class SettingsController extends Controller
             $user = $form->getData();
 
             if ($userOld->getEmail() !== $user->getEmail()) {
-                $user
-                    ->setNewEmailCode(md5(uniqid(null, true)))
-                    ->setNewEmail($user->getEmail())
-                    ->setEmail($userOld->getEmail())
-                ;
-
-                $this->get('app.user_action_manager')->add(
-                    'user.settings.email.change.request',
-                    $this->get('translator')->trans(
-                        'my.settings.new_email.user_action.text'
-                    ),
-                    [
-                        'current' => $user->getEmail(),
-                        'new' => $user->getNewEmail(),
-                    ]
+                // Because the form has already changed that value, we need to set it back to original
+                $user->setEmail(
+                    $userOld->getEmail()
                 );
 
-                $this->get('app.mailer')
-                    ->swiftMessageInitializeAndSend([
-                        'subject' => $this->get('translator')->trans(
-                            'emails.user.new_email.subject',
-                            [
-                                '%app_name%' => $this->getParameter('app_name'),
-                            ]
-                        ),
-                        'to' => [$user->getNewEmail() => $user->getName()],
-                        'body' => 'AppBundle:Emails:User/new_email.html.twig',
-                        'template_data' => [
-                            'user' => $user,
-                        ],
-                    ])
-                ;
+                $this->get('app.user_manager')
+                    ->newEmailRequest($user);
 
                 $this->addFlash(
                     'success',
@@ -181,42 +156,8 @@ class SettingsController extends Controller
                 ]);
 
             if ($userByNewEmailCode) {
-                $oldEmail = $user->getEmail();
-
-                $user
-                    ->setNewEmailCode(null)
-                    ->setEmail($user->getNewEmail())
-                    ->setNewEmail(null)
-                ;
-                $em->persist($user);
-                $em->flush();
-
-                $this->get('app.mailer')
-                    ->swiftMessageInitializeAndSend([
-                        'subject' => $this->get('translator')->trans(
-                            'emails.user.new_email_confirmation.subject',
-                            [
-                                '%app_name%' => $this->getParameter('app_name'),
-                            ]
-                        ),
-                        'to' => [$user->getEmail() => $user->getName()],
-                        'body' => 'AppBundle:Emails:User/new_email_confirmation.html.twig',
-                        'template_data' => [
-                            'user' => $user,
-                        ],
-                    ])
-                ;
-
-                $this->get('app.user_action_manager')->add(
-                    'user.settings.email.change',
-                    $this->get('translator')->trans(
-                        'my.settings.new_email.confirmation.user_action.text'
-                    ),
-                    [
-                        'old' => $oldEmail,
-                        'new' => $user->getEmail(),
-                    ]
-                );
+                $this->get('app.user_manager')
+                    ->newEmailConfirmation($user);
 
                 $this->addFlash(
                     'success',

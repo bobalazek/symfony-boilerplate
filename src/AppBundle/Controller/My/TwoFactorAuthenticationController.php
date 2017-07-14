@@ -17,7 +17,8 @@ class TwoFactorAuthenticationController extends Controller
      * @Route("/my/tfa", name="my.tfa")
      * @Security("has_role('ROLE_USER')")
      */
-    public function tfaAction(Request $request) {
+    public function tfaAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(
