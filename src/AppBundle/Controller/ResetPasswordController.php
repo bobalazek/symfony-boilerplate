@@ -143,7 +143,11 @@ class ResetPasswordController extends Controller
                 if ($form->isSubmitted() && $form->isValid()) {
                     $formUser = $form->getData();
 
-                    $this->get('app.user_manager')->resetPasswordConfirmation($user, $formUser);
+                    $this->get('app.user_manager')
+                        ->resetPasswordConfirmation(
+                            $user,
+                            $formUser->getPlainPassword()
+                        );
 
                     $alert = 'success';
                     $alertMessage = $this->get('translator')->trans(

@@ -92,18 +92,18 @@ class UserManager
     }
 
     /**
-     * @param User $user
-     * @param User $formUser
+     * @param User   $user
+     * @param string $plainPassword
      *
      * @return bool
      */
-    public function resetPasswordConfirmation(User $user, User $formUser)
+    public function resetPasswordConfirmation(User $user, $plainPassword)
     {
         $user
             ->setResetPasswordCode(null)
             ->setResetPasswordCodeExpiresAt(null)
             ->setPlainPassword(
-                $formUser->getPlainPassword(),
+                $plainPassword,
                 $this->container->get('security.password_encoder')
             )
         ;
