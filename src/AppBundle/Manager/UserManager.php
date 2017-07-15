@@ -14,12 +14,11 @@ class UserManager
 
     /**
      * @param User   $user
-     * @param string $route   To which route should the user be redirected?
      * @param bool   $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
-    public function signupRequest(User $user, $route = 'signup', $persist = true)
+    public function signupRequest(User $user, $persist = true)
     {
         $user
             ->setEmailActivationCode(
@@ -49,7 +48,6 @@ class UserManager
                 'body' => 'AppBundle:Emails:User/signup_request.html.twig',
                 'template_data' => [
                     'user' => $user,
-                    'route' => $route,
                 ],
             ])
         ;
@@ -120,14 +118,15 @@ class UserManager
             $em->flush();
         }
 
-        $this->get('app.user_action_manager')->add(
-            'user.reset_password.confirmation',
-            $this->container->get('translator')->trans(
-                'reset_password.user_action.text'
-            ),
-            [],
-            $user
-        );
+        $this->container->get('app.user_action_manager')
+            ->add(
+                'user.reset_password.confirmation',
+                $this->container->get('translator')->trans(
+                    'reset_password.user_action.text'
+                ),
+                [],
+                $user
+            );
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
@@ -170,14 +169,15 @@ class UserManager
             $em->flush();
         }
 
-        $this->container->get('app.user_action_manager')->add(
-            'user.reset_password.request',
-            $this->container->get('translator')->trans(
-                'reset_password.request.user_action.text'
-            ),
-            [],
-            $user
-        );
+        $this->container->get('app.user_action_manager')
+            ->add(
+                'user.reset_password.request',
+                $this->container->get('translator')->trans(
+                    'reset_password.request.user_action.text'
+                ),
+                [],
+                $user
+            );
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
@@ -274,7 +274,7 @@ class UserManager
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.new_email_confirmation.subject',
                     [
-                        '%app_name%' => $this->getParameter('app_name'),
+                        '%app_name%' => $this->container->getParameter('app_name'),
                     ]
                 ),
                 'to' => [$user->getEmail() => $user->getName()],
@@ -295,6 +295,103 @@ class UserManager
                     'old' => $oldEmail,
                     'new' => $user->getEmail(),
                 ]
+            );
+
+        return true;
+    }
+
+    /**
+     * @param User   $user
+     * @param bool   $persist Should the changes to the user entity be persisted to the database?
+     *
+     * @return bool
+     */
+    public function emailActivationRequest(User $user, $persist = true)
+    {
+        $user
+            ->setEmailActivationCode(
+                md5(uniqid(null, true))
+            )
+        ;
+
+        if ($persist) {
+            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em->persist($user);
+            $em->flush();
+        }
+
+        $this->container->get('app.mailer')
+            ->swiftMessageInitializeAndSend([
+                'subject' => $this->container->get('translator')->trans(
+                    'emails.user.email_activation.request.subject',
+                    [
+                        '%app_name%' => $this->container->getParameter('app_name'),
+                    ]
+                ),
+                'to' => [$user->getEmail() => $user->getName()],
+                'body' => 'AppBundle:Emails:User/email_activation_request.html.twig',
+                'template_data' => [
+                    'user' => $user,
+                ],
+            ])
+        ;
+
+        $this->container->get('app.user_action_manager')
+            ->add(
+                'user.settings.email_activation.request',
+                $this->container->get('translator')->trans(
+                    'my.settings.email_activation.request.user_action.text'
+                ),
+                [],
+                $user
+            );
+
+        return true;
+    }
+
+    /**
+     * @param User $user
+     * @param bool $persist Should the changes to the user entity be persisted to the database?
+     *
+     * @return bool
+     */
+    public function emailActivationConfirmation(User $user, $persist = true)
+    {
+        $user
+            ->setEmailActivationCode(null)
+            ->setEmailActivatedAt(new \DateTime())
+        ;
+
+        if ($persist) {
+            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em->persist($user);
+            $em->flush();
+        }
+
+        $this->container->get('app.mailer')
+            ->swiftMessageInitializeAndSend([
+                'subject' => $this->container->get('translator')->trans(
+                    'emails.user.email_activation.confirmation.subject',
+                    [
+                        '%app_name%' => $this->container->getParameter('app_name'),
+                    ]
+                ),
+                'to' => [$user->getEmail() => $user->getName()],
+                'body' => 'AppBundle:Emails:User/email_activation_confirmation.html.twig',
+                'template_data' => [
+                    'user' => $user,
+                ],
+            ])
+        ;
+
+        $this->container->get('app.user_action_manager')
+            ->add(
+                'user.settings.email_activation.confirmation',
+                $this->container->get('translator')->trans(
+                    'my.settings.email_activation.confirmation.user_action.text'
+                ),
+                [],
+                $user
             );
 
         return true;

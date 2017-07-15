@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\My\SettingsType;
+use AppBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -50,11 +51,6 @@ class SettingsController extends Controller
             $user = $form->getData();
 
             if ($userOld->getEmail() !== $user->getEmail()) {
-                // Because the form has already changed that value, we need to set it back to original
-                $user->setEmail(
-                    $userOld->getEmail()
-                );
-
                 $this->get('app.user_manager')
                     ->newEmailRequest($user);
 
@@ -113,10 +109,8 @@ class SettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $emailActivationCode = $request->query->get('email_activation_code');
-        $newEmailCode = $request->query->get('new_email_code');
-
         // Email code
+        $emailActivationCode = $request->query->get('email_activation_code');
         if ($emailActivationCode) {
             $userByEmailActivationCode = $em
                 ->getRepository('AppBundle:User')
@@ -147,6 +141,7 @@ class SettingsController extends Controller
         }
 
         // New email code
+        $newEmailCode = $request->query->get('new_email_code');
         if ($newEmailCode) {
             $userByNewEmailCode = $em
                 ->getRepository('AppBundle:User')
@@ -190,7 +185,16 @@ class SettingsController extends Controller
         $action = $request->query->get('action');
         if ($action) {
             if ($action === 'resend_activation_email') {
-                // TODO
+                $this->get('app.user_manager')->emailActivationRequest(
+                    $this->getUser()
+                );
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.email_activation.code_resent.flash_message.text'
+                    )
+               );
 
                 return $this->redirectToRoute('my.settings');
             } elseif ($action === 'resend_activation_mobile') {

@@ -1,7 +1,6 @@
 {% extends 'AppBundle:Layouts:email.html.twig' %}
 
-{% set activation_url = url('signup', {
-    id: user.getId(),
+{% set activation_url = url('my.settings', {
     email_activation_code: user.getEmailActivationCode(),
 }) %}
 
@@ -16,7 +15,7 @@
                      <b>{{ 'Username' | trans }}:</b>
                      {{ user.getUsername() }}
                 </p>
-                <p>{{ 'emails.user.signup.request.click_link_below_to_activate_account.text' | trans }}</p>
+                <p>{{ 'emails.user.email_activation.request.click_link_below_to_activate_account.text' | trans }}</p>
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">
