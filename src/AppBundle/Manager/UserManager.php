@@ -206,15 +206,17 @@ class UserManager
 
     /**
      * @param User $user
+     * @param User $userOld
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
-    public function newEmailRequest(User $user, $persist = false)
+    public function newEmailRequest(User $user, User $userOld, $persist = false)
     {
         $user
             ->setNewEmailCode(md5(uniqid(null, true)))
             ->setNewEmail($user->getEmail())
+            ->setEmail($userOld->getEmail())
         ;
 
         if ($persist) {
@@ -411,15 +413,17 @@ class UserManager
 
     /**
      * @param User $user
+     * @param User $userOld
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      */
-    public function newMobileRequest(User $user, $persist = false)
+    public function newMobileRequest(User $user, User $userOld, $persist = false)
     {
         $user
             ->setNewMobileCode(md5(uniqid(null, true)))
             ->setNewMobile($user->getMobile())
+            ->setMobile($userOld->getMobile())
         ;
 
         if ($persist) {
@@ -459,6 +463,11 @@ class UserManager
             ->setMobile($user->getNewMobile())
             ->setNewMobile(null)
         ;
+
+        // Check if the mobile wasn't yet activated
+        if ($user->getMobileActivatedAt() === null) {
+            $user->setMobileActivatedAt(new \Datetime());
+        }
 
         if ($persist) {
             $em = $this->container->get('doctrine.orm.entity_manager');

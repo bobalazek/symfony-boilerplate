@@ -79,14 +79,24 @@
                 {% if app.user.getNewMobile() %}
                     <div class="alert alert-info">
                         {{ 'my.settings.new_mobile.request.text' | trans({
-                            '%mobile%': app.user.getNewMobile(),
+                            '%mobile%': app.user.getNewMobile() | phone_number_format('INTERNATIONAL'),
                         }) }}
                         <div class="form-group">
                             <label for="new-mobile-code-input">
-                                {{ 'Code' | trans }}
+                                {{ 'Code:' | trans }}
                             </label>
-                            <input class="form-control"
-                                name="new_mobile_code">
+                            <div class="input-group">
+                                <input id="new-mobile-code-input"
+                                    class="form-control"
+                                    name="new_mobile_code">
+                                <span class="input-group-btn">
+                                    <button id="new-mobile-code-button"
+                                        class="btn btn-default"
+                                        type="button">
+                                        {{ 'Submit' | trans }}
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 {% endif %}
@@ -97,4 +107,16 @@
             {{ 'Save' | trans }}
         </button>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block body_javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function() {
+            $('#new-mobile-code-button').on('click', function() {
+                window.location.href = '?new_mobile_code=' +
+                    $('#new-mobile-code-input').val();
+            });
+        });
+    </script>
 {% endblock %}

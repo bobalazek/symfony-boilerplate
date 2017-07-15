@@ -47,7 +47,7 @@ class SettingsController extends Controller
 
             if ($userOld->getEmail() !== $user->getEmail()) {
                 $this->get('app.user_manager')
-                    ->newEmailRequest($user);
+                    ->newEmailRequest($user, $userOld);
 
                 $this->addFlash(
                     'success',
@@ -57,9 +57,12 @@ class SettingsController extends Controller
                 );
             }
 
-            if ($userOld->getMobile() !== $user->getMobile()) {
+            if (
+                !empty($user->getMobile()) &&
+                $userOld->getMobile() !== $user->getMobile()
+            ) {
                 $this->get('app.user_manager')
-                    ->newMobileRequest($user);
+                    ->newMobileRequest($user, $userOld);
 
                 $this->addFlash(
                     'success',
@@ -119,39 +122,37 @@ class SettingsController extends Controller
 
         /***** Actions *****/
         $action = $request->query->get('action');
-        if ($action) {
-            if ($action === 'resend_activation_email') {
-                $this->get('app.user_manager')->emailActivationRequest(
-                    $this->getUser()
-                );
+        if ($action === 'resend_activation_email') {
+            $this->get('app.user_manager')->emailActivationRequest(
+                $this->getUser()
+            );
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans(
-                        'my.settings.email_activation.code_resent.flash_message.text'
-                    )
-               );
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'my.settings.email_activation.code_resent.flash_message.text'
+                )
+           );
 
-                return $this->redirectToRoute('my.settings');
-            } elseif ($action === 'resend_activation_mobile') {
-                $this->get('app.user_manager')->mobileActivationRequest(
-                    $this->getUser()
-                );
+            return $this->redirectToRoute('my.settings');
+        } elseif ($action === 'resend_activation_mobile') {
+            $this->get('app.user_manager')->mobileActivationRequest(
+                $this->getUser()
+            );
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans(
-                        'my.settings.mobile_activation.code_resent.flash_message.text'
-                    )
-               );
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'my.settings.mobile_activation.code_resent.flash_message.text'
+                )
+           );
 
-                return $this->redirectToRoute('my.settings');
-            }
+            return $this->redirectToRoute('my.settings');
         }
 
         /***** Email activation code *****/
         $emailActivationCode = $request->query->get('email_activation_code');
-        if ($emailActivationCode) {
+        if ($emailActivationCode !== null) {
             $userByEmailActivationCode = $em
                 ->getRepository('AppBundle:User')
                 ->findOneBy([
@@ -182,7 +183,7 @@ class SettingsController extends Controller
 
         /***** Mobile activation code *****/
         $mobileActivationCode = $request->query->get('mobile_activation_code');
-        if ($mobileActivationCode) {
+        if ($mobileActivationCode !== null) {
             $userByMobileActivationCode = $em
                 ->getRepository('AppBundle:User')
                 ->findOneBy([
@@ -213,7 +214,7 @@ class SettingsController extends Controller
 
         /***** New email code *****/
         $newEmailCode = $request->query->get('new_email_code');
-        if ($newEmailCode) {
+        if ($newEmailCode !== null) {
             $userByNewEmailCode = $em
                 ->getRepository('AppBundle:User')
                 ->findOneBy([
@@ -245,12 +246,12 @@ class SettingsController extends Controller
 
         /***** New mobile code *****/
         $newMobileCode = $request->query->get('new_mobile_code');
-        if ($newMobileCode) {
+        if ($newMobileCode !== null) {
             $userByNewMobileCode = $em
                 ->getRepository('AppBundle:User')
                 ->findOneBy([
                     'id' => $user->getId(),
-                    'newEmailCode' => $newMobileCode,
+                    'newMobileCode' => $newMobileCode,
                 ]);
 
             if ($userByNewMobileCode) {
