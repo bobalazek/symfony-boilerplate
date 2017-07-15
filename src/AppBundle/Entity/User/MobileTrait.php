@@ -31,6 +31,13 @@ trait MobileTrait
     /**
      * @var string
      *
+     * @ORM\Column(name="new_mobile_code", type="string", length=255, nullable=true)
+     */
+    protected $newMobileCode;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="mobile_activation_code", type="string", length=255, nullable=true)
      */
     protected $mobileActivationCode;
@@ -93,6 +100,28 @@ trait MobileTrait
     public function setNewMobile($newMobile)
     {
         $this->newMobile = $newMobile;
+
+        return $this;
+    }
+
+    /*** New mobile code ***/
+
+    /**
+     * @return string
+     */
+    public function getNewMobileCode()
+    {
+        return $this->newMobileCode;
+    }
+
+    /**
+     * @param $newMobileCode
+     *
+     * @return User
+     */
+    public function setNewMobileCode($newMobileCode)
+    {
+        $this->newMobileCode = $newMobileCode;
 
         return $this;
     }

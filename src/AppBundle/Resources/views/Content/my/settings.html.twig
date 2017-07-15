@@ -67,7 +67,7 @@
                     {{ form_widget(form.mobile) }}
                     {{ form_errors(form.mobile) }}
                 </div>
-                {% if app.user.isMobileActivated() == false %}
+                {% if app.user.isMobileActivated() == false and app.user.getMobile() %}
                     <div class="alert alert-warning">
                         {{ 'my.settings.mobile.is_not_activated_yet.text' | trans({
                             '%resend_link%': url('my.settings', {
@@ -81,8 +81,14 @@
                         {{ 'my.settings.new_mobile.request.text' | trans({
                             '%mobile%': app.user.getNewMobile(),
                         }) }}
+                        <div class="form-group">
+                            <label for="new-mobile-code-input">
+                                {{ 'Code' | trans }}
+                            </label>
+                            <input class="form-control"
+                                name="new_mobile_code">
+                        </div>
                     </div>
-                    {# TODO: input for mobile number confirmation #}
                 {% endif %}
             </div>
         </div> <!-- /.row -->

@@ -33,17 +33,12 @@ class SettingsController extends Controller
         $userOld = clone $this->getUser();
         $userOldArray = $userOld->toArray();
 
-        $newEmailCodeResponse = $this->handleEmailCodes(
+        $queryDataResponse = $this->handleQueryData(
             $request,
             $this->getUser()
         );
-        if ($newEmailCodeResponse) {
-            return $newEmailCodeResponse;
-        }
-
-        $actionsResponse = $this->handleActions($request);
-        if ($actionsResponse) {
-            return $actionsResponse;
+        if ($queryDataResponse) {
+            return $queryDataResponse;
         }
 
         $form->handleRequest($request);
@@ -58,6 +53,18 @@ class SettingsController extends Controller
                     'success',
                     $this->get('translator')->trans(
                         'my.settings.new_email.success.flash_message.text'
+                    )
+                );
+            }
+
+            if ($userOld->getMobile() !== $user->getMobile()) {
+                $this->get('app.user_manager')
+                    ->newMobileRequest($user);
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.new_mobile.success.flash_message.text'
                     )
                 );
             }
@@ -99,17 +106,50 @@ class SettingsController extends Controller
     /**
      * Check if the new email code is present (for confirming the new email address) or
      * or email code, for email activation/validation.
+     * Also check for actions.
      *
      * @param Request $request
      * @param User    $user
      *
      * @return Response|null
      */
-    protected function handleEmailCodes(Request $request, User $user)
+    protected function handleQueryData(Request $request, User $user)
     {
         $em = $this->getDoctrine()->getManager();
 
-        // Email code
+        /***** Actions *****/
+        $action = $request->query->get('action');
+        if ($action) {
+            if ($action === 'resend_activation_email') {
+                $this->get('app.user_manager')->emailActivationRequest(
+                    $this->getUser()
+                );
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.email_activation.code_resent.flash_message.text'
+                    )
+               );
+
+                return $this->redirectToRoute('my.settings');
+            } elseif ($action === 'resend_activation_mobile') {
+                $this->get('app.user_manager')->mobileActivationRequest(
+                    $this->getUser()
+                );
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.mobile_activation.code_resent.flash_message.text'
+                    )
+               );
+
+                return $this->redirectToRoute('my.settings');
+            }
+        }
+
+        /***** Email activation code *****/
         $emailActivationCode = $request->query->get('email_activation_code');
         if ($emailActivationCode) {
             $userByEmailActivationCode = $em
@@ -120,7 +160,7 @@ class SettingsController extends Controller
                 ]);
 
             if ($userByEmailActivationCode) {
-                $this->get('app.user_manager')->signupConfirmation($user);
+                $this->get('app.user_manager')->emailActivationConfirmation($user);
 
                 $this->addFlash(
                     'success',
@@ -140,7 +180,38 @@ class SettingsController extends Controller
             return $this->redirectToRoute('my.settings');
         }
 
-        // New email code
+        /***** Mobile activation code *****/
+        $mobileActivationCode = $request->query->get('mobile_activation_code');
+        if ($mobileActivationCode) {
+            $userByMobileActivationCode = $em
+                ->getRepository('AppBundle:User')
+                ->findOneBy([
+                    'id' => $user->getId(),
+                    'mobileActivationCode' => $mobileActivationCode,
+                ]);
+
+            if ($userByMobileActivationCode) {
+                $this->get('app.user_manager')->mobileActivationConfirmation($user);
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.mobile_activation.success.flash_message.text'
+                    )
+                );
+            } else {
+                $this->addFlash(
+                    'warning',
+                    $this->get('translator')->trans(
+                        'my.settings.mobile_activation.success.code_invalid.flash_message.text'
+                    )
+               );
+            }
+
+            return $this->redirectToRoute('my.settings');
+        }
+
+        /***** New email code *****/
         $newEmailCode = $request->query->get('new_email_code');
         if ($newEmailCode) {
             $userByNewEmailCode = $em
@@ -172,36 +243,36 @@ class SettingsController extends Controller
             return $this->redirectToRoute('my.settings');
         }
 
-        return null;
-    }
+        /***** New mobile code *****/
+        $newMobileCode = $request->query->get('new_mobile_code');
+        if ($newMobileCode) {
+            $userByNewMobileCode = $em
+                ->getRepository('AppBundle:User')
+                ->findOneBy([
+                    'id' => $user->getId(),
+                    'newEmailCode' => $newMobileCode,
+                ]);
 
-    /**
-     * @param Request $request
-     *
-     * @return Response|null
-     */
-    protected function handleActions(Request $request)
-    {
-        $action = $request->query->get('action');
-        if ($action) {
-            if ($action === 'resend_activation_email') {
-                $this->get('app.user_manager')->emailActivationRequest(
-                    $this->getUser()
-                );
+            if ($userByNewMobileCode) {
+                $this->get('app.user_manager')
+                    ->newMobileConfirmation($user);
 
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.email_activation.code_resent.flash_message.text'
+                        'my.settings.new_mobile.success.flash_message.text'
+                    )
+                );
+            } else {
+                $this->addFlash(
+                    'warning',
+                    $this->get('translator')->trans(
+                        'my.settings.new_mobile.code_invalid.flash_message.text'
                     )
                );
-
-                return $this->redirectToRoute('my.settings');
-            } elseif ($action === 'resend_activation_mobile') {
-                // TODO
-
-                return $this->redirectToRoute('my.settings');
             }
+
+            return $this->redirectToRoute('my.settings');
         }
 
         return null;

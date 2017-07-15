@@ -1,0 +1,16 @@
+{% extends 'AppBundle:Layouts:email.html.twig' %}
+
+{% block main %}
+    <table class="row note">
+        <tr>
+            <td class="wrapper last">
+                <h4>{{ 'emails.general.greeting' | trans({
+                    '%user_name%': user.getName(),
+                }) }}</h4>
+                <p>{{ 'emails.user.mobile_activation.confirmation.text' | trans({
+                    '%app_name%': globals.app_name,
+                }) }}</p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

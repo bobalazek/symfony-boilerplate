@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormBuilder;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\ResetPasswordType;
 use AppBundle\Form\Type\ResetPasswordRequestType;
@@ -32,6 +31,7 @@ class ResetPasswordController extends Controller
             return $this->redirectToRoute('home');
         }
 
+        $id = $request->query->get('id');
         $resetPasswordCode = $request->query->get('reset_password_code');
         $isRequest = empty($resetPasswordCode);
         $alert = false;
@@ -43,7 +43,12 @@ class ResetPasswordController extends Controller
                 new User()
             );
 
-            $this->handleResetPasswordRequest($request, $form, $alert, $alertMessage);
+            $this->handleResetPasswordRequest(
+                $request,
+                $form,
+                $alert,
+                $alertMessage
+            );
         } else {
             $form = $this->createForm(
                 ResetPasswordType::class,
@@ -51,6 +56,7 @@ class ResetPasswordController extends Controller
             );
 
             $this->handleResetPasswordConfirmation(
+                $id,
                 $resetPasswordCode,
                 $request,
                 $form,
@@ -70,14 +76,14 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @param Request     $request
-     * @param FormBuilder $form
-     * @param bool        $alert
-     * @param string      $alertMessage
+     * @param Request $request
+     * @param Form    $form
+     * @param bool    $alert
+     * @param string  $alertMessage
      */
     private function handleResetPasswordRequest(
         Request $request,
-        FormBuilder $form,
+        Form $form,
         &$alert,
         &$alertMessage
     ) {
@@ -118,18 +124,18 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @param int         $request
-     * @param string      $resetPasswordCode
-     * @param Request     $request
-     * @param FormBuilder $form
-     * @param bool        $alert
-     * @param string      $alertMessage
+     * @param int     $request
+     * @param string  $resetPasswordCode
+     * @param Request $request
+     * @param Form    $form
+     * @param bool    $alert
+     * @param string  $alertMessage
      */
     private function handleResetPasswordConfirmation(
         $id,
         $resetPasswordCode,
         Request $request,
-        FormBuilder $form,
+        Form $form,
         &$alert,
         &$alertMessage
     ) {
