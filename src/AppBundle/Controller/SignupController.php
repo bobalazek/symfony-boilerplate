@@ -79,8 +79,12 @@ class SignupController extends Controller
      * @param string $alert
      * @param string $alertMessage
      */
-    protected function handleSignupConfirmation($id, $emailActivationCode, &$alert, &$alertMessage)
-    {
+    protected function handleSignupConfirmation(
+        $id,
+        $emailActivationCode,
+        &$alert,
+        &$alertMessage
+    ) {
         $em = $this->getDoctrine()->getManager();
         $user = $em
             ->getRepository('AppBundle:User')
@@ -110,8 +114,12 @@ class SignupController extends Controller
      * @param string      $alert
      * @param string      $alertMessage
      */
-    protected function handleSignupRequest(FormBuilder &$form, Request $request, &$alert, &$alertMessage)
-    {
+    protected function handleSignupRequest(
+        FormBuilder $form,
+        Request $request,
+        &$alert,
+        &$alertMessage
+    ) {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();

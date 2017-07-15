@@ -66,7 +66,7 @@ trait EmailTrait
     /**
      * @var string
      *
-     * @ORM\Column(name="reset_password_code", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="reset_password_code", type="string", length=255, nullable=true)
      */
     protected $resetPasswordCode;
 

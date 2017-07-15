@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormBuilder;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\ResetPasswordType;
 use AppBundle\Form\Type\ResetPasswordRequestType;
@@ -31,11 +32,8 @@ class ResetPasswordController extends Controller
             return $this->redirectToRoute('home');
         }
 
-        $code = $request->query->has('code')
-            ? $request->query->get('code')
-            : false
-        ;
-        $isRequest = empty($code);
+        $resetPasswordCode = $request->query->get('reset_password_code');
+        $isRequest = empty($resetPasswordCode);
         $alert = false;
         $alertMessage = '';
 
@@ -52,7 +50,13 @@ class ResetPasswordController extends Controller
                 new User()
             );
 
-            $this->handleResetPasswordConfirmation($code, $request, $form, $alert, $alertMessage);
+            $this->handleResetPasswordConfirmation(
+                $resetPasswordCode,
+                $request,
+                $form,
+                $alert,
+                $alertMessage
+            );
         }
 
         return $this->render(
@@ -66,13 +70,17 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Form    $form
-     * @param bool    $alert
-     * @param string  $alertMessage
+     * @param Request     $request
+     * @param FormBuilder $form
+     * @param bool        $alert
+     * @param string      $alertMessage
      */
-    private function handleResetPasswordRequest(Request $request, Form &$form, &$alert, &$alertMessage)
-    {
+    private function handleResetPasswordRequest(
+        Request $request,
+        FormBuilder $form,
+        &$alert,
+        &$alertMessage
+    ) {
         $em = $this->getDoctrine()->getManager();
 
         $form->handleRequest($request);
@@ -93,20 +101,12 @@ class ResetPasswordController extends Controller
                         'reset_password.request.already_requested.text'
                     );
                 } else {
-                    // In the REALLY unlikely case that the reset password code wouldn't be unique
-                    try {
-                        $this->get('app.user_manager')->resetPasswordRequest($user);
+                    $this->get('app.user_manager')->resetPasswordRequest($user);
 
-                        $alert = 'success';
-                        $alertMessage = $this->get('translator')->trans(
-                            'reset_password.request.success.text'
-                        );
-                    } catch (\Exception $e) {
-                        $alert = 'danger';
-                        $alertMessage = $this->get('translator')->trans(
-                            'general.something_went_wrong'
-                        );
-                    }
+                    $alert = 'success';
+                    $alertMessage = $this->get('translator')->trans(
+                        'reset_password.request.success.text'
+                    );
                 }
             } else {
                 $alert = 'danger';
@@ -118,18 +118,28 @@ class ResetPasswordController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Form    $form
-     * @param bool    $alert
-     * @param string  $alertMessage
+     * @param int         $request
+     * @param string      $resetPasswordCode
+     * @param Request     $request
+     * @param FormBuilder $form
+     * @param bool        $alert
+     * @param string      $alertMessage
      */
-    private function handleResetPasswordConfirmation($code, Request $request, &$form, &$alert, &$alertMessage)
-    {
+    private function handleResetPasswordConfirmation(
+        $id,
+        $resetPasswordCode,
+        Request $request,
+        FormBuilder $form,
+        &$alert,
+        &$alertMessage
+    ) {
         $em = $this->getDoctrine()->getManager();
         $user = $em
             ->getRepository('AppBundle:User')
-            ->findOneByResetPasswordCode($code)
-        ;
+            ->findOneBy([
+                'id' => $id,
+                'resetPasswordCode' => $resetPasswordCode,
+            ]);
 
         if ($user) {
             $isResetPasswordCodeExpired = new \DateTime() > $user->getResetPasswordCodeExpiresAt();
