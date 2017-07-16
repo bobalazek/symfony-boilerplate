@@ -438,7 +438,7 @@
       </trans-unit>
       <trans-unit id="16ddfa5aa705a164b1f634b738182e3630e7633a" resname="emails.user.new_mobile.confirmation.subject">
         <source>emails.user.new_mobile.confirmation.subject</source>
-        <target>[%app_name%] New email confirmation</target>
+        <target>[%app_name%] New mobile confirmation</target>
         <jms:reference-file line="510">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a65babef989f530ce7a4e6823f4757feb6abc068" resname="emails.user.new_mobile.confirmation.text">
