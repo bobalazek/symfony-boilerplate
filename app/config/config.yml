@@ -38,14 +38,6 @@ parameters:
     recovery_codes_count: 8 # how many codes should be generated?
     # Login code
     login_code_expiry_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
-    # Two factor authenticator
-    two_factor_authenticator_hostname: localhost
-    two_factor_authenticator_issuer: Corcosoft
-    # SMS Sender
-    sms_sender:
-        from: ~
-        url: ~
-        token: ~
     # Other
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
     app.security.authentication.listener.form.class: AppBundle\EventListener\UsernamePasswordFormAuthenticationListener
