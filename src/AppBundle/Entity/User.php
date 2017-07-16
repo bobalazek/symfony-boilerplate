@@ -123,9 +123,9 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserLoginBlock", mappedBy="user", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserBlockedAction", mappedBy="user", cascade={"all"})
      */
-    protected $userLoginBlocks;
+    protected $userBlockedActions;
 
     /**
      * Otherwise known as: userExpired / accountExpired.
@@ -159,7 +159,7 @@ class User implements AdvancedUserInterface, \Serializable
         $this->userRecoveryCodes = new ArrayCollection();
         $this->userDevices = new ArrayCollection();
         $this->userLoginCodes = new ArrayCollection();
-        $this->userLoginBlocks = new ArrayCollection();
+        $this->userBlockedActions = new ArrayCollection();
     }
 
     /*** Id ***/
@@ -449,28 +449,28 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /*** User login blocks ***/
+    /*** User blocked actions ***/
 
     /**
      * @return array
      */
-    public function getUserLoginBlocks()
+    public function getUserBlockedActions()
     {
         $criteria = Criteria::create()->orderBy([
             'createdAt' => Criteria::DESC,
         ]);
 
-        return $this->userLoginBlocks->matching($criteria)->toArray();
+        return $this->userBlockedActions->matching($criteria)->toArray();
     }
 
     /**
-     * @param $userLoginBlocks
+     * @param $userBlockedActio
      *
      * @return User
      */
-    public function setUserLoginBlocks($userLoginBlocks)
+    public function setUserBlockedActions($userBlockedActions)
     {
-        $this->userLoginBlocks = $userLoginBlocks;
+        $this->userBlockedActions = $userBlockedActions;
 
         return $this;
     }

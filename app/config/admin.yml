@@ -51,17 +51,17 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_login_block:
-        class: AdminBundle\Admin\UserLoginBlockAdmin
+    admin.user_blocked_action:
+        class: AdminBundle\Admin\UserBlockedActionAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserLoginBlock
+            - AppBundle\Entity\UserBlockedAction
             - ~
         tags:
             - name: sonata.admin
               manager_type: orm
               group: General
-              label: User Login Blocks
+              label: User Blocked Admin
         calls:
             - [setContainer, ["@service_container"]]
 

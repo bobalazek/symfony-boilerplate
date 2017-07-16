@@ -293,20 +293,20 @@ class TwoFactorAuthenticationController extends Controller
         $userAgent = $request->headers->get('User-Agent');
         $dateTimeFormat = $this->getParameter('date_time_format');
 
-        $userLoginBlock = $em
-            ->getRepository('AppBundle:UserLoginBlock')
+        $userBlockedAction = $em
+            ->getRepository('AppBundle:UserBlockedAction')
             ->getCurrentlyActive(
                 $ip,
                 $sessionId,
                 $userAgent,
                 'login.2fa'
             );
-        if ($userLoginBlock) {
+        if ($userBlockedAction) {
             throw new BruteForceAttemptException(
                 $this->get('translator')->trans(
                     'Your account has been blocked from logging in. The block will be released at %time%.',
                     [
-                        '%time%' => $userLoginBlock->getExpiresAt()->format($dateTimeFormat),
+                        '%time%' => $userBlockedAction->getExpiresAt()->format($dateTimeFormat),
                     ]
                 )
             );

@@ -13,7 +13,7 @@ use AppBundle\Entity\User;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserLoginBlockAdmin extends AbstractAdmin
+class UserBlockedActionAdmin extends AbstractAdmin
 {
     use ContainerAwareTrait;
 
@@ -42,7 +42,7 @@ class UserLoginBlockAdmin extends AbstractAdmin
             ->add('user.profile.lastName', null, [
                 'label' => 'Last name',
             ])
-            ->add('type')
+            ->add('action')
             ->add('ip')
             ->add('userAgent')
             ->add('sessionId')
@@ -61,7 +61,7 @@ class UserLoginBlockAdmin extends AbstractAdmin
             ->add('user.email', null, [
                 'label' => 'Email',
             ])
-            ->add('type')
+            ->add('action')
             ->add('ip')
             ->add('userAgent')
             ->add('sessionId')
@@ -83,7 +83,7 @@ class UserLoginBlockAdmin extends AbstractAdmin
     {
         $showMapper
             ->with('General', ['class' => 'col-md-6'])
-                ->add('type')
+                ->add('action')
                 ->add('ip')
                 ->add('userAgent')
                 ->add('sessionId')

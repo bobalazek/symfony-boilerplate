@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Exception\BruteForceAttemptException;
 use AppBundle\Entity\User;
-use AppBundle\Entity\UserLoginBlock;
+use AppBundle\Entity\UserBlockedAction;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -28,19 +28,19 @@ class BruteForceManager
         $sessionId = $session->getId();
         $userAgent = $request->headers->get('User-Agent');
 
-        $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
+        $userBlockedAction = $em->getRepository('AppBundle:UserBlockedAction')
             ->getCurrentlyActive(
                 $ip,
                 $sessionId,
                 $userAgent,
                 'login'
             );
-        if ($userLoginBlock) {
+        if ($userBlockedAction) {
             throw new BruteForceAttemptException(
                 $this->container->get('translator')->trans(
                     'Your account has been blocked from logging in. The block will be released at %time%.',
                     [
-                        '%time%' => $userLoginBlock->getExpiresAt()->format($dateTimeFormat),
+                        '%time%' => $userBlockedAction->getExpiresAt()->format($dateTimeFormat),
                     ]
                 )
             );
@@ -58,8 +58,8 @@ class BruteForceManager
      */
     public function handleUserLoginBlocks(
         User $user = null,
-        $type = 'login',
-        $actionKey = 'user.login.fail'
+        $action = 'login',
+        $userActionKey = 'user.login.fail'
     ) {
         $em = $this->container->get('doctrine.orm.entity_manager');
         $request = $this->container->get('request_stack')->getCurrentRequest();
@@ -75,7 +75,7 @@ class BruteForceManager
                 $ip,
                 $sessionId,
                 $userAgent,
-                $actionKey,
+                $userActionKey,
                 $bruteForceParameters['watch_time']
             );
 
@@ -84,7 +84,7 @@ class BruteForceManager
                 new \Dateinterval('PT'.$bruteForceParameters['block_time'].'S')
             );
 
-            $userLoginBlock = $em->getRepository('AppBundle:UserLoginBlock')
+            $userBlockedAction = $em->getRepository('AppBundle:UserBlockedAction')
                 ->getCurrentlyActive(
                     $ip,
                     $sessionId,
@@ -92,10 +92,10 @@ class BruteForceManager
                     $type
                 );
 
-            if ($userLoginBlock === null) {
-                $userLoginBlock = new UserLoginBlock();
-                $userLoginBlock
-                    ->setType($type)
+            if ($userBlockedAction === null) {
+                $userBlockedAction = new UserBlockedAction();
+                $userBlockedAction
+                    ->setAction($action)
                     ->setIp($ip)
                     ->setUserAgent($userAgent)
                     ->setSessionId($sessionId)
@@ -103,9 +103,9 @@ class BruteForceManager
                 ;
             }
 
-            $userLoginBlock->setExpiresAt($expiresAt);
+            $userBlockedAction->setExpiresAt($expiresAt);
 
-            $em->persist($userLoginBlock);
+            $em->persist($userBlockedAction);
             $em->flush();
         }
 

@@ -7,15 +7,15 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * User login block Entity.
+ * User blocked action Entity.
  *
  * @Gedmo\Loggable
- * @ORM\Table(name="user_login_blocks")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserLoginBlockRepository")
+ * @ORM\Table(name="user_blocked_action")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserBlockedActionRepository")
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class UserLoginBlock
+class UserBlockedAction
 {
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
@@ -24,7 +24,7 @@ class UserLoginBlock
         Shared\RequestMetaTrait
     ;
 
-    public static $types = [
+    public static $actions = [
         'login' => 'Login',
         'login.2fa' => '2FA Login',
     ];
@@ -42,9 +42,9 @@ class UserLoginBlock
      * @var string
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="type", type="string", length=32)
+     * @ORM\Column(name="action", type="string", length=32)
      */
-    protected $type = 'login';
+    protected $action = 'login';
 
     /**
      * @var \DateTime
@@ -54,7 +54,7 @@ class UserLoginBlock
     protected $expiresAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userLoginBlocks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="userBlockedActions")
      */
     protected $user;
 
@@ -71,7 +71,7 @@ class UserLoginBlock
     /**
      * @param $id
      *
-     * @return UserLoginBlock
+     * @return UserBlockedAction
      */
     public function setId($id)
     {
@@ -80,24 +80,24 @@ class UserLoginBlock
         return $this;
     }
 
-    /*** Type ***/
+    /*** Action ***/
 
     /**
      * @return string
      */
-    public function getType()
+    public function getAction()
     {
-        return $this->type;
+        return $this->action;
     }
 
     /**
-     * @param $type
+     * @param $action
      *
-     * @return UserLoginBlock
+     * @return UserBlockedAction
      */
-    public function setType($type)
+    public function setAction($action)
     {
-        $this->type = $type;
+        $this->action = $action;
 
         return $this;
     }
@@ -115,7 +115,7 @@ class UserLoginBlock
     /**
      * @param \DateTime $expiresAt
      *
-     * @return UserLoginBlock
+     * @return UserBlockedAction
      */
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
@@ -149,7 +149,7 @@ class UserLoginBlock
     /**
      * @param User $user
      *
-     * @return UserLoginBlock
+     * @return UserBlockedAction
      */
     public function setUser(User $user = null)
     {
@@ -173,7 +173,7 @@ class UserLoginBlock
     {
         return [
             'id' => $this->getId(),
-            'type' => $this->getType(),
+            'action' => $this->getAction(),
             'is_expired' => $this->isExpired(),
             'expires_at' => $this->getExpiresAt()
                 ? $this->getExpiresAt()->format(DATE_ATOM)
