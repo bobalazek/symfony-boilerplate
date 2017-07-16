@@ -160,9 +160,10 @@ class UserManager
      */
     public function resetPasswordRequest(User $user, $persist = true)
     {
-        $resetPasswordParameters = $this->container->getParameter('reset_password');
         $expiresAt = (new \Datetime())->add(
-            new \Dateinterval('PT'.$resetPasswordParameters['expiry_time'].'S')
+            new \Dateinterval(
+                'PT'.$this->container->getParameter('reset_password_expiry_time').'S'
+            )
         );
 
         $user

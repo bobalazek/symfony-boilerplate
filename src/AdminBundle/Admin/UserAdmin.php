@@ -212,9 +212,8 @@ class UserAdmin extends AbstractAdmin
      */
     public function prePersist($user)
     {
-        $recoveryCodesParameters = $this->container->getParameter('recovery_codes');
         $user->prepareUserRecoveryCodes(
-            $recoveryCodesParameters['count']
+            $this->container->getParameter('recovery_codes_count')
         );
         $this->preparePlainPassword($user);
     }

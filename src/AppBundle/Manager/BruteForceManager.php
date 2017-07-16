@@ -23,7 +23,6 @@ class BruteForceManager
         $session = $this->container->get('session');
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $dateTimeFormat = $this->container->getParameter('date_time_format');
         $ip = $request->getClientIp();
         $sessionId = $session->getId();
         $userAgent = $request->headers->get('User-Agent');
@@ -40,7 +39,9 @@ class BruteForceManager
                 $this->container->get('translator')->trans(
                     'Your account has been blocked from logging in. The block will be released at %time%.',
                     [
-                        '%time%' => $userBlockedAction->getExpiresAt()->format($dateTimeFormat),
+                        '%time%' => $userBlockedAction->getExpiresAt()->format(
+                            $this->container->getParameter('date_time_format')
+                        ),
                     ]
                 )
             );
@@ -64,7 +65,6 @@ class BruteForceManager
         $em = $this->container->get('doctrine.orm.entity_manager');
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $session = $this->container->get('session');
-        $bruteForceParameters = $this->container->getParameter('brute_force');
 
         $ip = $request->getClientIp();
         $sessionId = $session->getId();
@@ -73,15 +73,15 @@ class BruteForceManager
         $attemptsCount = $em->getRepository('AppBundle:UserAction')
             ->getCount(
                 $userActionKey,
-                $bruteForceParameters['watch_time'],
+                $this->container->getParameter('brute_force_watch_time'),
                 $ip,
                 $sessionId,
                 $userAgent
             );
 
-        if ($attemptsCount > $bruteForceParameters['max_attempts_before_block']) {
+        if ($attemptsCount > $this->container->getParameter('brute_force_max_attempts')) {
             $expiresAt = (new \Datetime())->add(
-                new \Dateinterval('PT'.$bruteForceParameters['block_time'].'S')
+                new \Dateinterval('PT'.$this->container->getParameter('brute_force_block_time').'S')
             );
 
             $userBlockedAction = $em->getRepository('AppBundle:UserBlockedAction')

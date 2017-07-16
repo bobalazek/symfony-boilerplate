@@ -22,7 +22,6 @@ class UserLoginCodeManager
      */
     public function add($code, $method = 'email', User $user = null)
     {
-        $loginCodeParameters = $this->container->getParameter('login_code');
         $em = $this->container->get('doctrine.orm.entity_manager');
         $token = $this->container->get('security.token_storage')->getToken();
         $session = $this->container->get('session');
@@ -38,7 +37,7 @@ class UserLoginCodeManager
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $sessionId = $session->getId();
         $expiresAt = (new \Datetime())->add(
-            new \Dateinterval('PT'.$loginCodeParameters['expiry_time'].'S')
+            new \Dateinterval('PT'.$this->container->getParameter('login_code_expiry_time').'S')
         );
 
         $userLoginCode = new UserLoginCode();

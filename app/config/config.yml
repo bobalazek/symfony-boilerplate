@@ -5,6 +5,7 @@ imports:
     - { resource: admin.yml }
 
 parameters:
+    # General
     locale: en_US
     locales:
         - en_US
@@ -22,16 +23,16 @@ parameters:
     uploads_path: '/assets/uploads'
     deployment_emails: # to whom should the email be sent, after a successful deployment?
         bobalazek124@gmail.com: 'Borut'
-    brute_force:
-        max_attempts_before_block: 10
-        block_time: 600 # in seconds; 10 minutes
-        watch_time: 300 # in seconds; 5 minutes; compare the last X (watch_time) seconds if Y (max_attempts_before_block) attempts appeared
-    reset_password:
-        expiry_time: 900 # in seconds; 15 minutes
-    recovery_codes:
-        count: 8 # how many codes should be generated?
-    login_code:
-        expiry_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
+    # Brute force
+    brute_force_max_attempts: 10
+    brute_force_block_time: 600 # in seconds; 10 minutes
+    brute_force_watch_time: 300 # in seconds; 5 minutes; compare the last X (watch_time) seconds if Y (max_attempts_before_block) attempts appeared
+    # Reset password
+    reset_password_expiry_time: 900 # in seconds; 15 minutes
+    # Recovery codes
+    recovery_codes_count: 8 # how many codes should be generated?
+    # Login code
+    login_code_expiry_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
     two_factor_authenticator:
         hostname: localhost
         issuer: Corcosoft

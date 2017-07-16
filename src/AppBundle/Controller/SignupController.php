@@ -28,8 +28,6 @@ class SignupController extends Controller
             return $this->redirectToRoute('home');
         }
 
-        $recoveryCodesParameters = $this->getParameter('recovery_codes');
-
         $id = $request->query->get('id');
         $emailActivationCode = $request->query->get('email_activation_code');
 
@@ -39,7 +37,7 @@ class SignupController extends Controller
 
         $user = new User();
         $user->prepareUserRecoveryCodes(
-            $recoveryCodesParameters['count']
+            $this->getParameter('recovery_codes_count')
         );
 
         $form = $this->createForm(
