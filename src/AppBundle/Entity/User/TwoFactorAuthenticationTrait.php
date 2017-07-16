@@ -12,7 +12,7 @@ trait TwoFactorAuthenticationTrait
 {
     public static $tfaMethods = [
         'email' => 'Email',
-        // 'sms' => 'SMS', // not available for now
+        'sms' => 'SMS',
         'authenticator' => 'Authenticator',
         'recovery_code' => 'Recovery code',
     ];
@@ -28,13 +28,21 @@ trait TwoFactorAuthenticationTrait
 
         // Email
         $isTFAEmailEnabled = $this->isTFAEmailEnabled();
-        if (!$isTFAEmailEnabled) {
+        $isEmailActivated = $this->isEmailActivated();
+        if (
+            !$isTFAEmailEnabled ||
+            !$isEmailActivated
+        ) {
             unset($availableMethods['email']);
         }
 
         // SMS
         $isTFASmsEnabled = $this->isTFASmsEnabled();
-        if (!$isTFASmsEnabled) {
+        $isMobileActivated = $this->isMobileActivated();
+        if (
+            !$isTFASmsEnabled ||
+            !$isMobileActivated
+        ) {
             unset($availableMethods['sms']);
         }
 
