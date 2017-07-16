@@ -51,20 +51,6 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_blocked_action:
-        class: AdminBundle\Admin\UserBlockedActionAdmin
-        arguments:
-            - ~
-            - AppBundle\Entity\UserBlockedAction
-            - ~
-        tags:
-            - name: sonata.admin
-              manager_type: orm
-              group: General
-              label: User Blocked Admin
-        calls:
-            - [setContainer, ["@service_container"]]
-
     admin.login_code:
         class: AdminBundle\Admin\UserLoginCodeAdmin
         arguments:
@@ -76,5 +62,19 @@ services:
               manager_type: orm
               group: General
               label: User Login Codes
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    admin.user_blocked_action:
+        class: AdminBundle\Admin\UserBlockedActionAdmin
+        arguments:
+            - ~
+            - AppBundle\Entity\UserBlockedAction
+            - ~
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User Blocked Actions
         calls:
             - [setContainer, ["@service_container"]]

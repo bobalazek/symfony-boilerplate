@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use AppBundle\Entity\User;
 use AppBundle\AppBundle;
 use AppBundle\Form\Type\ProfileType;
@@ -55,7 +56,10 @@ class UserAdmin extends AbstractAdmin
                         'label' => 'Repeat password',
                     ],
                 ])
-                ->add('mobile')
+                ->add('mobile', PhoneNumberType::class, [
+                    'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
+                    'preferred_country_choices' => ['DE', 'AT', 'CH'],
+                ])
                 ->add('locale', 'locale')
             ->end()
             ->with('Roles', ['class' => 'col-md-4'])
