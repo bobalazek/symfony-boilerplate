@@ -109,7 +109,8 @@ class TwoFactorAuthenticationManager
                 ->get('app.user_login_code_manager')
                 ->add($code, 'sms');
 
-            $to = $this->container->get('libphonenumber.phone_number_util')
+            $to = $this->container
+                ->get('libphonenumber.phone_number_util')
                 ->format(
                     $user->getMobile(),
                     PhoneNumberFormat::INTERNATIONAL
