@@ -304,7 +304,7 @@ class TwoFactorAuthenticationController extends Controller
         if ($userBlockedAction) {
             throw new BruteForceAttemptException(
                 $this->get('translator')->trans(
-                    'Your account has been blocked from logging in. The block will be released at %time%.',
+                    'login.tfa.too_many_attempts.text',
                     [
                         '%time%' => $userBlockedAction->getExpiresAt()->format($dateTimeFormat),
                     ]
