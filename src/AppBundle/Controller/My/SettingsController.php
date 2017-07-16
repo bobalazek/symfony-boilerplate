@@ -178,7 +178,7 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.email_activation.success.code_invalid.flash_message.text'
+                        'my.settings.email_activation.code_invalid.flash_message.text'
                     )
                );
             }
@@ -209,7 +209,7 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.mobile_activation.success.code_invalid.flash_message.text'
+                        'my.settings.mobile_activation.code_invalid.flash_message.text'
                     )
                );
             }
