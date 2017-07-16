@@ -54,7 +54,7 @@ class SmsSenderService
             );
         }
 
-        if (isset($json->error) {
+        if (isset($json->error)) {
             throw new SmsSenderException(
                 $json->error->message
             );
