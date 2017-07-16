@@ -58,10 +58,8 @@ class TwoFactorAuthenticatorManager
      */
     public function getQRContent(User $user)
     {
-        $tfaParameters = $this->container
-            ->getParameter('two_factor_authenticator');
-        $hostname = $tfaParameters['hostname'];
-        $issuer = $tfaParameters['issuer'];
+        $hostname = $this->container->getParameter('two_factor_authenticator_hostname');
+        $issuer = $this->container->getParameter('two_factor_authenticator_issuer');
         $secret = $user->getTFAAuthenticatorSecret();
 
         $userAndHost = rawurlencode($user->getUsername()).
