@@ -2281,7 +2281,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -4320,16 +4320,16 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/assetic-bundle.git",
-                "reference": "0241b135ff64c6031048c6425cd833a8300da46b"
+                "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/0241b135ff64c6031048c6425cd833a8300da46b",
-                "reference": "0241b135ff64c6031048c6425cd833a8300da46b",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/2e0a23a4874838e26de6f025e02fc63328921a4c",
+                "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c",
                 "shasum": ""
             },
             "require": {
@@ -4386,7 +4386,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2016-11-22T11:42:57+00:00"
+            "time": "2017-07-14T07:26:46+00:00"
         },
         {
             "name": "symfony/monolog-bundle",

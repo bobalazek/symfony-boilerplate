@@ -20,22 +20,25 @@ parameters:
     date_time_format: "d.m.Y H:i:s"
     uploads_directory: '%kernel.root_dir%/../web/assets/uploads'
     uploads_path: '/assets/uploads'
-    reset_password_expiry_time: '15 minutes'
-    mobile_activation_code_expiry_time: '15 minutes'
     deployment_emails: # to whom should the email be sent, after a successful deployment?
         bobalazek124@gmail.com: 'Borut'
-    google_authenticator_secret: 'XVQ9UHNO75HRUKJ9'
     brute_force:
         max_attempts_before_block: 10
         block_time: 600 # in seconds; 10 minutes
         watch_time: 300 # in seconds; 5 minutes; compare the last X (watch_time) seconds if Y (max_attempts_before_block) attempts appeared
+    reset_password:
+        expiry_time: 900 # in seconds; 15 minutes
     recovery_codes:
         count: 8 # how many codes should be generated?
     login_code:
-        expires_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
-    two_factor_authentication:
-        authenticator_hostname: localhost
-        authenticator_issuer: Corcosoft
+        expiry_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
+    two_factor_authenticator:
+        hostname: localhost
+        issuer: Corcosoft
+    sms_sender:
+        from: ~
+        url: ~
+        token: ~
     knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
     app.security.authentication.listener.form.class: AppBundle\EventListener\UsernamePasswordFormAuthenticationListener
 

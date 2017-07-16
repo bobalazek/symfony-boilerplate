@@ -38,7 +38,7 @@ class UserLoginCodeManager
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $sessionId = $session->getId();
         $expiresAt = (new \Datetime())->add(
-            new \Dateinterval('PT'.$loginCodeParameters['expires_time'].'S')
+            new \Dateinterval('PT'.$loginCodeParameters['expiry_time'].'S')
         );
 
         $userLoginCode = new UserLoginCode();
