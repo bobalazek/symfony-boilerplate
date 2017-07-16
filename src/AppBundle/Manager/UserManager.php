@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;
+use AppBundle\Utils\Helpers;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -24,7 +25,7 @@ class UserManager
     {
         $user
             ->setEmailActivationCode(
-                md5(uniqid(null, true))
+                Helpers::getRandomString(32)
             )
             ->setPlainPassword(
                 $user->getPlainPassword(),
@@ -160,7 +161,9 @@ class UserManager
     public function resetPasswordRequest(User $user, $persist = true)
     {
         $user
-            ->setResetPasswordCode(md5(uniqid(null, true)))
+            ->setResetPasswordCode(
+                Helpers::getRandomString(32)
+            )
             ->setResetPasswordCodeExpiresAt(
                 new \Datetime(
                     'now +'.$this->container->getParameter('reset_password_expiry_time')
@@ -214,7 +217,9 @@ class UserManager
     public function newEmailRequest(User $user, User $userOld, $persist = false)
     {
         $user
-            ->setNewEmailCode(md5(uniqid(null, true)))
+            ->setNewEmailCode(
+                Helpers::getRandomString(32)
+            )
             ->setNewEmail($user->getEmail())
             ->setEmail($userOld->getEmail())
         ;
@@ -322,7 +327,7 @@ class UserManager
 
         $user
             ->setEmailActivationCode(
-                md5(uniqid(null, true))
+                Helpers::getRandomString(32)
             )
         ;
 
@@ -421,7 +426,9 @@ class UserManager
     public function newMobileRequest(User $user, User $userOld, $persist = false)
     {
         $user
-            ->setNewMobileCode(md5(uniqid(null, true)))
+            ->setNewMobileCode(
+                Helpers::getRandomString(8)
+            )
             ->setNewMobile($user->getMobile())
             ->setMobile($userOld->getMobile())
         ;
@@ -478,7 +485,7 @@ class UserManager
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
                 'subject' => $this->container->get('translator')->trans(
-                    'emails.user.new_mobile_confirmation.subject',
+                    'emails.user.new_mobile.confirmation.subject',
                     [
                         '%app_name%' => $this->container->getParameter('app_name'),
                     ]
@@ -520,7 +527,7 @@ class UserManager
 
         $user
             ->setMobileActivationCode(
-                md5(uniqid(null, true))
+                Helpers::getRandomString(8)
             )
         ;
 

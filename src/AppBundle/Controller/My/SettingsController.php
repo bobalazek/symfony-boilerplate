@@ -70,6 +70,11 @@ class SettingsController extends Controller
                         'my.settings.new_mobile.success.flash_message.text'
                     )
                 );
+            } elseif (
+                empty($user->getMobile()) &&
+                $userOld->getMobile() !== $user->getMobile()
+            ) {
+                $user->setMobileActivatedAt(null);
             }
 
             $em->persist($user);

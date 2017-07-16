@@ -71,12 +71,12 @@ class BruteForceManager
         $userAgent = $request->headers->get('User-Agent');
 
         $attemptsCount = $em->getRepository('AppBundle:UserAction')
-            ->getFailedLoginAttemptsCount(
+            ->getCount(
+                $userActionKey,
+                $bruteForceParameters['watch_time'],
                 $ip,
                 $sessionId,
-                $userAgent,
-                $userActionKey,
-                $bruteForceParameters['watch_time']
+                $userAgent
             );
 
         if ($attemptsCount > $bruteForceParameters['max_attempts_before_block']) {

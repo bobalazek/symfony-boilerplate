@@ -10,13 +10,15 @@ use Doctrine\ORM\EntityRepository;
 class UserActionRepository extends EntityRepository
 {
     /**
+     * Get the number of certain actions in a certain time frame until now.
+     *
      * @param string $ip
      * @param string $sessionId
      * @param string $userAgent
      * @param string $key
      * @param int    $watchTime For how long back do we track the login attempts?
      */
-    public function getFailedLoginAttemptsCount($ip, $sessionId, $userAgent, $key, $watchTime)
+    public function getCount($key, $watchTime, $ip, $sessionId, $userAgent)
     {
         $createdAt = (new \Datetime())->sub(
             new \Dateinterval('PT'.$watchTime.'S')
@@ -24,8 +26,13 @@ class UserActionRepository extends EntityRepository
 
         return $this->createQueryBuilder('ua')
             ->select('COUNT(ua.id)')
-            ->where('ua.key = :key AND ua.createdAt > :createdAt')
+            ->where(implode(' AND ', [
+                'ua.key = :key',
+                'ua.ip = :ip',
+                'ua.createdAt = :createdAt',
+            ]))
             ->setParameter('key', $key)
+            ->setParameter('ip', $ip)
             ->setParameter('createdAt', $createdAt)
             ->getQuery()
             ->getSingleScalarResult();
