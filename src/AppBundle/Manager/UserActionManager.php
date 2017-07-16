@@ -60,12 +60,14 @@ class UserActionManager
         $em->persist($userAction);
         $em->flush();
 
-        $this->container->get('app.brute_force_manager')
-            ->handleUserBlockedAction(
-                $user,
-                $action,
-                $key
-            );
+        if ($handleBlockedActions) {
+            $this->container->get('app.brute_force_manager')
+                ->handleUserBlockedAction(
+                    $user,
+                    $action,
+                    $key
+                );
+        }
 
         return true;
     }
