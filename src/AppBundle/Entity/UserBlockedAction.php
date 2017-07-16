@@ -26,7 +26,7 @@ class UserBlockedAction
 
     public static $actions = [
         'login' => 'Login',
-        'login.2fa' => '2FA Login',
+        'login.tfa' => '2FA Login',
     ];
 
     /**

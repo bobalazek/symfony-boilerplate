@@ -184,7 +184,7 @@ class TwoFactorAuthenticationController extends Controller
 
         $this->get('app.user_action_manager')
             ->add(
-                'user.login.2fa',
+                'user.login.tfa',
                 'User has been logged in via Two-factor authentication!'
             );
 
@@ -299,7 +299,7 @@ class TwoFactorAuthenticationController extends Controller
                 $ip,
                 $sessionId,
                 $userAgent,
-                'login.2fa'
+                'login.tfa'
             );
         if ($userBlockedAction) {
             throw new BruteForceAttemptException(
@@ -342,9 +342,9 @@ class TwoFactorAuthenticationController extends Controller
 
             $this->get('app.user_action_manager')
                 ->add(
-                    'user.login.2fa.method_switch',
+                    'user.login.tfa.method_switch',
                     $this->get('translator')->trans(
-                        'my.login.2fa.method_switch.user_action.text'
+                        'my.login.tfa.method_switch.user_action.text'
                     ),
                     [
                         'current_method' => $currentMethod,
@@ -359,7 +359,7 @@ class TwoFactorAuthenticationController extends Controller
             $this->addFlash(
                 'info',
                 $this->get('translator')->trans(
-                    'login.tfa.method_unavailable'
+                    'login.tfa.method_unavailable.text'
                 )
             );
         }
@@ -380,9 +380,9 @@ class TwoFactorAuthenticationController extends Controller
     {
         $this->get('app.user_action_manager')
             ->add(
-                'user.login.2fa.fail',
+                'user.login.tfa.fail',
                 $this->get('translator')->trans(
-                    'my.login.2fa.fail.text'
+                    'login.tfa.fail.text'
                 ),
                 [
                     'method' => $method,
@@ -393,8 +393,8 @@ class TwoFactorAuthenticationController extends Controller
         $this->get('app.brute_force_manager')
             ->handleUserBlockedAction(
                 $user,
-                'login.2fa',
-                'user.login.2fa.fail'
+                'login.tfa',
+                'user.login.tfa.fail'
             );
     }
 

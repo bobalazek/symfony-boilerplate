@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use AppBundle\Entity\User;
 use AppBundle\Utils\Helpers;
+use libphonenumber\PhoneNumberFormat;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -50,8 +51,8 @@ class TwoFactorAuthenticationManager
             $this->container
                 ->get('app.user_action_manager')
                 ->add(
-                    'user.login.2fa.gate',
-                    'User has been logged in, but still needs to confirm 2FA!'
+                    'user.login.tfa.gate',
+                    'login.tfa.gate.user_action.text'
                 );
 
             $this->container
@@ -82,13 +83,13 @@ class TwoFactorAuthenticationManager
 
             $userLoginCode = $this->container
                 ->get('app.user_login_code_manager')
-                ->add($code, $method);
+                ->add($code, 'email');
 
             $this->container
                 ->get('app.mailer')
                 ->swiftMessageInitializeAndSend([
                     'subject' => $this->container->get('translator')->trans(
-                        'emails.user.login.2fa.subject',
+                        'emails.user.login.tfa.subject',
                         [
                             '%app_name%' => $this->container->getParameter('app_name'),
                         ]
@@ -106,9 +107,24 @@ class TwoFactorAuthenticationManager
 
             $userLoginCode = $this->container
                 ->get('app.user_login_code_manager')
-                ->add($code, $method);
+                ->add($code, 'sms');
 
-            // TODO: send SMS
+            $to = $this->container->get('libphonenumber.phone_number_util')
+                ->format(
+                    $user->getMobile(),
+                    PhoneNumberFormat::INTERNATIONAL
+                );
+
+            $this->container->get('app.sms_sender')
+                ->send(
+                    $to,
+                    $this->container->get('translator')->trans(
+                        'login.tfa.sms.text',
+                        [
+                            '%code%' => $code,
+                        ]
+                    )
+                );
         }
 
         return true;
