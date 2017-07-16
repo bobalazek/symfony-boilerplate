@@ -90,7 +90,18 @@
                 {% endif %}
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">
-                <h3>{{ 'Recovery codes' | trans }}</h3>
+                <h3>
+                    {{ 'Recovery codes' | trans }}
+                    {% if 'recovery_code' in app.user.getAvailableTFAMethods() | keys %}
+                        <span class="label label-success">
+                            {{ 'Active' | trans }}
+                        </span>
+                    {% else %}
+                        <span class="label label-danger">
+                            {{ 'Inactive' | trans }}
+                        </span>
+                    {% endif %}
+                </h3>
                 <p class="help-block">
                     {{ 'my.tfa.recovery_codes.message.text' | trans }}
                 </p>

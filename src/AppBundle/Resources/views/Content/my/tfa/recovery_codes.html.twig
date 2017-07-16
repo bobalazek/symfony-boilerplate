@@ -10,7 +10,24 @@
             {{ 'back' | trans }}
         </a>
     </h1>
-    <h2>{{ 'Recovery codes' | trans }}</h2>
+    <h2>
+        {{ 'Recovery codes' | trans }}
+        {% if app.user.getUserRecoveryCodes() %}
+            <a class="btn btn-danger"
+                href="{{ url('my.tfa.recovery_codes', {
+                    action: 'generate',
+                }) }}">
+                {{ 'Regenerate' | trans }}
+            </a>
+        {% else %}
+            <a class="btn btn-success"
+                href="{{ url('my.tfa.recovery_codes', {
+                    action: 'generate',
+                }) }}">
+                {{ 'Generate' | trans }}
+            </a>
+        {% endif %}
+    </h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>

@@ -354,6 +354,7 @@ class TwoFactorAuthenticationController extends Controller
                             'current_method' => $currentMethod,
                             'new_method' => $method,
                         ],
+                        $user,
                         true,
                         'login.tfa.method_switch'
                     );

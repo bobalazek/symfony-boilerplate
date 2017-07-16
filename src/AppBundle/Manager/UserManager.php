@@ -252,6 +252,7 @@ class UserManager
                     'current' => $user->getEmail(),
                     'new' => $user->getNewEmail(),
                 ],
+                $user,
                 true,
                 'settings.new_email'
             );
@@ -474,6 +475,7 @@ class UserManager
                     'current' => $user->getMobile(),
                     'new' => $user->getNewMobile(),
                 ],
+                $user,
                 true,
                 'settings.new_mobile'
             );

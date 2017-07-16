@@ -16,9 +16,7 @@ class AuthenticatorController extends Controller
      * @Route("/my/tfa/authenticator", name="my.tfa.authenticator")
      * @Security("has_role('ROLE_USER')")
      */
-    public function authenticatorAction(
-        Request $request
-    ) {
+    public function authenticatorAction(Request $request) {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
