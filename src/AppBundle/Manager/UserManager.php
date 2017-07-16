@@ -251,7 +251,9 @@ class UserManager
                 [
                     'current' => $user->getEmail(),
                     'new' => $user->getNewEmail(),
-                ]
+                ],
+                true,
+                'settings.new_email'
             );
 
         $this->container->get('app.mailer')
@@ -269,13 +271,6 @@ class UserManager
                 ],
             ])
         ;
-
-        $this->container->get('app.brute_force_manager')
-            ->handleUserBlockedAction(
-                $user,
-                'settings.new_email',
-                'user.settings.new_email.request'
-            );
 
         return true;
     }
@@ -360,6 +355,18 @@ class UserManager
             $em->flush();
         }
 
+        $this->container->get('app.user_action_manager')
+            ->add(
+                'user.settings.email_activation.request',
+                $this->container->get('translator')->trans(
+                    'my.settings.email_activation.request.user_action.text'
+                ),
+                [],
+                $user,
+                true,
+                'settings.email_activation'
+            );
+
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
                 'subject' => $this->container->get('translator')->trans(
@@ -375,23 +382,6 @@ class UserManager
                 ],
             ])
         ;
-
-        $this->container->get('app.user_action_manager')
-            ->add(
-                'user.settings.email_activation.request',
-                $this->container->get('translator')->trans(
-                    'my.settings.email_activation.request.user_action.text'
-                ),
-                [],
-                $user
-            );
-
-        $this->container->get('app.brute_force_manager')
-            ->handleUserBlockedAction(
-                $user,
-                'settings.email_activation',
-                'user.settings.email_activation.request'
-            );
 
         return true;
     }
@@ -483,7 +473,9 @@ class UserManager
                 [
                     'current' => $user->getMobile(),
                     'new' => $user->getNewMobile(),
-                ]
+                ],
+                true,
+                'settings.new_mobile'
             );
 
         $to = $this->container->get('libphonenumber.phone_number_util')
@@ -501,13 +493,6 @@ class UserManager
                         '%code%' => $user->getNewMobileCode(),
                     ]
                 )
-            );
-
-        $this->container->get('app.brute_force_manager')
-            ->handleUserBlockedAction(
-                $user,
-                'settings.new_mobile',
-                'user.settings.new_mobile.request'
             );
 
         return true;
@@ -593,6 +578,18 @@ class UserManager
             $em->flush();
         }
 
+        $this->container->get('app.user_action_manager')
+            ->add(
+                'user.settings.mobile_activation.request',
+                $this->container->get('translator')->trans(
+                    'my.settings.mobile_activation.request.user_action.text'
+                ),
+                [],
+                $user,
+                true,
+                'settings.mobile_activation'
+            );
+
         $to = $this->container->get('libphonenumber.phone_number_util')
             ->format(
                 $user->getMobile(),
@@ -609,23 +606,6 @@ class UserManager
                     ]
                 )
             );
-
-        $this->container->get('app.user_action_manager')
-            ->add(
-                'user.settings.mobile_activation.request',
-                $this->container->get('translator')->trans(
-                    'my.settings.mobile_activation.request.user_action.text'
-                ),
-                [],
-                $user
-            );
-
-        $this->container->get('app.brute_force_manager')
-                ->handleUserBlockedAction(
-                    $user,
-                    'settings.mobile_activation',
-                    'user.settings.mobile_activation.request'
-                );
 
         return true;
     }

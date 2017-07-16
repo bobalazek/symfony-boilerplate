@@ -18,11 +18,19 @@ class UserActionManager
      * @param string $message
      * @param array  $data
      * @param User   $user
+     * @param bool   $handleBlockedActions should it check if the action was executed too much times? Create a block if so
+     * @param string $action               What is the action key?
      *
      * @return bool
      */
-    public function add($key, $message, array $data = [], User $user = null)
-    {
+    public function add(
+        $key,
+        $message,
+        array $data = [],
+        User $user = null,
+        $handleBlockedActions = false,
+        $action = null
+    ) {
         $em = $this->container->get('doctrine.orm.entity_manager');
         $token = $this->container->get('security.token_storage')->getToken();
         $session = $this->container->get('session');
@@ -51,6 +59,13 @@ class UserActionManager
 
         $em->persist($userAction);
         $em->flush();
+
+        $this->container->get('app.brute_force_manager')
+            ->handleUserBlockedAction(
+                $user,
+                $action,
+                $key
+            );
 
         return true;
     }

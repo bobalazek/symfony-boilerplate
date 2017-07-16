@@ -332,25 +332,37 @@ class TwoFactorAuthenticationController extends Controller
         $method = $request->query->get('method');
 
         if (in_array($method, array_keys($alternativeMethods))) {
-            $session->set(
-                'two_factor_authentication_method',
-                $method
-            );
+            try {
+                $this->container->get('app.brute_force_manager')
+                    ->checkIfBlocked($request, 'login.tfa.method_switch');
 
-            $this->get('app.two_factor_authentication_manager')
-                ->handleMethod($method, $user);
-
-            $this->get('app.user_action_manager')
-                ->add(
-                    'user.login.tfa.method_switch',
-                    $this->get('translator')->trans(
-                        'my.login.tfa.method_switch.user_action.text'
-                    ),
-                    [
-                        'current_method' => $currentMethod,
-                        'new_method' => $method,
-                    ]
+                $session->set(
+                    'two_factor_authentication_method',
+                    $method
                 );
+
+                $this->get('app.two_factor_authentication_manager')
+                    ->handleMethod($method, $user);
+
+                $this->get('app.user_action_manager')
+                    ->add(
+                        'user.login.tfa.method_switch',
+                        $this->get('translator')->trans(
+                            'my.login.tfa.method_switch.user_action.text'
+                        ),
+                        [
+                            'current_method' => $currentMethod,
+                            'new_method' => $method,
+                        ],
+                        true,
+                        'login.tfa.method_switch'
+                    );
+            } catch (BruteForceAttemptException $e) {
+                $this->addFlash(
+                    'danger',
+                    $e->getMessage()
+                );
+            }
 
             return $this->redirectToRoute(
                 'login.tfa'
