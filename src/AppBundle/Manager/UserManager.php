@@ -5,6 +5,7 @@ namespace AppBundle\Manager;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;
 use AppBundle\Utils\Helpers;
+use libphonenumber\PhoneNumberFormat;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -430,6 +431,8 @@ class UserManager
      */
     public function newMobileRequest(User $user, User $userOld, $persist = false)
     {
+        // TODO: prevent sending it too much times
+
         $user
             ->setNewMobileCode(
                 Helpers::getRandomString(8)
@@ -456,7 +459,22 @@ class UserManager
                 ]
             );
 
-        // TODO: send SMS code
+        $to = $this->container->get('libphonenumber.phone_number_util')
+            ->format(
+                $user->getNewMobile(),
+                PhoneNumberFormat::INTERNATIONAL
+            );
+
+        $this->container->get('app.sms_sender')
+            ->send(
+                $to,
+                $this->container->get('translator')->trans(
+                    'my.settings.new_mobile.request.sms.text',
+                    [
+                        '%code%' => $user->getNewMobileCode(),
+                    ]
+                )
+            );
 
         return true;
     }
@@ -542,7 +560,22 @@ class UserManager
             $em->flush();
         }
 
-        // TODO: send code via SMS
+        $to = $this->container->get('libphonenumber.phone_number_util')
+            ->format(
+                $user->getMobile(),
+                PhoneNumberFormat::INTERNATIONAL
+            );
+
+        $this->container->get('app.sms_sender')
+            ->send(
+                $to,
+                $this->container->get('translator')->trans(
+                    'my.settings.mobile_activation.request.sms.text',
+                    [
+                        '%code%' => $user->getMobileActivationCode(),
+                    ]
+                )
+            );
 
         $this->container->get('app.user_action_manager')
             ->add(

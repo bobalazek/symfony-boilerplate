@@ -47,7 +47,8 @@
         "jenssegers/agent": "^2.5",
         "cravler/maxmind-geoip-bundle": "^1.1",
         "sonata-project/google-authenticator": "^2.0",
-        "misd/phone-number-bundle": "^1.2"
+        "misd/phone-number-bundle": "^1.2",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
