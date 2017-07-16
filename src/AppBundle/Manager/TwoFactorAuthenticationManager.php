@@ -7,9 +7,9 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use libphonenumber\PhoneNumberFormat;
 use AppBundle\Entity\User;
 use AppBundle\Utils\Helpers;
-use libphonenumber\PhoneNumberFormat;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
