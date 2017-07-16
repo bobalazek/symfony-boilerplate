@@ -50,7 +50,7 @@ class AuthenticationSubscriber implements EventSubscriberInterface
             $user
         );
 
-        $this->bruteForceManager->handleUserLoginBlocks(
+        $this->bruteForceManager->handleUserBlockedAction(
             $user,
             'login',
             'user.login.fail'

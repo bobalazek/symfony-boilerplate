@@ -37,7 +37,7 @@ class UsernamePasswordFormAuthenticationListener extends BaseListener
      */
     protected function attemptAuthentication(Request $request)
     {
-        $this->bruteForceManager->attemptAuthentication($request);
+        $this->bruteForceManager->checkIfBlocked($request, 'login');
 
         return parent::attemptAuthentication($request);
     }

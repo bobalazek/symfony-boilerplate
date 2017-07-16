@@ -18,7 +18,7 @@ class BruteForceManager
     /**
      * @return bool
      */
-    public function attemptAuthentication(Request $request)
+    public function checkIfBlocked(Request $request, $action = 'login')
     {
         $session = $this->container->get('session');
         $em = $this->container->get('doctrine.orm.entity_manager');
@@ -32,7 +32,7 @@ class BruteForceManager
                 $ip,
                 $sessionId,
                 $userAgent,
-                'login'
+                $action
             );
         if ($userBlockedAction) {
             throw new BruteForceAttemptException(
@@ -57,7 +57,7 @@ class BruteForceManager
      *
      * @return bool
      */
-    public function handleUserLoginBlocks(
+    public function handleUserBlockedAction(
         User $user = null,
         $action = 'login',
         $userActionKey = 'user.login.fail'

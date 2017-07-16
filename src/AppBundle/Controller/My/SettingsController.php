@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Exception\BruteForceAttemptException;
 use AppBundle\Form\Type\My\SettingsType;
 use AppBundle\Entity\User;
 
@@ -46,30 +47,44 @@ class SettingsController extends Controller
             $user = $form->getData();
 
             if ($userOld->getEmail() !== $user->getEmail()) {
-                $this->get('app.user_manager')
-                    ->newEmailRequest($user, $userOld);
+                try {
+                    $this->get('app.user_manager')
+                        ->newEmailRequest($user, $userOld);
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans(
-                        'my.settings.new_email.request.success.flash_message.text'
-                    )
-                );
+                    $this->addFlash(
+                        'success',
+                        $this->get('translator')->trans(
+                            'my.settings.new_email.request.success.flash_message.text'
+                        )
+                    );
+                } catch (BruteForceAttemptException $e) {
+                    $this->addFlash(
+                        'warning',
+                        $e->getMessage()
+                    );
+                }
             }
 
             if (
                 !empty($user->getMobile()) &&
                 $userOld->getMobile() !== $user->getMobile()
             ) {
-                $this->get('app.user_manager')
-                    ->newMobileRequest($user, $userOld);
+                try {
+                    $this->get('app.user_manager')
+                        ->newMobileRequest($user, $userOld);
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans(
-                        'my.settings.new_mobile.request.success.flash_message.text'
-                    )
-                );
+                    $this->addFlash(
+                        'success',
+                        $this->get('translator')->trans(
+                            'my.settings.new_mobile.request.success.flash_message.text'
+                        )
+                    );
+                } catch (BruteForceAttemptException $e) {
+                    $this->addFlash(
+                        'warning',
+                        $e->getMessage()
+                    );
+                }
             } elseif (
                 empty($user->getMobile()) &&
                 $userOld->getMobile() !== $user->getMobile()
@@ -128,29 +143,45 @@ class SettingsController extends Controller
         /***** Actions *****/
         $action = $request->query->get('action');
         if ($action === 'resend_activation_email') {
-            $this->get('app.user_manager')->emailActivationRequest(
-                $this->getUser()
-            );
+            try {
+                $this->get('app.user_manager')
+                    ->emailActivationRequest(
+                        $this->getUser()
+                    );
 
-            $this->addFlash(
-                'success',
-                $this->get('translator')->trans(
-                    'my.settings.email_activation.code_resent.flash_message.text'
-                )
-           );
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.email_activation.request.success.flash_message.text'
+                    )
+               );
+            } catch (BruteForceAttemptException $e) {
+                $this->addFlash(
+                   'warning',
+                   $e->getMessage()
+               );
+            }
 
             return $this->redirectToRoute('my.settings');
         } elseif ($action === 'resend_activation_mobile') {
-            $this->get('app.user_manager')->mobileActivationRequest(
-                $this->getUser()
-            );
+            try {
+                $this->get('app.user_manager')
+                    ->mobileActivationRequest(
+                        $this->getUser()
+                    );
 
-            $this->addFlash(
-                'success',
-                $this->get('translator')->trans(
-                    'my.settings.mobile_activation.code_resent.flash_message.text'
-                )
-           );
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.mobile_activation.request.code_resent.flash_message.text'
+                    )
+               );
+            } catch (BruteForceAttemptException $e) {
+                $this->addFlash(
+                   'warning',
+                   $e->getMessage()
+               );
+            }
 
             return $this->redirectToRoute('my.settings');
         }
@@ -166,19 +197,20 @@ class SettingsController extends Controller
                 ]);
 
             if ($userByEmailActivationCode) {
-                $this->get('app.user_manager')->emailActivationConfirmation($user);
+                $this->get('app.user_manager')
+                    ->emailActivationConfirmation($user);
 
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.email_activation.success.flash_message.text'
+                        'my.settings.email_activation.confirmation.success.flash_message.text'
                     )
                 );
             } else {
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.email_activation.code_invalid.flash_message.text'
+                        'my.settings.email_activation.confirmation.code_invalid.flash_message.text'
                     )
                );
             }
@@ -202,14 +234,14 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.mobile_activation.success.flash_message.text'
+                        'my.settings.mobile_activation.confirmation.success.flash_message.text'
                     )
                 );
             } else {
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.mobile_activation.code_invalid.flash_message.text'
+                        'my.settings.mobile_activation.confirmation.code_invalid.flash_message.text'
                     )
                );
             }
@@ -234,14 +266,14 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.new_email.success.flash_message.text'
+                        'my.settings.new_email.confirmation.success.flash_message.text'
                     )
                 );
             } else {
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.new_email.code_invalid.flash_message.text'
+                        'my.settings.new_email.confirmation.code_invalid.flash_message.text'
                     )
                );
             }
@@ -266,14 +298,14 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.new_mobile.success.flash_message.text'
+                        'my.settings.new_mobile.confirmation.success.flash_message.text'
                     )
                 );
             } else {
                 $this->addFlash(
                     'warning',
                     $this->get('translator')->trans(
-                        'my.settings.new_mobile.code_invalid.flash_message.text'
+                        'my.settings.new_mobile.confirmation.code_invalid.flash_message.text'
                     )
                );
             }

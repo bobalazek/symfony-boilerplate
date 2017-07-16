@@ -391,7 +391,7 @@ class TwoFactorAuthenticationController extends Controller
             );
 
         $this->get('app.brute_force_manager')
-            ->handleUserLoginBlocks(
+            ->handleUserBlockedAction(
                 $user,
                 'login.2fa',
                 'user.login.2fa.fail'

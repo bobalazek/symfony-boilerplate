@@ -3,9 +3,10 @@
 namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use libphonenumber\PhoneNumberFormat;
 use AppBundle\Entity\User;
 use AppBundle\Utils\Helpers;
-use libphonenumber\PhoneNumberFormat;
+use AppBundle\Exception\BruteForceAttemptException;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -219,9 +220,14 @@ class UserManager
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
+     *
+     * @throws BruteForceAttemptException
      */
     public function newEmailRequest(User $user, User $userOld, $persist = false)
     {
+        $this->container->get('app.brute_force_manager')
+            ->checkIfBlocked($request, 'settings.new_email');
+
         $user
             ->setNewEmailCode(
                 Helpers::getRandomString(32)
@@ -263,6 +269,13 @@ class UserManager
                 ],
             ])
         ;
+
+        $this->container->get('app.brute_force_manager')
+            ->handleUserBlockedAction(
+                $user,
+                'settings.new_email',
+                'user.settings.new_email.request'
+            );
 
         return true;
     }
@@ -327,10 +340,13 @@ class UserManager
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
+     *
+     * @throws BruteForceAttemptException
      */
     public function emailActivationRequest(User $user, $persist = true)
     {
-        // TODO: prevent request if old one is still active
+        $this->container->get('app.brute_force_manager')
+            ->checkIfBlocked($request, 'settings.email_activation');
 
         $user
             ->setEmailActivationCode(
@@ -368,6 +384,13 @@ class UserManager
                 ),
                 [],
                 $user
+            );
+
+        $this->container->get('app.brute_force_manager')
+            ->handleUserBlockedAction(
+                $user,
+                'settings.email_activation',
+                'user.settings.email_activation.request'
             );
 
         return true;
@@ -429,10 +452,13 @@ class UserManager
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
+     *
+     * @throws BruteForceAttemptException
      */
     public function newMobileRequest(User $user, User $userOld, $persist = false)
     {
-        // TODO: prevent sending it too much times
+        $this->container->get('app.brute_force_manager')
+            ->checkIfBlocked($request, 'settings.new_mobile');
 
         $user
             ->setNewMobileCode(
@@ -475,6 +501,13 @@ class UserManager
                         '%code%' => $user->getNewMobileCode(),
                     ]
                 )
+            );
+
+        $this->container->get('app.brute_force_manager')
+            ->handleUserBlockedAction(
+                $user,
+                'settings.new_mobile',
+                'user.settings.new_mobile.request'
             );
 
         return true;
@@ -540,10 +573,13 @@ class UserManager
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
+     *
+     * @throws BruteForceAttemptException
      */
     public function mobileActivationRequest(User $user, $persist = true)
     {
-        // TODO: prevent request if old one is still active
+        $this->container->get('app.brute_force_manager')
+            ->checkIfBlocked($request, 'settings.mobile_activation');
 
         $user
             ->setMobileActivationCode(
@@ -583,6 +619,13 @@ class UserManager
                 [],
                 $user
             );
+
+        $this->container->get('app.brute_force_manager')
+                ->handleUserBlockedAction(
+                    $user,
+                    'settings.mobile_activation',
+                    'user.settings.mobile_activation.request'
+                );
 
         return true;
     }
