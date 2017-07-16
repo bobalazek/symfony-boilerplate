@@ -280,6 +280,7 @@ class UserManager
             ->setNewEmailCode(null)
             ->setEmail($user->getNewEmail())
             ->setNewEmail(null)
+            ->setEmailActivatedAt(new \DateTime())
         ;
 
         if ($persist) {
@@ -492,12 +493,8 @@ class UserManager
             ->setNewMobileCode(null)
             ->setMobile($user->getNewMobile())
             ->setNewMobile(null)
+            ->setMobileActivatedAt(new \DateTime())
         ;
-
-        // Check if the mobile wasn't yet activated
-        if ($user->getMobileActivatedAt() === null) {
-            $user->setMobileActivatedAt(new \Datetime());
-        }
 
         if ($persist) {
             $em = $this->container->get('doctrine.orm.entity_manager');
