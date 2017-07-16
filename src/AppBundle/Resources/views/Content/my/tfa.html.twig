@@ -15,35 +15,58 @@
         <div class="help-block">
             {{ 'my.tfa.form.default_method.help.text' | trans }}
         </div>
-        <h3>{{ 'Email' | trans }}</h3>
-        {{ form_row(form.tfaEmailEnabled) }}
-        <div class="help-block">
-            {{ 'my.tfa.form.email_enabled.help.text' | trans }}
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{ 'Email' | trans }}</h3>
+                {{ form_row(form.tfaEmailEnabled) }}
+                <div class="help-block">
+                    {{ 'my.tfa.form.email_enabled.help.text' | trans }}
+                </div>
+                {% if app.user.isEmailActivated() == false %}
+                    <div class="alert alert-info">
+                        {{ 'my.tfa.email.not_yet_activated.text' | trans }}
+                    </div>
+                {% endif %}
+            </div> <!-- /.col-md-6 -->
+            <div class="col-md-6">
+                <h3>{{ 'SMS' | trans }}</h3>
+                {{ form_row(form.tfaSmsEnabled) }}
+                <div class="help-block">
+                    {{ 'my.tfa.form.sms_enabled.help.text' | trans }}
+                    {% if app.user.isMobileActivated() == false %}
+                        <div class="alert alert-info">
+                            {{ 'my.tfa.sms.not_yet_activated.text' | trans }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div> <!-- /.col-md-6 -->
+            <div class="col-md-6">
+                <h3>{{ 'Authenticator' | trans }}</h3>
+                {{ form_row(form.tfaAuthenticatorEnabled) }}
+                <div class="help-block">
+                    {{ 'my.tfa.form.authenticator_enabled.help.text' | trans }}
+                </div>
+                {% if app.user.isTFAAuthenticatorActivated() == false %}
+                    <div class="alert alert-info">
+                        {{ 'my.tfa.authenticator.not_yet_activated.text' | trans }}
+                    </div>
+                {% endif %}
+                <a class="btn btn-default"
+                    href="{{ url('my.tfa.authenticator') }}">
+                    {{ 'Prepare authenticator' | trans }}
+                </a>
+            </div> <!-- /.col-md-6 -->
+            <div class="col-md-6">
+                <h3>{{ 'Recovery codes' | trans }}</h3>
+                <p class="help-block">
+                    {{ 'my.tfa.recovery_codes.message.text' | trans }}
+                </p>
+                <a class="btn btn-default"
+                    href="{{ url('my.tfa.recovery_codes') }}">
+                    {{ 'Show codes' | trans }}
+                </a>
+            </div> <!-- /.col-md-6 -->
         </div>
-        <h3>{{ 'Authenticator' | trans }}</h3>
-        {{ form_row(form.tfaAuthenticatorEnabled) }}
-        <div class="help-block">
-            {{ 'my.tfa.form.authenticator_enabled.help.text' | trans }}
-        </div>
-        <div class="alert alert-info">
-            {% if app.user.isTFAAuthenticatorActivated() %}
-                {{ 'my.tfa.authenticator.already_activated.text' | trans }}
-            {% else %}
-                {{ 'my.tfa.authenticator.not_yet_activated.text' | trans }}
-            {% endif %}
-        </div>
-        <a class="btn btn-default"
-            href="{{ url('my.tfa.authenticator') }}">
-            {{ 'Prepare authenticator' | trans }}
-        </a>
-        <h3>{{ 'Recovery codes' | trans }}</h3>
-        <p class="help-block">
-            {{ 'my.tfa.recovery_codes.message.text' | trans }}
-        </p>
-        <a class="btn btn-default"
-            href="{{ url('my.tfa.recovery_codes') }}">
-            {{ 'Show codes' | trans }}
-        </a>
         <hr />
         <button type="submit"
             class="btn btn-primary btn-lg btn-block" />

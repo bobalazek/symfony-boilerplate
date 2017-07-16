@@ -31,6 +31,10 @@ class TwoFactorAuthenticationType extends AbstractType
                 'required' => false,
                 'label' => 'Enable email authentication',
             ])
+            ->add('tfaSmsEnabled', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Enable SMS authentication',
+            ])
             ->add('tfaAuthenticatorEnabled', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Enable authenticator',
