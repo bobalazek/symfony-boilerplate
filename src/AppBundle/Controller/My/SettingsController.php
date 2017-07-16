@@ -52,7 +52,7 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.new_email.success.flash_message.text'
+                        'my.settings.new_email.request.success.flash_message.text'
                     )
                 );
             }
@@ -67,7 +67,7 @@ class SettingsController extends Controller
                 $this->addFlash(
                     'success',
                     $this->get('translator')->trans(
-                        'my.settings.new_mobile.success.flash_message.text'
+                        'my.settings.new_mobile.request.success.flash_message.text'
                     )
                 );
             } elseif (
