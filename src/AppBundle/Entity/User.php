@@ -337,14 +337,14 @@ class User implements AdvancedUserInterface, \Serializable
         $criteria = Criteria::create();
 
         if ($onlyNonDeleted) {
-            $criteria->where(Criteria::expr()->eq(
+            $criteria->andWhere(Criteria::expr()->eq(
                 'deletedAt',
                 null
             ));
         }
 
         if ($onlyNonUsed) {
-            $criteria->where(Criteria::expr()->eq(
+            $criteria->andWhere(Criteria::expr()->eq(
                 'usedAt',
                 null
             ));

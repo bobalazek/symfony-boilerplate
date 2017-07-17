@@ -17,13 +17,25 @@
                 {% elseif method == 'recovery_code' %}
                     {% include 'AppBundle:Content:login/tfa/_method_recovery_code.html.twig' %}
                 {% else %}
-                    <div class="alert alert-danger">
-                        {{ 'login.tfa.invalid_method.text' | trans }}
-                    </div>
+                    {% if app.user.getAvailableTFAMethods() is not empty %}
+                        <div class="alert alert-info">
+                            {{ 'login.tfa.no_method_selected.text' | trans }}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-danger">
+                            {{ 'login.tfa.no_available_methods.text' | trans }}
+                        </div>
+                    {% endif %}
                 {% endif %}
                 {% if alternative_methods is not empty %}
                     <hr />
-                    <h3>{{ 'Alternative methods' | trans }}</h3>
+                    <h3>
+                        {% if method == null %}
+                            {{ 'Methods' | trans }}
+                        {% else %}
+                            {{ 'Alternative methods' | trans }}
+                        {% endif %}
+                    </h3>
                     <div class="list-group">
                         {% for alternative_method_key, alternative_method_label in alternative_methods %}
                             <a class="list-group-item"
@@ -34,7 +46,6 @@
                             </a>
                         {% endfor %}
                     </div>
-
                 {% endif %}
             </div>
         </div>

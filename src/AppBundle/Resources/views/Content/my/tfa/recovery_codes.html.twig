@@ -12,7 +12,7 @@
     </h1>
     <h2>
         {{ 'Recovery codes' | trans }}
-        {% if app.user.getUserRecoveryCodes() %}
+        {% if app.user.getUserRecoveryCodes() is not empty %}
             <a class="btn btn-danger"
                 href="{{ url('my.tfa.recovery_codes', {
                     action: 'generate',

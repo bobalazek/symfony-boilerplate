@@ -20,7 +20,10 @@ class TwoFactorAuthenticationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $defaultMethodChoices = array_flip(User::$tfaMethods);
+        $defaultMethodChoices = array_merge(
+            ['-- none --' => null],
+            array_flip(User::$tfaMethods)
+        );
         $availableMethods = $options['user']->getAvailableTFAMethods();
         $builder
             ->add('tfaEnabled', CheckboxType::class, [
@@ -31,7 +34,7 @@ class TwoFactorAuthenticationType extends AbstractType
                 'label' => 'Default method',
                 'choices' => $defaultMethodChoices,
                 'choice_attr' => function ($val, $key, $index) use ($availableMethods) {
-                    return !in_array($key, $availableMethods)
+                    return !in_array($key, $availableMethods) && $val !== null
                         ? ['disabled' => 'disabled']
                         : [];
                 },

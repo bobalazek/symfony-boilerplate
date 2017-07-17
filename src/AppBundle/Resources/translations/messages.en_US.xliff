@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-16T21:45:02Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-17T20:21:11Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="5c990c0701f8e25b22f37477d1d9382a0c2bd706" resname="%available% codes available">
+        <source>%available% codes available</source>
+        <target>%available% codes available</target>
+        <jms:reference-file line="115">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="e8442a3a9ebf7bb5cc78ffdb8fc26d539e2ab168" resname="2FA">
         <source>2FA</source>
         <target>2FA</target>
@@ -30,10 +35,11 @@
       <trans-unit id="a733b809d2f1233496ab516eed0f3ef75cf3791a" resname="Active">
         <source>Active</source>
         <target>Active</target>
-        <jms:reference-file line="24">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
-        <jms:reference-file line="47">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
-        <jms:reference-file line="70">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
-        <jms:reference-file line="97">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="114">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="63">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="86">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4e7afebcfbae000b22c7c85e5560f89a2a0280b4" resname="Admin">
         <source>Admin</source>
@@ -43,13 +49,13 @@
       <trans-unit id="2f72382de5b583671e3070aa8dd00f5026d3ab86" resname="Alternative methods">
         <source>Alternative methods</source>
         <target>Alternative methods</target>
-        <jms:reference-file line="26">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="36">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4853c808b11b9b67738f58bbcfad661b3344e999" resname="Authenticator">
         <source>Authenticator</source>
         <target>Authenticator</target>
         <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_authenticator.html.twig</jms:reference-file>
-        <jms:reference-file line="67">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="83">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
         <jms:reference-file line="13">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
         <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
       </trans-unit>
@@ -83,7 +89,7 @@
       <trans-unit id="be35340599bb31d522ed409e731f2ead77c06339" resname="Default method">
         <source>Default method</source>
         <target>Default method</target>
-        <jms:reference-file line="28">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="34">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c4a2e80cc873135b3d277a22b6e85110c509731" resname="Disclaimer">
         <source>Disclaimer</source>
@@ -98,27 +104,27 @@
         <jms:reference-file line="39">/../src/AppBundle/Form/Type/My/SettingsType.php</jms:reference-file>
         <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_email.html.twig</jms:reference-file>
         <jms:reference-file line="26">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
-        <jms:reference-file line="21">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="37">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c0751d3116fe6363722a46e24a3e83e4cfb7d637" resname="Enable SMS authentication">
         <source>Enable SMS authentication</source>
         <target>Enable SMS authentication</target>
-        <jms:reference-file line="36">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="48">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="40e8787de5dcd48dedbc847de4fa8d4877e84c25" resname="Enable authenticator">
         <source>Enable authenticator</source>
         <target>Enable authenticator</target>
-        <jms:reference-file line="40">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="52">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ec0ae6116dd1c5180f9f2ae12a8183ccdefae184" resname="Enable email authentication">
         <source>Enable email authentication</source>
         <target>Enable email authentication</target>
-        <jms:reference-file line="32">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="44">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="df174a3f2faa31814e06540acda7af8825403fac" resname="Enabled">
         <source>Enabled</source>
         <target>Enabled</target>
-        <jms:reference-file line="25">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+        <jms:reference-file line="31">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7e568a90221d853052b3466e581eb5f7c030b901" resname="First name">
         <source>First name</source>
@@ -156,10 +162,11 @@
       <trans-unit id="09af574c7f20770e2ba62ab519196e2d4d08efa4" resname="Inactive">
         <source>Inactive</source>
         <target>Inactive</target>
-        <jms:reference-file line="101">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
-        <jms:reference-file line="28">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
-        <jms:reference-file line="51">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
-        <jms:reference-file line="74">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="121">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="22">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="44">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="67">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="90">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="adec36a821f81a6990b1e65d9e4ac5fb8ee2a205" resname="Last name">
         <source>Last name</source>
@@ -185,6 +192,11 @@
         <source>Logout</source>
         <target>Logout</target>
         <jms:reference-file line="86">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7e4ac6803c9159c694f63d089cb06b2519c16aba" resname="Methods">
+        <source>Methods</source>
+        <target state="new">Methods</target>
+        <jms:reference-file line="34">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b1d702459399a2512fba5a402d4d5f26aee34693" resname="Mobile">
         <source>Mobile</source>
@@ -235,7 +247,7 @@
       <trans-unit id="5e56087ce5efcc3849a19a13a548bd7b4a7aa88a" resname="Prepare authenticator">
         <source>Prepare authenticator</source>
         <target>Prepare authenticator</target>
-        <jms:reference-file line="88">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="104">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cf01481f626d5127ec7732fcbdb29504f08abefd" resname="Privacy">
         <source>Privacy</source>
@@ -264,7 +276,7 @@
       <trans-unit id="b3f5f8ca4dc4584c290193d2e6420128c8fd65b4" resname="Recovery codes">
         <source>Recovery codes</source>
         <target>Recovery codes</target>
-        <jms:reference-file line="94">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="111">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
         <jms:reference-file line="14">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
         <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
       </trans-unit>
@@ -290,14 +302,14 @@
         <source>SMS</source>
         <target>SMS</target>
         <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_sms.html.twig</jms:reference-file>
-        <jms:reference-file line="44">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="efc007a393f66cdb14d57d385822a3d9e36ef873" resname="Save">
         <source>Save</source>
         <target>Save</target>
         <jms:reference-file line="13">/../src/AppBundle/Resources/views/Content/my/password.html.twig</jms:reference-file>
         <jms:reference-file line="107">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
-        <jms:reference-file line="117">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="142">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5c7fcfc75a01016412fdd3913c1f7fc446d458ce" resname="Secret:">
         <source>Secret:</source>
@@ -312,7 +324,7 @@
       <trans-unit id="1c49eb247ad87dc49993e65f0affe1836fb1fa88" resname="Show codes">
         <source>Show codes</source>
         <target>Show codes</target>
-        <jms:reference-file line="110">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="135">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="894bc414e6b716730609cecece10977501d4d3dc" resname="Signup">
         <source>Signup</source>
@@ -325,7 +337,7 @@
       <trans-unit id="bae7d5be70820ed56467bd9a63744e23b47bd711" resname="Status">
         <source>Status</source>
         <target>Status</target>
-        <jms:reference-file line="9">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2dacf65959849884a011f36f76a04eebea94c5ea" resname="Submit">
         <source>Submit</source>
@@ -410,7 +422,7 @@
       <trans-unit id="dc60cc7192204cad637e02a59be22ff652db9b9c" resname="emails.user.email_activation.confirmation.subject">
         <source>emails.user.email_activation.confirmation.subject</source>
         <target>[%app_name%] Email activation confirmation</target>
-        <jms:reference-file line="410">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="411">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d77bc12e4d8094fdc275b9a325fdf6850870e8a" resname="emails.user.email_activation.confirmation.text">
         <source>emails.user.email_activation.confirmation.text</source>
@@ -425,7 +437,7 @@
       <trans-unit id="5e6dbd00f81ea62e152d2d3af4530cd01beda8a9" resname="emails.user.email_activation.request.subject">
         <source>emails.user.email_activation.request.subject</source>
         <target>[%app_name%] Email activation request</target>
-        <jms:reference-file line="372">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="373">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="843256892ce3928235aae16ef567047663befd16" resname="emails.user.login.tfa.subject">
         <source>emails.user.login.tfa.subject</source>
@@ -440,7 +452,7 @@
       <trans-unit id="ae075489d04be98ef1381ca1ecc573dac44e8629" resname="emails.user.mobile_activation.confirmation.subject">
         <source>emails.user.mobile_activation.confirmation.subject</source>
         <target>[%app_name%] Mobile activation confirmation</target>
-        <jms:reference-file line="634">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="636">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ffb17f58e94a327b92484459f828a8004290f4c5" resname="emails.user.mobile_activation.confirmation.text">
         <source>emails.user.mobile_activation.confirmation.text</source>
@@ -460,17 +472,17 @@
       <trans-unit id="434bd043141a674454fbcf923e8ea34f3af27f51" resname="emails.user.new_email.request.subject">
         <source>emails.user.new_email.request.subject</source>
         <target>[%app_name%] New email request</target>
-        <jms:reference-file line="261">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="262">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2ecfb36866dc97b6ac2490ad657c451e3d55bf75" resname="emails.user.new_email_confirmation.subject">
         <source>emails.user.new_email_confirmation.subject</source>
         <target>[%app_name%] New email confirmation</target>
-        <jms:reference-file line="302">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="303">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="16ddfa5aa705a164b1f634b738182e3630e7633a" resname="emails.user.new_mobile.confirmation.subject">
         <source>emails.user.new_mobile.confirmation.subject</source>
         <target>[%app_name%] New mobile confirmation</target>
-        <jms:reference-file line="525">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="527">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a65babef989f530ce7a4e6823f4757feb6abc068" resname="emails.user.new_mobile.confirmation.text">
         <source>emails.user.new_mobile.confirmation.text</source>
@@ -543,12 +555,7 @@
       <trans-unit id="a621aab66bb1bd0b24dfcd002cacd964dd61ad25" resname="login.tfa.fail.text">
         <source>login.tfa.fail.text</source>
         <target>The user entered an invalid 2FA code.</target>
-        <jms:reference-file line="396">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="94b90cd6079769f1eec94b6cd4b69ac755e909a4" resname="login.tfa.invalid_method.text">
-        <source>login.tfa.invalid_method.text</source>
-        <target>Oh, something strange happened. Please select one of the methods below.</target>
-        <jms:reference-file line="21">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="397">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e58b86d8b8a6d4e3416816338c2159fb67febaf1" resname="login.tfa.method.authenticator.message.text">
         <source>login.tfa.method.authenticator.message.text</source>
@@ -573,7 +580,17 @@
       <trans-unit id="b3db64c936ddb23dadc59e5794210975e2197be1" resname="login.tfa.method_unavailable.text">
         <source>login.tfa.method_unavailable.text</source>
         <target>This method is unavailable.</target>
-        <jms:reference-file line="373">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="374">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f8295a2341246eed62b603304c619cffb8c7659c" resname="login.tfa.no_available_methods.text">
+        <source>login.tfa.no_available_methods.text</source>
+        <target>Oh, something went wrong. Your 2FA is enabled, but we could not determine any active methods. Please contact our support to resolve the issue.</target>
+        <jms:reference-file line="26">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="07c82e0cbea24328c0fc77ab8143c7fc841f3dbf" resname="login.tfa.no_method_selected.text">
+        <source>login.tfa.no_method_selected.text</source>
+        <target>Please select the method below.</target>
+        <jms:reference-file line="22">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4a27e9e87968ab77fd5472c0ef88c7a38aae80c7" resname="login.tfa.sms.text">
         <source>login.tfa.sms.text</source>
@@ -623,27 +640,27 @@
       <trans-unit id="268c3c6309e7d7a5345a8f598bf9bf298e8deb7e" resname="my.settings.email_activation.confirmation.code_invalid.flash_message.text">
         <source>my.settings.email_activation.confirmation.code_invalid.flash_message.text</source>
         <target>The email activation code is invalid.</target>
-        <jms:reference-file line="212">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="211">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a362e7b05890a6aabb9fb7a7750e80843948247b" resname="my.settings.email_activation.confirmation.success.flash_message.text">
         <source>my.settings.email_activation.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your email.</target>
-        <jms:reference-file line="205">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="204">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="462fe94308c48e3e3c7896b43ba419cbdb8d1586" resname="my.settings.email_activation.confirmation.user_action.text">
         <source>my.settings.email_activation.confirmation.user_action.text</source>
         <target>The user has confirmed it's email.</target>
-        <jms:reference-file line="427">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="428">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ee9216d8a1ddfe48e61d2e2af8af94a856014e08" resname="my.settings.email_activation.request.success.flash_message.text">
         <source>my.settings.email_activation.request.success.flash_message.text</source>
         <target>You have successfully requested an email activation email. Please check your email and click the link inside to confirm your email.</target>
-        <jms:reference-file line="154">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="153">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4952d87f31b4c7ab5afbf8c32f4e14869c00b835" resname="my.settings.email_activation.request.user_action.text">
         <source>my.settings.email_activation.request.user_action.text</source>
         <target>The user has requested an email activation.</target>
-        <jms:reference-file line="361">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="362">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a805d803ee7714c416293f6d8b2ec75bd16db361" resname="my.settings.mobile.is_activated.text">
         <source>my.settings.mobile.is_activated.text</source>
@@ -658,52 +675,52 @@
       <trans-unit id="c3ca86b5531580c5bbd3c80171bc52619c80ef9c" resname="my.settings.mobile_activation.confirmation.code_invalid.flash_message.text">
         <source>my.settings.mobile_activation.confirmation.code_invalid.flash_message.text</source>
         <target>The mobile activation code is invalid.</target>
-        <jms:reference-file line="243">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="242">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d4eae93e0d6397b06eb06223b7c053e9e19032bf" resname="my.settings.mobile_activation.confirmation.success.flash_message.text">
         <source>my.settings.mobile_activation.confirmation.success.flash_message.text</source>
         <target>You have successfully activated your mobile number.</target>
-        <jms:reference-file line="236">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="235">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b8361f363da96268657fee4f32f034356f6ab334" resname="my.settings.mobile_activation.confirmation.user_action.text">
         <source>my.settings.mobile_activation.confirmation.user_action.text</source>
         <target>The user has successfully activated it's mobile number.</target>
-        <jms:reference-file line="651">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="653">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="409b1b56686d9f446fbe44db1c5e7fba7193aa72" resname="my.settings.mobile_activation.request.code_resent.flash_message.text">
         <source>my.settings.mobile_activation.request.code_resent.flash_message.text</source>
         <target>You have successfully resent the activation code to your mobile number.</target>
-        <jms:reference-file line="175">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="174">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ea4d0bec3b04b2e1709518d608606108e81c9c8c" resname="my.settings.mobile_activation.request.sms.text">
         <source>my.settings.mobile_activation.request.sms.text</source>
         <target>Your activation code: %code%</target>
-        <jms:reference-file line="602">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="604">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="88fb71840e8bb6d8203d2854696d3e6a53ba982e" resname="my.settings.mobile_activation.request.user_action.text">
         <source>my.settings.mobile_activation.request.user_action.text</source>
         <target>The user has requested a mobile activation.</target>
-        <jms:reference-file line="584">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="586">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cc86ea99da17fab353077c58ef991148a80643af" resname="my.settings.new_email.confirmation.code_invalid.flash_message.text">
         <source>my.settings.new_email.confirmation.code_invalid.flash_message.text</source>
         <target>The new email activation code is invalid.</target>
-        <jms:reference-file line="275">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="274">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="08a847fe8f7014ef98377307279a81af47484651" resname="my.settings.new_email.confirmation.success.flash_message.text">
         <source>my.settings.new_email.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your new email.</target>
-        <jms:reference-file line="268">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="267">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="508af05c3c73489da2df81b59ad492e6954bde7a" resname="my.settings.new_email.confirmation.user_action.text">
         <source>my.settings.new_email.confirmation.user_action.text</source>
         <target>The user has confirmed it's new email.</target>
-        <jms:reference-file line="319">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="320">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c7124f601a59cc828283ad320e629d9827152d3" resname="my.settings.new_email.request.success.flash_message.text">
         <source>my.settings.new_email.request.success.flash_message.text</source>
         <target>You have successfully requested a new email.</target>
-        <jms:reference-file line="56">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="54">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b001c9a460083c54d0aff0ace505e3a44fb50a9c" resname="my.settings.new_email.request.text">
         <source>my.settings.new_email.request.text</source>
@@ -718,27 +735,27 @@
       <trans-unit id="005f5a4d2ca8358b1ae4ed6fbfdec926db9b2c7b" resname="my.settings.new_mobile.confirmation.code_invalid.flash_message.text">
         <source>my.settings.new_mobile.confirmation.code_invalid.flash_message.text</source>
         <target>The new mobile activation code is invalid.</target>
-        <jms:reference-file line="307">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="306">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a7b636da1a9a770f37bf6d7f5248c2691c9e45c0" resname="my.settings.new_mobile.confirmation.success.flash_message.text">
         <source>my.settings.new_mobile.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your new mobile number.</target>
-        <jms:reference-file line="300">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="299">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd84b11b5a9a70a8dfc0e776c7f28edd2e93b3db" resname="my.settings.new_mobile.confirmation.user_action.text">
         <source>my.settings.new_mobile.confirmation.user_action.text</source>
         <target>my.settings.new_mobile.confirmation.user_action.text</target>
-        <jms:reference-file line="542">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="544">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ad88e625dfe31625ac7f135a781c96c2d36e6e50" resname="my.settings.new_mobile.request.sms.text">
         <source>my.settings.new_mobile.request.sms.text</source>
         <target>Your activation code: %code%</target>
-        <jms:reference-file line="490">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="492">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="745ba43cc5a45017043380e226c5de72cec1d7dd" resname="my.settings.new_mobile.request.success.flash_message.text">
         <source>my.settings.new_mobile.request.success.flash_message.text</source>
         <target>You have successfully requested a new mobile number.</target>
-        <jms:reference-file line="78">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="76">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="37fdb8c1e24026694172700324eda7d2b87d4b3a" resname="my.settings.new_mobile.request.text">
         <source>my.settings.new_mobile.request.text</source>
@@ -748,18 +765,18 @@
       <trans-unit id="801c42d9e8b6abf6eedcb6a8dcbde2efc250a4e5" resname="my.settings.new_mobile.request.user_action.text">
         <source>my.settings.new_mobile.request.user_action.text</source>
         <target>The user has successfully requested a new mobile number.</target>
-        <jms:reference-file line="470">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+        <jms:reference-file line="471">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="00abbec280c60dd1174b1124f863ae5309e2e0bd" resname="my.settings.save.success.flash_message.text">
         <source>my.settings.save.success.flash_message.text</source>
         <target>The settings were successfully changed.</target>
-        <jms:reference-file line="111">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="109">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d13562d3f339486ef84b801171f5776bea9d4c5c" resname="my.settings.user_action.text">
         <source>my.settings.user_action.text</source>
         <target>The user has changed his settings successfully.</target>
-        <jms:reference-file line="100">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
-        <jms:reference-file line="41">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="98">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="59">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e22cfdb333b5d82b6ce17ebfce1f2200ac09ac5b" resname="my.tfa.authenticator.already_activated.text">
         <source>my.tfa.authenticator.already_activated.text</source>
@@ -769,52 +786,62 @@
       <trans-unit id="8d51bb7db7f5352e53c21f3dcd0a4526128752fb" resname="my.tfa.authenticator.invalid_code.text">
         <source>my.tfa.authenticator.invalid_code.text</source>
         <target>You have entered an invalid code.</target>
-        <jms:reference-file line="52">/../src/AppBundle/Controller/My/TwoFactorAuthentication/AuthenticatorController.php</jms:reference-file>
+        <jms:reference-file line="53">/../src/AppBundle/Controller/My/TwoFactorAuthentication/AuthenticatorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e00f06b80b443e053595323c8705aa745fab64d8" resname="my.tfa.authenticator.not_yet_activated.text">
         <source>my.tfa.authenticator.not_yet_activated.text</source>
         <target>In order to use the authenticator, you will need to activate it first.</target>
-        <jms:reference-file line="84">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="100">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d4ec79267ad0a2f4a20810b7e777d25f34d31ae" resname="my.tfa.authenticator.success.text">
         <source>my.tfa.authenticator.success.text</source>
         <target>You are now successfully logged in.</target>
-        <jms:reference-file line="62">/../src/AppBundle/Controller/My/TwoFactorAuthentication/AuthenticatorController.php</jms:reference-file>
+        <jms:reference-file line="63">/../src/AppBundle/Controller/My/TwoFactorAuthentication/AuthenticatorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5e6a0586081baaf9c320ad0a9cb3aa0b4953b89d" resname="my.tfa.email.not_yet_activated.text">
         <source>my.tfa.email.not_yet_activated.text</source>
         <target>In order to use email 2FA, you will need to activate it first.</target>
-        <jms:reference-file line="38">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="54">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c3e6b03d5bce259fe34bf32a05f289af7b7d2c11" resname="my.tfa.form.authenticator_enabled.help.text">
         <source>my.tfa.form.authenticator_enabled.help.text</source>
         <target>If you want to have the 2FA protection enabled. Note: it will only work, if you have on the the methods set up.</target>
-        <jms:reference-file line="80">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="96">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ebb33d6b806d9bb3a8f6b4663bd393ea003f6796" resname="my.tfa.form.default_method.help.text">
         <source>my.tfa.form.default_method.help.text</source>
-        <target>Which is the default method on the 2FA?</target>
-        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <target>Which default two-factor method do you want, when you login?</target>
+        <jms:reference-file line="32">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="617218d1e37319a43ecdb90b1c21b9e9afff9d19" resname="my.tfa.form.email_enabled.help.text">
         <source>my.tfa.form.email_enabled.help.text</source>
         <target>On each login, you will get an email with a security code, that you will need to type in, before you will be able to fully log into your account.</target>
-        <jms:reference-file line="34">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="50">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f0fe977ba33aa73268ec39fd1f1d96010f3bd0cb" resname="my.tfa.form.enabled.help.text">
         <source>my.tfa.form.enabled.help.text</source>
         <target>On each login, you will need to enter the code on your authenticator (Google Authenticator, Authy, ...).</target>
-        <jms:reference-file line="12">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="28">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5ab7e64ccecb12510483bcc4ae86784942c8814a" resname="my.tfa.form.sms_enabled.help.text">
         <source>my.tfa.form.sms_enabled.help.text</source>
         <target>On each login, you will get a SMS with a security code, that you will need to type in, before you will be able to fully log into your account.</target>
-        <jms:reference-file line="57">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="73">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e513048eb3b0024c251ddf36b48bfbaef3a77988" resname="my.tfa.no_available_methods.text">
+        <source>my.tfa.no_available_methods.text</source>
+        <target>You have two-factor authentication enabled, but none of the methods. Please set up a method as soon as possible else you may get locked out of your account after the next login!</target>
+        <jms:reference-file line="9">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8f4e52c307b1734e735417afbea37ed08abe3f5a" resname="my.tfa.recovery_codes.message.text">
         <source>my.tfa.recovery_codes.message.text</source>
         <target>If you happen to lose the access to your authenticator or email, you can still get access via the recovery codes, so keep them somewhere safe!</target>
-        <jms:reference-file line="106">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="126">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="976e1a85a0b0293c9e7485d14b060be528304781" resname="my.tfa.recovery_codes.no_codes_available.text">
+        <source>my.tfa.recovery_codes.no_codes_available.text</source>
+        <target>You have no available codes. Please click the "Show codes" button and generate some new one.</target>
+        <jms:reference-file line="130">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="aeeb4bf85db7392d93c7e77839db0c4f24e764fc" resname="my.tfa.recovery_codes.no_recovery_codes_yet.text">
         <source>my.tfa.recovery_codes.no_recovery_codes_yet.text</source>
@@ -824,17 +851,17 @@
       <trans-unit id="90b18fa861a635e468a73d244b21bd2a2ee0cec2" resname="my.tfa.recovery_codes.regenerate.flash_message.text">
         <source>my.tfa.recovery_codes.regenerate.flash_message.text</source>
         <target>You have successfully generated new recovery codes.</target>
-        <jms:reference-file line="85">/../src/AppBundle/Controller/My/TwoFactorAuthentication/RecoveryCodesController.php</jms:reference-file>
+        <jms:reference-file line="86">/../src/AppBundle/Controller/My/TwoFactorAuthentication/RecoveryCodesController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ffc3c908808b6c16f6f998e54124a890f4072552" resname="my.tfa.save.success.flash_message.text">
         <source>my.tfa.save.success.flash_message.text</source>
         <target>You have successfully changed your 2FA settings.</target>
-        <jms:reference-file line="52">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="70">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ea8333dd2f537d245277a449c651337591390454" resname="my.tfa.sms.not_yet_activated.text">
         <source>my.tfa.sms.not_yet_activated.text</source>
         <target>In order to use SMS 2FA, you will need to activate it first.</target>
-        <jms:reference-file line="60">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
+        <jms:reference-file line="76">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6cc9ac4c7ecc5c4a7aa62ede0a345e196b8d2602" resname="reset_password.confirmation.code_expired.text">
         <source>reset_password.confirmation.code_expired.text</source>

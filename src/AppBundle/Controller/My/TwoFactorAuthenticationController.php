@@ -38,15 +38,17 @@ class TwoFactorAuthenticationController extends Controller
             $user = $form->getData();
 
             // Check if the method is available, else set the first available one
-            $tfaAvailableMethods = $user->getAvailableTFAMethods();
+            $method = $user->getTFADefaultMethod();
+            $tfaAvailableMethods = array_keys($user->getAvailableTFAMethods());
             if (
-                !empty($tfaAvailableMethods) &&
-                !in_array(
-                    $user->getTFADefaultMethod(),
-                    array_keys($tfaAvailableMethods)
-                )
+                !in_array($method, $tfaAvailableMethods) &&
+                $method !== null
             ) {
-                $user->setTFADefaultMethod(reset($tfaAvailableMethods));
+                $method = null;
+                if (!empty($tfaAvailableMethods)) {
+                    $method = reset($tfaAvailableMethods);
+                }
+                $user->setTFADefaultMethod($method);
             }
 
             $em->persist($user);

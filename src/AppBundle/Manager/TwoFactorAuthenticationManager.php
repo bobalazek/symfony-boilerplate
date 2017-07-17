@@ -28,13 +28,13 @@ class TwoFactorAuthenticationManager
         $session = $this->container->get('session');
         $user = $event->getAuthenticationToken()->getUser();
 
-        $isEnabled = $user->isTFAEnabled();
-        $availableMethods = $user->getAvailableTFAMethods();
-        if (
-            $isEnabled &&
-            !empty($availableMethods)
-        ) {
+        if ($user->isTFAEnabled()) {
+            $availableMethods = $user->getAvailableTFAMethods();
             $method = $user->getTFADefaultMethod();
+
+            if (!in_array($method, $availableMethods)) {
+                $method = null;
+            }
 
             $session->set(
                 'two_factor_authentication_method',

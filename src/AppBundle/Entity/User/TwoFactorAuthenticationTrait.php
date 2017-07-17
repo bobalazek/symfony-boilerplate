@@ -59,7 +59,7 @@ trait TwoFactorAuthenticationTrait
         }
 
         // Recovery code
-        $recoveryCodes = $this->getUserRecoveryCodes();
+        $recoveryCodes = $this->getUserRecoveryCodes(true, true);
         if (empty($recoveryCodes)) {
             unset($availableMethods['recovery_code']);
         }
@@ -81,7 +81,7 @@ trait TwoFactorAuthenticationTrait
      * @Gedmo\Versioned
      * @ORM\Column(name="tfa_default_method", type="string", length=32, nullable=true)
      */
-    protected $tfaDefaultMethod = 'email';
+    protected $tfaDefaultMethod;
 
     /**
      * @var bool

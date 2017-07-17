@@ -4,9 +4,25 @@
 
 {% block main %}
     <h1>{{ 'My Two-factor authentication' | trans }}</h1>
+    {% if app.user.isTfaEnabled() and app.user.getAvailableTFAMethods() is empty %}
+        <div class="alert alert-danger">
+            {{ 'my.tfa.no_available_methods.text' | trans }}
+        </div>
+    {% endif %}
     {{ form_start(form) }}
         {{ form_errors(form) }}
-        <h2>{{ 'Status' | trans }}</h2>
+        <h2>
+            {{ 'Status' | trans }}
+            {% if app.user.isTfaEnabled() %}
+                <span class="label label-success">
+                    {{ 'Active' | trans }}
+                </span>
+            {% else %}
+                <span class="label label-danger">
+                    {{ 'Inactive' | trans }}
+                </span>
+            {% endif %}
+        </h2>
         {{ form_row(form.tfaEnabled) }}
         <div class="help-block">
             {{ 'my.tfa.form.enabled.help.text' | trans }}
@@ -90,11 +106,15 @@
                 {% endif %}
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">
+                {% set recovery_codes_count = app.user.getUserRecoveryCodes(true, true) | length %}
                 <h3>
                     {{ 'Recovery codes' | trans }}
-                    {% if 'recovery_code' in app.user.getAvailableTFAMethods() | keys %}
+                    {% if 'recovery_code' in app.user.getAvailableTFAMethods() | keys and recovery_codes_count > 0 %}
                         <span class="label label-success">
                             {{ 'Active' | trans }}
+                            ({{ '%available% codes available' | trans({
+                                '%available%': recovery_codes_count,
+                            }) }})
                         </span>
                     {% else %}
                         <span class="label label-danger">
@@ -105,6 +125,11 @@
                 <p class="help-block">
                     {{ 'my.tfa.recovery_codes.message.text' | trans }}
                 </p>
+                {% if recovery_codes_count == 0 %}
+                    <div class="alert alert-info">
+                        {{ 'my.tfa.recovery_codes.no_codes_available.text' | trans }}
+                    </div>
+                {% endif %}
                 <a class="btn btn-default"
                     href="{{ url('my.tfa.recovery_codes') }}">
                     {{ 'Show codes' | trans }}
