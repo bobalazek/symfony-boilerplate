@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use AppBundle\Form\Type\TwoFactorMethodType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use AppBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -19,13 +20,21 @@ class TwoFactorAuthenticationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $defaultMethodChoices = array_flip(User::$tfaMethods);
+        $availableMethods = $options['user']->getAvailableTFAMethods();
         $builder
             ->add('tfaEnabled', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Enabled',
             ])
-            ->add('tfaDefaultMethod', TwoFactorMethodType::class, [
+            ->add('tfaDefaultMethod', ChoiceType::class, [
                 'label' => 'Default method',
+                'choices' => $defaultMethodChoices,
+                'choice_attr' => function ($val, $key, $index) use ($availableMethods) {
+                    return !in_array($key, $availableMethods)
+                        ? ['disabled' => 'disabled']
+                        : [];
+                },
             ])
             ->add('tfaEmailEnabled', CheckboxType::class, [
                 'required' => false,
@@ -47,6 +56,7 @@ class TwoFactorAuthenticationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired('user');
         $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\User',
             'validation_groups' => ['my.tfa'],

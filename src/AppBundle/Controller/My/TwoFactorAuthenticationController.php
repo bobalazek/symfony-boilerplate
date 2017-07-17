@@ -20,18 +20,31 @@ class TwoFactorAuthenticationController extends Controller
     public function tfaAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $form = $this->createForm(
             TwoFactorAuthenticationType::class,
-            $this->getUser()
+            $user,
+            [
+                'user' => $user,
+            ]
         );
 
-        $userOld = clone $this->getUser();
+        $userOld = clone $user;
         $userOldArray = $userOld->toArray();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+
+            // Check if the method is available, else set the first available one
+            $tfaAvailableMethods = $user->getAvailableTFAMethods();
+            if (
+                !empty($tfaAvailableMethods) &&
+                !in_array($user->getTFADefaultMethod(), $tfaAvailableMethods)
+            ) {
+                $user->setTFADefaultMethod(reset($tfaAvailableMethods));
+            }
 
             $em->persist($user);
             $em->flush();

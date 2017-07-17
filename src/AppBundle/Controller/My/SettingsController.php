@@ -22,21 +22,19 @@ class SettingsController extends Controller
     public function settingsAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $form = $this->createForm(
             SettingsType::class,
-            $this->getUser(),
-            [
-                'authorization_checker' => $this->get('security.authorization_checker'),
-            ]
+            $user
         );
 
-        $userOld = clone $this->getUser();
+        $userOld = clone $user;
         $userOldArray = $userOld->toArray();
 
         $queryDataResponse = $this->handleQueryData(
             $request,
-            $this->getUser()
+            $user
         );
         if ($queryDataResponse) {
             return $queryDataResponse;
@@ -115,7 +113,7 @@ class SettingsController extends Controller
 
             return $this->redirectToRoute('my.settings');
         } else {
-            $em->refresh($this->getUser());
+            $em->refresh($user);
         }
 
         return $this->render(
@@ -139,6 +137,7 @@ class SettingsController extends Controller
     protected function handleQueryData(Request $request, User $user)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         /***** Actions *****/
         $action = $request->query->get('action');
@@ -146,7 +145,7 @@ class SettingsController extends Controller
             try {
                 $this->get('app.user_manager')
                     ->emailActivationRequest(
-                        $this->getUser()
+                        $user
                     );
 
                 $this->addFlash(
@@ -167,7 +166,7 @@ class SettingsController extends Controller
             try {
                 $this->get('app.user_manager')
                     ->mobileActivationRequest(
-                        $this->getUser()
+                        $user
                     );
 
                 $this->addFlash(

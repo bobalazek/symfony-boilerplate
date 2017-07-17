@@ -52,7 +52,6 @@ class SettingsType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired('authorization_checker');
         $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\User',
             'validation_groups' => ['my.settings'],
