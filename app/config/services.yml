@@ -17,7 +17,6 @@ services:
 
     app.apifier:
         class: AppBundle\Service\ApifierService
-        arguments: ["@request_stack"]
         calls:
             - [setContainer, ["@service_container"]]
 

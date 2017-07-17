@@ -4,7 +4,6 @@ namespace AppBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -12,13 +11,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ApifierService
 {
     use ContainerAwareTrait;
-
-    private $requestStack;
-
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
-    }
 
     /**
      * Get a nicer errors format.
@@ -76,7 +68,7 @@ class ApifierService
     public function uploadFile($file, $prefix = '', $includePath = false)
     {
         $env = $this->container->getParameter('kernel.environment');
-        $request = $this->requestStack->getCurrentRequest();
+        $request = $this->container->get('request_stack')->getCurrentRequest();
         $baseUrl = str_replace(
             '/app_'.$env.'.php',
             '',
