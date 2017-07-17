@@ -5,6 +5,7 @@ namespace AppBundle\EventSubscriber;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
+use Symfony\Component\Translation\DataCollectorTranslator;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
 use AppBundle\Manager\UserActionManager;
@@ -19,6 +20,7 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     protected $userActionManager;
     protected $requestStack;
     protected $session;
+    protected $translator;
 
     /**
      * @param EntityManager     $em
@@ -28,11 +30,13 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     public function __construct(
         EntityManager $em,
         UserActionManager $userActionManager,
-        BruteForceManager $bruteForceManager
+        BruteForceManager $bruteForceManager,
+        DataCollectorTranslator $translator
     ) {
         $this->em = $em;
         $this->userActionManager = $userActionManager;
         $this->bruteForceManager = $bruteForceManager;
+        $this->translator = $translator;
     }
 
     /**
@@ -48,7 +52,9 @@ class AuthenticationSubscriber implements EventSubscriberInterface
 
         $this->userActionManager->add(
             'user.login.fail',
-            'User has tried to log in!',
+            $this->translator->trans(
+                'login.fail.user_action.text'
+            ),
             [
                 'username' => $authenticationTokenUser,
             ],

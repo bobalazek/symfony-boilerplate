@@ -59,7 +59,8 @@ services:
     # Security
     app.user_provider:
         class: AppBundle\Security\UserProvider
-        arguments: [ "@doctrine.orm.entity_manager" ]
+        arguments:
+            - "@doctrine.orm.entity_manager"
 
     app.token_authenticator:
         class: AppBundle\Security\TokenAuthenticator
@@ -87,6 +88,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@app.user_action_manager"
             - "@app.brute_force_manager"
+            - "@translator"
 
     app.security_subscriber:
         class: AppBundle\EventSubscriber\SecuritySubscriber
@@ -101,7 +103,9 @@ services:
 
     app.logout_listener:
         class: AppBundle\EventListener\LogoutListener
-        arguments: [ "@app.user_action_manager", "@translator" ]
+        arguments:
+            - "@app.user_action_manager"
+            - "@translator"
 
     app.exception_listener:
         class: AppBundle\EventListener\ExceptionListener
@@ -116,6 +120,8 @@ services:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
+            - { name: kernel.event_listener, event: kernel.request }
+            - { name: kernel.event_listener, event: kernel.response }
 
     # Other
     google_authenticator:

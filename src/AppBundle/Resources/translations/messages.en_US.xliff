@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-17T22:29:54Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-17T23:39:34Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -556,6 +556,11 @@
         <source>general.wildcard_searches.text</source>
         <target>For wildcard searches use the asterisk (*), for example: info@*.com, *@gmail.com, ...</target>
         <jms:reference-file line="31">/../src/AppBundle/Resources/views/Pagination/filtration.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5b0f958e68b5a1284d817969cb70a0263d77cc0b" resname="login.fail.user_action.text">
+        <source>login.fail.user_action.text</source>
+        <target>The user has tried to log in, but failed.</target>
+        <jms:reference-file line="55">/../src/AppBundle/EventSubscriber/AuthenticationSubscriber.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0e8af9eebf818381d660aacbaee8f9b74d3fd792" resname="login.tfa.code_invalid.text">
         <source>login.tfa.code_invalid.text</source>

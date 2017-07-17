@@ -98,7 +98,7 @@ class UserDevice
     /*** UID ***/
 
     /**
-     * @return int
+     * @return string
      */
     public function getUid()
     {
@@ -113,6 +113,28 @@ class UserDevice
     public function setUid($uid)
     {
         $this->uid = $uid;
+
+        return $this;
+    }
+
+    /*** Name ***/
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param $name
+     *
+     * @return UserDevice
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
         return $this;
     }
