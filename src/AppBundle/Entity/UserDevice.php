@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,6 +13,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @Gedmo\Loggable
  * @ORM\Table(name="user_devices")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserDeviceRepository")
+ *
+ * @UniqueEntity(
+ *     fields={"uid"},
+ *     errorPath="uid",
+ *     message="This uid is already in use."
+ * )
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
@@ -32,6 +39,13 @@ class UserDevice
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uid", type="string", length=255)
+     */
+    protected $uid;
 
     /**
      * @var string
@@ -59,7 +73,7 @@ class UserDevice
      */
     protected $user;
 
-    /*** Id ***/
+    /*** I ***/
 
     /**
      * @return int
@@ -77,6 +91,28 @@ class UserDevice
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /*** UID ***/
+
+    /**
+     * @return int
+     */
+    public function getUid()
+    {
+        return $this->uid;
+    }
+
+    /**
+     * @param $uid
+     *
+     * @return UserDevice
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
 
         return $this;
     }

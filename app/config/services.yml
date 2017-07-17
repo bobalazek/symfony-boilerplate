@@ -97,6 +97,7 @@ services:
             - "@security.authorization_checker"
             - "@app.user_action_manager"
             - "@app.two_factor_authentication_manager"
+            - "@translator"
 
     app.logout_listener:
         class: AppBundle\EventListener\LogoutListener

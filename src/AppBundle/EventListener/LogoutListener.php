@@ -21,8 +21,10 @@ class LogoutListener implements LogoutHandlerInterface
      * @param UserActionManager       $userActionManager
      * @param DataCollectorTranslator $translator
      */
-    public function __construct(UserActionManager $userActionManager, DataCollectorTranslator $translator)
-    {
+    public function __construct(
+        UserActionManager $userActionManager,
+        DataCollectorTranslator $translator
+    ) {
         $this->userActionManager = $userActionManager;
         $this->translator = $translator;
     }

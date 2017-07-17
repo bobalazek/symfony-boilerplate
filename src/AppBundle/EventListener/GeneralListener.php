@@ -22,48 +22,62 @@ class GeneralListener
         $em = $this->container->get('doctrine.orm.entity_manager');
 
         if (
-            $event->isMasterRequest() &&
-            $tokenStorage->getToken()
+            !$event->isMasterRequest() ||
+            !$tokenStorage->getToken()
         ) {
-            $token = $tokenStorage->getToken();
-            $user = $token->getUser();
+            return false;
+        }
 
-            if ($token->getUser() instanceof User) {
-                // Two factor authentication
-                if ($session->get('two_factor_authentication_in_progress')) {
-                    $accessMap = $this->container->get('security.access_map');
-                    $patterns = $accessMap->getPatterns($request);
-                    $roles = $patterns[0];
+        $token = $tokenStorage->getToken();
+        $user = $token->getUser();
 
-                    // Prevent the gate kicking in on pages, that do not require authentication
-                    if ($roles === null) {
-                        return false;
-                    }
+        if (!($token->getUser() instanceof User)) {
+            return false;
+        }
 
-                    $twoFactorAuthenticationRoute = 'login.tfa';
-                    if ($twoFactorAuthenticationRoute === $event->getRequest()->get('_route')) {
-                        return false;
-                    }
+        // Two factor authentication
+        if ($session->get('two_factor_authentication_in_progress')) {
+            $accessMap = $this->container->get('security.access_map');
+            $patterns = $accessMap->getPatterns($request);
+            $roles = $patterns[0];
 
-                    $url = $this->container->get('router')
-                        ->generate($twoFactorAuthenticationRoute);
-                    $response = new RedirectResponse($url);
-                    $event->setController(function () use ($response) {
-                        return $response;
-                    });
+            // Prevent the 2FA gate on pages, that do not require authentication
+            if ($roles === null) {
+                return false;
+            }
 
-                    return false;
-                }
+            $twoFactorAuthenticationRoute = 'login.tfa';
+            if ($twoFactorAuthenticationRoute === $event->getRequest()->get('_route')) {
+                return false;
+            }
 
-                // Last active
-                $user->setLastActiveAt(new \DateTime());
-                $em->persist($user);
+            $url = $this->container->get('router')
+                ->generate($twoFactorAuthenticationRoute);
+            $event->setController(function () use ($url) {
+                return new RedirectResponse($url);
+            });
 
-                // Last active trusted device
-                // TODO
+            return false;
+        }
 
-                $em->flush();
+        // User - last active
+        $user->setLastActiveAt(new \Datetime());
+        $em->persist($user);
+
+        // User device - last active
+        $deviceUid = $request->cookies->get('device_uid');
+        if ($deviceUid) {
+            $userDevice = $em->getRepository('AppBundle:UserDevice')
+                ->findOneBy([
+                    'user' => $user,
+                    'uid' => $deviceUid,
+                ]);
+            if ($userDevice !== nul) {
+                $userDevice->setLastActive(new \Datetime());
+                $em->persist($userDevice);
             }
         }
+
+        $em->flush();
     }
 }

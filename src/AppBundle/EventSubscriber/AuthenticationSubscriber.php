@@ -20,6 +20,11 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     protected $requestStack;
     protected $session;
 
+    /**
+     * @param EntityManager     $em
+     * @param UserActionManager $userActionManager
+     * @param BruteForceManager $bruteForceManager
+     */
     public function __construct(
         EntityManager $em,
         UserActionManager $userActionManager,
