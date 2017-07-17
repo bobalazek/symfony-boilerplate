@@ -101,7 +101,7 @@ services:
 
     app.logout_listener:
         class: AppBundle\EventListener\LogoutListener
-        arguments: [ "@app.user_action_manager" ]
+        arguments: [ "@app.user_action_manager", "@translator" ]
 
     app.exception_listener:
         class: AppBundle\EventListener\ExceptionListener

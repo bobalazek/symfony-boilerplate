@@ -52,7 +52,9 @@ class TwoFactorAuthenticationManager
                 ->get('app.user_action_manager')
                 ->add(
                     'user.login.tfa.gate',
-                    'login.tfa.gate.user_action.text'
+                    $this->container->get('translator')->trans(
+                        'login.tfa.gate.user_action.text'
+                    )
                 );
 
             $this->container

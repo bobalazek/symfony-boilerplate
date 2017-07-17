@@ -185,7 +185,9 @@ class TwoFactorAuthenticationController extends Controller
         $this->get('app.user_action_manager')
             ->add(
                 'user.login.tfa',
-                'User has been logged in via Two-factor authentication!'
+                $this->container->get('translator')->trans(
+                    'login.tfa.user_action.text'
+                )
             );
 
         return $response;

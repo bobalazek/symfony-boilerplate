@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-17T20:21:11Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-17T20:53:04Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="7e4ac6803c9159c694f63d089cb06b2519c16aba" resname="Methods">
         <source>Methods</source>
-        <target state="new">Methods</target>
+        <target>Methods</target>
         <jms:reference-file line="34">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b1d702459399a2512fba5a402d4d5f26aee34693" resname="Mobile">
@@ -442,7 +442,7 @@
       <trans-unit id="843256892ce3928235aae16ef567047663befd16" resname="emails.user.login.tfa.subject">
         <source>emails.user.login.tfa.subject</source>
         <target>[%app_name%] Two-factor login</target>
-        <jms:reference-file line="91">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
+        <jms:reference-file line="93">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b363c7b79812609124ba1bf612589e00f469edb8" resname="emails.user.login.tfa.text">
         <source>emails.user.login.tfa.text</source>
@@ -555,7 +555,12 @@
       <trans-unit id="a621aab66bb1bd0b24dfcd002cacd964dd61ad25" resname="login.tfa.fail.text">
         <source>login.tfa.fail.text</source>
         <target>The user entered an invalid 2FA code.</target>
-        <jms:reference-file line="397">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="399">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="77e4e7179cccd31acc2c9e3fd8d2b50cd60e0528" resname="login.tfa.gate.user_action.text">
+        <source>login.tfa.gate.user_action.text</source>
+        <target>The user has logged in, but still need needs confirm the second step.</target>
+        <jms:reference-file line="55">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e58b86d8b8a6d4e3416816338c2159fb67febaf1" resname="login.tfa.method.authenticator.message.text">
         <source>login.tfa.method.authenticator.message.text</source>
@@ -580,7 +585,7 @@
       <trans-unit id="b3db64c936ddb23dadc59e5794210975e2197be1" resname="login.tfa.method_unavailable.text">
         <source>login.tfa.method_unavailable.text</source>
         <target>This method is unavailable.</target>
-        <jms:reference-file line="374">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="376">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f8295a2341246eed62b603304c619cffb8c7659c" resname="login.tfa.no_available_methods.text">
         <source>login.tfa.no_available_methods.text</source>
@@ -595,7 +600,7 @@
       <trans-unit id="4a27e9e87968ab77fd5472c0ef88c7a38aae80c7" resname="login.tfa.sms.text">
         <source>login.tfa.sms.text</source>
         <target>The 2FA code is: %code%</target>
-        <jms:reference-file line="122">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
+        <jms:reference-file line="124">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ae4ba11cb1cc97b1d89ecd1190ee772cebad2852" resname="login.tfa.success">
         <source>login.tfa.success</source>
@@ -605,17 +610,27 @@
       <trans-unit id="0750c51b58bd7ead9b231afd73c5d2af9181f575" resname="login.tfa.too_many_attempts.text">
         <source>login.tfa.too_many_attempts.text</source>
         <target>Your account has been blocked from logging in. The block will be released at %time%.</target>
-        <jms:reference-file line="306">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="308">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="41dc30e7978bb314704bd92a833f6c7f20d42bbe" resname="login.tfa.user_action.text">
+        <source>login.tfa.user_action.text</source>
+        <target>The user has been logged in via two-factor authentication!</target>
+        <jms:reference-file line="188">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3feec603f97862c50f67294ce925bed18ce7ae39" resname="logout.user_action.text">
+        <source>logout.user_action.text</source>
+        <target>The user has logged out.</target>
+        <jms:reference-file line="39">/../src/AppBundle/EventListener/LogoutListener.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7730d407b397dfafe3dcced6f2d931d62ad93195" resname="my.actions.no_actions_yet.text">
         <source>my.actions.no_actions_yet.text</source>
         <target>No actions yet.</target>
-        <jms:reference-file line="28">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
+        <jms:reference-file line="30">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9dfd280b38e06dd08c6e7cd9a90260daa15f2c1e" resname="my.login.tfa.method_switch.user_action.text">
         <source>my.login.tfa.method_switch.user_action.text</source>
         <target>The user has switched it's 2FA method.</target>
-        <jms:reference-file line="350">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="352">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="bef317cb57eb19a3250f849d1c23f1f9d5b86c2f" resname="my.password.success.flash_message.text">
         <source>my.password.success.flash_message.text</source>
@@ -776,7 +791,7 @@
         <source>my.settings.user_action.text</source>
         <target>The user has changed his settings successfully.</target>
         <jms:reference-file line="98">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
-        <jms:reference-file line="59">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="61">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e22cfdb333b5d82b6ce17ebfce1f2200ac09ac5b" resname="my.tfa.authenticator.already_activated.text">
         <source>my.tfa.authenticator.already_activated.text</source>
@@ -856,7 +871,7 @@
       <trans-unit id="ffc3c908808b6c16f6f998e54124a890f4072552" resname="my.tfa.save.success.flash_message.text">
         <source>my.tfa.save.success.flash_message.text</source>
         <target>You have successfully changed your 2FA settings.</target>
-        <jms:reference-file line="70">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
+        <jms:reference-file line="72">/../src/AppBundle/Controller/My/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ea8333dd2f537d245277a449c651337591390454" resname="my.tfa.sms.not_yet_activated.text">
         <source>my.tfa.sms.not_yet_activated.text</source>
