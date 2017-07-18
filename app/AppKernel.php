@@ -25,7 +25,10 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
 
             // JMS
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
 
             // Doctrine migrations
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
@@ -62,9 +65,6 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
-            $bundles[] = new JMS\DiExtraBundle\JMSDiExtraBundle($this);
-            $bundles[] = new JMS\AopBundle\JMSAopBundle();
-            $bundles[] = new JMS\TranslationBundle\JMSTranslationBundle();
         }
 
         return $bundles;

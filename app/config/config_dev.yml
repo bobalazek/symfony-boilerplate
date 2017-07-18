@@ -24,18 +24,3 @@ monolog:
             channels:
                 - "!event"
                 - "!doctrine"
-
-jms_translation:
-    locales: "%locales%"
-    source_language: "%locale%"
-    configs:
-        AppBundle:
-            dirs:
-                - "%kernel.root_dir%/../src/AppBundle"
-            output_dir: "%kernel.root_dir%/../src/AppBundle/Resources/translations"
-            default_output_format: xliff
-        DevBundle:
-            dirs:
-                - "%kernel.root_dir%/../src/DevBundle"
-            output_dir: "%kernel.root_dir%/../src/DevBundle/Resources/translations"
-            default_output_format: xliff
