@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Jenssegers\Agent\Agent;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserDevice;
@@ -28,7 +29,6 @@ class GeneralListener
         $session = $this->container->get('session');
         $tokenStorage = $this->container->get('security.token_storage');
         $request = $this->container->get('request_stack')->getCurrentRequest();
-        $em = $this->container->get('doctrine.orm.entity_manager');
 
         if (
             !$event->isMasterRequest() ||
@@ -69,6 +69,8 @@ class GeneralListener
             return false;
         }
 
+        $em = $this->container->get('doctrine.orm.entity_manager');
+
         // User - last active
         $user->setLastActiveAt(new \Datetime());
         $em->persist($user);
@@ -89,11 +91,18 @@ class GeneralListener
                     'user' => $user,
                     'uid' => $deviceUid,
                 ]);
-            if ($userDevice !== null) {
-                $userDevice->setLastActiveAt(new \Datetime());
-                $em->persist($userDevice);
+
+            if ($userDevice === null) {
+                $userDevice = $this->createUserDevice(
+                    $request,
+                    $this->container->get('session'),
+                    $user
+                );
             }
-            // TODO: create if non-existent?
+
+            $userDevice->setLastActiveAt(new \Datetime());
+
+            $em->persist($userDevice);
         }
 
         $em->flush();
@@ -126,28 +135,13 @@ class GeneralListener
         }
 
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $session = $this->container->get('session');
-
-        $userAgent = $request->headers->get('User-Agent');
-        $agent = new Agent();
-        $agent->setUserAgent($userAgent);
-
-        $deviceUid = Helpers::getRandomString(64);
-
-        $userDevice = new UserDevice();
-        $userDevice
-            ->setUid($deviceUid)
-            ->setName($agent->platform().' - '.$agent->browser())
-            ->setIp($request->getClientIp())
-            ->setUserAgent($userAgent)
-            ->setSessionId($session->getId())
-            ->setUser($user)
-        ;
-
+        $userDevice = $this->createUserDevice(
+            $request,
+            $this->container->get('session'),
+            $user
+        );
         $em->persist($userDevice);
         $em->flush();
-
-        $request->attributes->set('device_uid', $deviceUid);
     }
 
     /**
@@ -167,5 +161,40 @@ class GeneralListener
 
         $cookie = new Cookie('device_uid', $deviceUid, time() + $cookieLifetime);
         $response->headers->setCookie($cookie);
+    }
+
+    /**
+     * Creates a user device.
+     *
+     * @param Request $request
+     * @param Session $session
+     * @param User    $user
+     *
+     * @return UserDevice
+     */
+    protected function createUserDevice(
+        Request $request,
+        Session $session,
+        User $user
+    ) {
+        $deviceUid = Helpers::getRandomString(64);
+
+        $userAgent = $request->headers->get('User-Agent');
+        $agent = new Agent();
+        $agent->setUserAgent($userAgent);
+
+        $userDevice = new UserDevice();
+        $userDevice
+            ->setUid($deviceUid)
+            ->setName($agent->platform().' - '.$agent->browser())
+            ->setIp($request->getClientIp())
+            ->setUserAgent($userAgent)
+            ->setSessionId($session->getId())
+            ->setUser($user)
+        ;
+
+        $request->attributes->set('device_uid', $userDevice->getUid());
+
+        return $userDevice;
     }
 }
