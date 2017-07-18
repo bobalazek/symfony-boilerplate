@@ -1,0 +1,28 @@
+{% set recovery_codes_count = app.user.getUserRecoveryCodes(true, true) | length %}
+<h3>
+    {{ 'Recovery codes' | trans }}
+    {% if 'recovery_code' in app.user.getAvailableTFAMethods() | keys and recovery_codes_count > 0 %}
+        <span class="label label-success">
+            {{ 'Active' | trans }}
+            ({{ '%available% codes available' | trans({
+                '%available%': recovery_codes_count,
+            }) | meaning('Available arguments: %available%') }})
+        </span>
+    {% else %}
+        <span class="label label-danger">
+            {{ 'Inactive' | trans }}
+        </span>
+    {% endif %}
+</h3>
+<p class="help-block">
+    {{ 'my.tfa.recovery_codes.message.text' | trans }}
+</p>
+{% if recovery_codes_count == 0 %}
+    <div class="alert alert-info">
+        {{ 'my.tfa.recovery_codes.no_codes_available.text' | trans }}
+    </div>
+{% endif %}
+<a class="btn btn-default"
+    href="{{ url('my.tfa.recovery_codes') }}">
+    {{ 'Show codes' | trans }}
+</a>

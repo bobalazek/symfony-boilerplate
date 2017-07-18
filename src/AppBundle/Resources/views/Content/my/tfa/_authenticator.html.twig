@@ -1,0 +1,25 @@
+<h3>
+    {{ 'Authenticator' | trans }}
+    {% if 'authenticator' in app.user.getAvailableTFAMethods() | keys %}
+        <span class="label label-success">
+            {{ 'Active' | trans }}
+        </span>
+    {% else %}
+        <span class="label label-danger">
+            {{ 'Inactive' | trans }}
+        </span>
+    {% endif %}
+</h3>
+{{ form_row(form.tfaAuthenticatorEnabled) }}
+<div class="help-block">
+    {{ 'my.tfa.form.authenticator_enabled.help.text' | trans }}
+</div>
+{% if app.user.isTFAAuthenticatorActivated() == false %}
+    <div class="alert alert-info">
+        {{ 'my.tfa.authenticator.not_yet_activated.text' | trans }}
+    </div>
+{% endif %}
+<a class="btn btn-default"
+    href="{{ url('my.tfa.authenticator') }}">
+    {{ 'Show authenticator' | trans }}
+</a>

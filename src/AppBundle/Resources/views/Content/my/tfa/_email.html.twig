@@ -1,0 +1,21 @@
+<h3>
+    {{ 'Email' | trans }}
+    {% if 'email' in app.user.getAvailableTFAMethods() | keys %}
+        <span class="label label-success">
+            {{ 'Active' | trans }}
+        </span>
+    {% else %}
+        <span class="label label-danger">
+            {{ 'Inactive' | trans }}
+        </span>
+    {% endif %}
+</h3>
+{{ form_row(form.tfaEmailEnabled) }}
+<div class="help-block">
+    {{ 'my.tfa.form.email_enabled.help.text' | trans }}
+</div>
+{% if app.user.isEmailActivated() == false %}
+    <div class="alert alert-info">
+        {{ 'my.tfa.email.not_yet_activated.text' | trans }}
+    </div>
+{% endif %}

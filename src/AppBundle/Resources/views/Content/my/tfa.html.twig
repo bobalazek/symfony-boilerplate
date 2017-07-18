@@ -33,107 +33,16 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h3>
-                    {{ 'Email' | trans }}
-                    {% if 'email' in app.user.getAvailableTFAMethods() | keys %}
-                        <span class="label label-success">
-                            {{ 'Active' | trans }}
-                        </span>
-                    {% else %}
-                        <span class="label label-danger">
-                            {{ 'Inactive' | trans }}
-                        </span>
-                    {% endif %}
-                </h3>
-                {{ form_row(form.tfaEmailEnabled) }}
-                <div class="help-block">
-                    {{ 'my.tfa.form.email_enabled.help.text' | trans }}
-                </div>
-                {% if app.user.isEmailActivated() == false %}
-                    <div class="alert alert-info">
-                        {{ 'my.tfa.email.not_yet_activated.text' | trans }}
-                    </div>
-                {% endif %}
+                {% include 'AppBundle:Content:my/tfa/_email.html.twig' %}
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">
-                <h3>
-                    {{ 'SMS' | trans }}
-                    {% if 'sms' in app.user.getAvailableTFAMethods() | keys %}
-                        <span class="label label-success">
-                            {{ 'Active' | trans }}
-                        </span>
-                    {% else %}
-                        <span class="label label-danger">
-                            {{ 'Inactive' | trans }}
-                        </span>
-                    {% endif %}
-                </h3>
-                {{ form_row(form.tfaSmsEnabled) }}
-                <div class="help-block">
-                    {{ 'my.tfa.form.sms_enabled.help.text' | trans }}
-                    {% if app.user.isMobileActivated() == false %}
-                        <div class="alert alert-info">
-                            {{ 'my.tfa.sms.not_yet_activated.text' | trans }}
-                        </div>
-                    {% endif %}
-                </div>
+                {% include 'AppBundle:Content:my/tfa/_sms.html.twig' %}
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">
-                <h3>
-                    {{ 'Authenticator' | trans }}
-                    {% if 'authenticator' in app.user.getAvailableTFAMethods() | keys %}
-                        <span class="label label-success">
-                            {{ 'Active' | trans }}
-                        </span>
-                    {% else %}
-                        <span class="label label-danger">
-                            {{ 'Inactive' | trans }}
-                        </span>
-                    {% endif %}
-                </h3>
-                {{ form_row(form.tfaAuthenticatorEnabled) }}
-                <div class="help-block">
-                    {{ 'my.tfa.form.authenticator_enabled.help.text' | trans }}
-                </div>
-                {% if app.user.isTFAAuthenticatorActivated() == false %}
-                    <div class="alert alert-info">
-                        {{ 'my.tfa.authenticator.not_yet_activated.text' | trans }}
-                    </div>
-                    <a class="btn btn-default"
-                        href="{{ url('my.tfa.authenticator') }}">
-                        {{ 'Prepare authenticator' | trans }}
-                    </a>
-                {% endif %}
+                {% include 'AppBundle:Content:my/tfa/_authenticator.html.twig' %}
             </div> <!-- /.col-md-6 -->
             <div class="col-md-6">
-                {% set recovery_codes_count = app.user.getUserRecoveryCodes(true, true) | length %}
-                <h3>
-                    {{ 'Recovery codes' | trans }}
-                    {% if 'recovery_code' in app.user.getAvailableTFAMethods() | keys and recovery_codes_count > 0 %}
-                        <span class="label label-success">
-                            {{ 'Active' | trans }}
-                            ({{ '%available% codes available' | trans({
-                                '%available%': recovery_codes_count,
-                            }) | meaning('Available arguments: %available%') }})
-                        </span>
-                    {% else %}
-                        <span class="label label-danger">
-                            {{ 'Inactive' | trans }}
-                        </span>
-                    {% endif %}
-                </h3>
-                <p class="help-block">
-                    {{ 'my.tfa.recovery_codes.message.text' | trans }}
-                </p>
-                {% if recovery_codes_count == 0 %}
-                    <div class="alert alert-info">
-                        {{ 'my.tfa.recovery_codes.no_codes_available.text' | trans }}
-                    </div>
-                {% endif %}
-                <a class="btn btn-default"
-                    href="{{ url('my.tfa.recovery_codes') }}">
-                    {{ 'Show codes' | trans }}
-                </a>
+                {% include 'AppBundle:Content:my/tfa/_recovery_codes.html.twig' %}
             </div> <!-- /.col-md-6 -->
         </div>
         <hr />

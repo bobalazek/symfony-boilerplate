@@ -10,7 +10,17 @@
             {{ 'back' | trans }}
         </a>
     </h1>
-    <h2>{{ 'Authenticator' | trans }}</h2>
+    <h2>
+        {{ 'Authenticator' | trans }}
+        {% if app.user.isTFAAuthenticatorActivated() %}
+            <a class="btn btn-danger"
+                href="{{ url('my.tfa.authenticator', {
+                    action: 'reset',
+                }) }}">
+                {{ 'Reset' | trans }}
+            </a>
+        {% endif %}
+    </h2>
     {% if app.user.isTFAAuthenticatorActivated() %}
         <div class="alert alert-info">
             {{ 'my.tfa.authenticator.already_activated.text' | trans }}

@@ -6,6 +6,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -18,9 +20,9 @@ class AuthenticatorController extends Controller
      */
     public function authenticatorAction(Request $request)
     {
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
+        $user = $this->getUser();
         $twoFactorAuthenticatorManager = $this
             ->get('app.two_factor_authenticator_manager');
 
@@ -33,6 +35,15 @@ class AuthenticatorController extends Controller
 
             $em->persist($user);
             $em->flush();
+        }
+
+        $actionsResponse = $this->handleActions(
+            $request,
+            $user,
+            $em
+        );
+        if ($actionsResponse) {
+            return $actionsResponse;
         }
 
         $qrCodeUrl = $twoFactorAuthenticatorManager
@@ -82,5 +93,38 @@ class AuthenticatorController extends Controller
                 'secret' => $secret,
             ]
         );
+    }
+
+    /**
+     * @param Request       $request
+     * @param User          $user
+     * @param EntityManager $em
+     */
+    protected function handleActions(Request $request, User $user, EntityManager $em)
+    {
+        $action = $request->query->get('action');
+        if ($action === 'reset') {
+            $secret = $this->container->get('app.two_factor_authenticator_manager')
+                ->generateSecret();
+
+            $user
+                ->setTFAAuthenticatorSecret($secret)
+                ->setTFAAuthenticatorActivatedAt(null)
+            ;
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'my.tfa.authenticator.reset.flash_message.text'
+                )
+            );
+
+            return $this->redirectToRoute('my.tfa.authenticator');
+        }
+
+        return null;
     }
 }
