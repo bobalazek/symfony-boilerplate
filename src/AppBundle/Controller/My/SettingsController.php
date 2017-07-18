@@ -65,7 +65,7 @@ class SettingsController extends Controller
 
             if (
                 !empty($user->getMobile()) &&
-                (string)$userOld->getMobile() !== (string)$user->getMobile()
+                (string) $userOld->getMobile() !== (string) $user->getMobile()
             ) {
                 try {
                     $this->get('app.user_manager')
@@ -85,7 +85,7 @@ class SettingsController extends Controller
                 }
             } elseif (
                 empty($user->getMobile()) &&
-                (string)$userOld->getMobile() !== (string)$user->getMobile()
+                (string) $userOld->getMobile() !== (string) $user->getMobile()
             ) {
                 $user->setMobileActivatedAt(null);
             }
@@ -141,7 +141,7 @@ class SettingsController extends Controller
 
         /***** Actions *****/
         $action = $request->query->get('action');
-        if ($action === 'resend_activation_email') {
+        if ($action === 'resend_email_activation') {
             try {
                 $this->get('app.user_manager')
                     ->emailActivationRequest(
@@ -163,7 +163,7 @@ class SettingsController extends Controller
             }
 
             return $this->redirectToRoute('my.settings');
-        } elseif ($action === 'resend_activation_mobile') {
+        } elseif ($action === 'resend_mobile_activation') {
             try {
                 $this->get('app.user_manager')
                     ->mobileActivationRequest(
@@ -182,6 +182,55 @@ class SettingsController extends Controller
                    'warning',
                    $e->getMessage()
                );
+            }
+
+            return $this->redirectToRoute('my.settings');
+        } elseif ($action === 'resend_new_email') {
+            try {
+                $this->get('app.user_manager')
+                    ->newEmailRequest(
+                        $request,
+                        $user,
+                        $user,
+                        true
+                    );
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.new_email.request.code_resent.flash_message.text'
+                    )
+                );
+            } catch (BruteForceAttemptException $e) {
+                $this->addFlash(
+                    'warning',
+                    $e->getMessage()
+                );
+            }
+
+            return $this->redirectToRoute('my.settings');
+        } elseif ($action === 'resend_new_mobile') {
+            try {
+                $this->get('app.user_manager')
+                    ->newMobileRequest(
+                        $request,
+                        $user,
+                        $user,
+                        true,
+                        false
+                    );
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans(
+                        'my.settings.new_mobile.request.code_resent.flash_message.text'
+                    )
+                );
+            } catch (BruteForceAttemptException $e) {
+                $this->addFlash(
+                    'warning',
+                    $e->getMessage()
+                );
             }
 
             return $this->redirectToRoute('my.settings');

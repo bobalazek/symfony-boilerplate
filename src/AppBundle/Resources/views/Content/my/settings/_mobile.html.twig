@@ -1,0 +1,49 @@
+<h3>{{ 'Mobile' | trans }}</h3>
+<div class="form-group">
+    {% if app.user.isMobileActivated() %}
+        <i class="fa fa-check-circle-o"
+            title="{{ 'my.settings.mobile.is_activated.text' | trans({
+                '%activated_at%': app.user.getMobileActivatedAt() | date(globals.date_time_format)
+            }) | meaning('Available arguments: %activated_at%') }}"
+        ></i>
+    {% endif %}
+    {{ form_label(form.mobile) }}
+    {{ form_widget(form.mobile) }}
+    {{ form_errors(form.mobile) }}
+</div>
+{% if app.user.isMobileActivated() == false and app.user.getMobile() %}
+    <div class="alert alert-warning">
+        {{ 'my.settings.mobile.is_not_activated_yet.text' | trans({
+            '%resend_link%': url('my.settings', {
+                action: 'resend_mobile_activation',
+            }),
+        }) | raw | meaning('Available arguments: %resend_link%') }}
+    </div>
+{% endif %}
+{% if app.user.getNewMobile() %}
+    <div class="alert alert-info">
+        {{ 'my.settings.new_mobile.request.text' | trans({
+            '%mobile%': app.user.getNewMobile() | phone_number_format('INTERNATIONAL'),
+            '%resend_link%': url('my.settings', {
+                action: 'resend_new_mobile',
+            }),
+        }) | raw | meaning('Available arguments: %mobile%, %resend_link%') }}
+        <div class="form-group">
+            <label for="new-mobile-code-input">
+                {{ 'Code:' | trans }}
+            </label>
+            <div class="input-group">
+                <input id="new-mobile-code-input"
+                    class="form-control"
+                    name="new_mobile_code">
+                <span class="input-group-btn">
+                    <button id="new-mobile-code-button"
+                        class="btn btn-default"
+                        type="button">
+                        {{ 'Submit' | trans }}
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -75,7 +75,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         if ($this->authorizationChecker->isGranted('ROLE_PREVIOUS_ADMIN')) {
             $this->userActionManager->add(
                 'user.switch.back',
-                /** @Meaning("Available arguments: %user_id%") */
+                /* @Meaning("Available arguments: %user_id%") */
                 $this->translator->trans(
                     'admin.users.switch_user.back.user_action.text',
                     [
@@ -91,7 +91,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         } else {
             $this->userActionManager->add(
                 'user.switch',
-                /** @Meaning("Available arguments: %target_user_id%") */
+                /* @Meaning("Available arguments: %target_user_id%") */
                 $this->translator->trans(
                     'admin.users.switch_user.into.user_action.text',
                     [

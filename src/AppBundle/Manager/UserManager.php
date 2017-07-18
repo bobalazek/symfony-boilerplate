@@ -44,7 +44,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.signup.request.subject',
                     [
@@ -84,7 +84,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.signup.confirmation.subject',
                     [
@@ -140,7 +140,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.reset_password.confirmation.subject',
                     [
@@ -199,7 +199,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.reset_password.request.subject',
                     [
@@ -221,16 +221,22 @@ class UserManager
 
     /**
      * @param Request $request
-     * @param User $user
-     * @param User $userOld
-     * @param bool $persist Should the changes to the user entity be persisted to the database?
+     * @param User    $user
+     * @param User    $userOld
+     * @param bool    $persist       Should the changes to the user entity be persisted to the database?
+     * @param bool    $resetUserData should the data, that was manipulated in the form, be set back to original? Is useful, if the values weren't actually manipulated and the $user && $userOld are the same
      *
      * @return bool
      *
      * @throws BruteForceAttemptException
      */
-    public function newEmailRequest(Request $request, User $user, User $userOld, $persist = false)
-    {
+    public function newEmailRequest(
+        Request $request,
+        User $user,
+        User $userOld,
+        $persist = false,
+        $resetUserData = true
+    ) {
         $this->container->get('app.brute_force_manager')
             ->checkIfBlocked($request, 'settings.new_email');
 
@@ -238,9 +244,14 @@ class UserManager
             ->setNewEmailCode(
                 Helpers::getRandomString(32)
             )
-            ->setNewEmail($user->getEmail())
-            ->setEmail($userOld->getEmail())
         ;
+
+        if ($resetUserData) {
+            $user
+                ->setNewEmail($user->getEmail())
+                ->setEmail($userOld->getEmail())
+            ;
+        }
 
         if ($persist) {
             $em = $this->container->get('doctrine.orm.entity_manager');
@@ -265,7 +276,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.new_email.request.subject',
                     [
@@ -307,7 +318,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.new_email_confirmation.subject',
                     [
@@ -341,8 +352,8 @@ class UserManager
 
     /**
      * @param Request $request
-     * @param User $user
-     * @param bool $persist Should the changes to the user entity be persisted to the database?
+     * @param User    $user
+     * @param bool    $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      *
@@ -379,7 +390,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.email_activation.request.subject',
                     [
@@ -418,7 +429,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.email_activation.confirmation.subject',
                     [
@@ -450,16 +461,22 @@ class UserManager
 
     /**
      * @param Request $request
-     * @param User $user
-     * @param User $userOld
-     * @param bool $persist Should the changes to the user entity be persisted to the database?
+     * @param User    $user
+     * @param User    $userOld
+     * @param bool    $persist       Should the changes to the user entity be persisted to the database?
+     * @param bool    $resetUserData should the data, that was manipulated in the form, be set back to original? Is useful, if the values weren't actually manipulated and the $user && $userOld are the same
      *
      * @return bool
      *
      * @throws BruteForceAttemptException
      */
-    public function newMobileRequest(Request $request, User $user, User $userOld, $persist = false)
-    {
+    public function newMobileRequest(
+        Request $request,
+        User $user,
+        User $userOld,
+        $persist = false,
+        $resetUserData = true
+    ) {
         $this->container->get('app.brute_force_manager')
             ->checkIfBlocked($request, 'settings.new_mobile');
 
@@ -467,9 +484,14 @@ class UserManager
             ->setNewMobileCode(
                 Helpers::getRandomString(8)
             )
-            ->setNewMobile($user->getMobile())
-            ->setMobile($userOld->getMobile())
         ;
+
+        if ($resetUserData) {
+            $user
+                ->setNewMobile($user->getMobile())
+                ->setMobile($userOld->getMobile())
+            ;
+        }
 
         if ($persist) {
             $em = $this->container->get('doctrine.orm.entity_manager');
@@ -501,7 +523,7 @@ class UserManager
         $this->container->get('app.sms_sender')
             ->send(
                 $to,
-                /** @Meaning("Available arguments: %code%") */
+                /* @Meaning("Available arguments: %code%") */
                 $this->container->get('translator')->trans(
                     'my.settings.new_mobile.request.sms.text',
                     [
@@ -537,7 +559,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.new_mobile.confirmation.subject',
                     [
@@ -571,8 +593,8 @@ class UserManager
 
     /**
      * @param Request $request
-     * @param User $user
-     * @param bool $persist Should the changes to the user entity be persisted to the database?
+     * @param User    $user
+     * @param bool    $persist Should the changes to the user entity be persisted to the database?
      *
      * @return bool
      *
@@ -616,7 +638,7 @@ class UserManager
         $this->container->get('app.sms_sender')
             ->send(
                 $to,
-                /** @Meaning("Available arguments: %code%") */
+                /* @Meaning("Available arguments: %code%") */
                 $this->container->get('translator')->trans(
                     'my.settings.mobile_activation.request.sms.text',
                     [
@@ -649,7 +671,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Meaning("Available arguments: %app_name%") */
+                /* @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.mobile_activation.confirmation.subject',
                     [

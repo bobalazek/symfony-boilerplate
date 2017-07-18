@@ -6,37 +6,37 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="list-group">
-                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.profile'
+                        <a class="list-group-item {{ 'my.profile' in app.request.attributes.get('_route')
                             ? 'active'
                             : '' }}"
                             href="{{ url('my.profile') }}">
                             {{ 'Profile' | trans }}
                         </a>
-                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.settings'
+                        <a class="list-group-item {{ 'my.settings' in app.request.attributes.get('_route')
                             ? 'active'
                             : '' }}"
                             href="{{ url('my.settings') }}">
                             {{ 'Settings' | trans }}
                         </a>
-                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.password'
+                        <a class="list-group-item {{ 'my.password' in app.request.attributes.get('_route')
                             ? 'active'
                             : '' }}"
                             href="{{ url('my.password') }}">
                             {{ 'Password' | trans }}
                         </a>
-                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.actions'
+                        <a class="list-group-item {{ 'my.actions' in app.request.attributes.get('_route')
                             ? 'active'
                             : '' }}"
                             href="{{ url('my.actions') }}">
                             {{ 'Actions' | trans }}
                         </a>
-                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.devices'
+                        <a class="list-group-item {{ 'my.devices' in app.request.attributes.get('_route')
                             ? 'active'
                             : '' }}"
                             href="{{ url('my.devices') }}">
                             {{ 'Devices' | trans }}
                         </a>
-                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.tfa'
+                        <a class="list-group-item {{ 'my.tfa' in app.request.attributes.get('_route')
                             ? 'active'
                             : '' }}"
                             href="{{ url('my.tfa') }}">

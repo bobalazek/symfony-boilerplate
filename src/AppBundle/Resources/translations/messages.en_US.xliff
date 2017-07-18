@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-18T19:04:51Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-18T21:19:46Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -84,7 +84,7 @@
       <trans-unit id="ca567dda33cdf7058994a40bb9ef4db135c7d283" resname="Code:">
         <source>Code:</source>
         <target>Code:</target>
-        <jms:reference-file line="86">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../src/AppBundle/Resources/views/Content/my/settings/_mobile.html.twig</jms:reference-file>
         <jms:reference-file line="32">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b37456c4530be810dc040f50da72eda09addfb0a" resname="Contact">
@@ -117,7 +117,7 @@
         <target>Email</target>
         <jms:reference-file line="39">/../src/AppBundle/Form/Type/My/SettingsType.php</jms:reference-file>
         <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/login/tfa/_method_email.html.twig</jms:reference-file>
-        <jms:reference-file line="26">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/my/settings/_email.html.twig</jms:reference-file>
         <jms:reference-file line="37">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c4e6b2d1d9f5f35cb7e500e38d9bfeb0e328524" resname="Email:">
@@ -247,7 +247,7 @@
         <source>Mobile</source>
         <target>Mobile</target>
         <jms:reference-file line="43">/../src/AppBundle/Form/Type/My/SettingsType.php</jms:reference-file>
-        <jms:reference-file line="57">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="1">/../src/AppBundle/Resources/views/Content/my/settings/_mobile.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4bf8c70526a411e6204aab4fb43243af3c0bacb5" resname="My Actions">
         <source>My Actions</source>
@@ -372,7 +372,7 @@
         <source>Save</source>
         <target>Save</target>
         <jms:reference-file line="13">/../src/AppBundle/Resources/views/Content/my/password.html.twig</jms:reference-file>
-        <jms:reference-file line="107">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="34">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
         <jms:reference-file line="142">/../src/AppBundle/Resources/views/Content/my/tfa.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5c7fcfc75a01016412fdd3913c1f7fc446d458ce" resname="Secret:">
@@ -408,7 +408,7 @@
         <source>Submit</source>
         <target>Submit</target>
         <jms:reference-file line="14">/../src/AppBundle/Resources/views/Content/login/tfa/_form.html.twig</jms:reference-file>
-        <jms:reference-file line="96">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="43">/../src/AppBundle/Resources/views/Content/my/settings/_mobile.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a55a275aa676930d9258569485d5b38eb1196630" resname="Terms">
         <source>Terms</source>
@@ -750,22 +750,22 @@
       <trans-unit id="c9bf56f8382656f4a5af4643712ea1303ae460c8" resname="my.settings.email.is_activated.text" extradata="Meaning: Available arguments: %activated_at%">
         <source>my.settings.email.is_activated.text</source>
         <target>The email address was activated at %activated_at%</target>
-        <jms:reference-file line="30">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../src/AppBundle/Resources/views/Content/my/settings/_email.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="0cb04de2e12bc9826d5022846465b3883c33e0bf" resname="my.settings.email.is_not_activated_yet.text">
+      <trans-unit id="0cb04de2e12bc9826d5022846465b3883c33e0bf" resname="my.settings.email.is_not_activated_yet.text" extradata="Meaning: Available arguments: %resend_link%">
         <source>my.settings.email.is_not_activated_yet.text</source>
         <target><![CDATA[Your email address is not yet activated. Please click <a href="%resend_link%">here</a>, to activate your email address.]]></target>
-        <jms:reference-file line="41">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Content/my/settings/_email.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="268c3c6309e7d7a5345a8f598bf9bf298e8deb7e" resname="my.settings.email_activation.confirmation.code_invalid.flash_message.text">
         <source>my.settings.email_activation.confirmation.code_invalid.flash_message.text</source>
         <target>The email activation code is invalid.</target>
-        <jms:reference-file line="213">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="251">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a362e7b05890a6aabb9fb7a7750e80843948247b" resname="my.settings.email_activation.confirmation.success.flash_message.text">
         <source>my.settings.email_activation.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your email.</target>
-        <jms:reference-file line="206">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="244">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="462fe94308c48e3e3c7896b43ba419cbdb8d1586" resname="my.settings.email_activation.confirmation.user_action.text">
         <source>my.settings.email_activation.confirmation.user_action.text</source>
@@ -785,22 +785,22 @@
       <trans-unit id="a805d803ee7714c416293f6d8b2ec75bd16db361" resname="my.settings.mobile.is_activated.text" extradata="Meaning: Available arguments: %activated_at%">
         <source>my.settings.mobile.is_activated.text</source>
         <target>The mobile number was activated at %activated_at%</target>
-        <jms:reference-file line="61">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../src/AppBundle/Resources/views/Content/my/settings/_mobile.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="9246773e15086260975c7d17eb79e303b2c71243" resname="my.settings.mobile.is_not_activated_yet.text">
+      <trans-unit id="9246773e15086260975c7d17eb79e303b2c71243" resname="my.settings.mobile.is_not_activated_yet.text" extradata="Meaning: Available arguments: %resend_link%">
         <source>my.settings.mobile.is_not_activated_yet.text</source>
         <target><![CDATA[Your mobile number is not yet activated. Please click <a href="%resend_link%">here</a>, to activate your mobile number.]]></target>
-        <jms:reference-file line="72">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Content/my/settings/_mobile.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c3ca86b5531580c5bbd3c80171bc52619c80ef9c" resname="my.settings.mobile_activation.confirmation.code_invalid.flash_message.text">
         <source>my.settings.mobile_activation.confirmation.code_invalid.flash_message.text</source>
         <target>The mobile activation code is invalid.</target>
-        <jms:reference-file line="244">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="282">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d4eae93e0d6397b06eb06223b7c053e9e19032bf" resname="my.settings.mobile_activation.confirmation.success.flash_message.text">
         <source>my.settings.mobile_activation.confirmation.success.flash_message.text</source>
         <target>You have successfully activated your mobile number.</target>
-        <jms:reference-file line="237">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="275">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b8361f363da96268657fee4f32f034356f6ab334" resname="my.settings.mobile_activation.confirmation.user_action.text">
         <source>my.settings.mobile_activation.confirmation.user_action.text</source>
@@ -825,17 +825,22 @@
       <trans-unit id="cc86ea99da17fab353077c58ef991148a80643af" resname="my.settings.new_email.confirmation.code_invalid.flash_message.text">
         <source>my.settings.new_email.confirmation.code_invalid.flash_message.text</source>
         <target>The new email activation code is invalid.</target>
-        <jms:reference-file line="276">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="314">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="08a847fe8f7014ef98377307279a81af47484651" resname="my.settings.new_email.confirmation.success.flash_message.text">
         <source>my.settings.new_email.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your new email.</target>
-        <jms:reference-file line="269">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="307">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="508af05c3c73489da2df81b59ad492e6954bde7a" resname="my.settings.new_email.confirmation.user_action.text">
         <source>my.settings.new_email.confirmation.user_action.text</source>
         <target>The user has confirmed it's new email.</target>
         <jms:reference-file line="328">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="89bf0e5cc5a59fdbc214b88dd422df0ad7f4b977" resname="my.settings.new_email.request.code_resent.flash_message.text">
+        <source>my.settings.new_email.request.code_resent.flash_message.text</source>
+        <target>We have resent you the code.</target>
+        <jms:reference-file line="195">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c7124f601a59cc828283ad320e629d9827152d3" resname="my.settings.new_email.request.success.flash_message.text">
         <source>my.settings.new_email.request.success.flash_message.text</source>
@@ -844,8 +849,8 @@
       </trans-unit>
       <trans-unit id="b001c9a460083c54d0aff0ace505e3a44fb50a9c" resname="my.settings.new_email.request.text" extradata="Meaning: Available arguments: %email%">
         <source>my.settings.new_email.request.text</source>
-        <target>We have sent you a confirmation email to the new email address (%email%). Please click the link inside to confirm it.</target>
-        <jms:reference-file line="50">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <target><![CDATA[We have sent you a confirmation email to the new email address (%email%). Please click the link inside to confirm it. In case you did not get any code, click <a href="%resend_link%">here</a> and we will resend you the email.]]></target>
+        <jms:reference-file line="25">/../src/AppBundle/Resources/views/Content/my/settings/_email.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4bae7ad1c41e43606d0d487b24f6b313f583bfb0" resname="my.settings.new_email.request.user_action.text">
         <source>my.settings.new_email.request.user_action.text</source>
@@ -855,17 +860,22 @@
       <trans-unit id="005f5a4d2ca8358b1ae4ed6fbfdec926db9b2c7b" resname="my.settings.new_mobile.confirmation.code_invalid.flash_message.text">
         <source>my.settings.new_mobile.confirmation.code_invalid.flash_message.text</source>
         <target>The new mobile activation code is invalid.</target>
-        <jms:reference-file line="308">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="346">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a7b636da1a9a770f37bf6d7f5248c2691c9e45c0" resname="my.settings.new_mobile.confirmation.success.flash_message.text">
         <source>my.settings.new_mobile.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your new mobile number.</target>
-        <jms:reference-file line="301">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="339">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd84b11b5a9a70a8dfc0e776c7f28edd2e93b3db" resname="my.settings.new_mobile.confirmation.user_action.text">
         <source>my.settings.new_mobile.confirmation.user_action.text</source>
         <target>my.settings.new_mobile.confirmation.user_action.text</target>
         <jms:reference-file line="558">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7fc2288d519bab2dccdab65771a520a39695170a" resname="my.settings.new_mobile.request.code_resent.flash_message.text">
+        <source>my.settings.new_mobile.request.code_resent.flash_message.text</source>
+        <target>We have resent you the code.</target>
+        <jms:reference-file line="214">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ad88e625dfe31625ac7f135a781c96c2d36e6e50" resname="my.settings.new_mobile.request.sms.text" extradata="Meaning: Available arguments: %code%">
         <source>my.settings.new_mobile.request.sms.text</source>
@@ -879,8 +889,8 @@
       </trans-unit>
       <trans-unit id="37fdb8c1e24026694172700324eda7d2b87d4b3a" resname="my.settings.new_mobile.request.text" extradata="Meaning: Available arguments: %mobile%">
         <source>my.settings.new_mobile.request.text</source>
-        <target>We have sent you a confirmation sms to the new mobile number (%mobile%). Please enter the code we sent you to the new number below:</target>
-        <jms:reference-file line="81">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
+        <target><![CDATA[We have sent you a confirmation sms to the new mobile number (%mobile%). Please enter the code we sent you to the new number below. In case you did not get any code, click <a href="%resend_link%">here</a> and we will resend you the sms.]]></target>
+        <jms:reference-file line="25">/../src/AppBundle/Resources/views/Content/my/settings/_mobile.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="801c42d9e8b6abf6eedcb6a8dcbde2efc250a4e5" resname="my.settings.new_mobile.request.user_action.text">
         <source>my.settings.new_mobile.request.user_action.text</source>

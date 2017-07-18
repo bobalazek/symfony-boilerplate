@@ -4,7 +4,6 @@ namespace AppBundle\Entity\Shared;
 
 use Jenssegers\Agent\Agent;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\User;
 
 /**
