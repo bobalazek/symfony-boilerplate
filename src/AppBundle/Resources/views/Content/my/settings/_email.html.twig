@@ -28,5 +28,12 @@
                 action: 'resend_new_email',
             }),
         }) | raw | meaning('Available arguments: %email%, %resend_link%') }}
+        <br /> <br />
+        <a class="btn btn-default btn-sm"
+            href="{{ url('my.settings', {
+                action: 'cancel_new_email',
+            }) }}">
+            {{ 'Cancel' | trans }}
+        </a>
     </div>
 {% endif %}

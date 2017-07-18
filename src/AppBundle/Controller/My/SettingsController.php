@@ -235,6 +235,38 @@ class SettingsController extends Controller
             }
 
             return $this->redirectToRoute('my.settings');
+        } elseif ($action === 'cancel_new_email') {
+            $user
+                ->setNewEmail(null)
+                ->setNewEmailCode(null)
+            ;
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'my.settings.new_email.request.cancel.flash_message.text'
+                )
+            );
+
+            return $this->redirectToRoute('my.settings');
+        } elseif ($action === 'cancel_new_mobile') {
+            $user
+                ->setNewMobile(null)
+                ->setNewMobileCode(null)
+            ;
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans(
+                    'my.settings.new_mobile.request.cancel.flash_message.text'
+                )
+            );
+
+            return $this->redirectToRoute('my.settings');
         }
 
         /***** Email activation code *****/

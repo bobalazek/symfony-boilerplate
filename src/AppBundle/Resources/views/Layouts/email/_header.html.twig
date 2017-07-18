@@ -13,8 +13,9 @@
                                 <a href="{{ url('home') }}">
                                     {% set logoImageUrl = url('home') ~ 'assets/img/logo/icon.png' %}
                                     <img src="{{ logoImageUrl }}"
-                                        src-original="{{ logoImageUrl }}"
-                                        alt="Logo" width="48" height="48"
+                                        alt="{{ 'Logo' | trans }}"
+                                        width="48"
+                                        height="48"
                                         style="width: 48px; height: 48px;" />
                                 </a>
                             </td>

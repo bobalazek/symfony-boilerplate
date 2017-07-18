@@ -45,5 +45,11 @@
                 </span>
             </div>
         </div>
+        <a class="btn btn-default btn-sm"
+            href="{{ url('my.settings', {
+                action: 'cancel_new_mobile',
+            }) }}">
+            {{ 'Cancel' | trans }}
+        </a>
     </div>
 {% endif %}

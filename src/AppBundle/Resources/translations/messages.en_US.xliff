@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-18T23:06:55Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-18T23:23:19Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -75,6 +75,12 @@
         <source>Birthday:</source>
         <target>Birthday:</target>
         <jms:reference-file line="92">/../src/AppBundle/Resources/views/Content/my/profile.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="77dfd2135f4db726c47299bb55be26f7f4525a46" resname="Cancel">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <jms:reference-file line="36">/../src/AppBundle/Resources/views/Content/my/settings/_email.html.twig</jms:reference-file>
+        <jms:reference-file line="52">/../src/AppBundle/Resources/views/Content/my/settings/_mobile.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="adac69379a626c2436948a4ef1792c7d719ef929" resname="Code">
         <source>Code</source>
@@ -232,6 +238,11 @@
         <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
         <jms:reference-file line="9">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
         <jms:reference-file line="99">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="83fce8327410848c9eb609acb21732c7c0fec96a" resname="Logo">
+        <source>Logo</source>
+        <target>Logo</target>
+        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Layouts/email/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e43d612e11f1568f2373e719d4c4b08dcecdc7cc" resname="Logout">
         <source>Logout</source>
@@ -765,12 +776,12 @@
       <trans-unit id="268c3c6309e7d7a5345a8f598bf9bf298e8deb7e" resname="my.settings.email_activation.confirmation.code_invalid.flash_message.text">
         <source>my.settings.email_activation.confirmation.code_invalid.flash_message.text</source>
         <target>The email activation code is invalid.</target>
-        <jms:reference-file line="263">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="295">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a362e7b05890a6aabb9fb7a7750e80843948247b" resname="my.settings.email_activation.confirmation.success.flash_message.text">
         <source>my.settings.email_activation.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your email.</target>
-        <jms:reference-file line="256">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="288">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="462fe94308c48e3e3c7896b43ba419cbdb8d1586" resname="my.settings.email_activation.confirmation.user_action.text">
         <source>my.settings.email_activation.confirmation.user_action.text</source>
@@ -800,12 +811,12 @@
       <trans-unit id="c3ca86b5531580c5bbd3c80171bc52619c80ef9c" resname="my.settings.mobile_activation.confirmation.code_invalid.flash_message.text">
         <source>my.settings.mobile_activation.confirmation.code_invalid.flash_message.text</source>
         <target>The mobile activation code is invalid.</target>
-        <jms:reference-file line="294">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="326">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d4eae93e0d6397b06eb06223b7c053e9e19032bf" resname="my.settings.mobile_activation.confirmation.success.flash_message.text">
         <source>my.settings.mobile_activation.confirmation.success.flash_message.text</source>
         <target>You have successfully activated your mobile number.</target>
-        <jms:reference-file line="287">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="319">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b8361f363da96268657fee4f32f034356f6ab334" resname="my.settings.mobile_activation.confirmation.user_action.text">
         <source>my.settings.mobile_activation.confirmation.user_action.text</source>
@@ -830,17 +841,22 @@
       <trans-unit id="cc86ea99da17fab353077c58ef991148a80643af" resname="my.settings.new_email.confirmation.code_invalid.flash_message.text">
         <source>my.settings.new_email.confirmation.code_invalid.flash_message.text</source>
         <target>The new email activation code is invalid.</target>
-        <jms:reference-file line="326">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="358">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="08a847fe8f7014ef98377307279a81af47484651" resname="my.settings.new_email.confirmation.success.flash_message.text">
         <source>my.settings.new_email.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your new email.</target>
-        <jms:reference-file line="319">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="351">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="508af05c3c73489da2df81b59ad492e6954bde7a" resname="my.settings.new_email.confirmation.user_action.text">
         <source>my.settings.new_email.confirmation.user_action.text</source>
         <target>The user has confirmed it's new email.</target>
         <jms:reference-file line="339">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1643846548e38641aae908a9ad8f8483e374011d" resname="my.settings.new_email.request.cancel.flash_message.text">
+        <source>my.settings.new_email.request.cancel.flash_message.text</source>
+        <target>The new email address request was successfully canceled.</target>
+        <jms:reference-file line="248">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="89bf0e5cc5a59fdbc214b88dd422df0ad7f4b977" resname="my.settings.new_email.request.code_resent.flash_message.text">
         <source>my.settings.new_email.request.code_resent.flash_message.text</source>
@@ -865,17 +881,22 @@
       <trans-unit id="005f5a4d2ca8358b1ae4ed6fbfdec926db9b2c7b" resname="my.settings.new_mobile.confirmation.code_invalid.flash_message.text">
         <source>my.settings.new_mobile.confirmation.code_invalid.flash_message.text</source>
         <target>The new mobile activation code is invalid.</target>
-        <jms:reference-file line="358">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="390">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a7b636da1a9a770f37bf6d7f5248c2691c9e45c0" resname="my.settings.new_mobile.confirmation.success.flash_message.text">
         <source>my.settings.new_mobile.confirmation.success.flash_message.text</source>
         <target>You have successfully confirmed your new mobile number.</target>
-        <jms:reference-file line="351">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
+        <jms:reference-file line="383">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd84b11b5a9a70a8dfc0e776c7f28edd2e93b3db" resname="my.settings.new_mobile.confirmation.user_action.text">
         <source>my.settings.new_mobile.confirmation.user_action.text</source>
         <target>my.settings.new_mobile.confirmation.user_action.text</target>
         <jms:reference-file line="580">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="765cd58fb2425bdd0ed386ba70dcc939ef19a2f7" resname="my.settings.new_mobile.request.cancel.flash_message.text">
+        <source>my.settings.new_mobile.request.cancel.flash_message.text</source>
+        <target>The new mobile number request was successfully canceled.</target>
+        <jms:reference-file line="264">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7fc2288d519bab2dccdab65771a520a39695170a" resname="my.settings.new_mobile.request.code_resent.flash_message.text">
         <source>my.settings.new_mobile.request.code_resent.flash_message.text</source>
