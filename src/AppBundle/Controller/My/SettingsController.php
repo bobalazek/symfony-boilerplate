@@ -192,7 +192,8 @@ class SettingsController extends Controller
                         $request,
                         $user,
                         $user,
-                        true
+                        true,
+                        false
                     );
 
                 $this->addFlash(
