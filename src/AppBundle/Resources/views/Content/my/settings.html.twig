@@ -29,7 +29,7 @@
                         <i class="fa fa-check-circle-o"
                             title="{{ 'my.settings.email.is_activated.text' | trans({
                                 '%activated_at%': app.user.getEmailActivatedAt() | date(globals.date_time_format)
-                            }) }}"
+                            }) | meaning('Available arguments: %activated_at%') }}"
                         ></i>
                     {% endif %}
                     {{ form_label(form.email) }}
@@ -49,7 +49,7 @@
                     <div class="alert alert-info">
                         {{ 'my.settings.new_email.request.text' | trans({
                             '%email%': app.user.getNewEmail(),
-                        }) }}
+                        }) | meaning('Available arguments: %email%') }}
                     </div>
                 {% endif %}
             </div>
@@ -60,7 +60,7 @@
                         <i class="fa fa-check-circle-o"
                             title="{{ 'my.settings.mobile.is_activated.text' | trans({
                                 '%activated_at%': app.user.getMobileActivatedAt() | date(globals.date_time_format)
-                            }) }}"
+                            }) | meaning('Available arguments: %activated_at%') }}"
                         ></i>
                     {% endif %}
                     {{ form_label(form.mobile) }}

@@ -114,7 +114,7 @@
                             {{ 'Active' | trans }}
                             ({{ '%available% codes available' | trans({
                                 '%available%': recovery_codes_count,
-                            }) }})
+                            }) | meaning('Available arguments: %available%') }})
                         </span>
                     {% else %}
                         <span class="label label-danger">

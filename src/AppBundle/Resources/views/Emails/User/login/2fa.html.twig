@@ -6,7 +6,7 @@
             <td class="wrapper last">
                 <h4>{{ 'emails.general.greeting' | trans({
                     '%user_name%': user.getName(),
-                }) }}</h4>
+                }) | meaning('Available arguments: %user_name%') }}</h4>
                 <p>{{ 'emails.user.login.tfa.text' | trans({
                     '%code%': '<b>' ~ user_login_code.getCode() ~ '</b>',
                     '%expires_at%': '<b>' ~ user_login_code.getExpiresAt() | date(globals.date_time_format) ~ '</b>',
