@@ -1,0 +1,54 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block content %}
+    <div id="main" role="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.profile'
+                            ? 'active'
+                            : '' }}"
+                            href="{{ url('my.profile') }}">
+                            {{ 'Profile' | trans }}
+                        </a>
+                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.settings'
+                            ? 'active'
+                            : '' }}"
+                            href="{{ url('my.settings') }}">
+                            {{ 'Settings' | trans }}
+                        </a>
+                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.password'
+                            ? 'active'
+                            : '' }}"
+                            href="{{ url('my.password') }}">
+                            {{ 'Password' | trans }}
+                        </a>
+                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.actions'
+                            ? 'active'
+                            : '' }}"
+                            href="{{ url('my.actions') }}">
+                            {{ 'Actions' | trans }}
+                        </a>
+                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.devices'
+                            ? 'active'
+                            : '' }}"
+                            href="{{ url('my.devices') }}">
+                            {{ 'Devices' | trans }}
+                        </a>
+                        <a class="list-group-item {{ app.request.attributes.get('_route') == 'my.tfa'
+                            ? 'active'
+                            : '' }}"
+                            href="{{ url('my.tfa') }}">
+                            {{ '2FA' | trans }}
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    {% include 'AppBundle:Layouts:default/_flash_messages.html.twig' %}
+                    {% block main %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div> <!-- /#main -->
+{% endblock %}

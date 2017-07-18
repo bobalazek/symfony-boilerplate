@@ -47,7 +47,7 @@ class SettingsController extends Controller
             if ($userOld->getEmail() !== $user->getEmail()) {
                 try {
                     $this->get('app.user_manager')
-                        ->newEmailRequest($user, $userOld);
+                        ->newEmailRequest($request, $user, $userOld);
 
                     $this->addFlash(
                         'success',
@@ -65,11 +65,11 @@ class SettingsController extends Controller
 
             if (
                 !empty($user->getMobile()) &&
-                $userOld->getMobile() !== $user->getMobile()
+                (string)$userOld->getMobile() !== (string)$user->getMobile()
             ) {
                 try {
                     $this->get('app.user_manager')
-                        ->newMobileRequest($user, $userOld);
+                        ->newMobileRequest($request, $user, $userOld);
 
                     $this->addFlash(
                         'success',
@@ -85,7 +85,7 @@ class SettingsController extends Controller
                 }
             } elseif (
                 empty($user->getMobile()) &&
-                $userOld->getMobile() !== $user->getMobile()
+                (string)$userOld->getMobile() !== (string)$user->getMobile()
             ) {
                 $user->setMobileActivatedAt(null);
             }
@@ -145,6 +145,7 @@ class SettingsController extends Controller
             try {
                 $this->get('app.user_manager')
                     ->emailActivationRequest(
+                        $request,
                         $user
                     );
 
@@ -166,6 +167,7 @@ class SettingsController extends Controller
             try {
                 $this->get('app.user_manager')
                     ->mobileActivationRequest(
+                        $request,
                         $user
                     );
 

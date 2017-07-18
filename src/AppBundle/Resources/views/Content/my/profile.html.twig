@@ -1,8 +1,127 @@
-{% extends 'AppBundle:Layouts:default.html.twig' %}
+{% extends 'AppBundle:Layouts:my.html.twig' %}
 
 {% block title %}{{ 'My Profile' | trans }} | {{ parent() }}{% endblock %}
 
 {% block main %}
     <h1>{{ 'My Profile' | trans }}</h1>
-    <h2>{{ app.user }}</h2>
+    <div class="row">
+        <div class="col-md-3">
+            {% if app.user.getProfile().getImageUrl() %}
+                <img class="img-responsive img-thumbnail"
+                    src="{{ app.user.getProfile().getImageUrl() }}"
+                    alt="{{ 'Profile image' | trans }}"
+                    style="max-height: 400px;" />
+            {% endif %}
+            <div>
+                <h1>
+                    {{ app.user.getName() }}
+                    <br />
+                    <small>{{ app.user.getEmail() }}</small>
+                </h1>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">
+                            <i class="fa fa-{{ app.user.isEnabled() ? 'check' : 'times' }}"></i>
+                        </span>
+                        {{ 'Enabled' | trans }}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">
+                            <i class="fa fa-{{ app.user.isVerified() ? 'check' : 'times' }}"></i>
+                        </span>
+                        {{ 'Verified' | trans }}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">
+                            <i class="fa fa-{{ app.user.isWarned() ? 'check' : 'times' }}"></i>
+                        </span>
+                        {{ 'Warned' | trans }}
+                        {% if app.user.getWarnedReason() %}
+                            <small>({{ app.user.getWarnedReason() }})</small>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">
+                            <i class="fa fa-{{ app.user.isLocked() ? 'check' : 'times' }}"></i>
+                        </span>
+                        {{ 'Locked' | trans }}
+                        {% if app.user.getWarnedReason() %}
+                            <small>({{ app.user.getWarnedReason() }})</small>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ 'Profile' | trans }}</h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <b>{{ 'Username:' | trans }}</b>
+                            {{ app.user.getUsername() }}
+                        </li>
+                        <li>
+                            <b>{{ 'Email:' | trans }}</b>
+                            {{ app.user.getEmail() }}
+                        </li>
+                        {% if app.user.getProfile().getTitle() %}
+                            <li>
+                                <b>{{ 'Title:' | trans }}</b>
+                                {{ app.user.getProfile().getTitle() }}
+                            </li>
+                        {% endif %}
+                        <li>
+                            <b>{{ 'First name:' | trans }}</b>
+                            {{ app.user.getProfile().getFirstName() }}
+                        </li>
+                        {% if app.user.getProfile().getLastName() %}
+                            <li>
+                                <b>{{ 'Last name:' | trans }}</b>
+                                {{ app.user.getProfile().getLastName() }}
+                            </li>
+                        {% endif %}
+                        {% if app.user.getProfile().getGender() %}
+                            <li>
+                                <b>{{ 'Gender:' | trans }}</b>
+                                <i class="fa fa-{{ app.user.getProfile().getGender() }}"></i>
+                            </li>
+                        {% endif %}
+                        {% if app.user.getProfile().getBirthday() %}
+                            <li>
+                                <b>{{ 'Birthday:' | trans }}</b>
+                                {{ app.user.getProfile().getBirthday() | date(globals.date_time_format) }}
+                            </li>
+                        {% endif %}
+                        <li>
+                            <b>{{ 'Locale:' | trans }}</b>
+                            {{ app.user.getLocale() }}
+                        </li>
+                    </ul>
+                </div> <!-- /.col-md-4 -->
+                {% if app.user.getRoles() | length %}
+                    <div class="col-md-4">
+                        <h3>{{ 'Roles' | trans }}</h3>
+                        <ul class="list-unstyled">
+                            {% for userRole in app.user.getRoles() %}
+                                <li>
+                                    {{ userRole }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div> <!-- /.col-md-4 -->
+                {% endif %}
+                {% if app.user.getUserDevices() | length %}
+                    <div class="col-md-4">
+                        <h3>{{ 'Devices' | trans }}</h3>
+                        <ul class="list-unstyled">
+                            {% for userDevice in app.user.getUserDevices() %}
+                                <li>{{ userDevice }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div> <!-- /.col-md-4 -->
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

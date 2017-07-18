@@ -4,6 +4,7 @@ namespace AppBundle\Entity\Shared;
 
 use Jenssegers\Agent\Agent;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\User;
 
 /**
@@ -48,7 +49,7 @@ trait RequestMetaTrait
     /**
      * @param $ip
      *
-     * @return UserAction
+     * @return $this
      */
     public function setIp($ip)
     {
@@ -70,7 +71,7 @@ trait RequestMetaTrait
     /**
      * @param $userAgent
      *
-     * @return UserAction
+     * @return $this
      */
     public function setUserAgent($userAgent)
     {
@@ -103,7 +104,7 @@ trait RequestMetaTrait
     /**
      * @param $sessionId
      *
-     * @return UserAction
+     * @return $this
      */
     public function setSessionId($sessionId)
     {

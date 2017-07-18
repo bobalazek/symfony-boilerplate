@@ -3,6 +3,7 @@
 namespace AppBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\Request;
 use libphonenumber\PhoneNumberFormat;
 use AppBundle\Entity\User;
 use AppBundle\Utils\Helpers;
@@ -215,6 +216,7 @@ class UserManager
     /***** New Email *****/
 
     /**
+     * @param Request $request
      * @param User $user
      * @param User $userOld
      * @param bool $persist Should the changes to the user entity be persisted to the database?
@@ -223,7 +225,7 @@ class UserManager
      *
      * @throws BruteForceAttemptException
      */
-    public function newEmailRequest(User $user, User $userOld, $persist = false)
+    public function newEmailRequest(Request $request, User $user, User $userOld, $persist = false)
     {
         $this->container->get('app.brute_force_manager')
             ->checkIfBlocked($request, 'settings.new_email');
@@ -332,6 +334,7 @@ class UserManager
     /***** Email Activation *****/
 
     /**
+     * @param Request $request
      * @param User $user
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
@@ -339,7 +342,7 @@ class UserManager
      *
      * @throws BruteForceAttemptException
      */
-    public function emailActivationRequest(User $user, $persist = true)
+    public function emailActivationRequest(Request $request, User $user, $persist = true)
     {
         $this->container->get('app.brute_force_manager')
             ->checkIfBlocked($request, 'settings.email_activation');
@@ -438,6 +441,7 @@ class UserManager
     /***** New Mobile *****/
 
     /**
+     * @param Request $request
      * @param User $user
      * @param User $userOld
      * @param bool $persist Should the changes to the user entity be persisted to the database?
@@ -446,7 +450,7 @@ class UserManager
      *
      * @throws BruteForceAttemptException
      */
-    public function newMobileRequest(User $user, User $userOld, $persist = false)
+    public function newMobileRequest(Request $request, User $user, User $userOld, $persist = false)
     {
         $this->container->get('app.brute_force_manager')
             ->checkIfBlocked($request, 'settings.new_mobile');
@@ -556,6 +560,7 @@ class UserManager
     /***** Mobile Activation *****/
 
     /**
+     * @param Request $request
      * @param User $user
      * @param bool $persist Should the changes to the user entity be persisted to the database?
      *
@@ -563,7 +568,7 @@ class UserManager
      *
      * @throws BruteForceAttemptException
      */
-    public function mobileActivationRequest(User $user, $persist = true)
+    public function mobileActivationRequest(Request $request, User $user, $persist = true)
     {
         $this->container->get('app.brute_force_manager')
             ->checkIfBlocked($request, 'settings.mobile_activation');

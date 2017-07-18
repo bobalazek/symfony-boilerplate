@@ -21,7 +21,8 @@ class Profile
     use ORMBehaviors\Blameable\Blameable,
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
-        ORMBehaviors\Timestampable\Timestampable
+        ORMBehaviors\Timestampable\Timestampable,
+        Shared\ImageTrait
     ;
 
     public static $titles = [
