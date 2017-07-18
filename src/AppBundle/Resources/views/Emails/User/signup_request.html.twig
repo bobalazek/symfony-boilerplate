@@ -11,7 +11,7 @@
             <td class="wrapper last">
                 <h4>{{ 'emails.general.greeting' | trans({
                     '%user_name%': user.getName(),
-                }) }}</h4>
+                }) | meaning('Available arguments: %user_name%') }}</h4>
                 <p>
                      <b>{{ 'Username' | trans }}:</b>
                      {{ user.getUsername() }}

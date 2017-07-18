@@ -6,7 +6,7 @@
             <td class="wrapper last">
                 <p>{{ 'The deployment of the %app_name% was succsessful.' | trans({
                     '%app_name%': globals.app_name,
-                }) }}</p>
+                } | meaning('Available arguments: %app_name%')) }}</p>
                 <table class="twelve columns">
                     <tr>
                         <td class="panel">

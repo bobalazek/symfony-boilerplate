@@ -80,7 +80,7 @@
                     <div class="alert alert-info">
                         {{ 'my.settings.new_mobile.request.text' | trans({
                             '%mobile%': app.user.getNewMobile() | phone_number_format('INTERNATIONAL'),
-                        }) }}
+                        }) | meaning('Available arguments: %mobile%') }}
                         <div class="form-group">
                             <label for="new-mobile-code-input">
                                 {{ 'Code:' | trans }}

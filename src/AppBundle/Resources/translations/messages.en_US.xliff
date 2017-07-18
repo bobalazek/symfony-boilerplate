@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-18T18:35:06Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-18T18:56:49Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -519,7 +519,7 @@
         <target>[%app_name%] Email activation confirmation</target>
         <jms:reference-file line="414">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="7d77bc12e4d8094fdc275b9a325fdf6850870e8a" resname="emails.user.email_activation.confirmation.text">
+      <trans-unit id="7d77bc12e4d8094fdc275b9a325fdf6850870e8a" resname="emails.user.email_activation.confirmation.text" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.email_activation.confirmation.text</source>
         <target>You have successfully confirmed your email.</target>
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/email_activation_confirmation.html.twig</jms:reference-file>
@@ -609,7 +609,7 @@
         <target>[%app_name%] Signup confirmation</target>
         <jms:reference-file line="86">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="6163bfd895431c16d6914dcbfdfd5994a409c560" resname="emails.user.signup.confirmation.text">
+      <trans-unit id="6163bfd895431c16d6914dcbfdfd5994a409c560" resname="emails.user.signup.confirmation.text" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.signup.confirmation.text</source>
         <target>Thanks for your signup. Have fun using the application.</target>
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/signup_confirmation.html.twig</jms:reference-file>
@@ -877,7 +877,7 @@
         <target>You have successfully requested a new mobile number.</target>
         <jms:reference-file line="76">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="37fdb8c1e24026694172700324eda7d2b87d4b3a" resname="my.settings.new_mobile.request.text">
+      <trans-unit id="37fdb8c1e24026694172700324eda7d2b87d4b3a" resname="my.settings.new_mobile.request.text" extradata="Meaning: Available arguments: %mobile%">
         <source>my.settings.new_mobile.request.text</source>
         <target>We have sent you a confirmation sms to the new mobile number (%mobile%). Please enter the code we sent you to the new number below:</target>
         <jms:reference-file line="81">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>

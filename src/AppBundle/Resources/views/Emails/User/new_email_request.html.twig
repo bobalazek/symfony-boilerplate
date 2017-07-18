@@ -6,7 +6,7 @@
             <td class="wrapper last">
                 <h4>{{ 'emails.general.greeting' | trans({
                     '%user_name%': user.getName(),
-                }) }}</h4>
+                }) | meaning('Available arguments: %user_name%') }}</h4>
                 <p>{{ 'emails.user.new_email.request.click_link_below_to_confirm_new_email.text' | trans }}</p>
                 <table class="twelve columns">
                     <tr>
