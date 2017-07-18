@@ -44,7 +44,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.signup.request.subject',
                     [
@@ -84,7 +84,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.signup.confirmation.subject',
                     [
@@ -140,7 +140,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.reset_password.confirmation.subject',
                     [
@@ -199,7 +199,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.reset_password.request.subject',
                     [
@@ -265,7 +265,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.new_email.request.subject',
                     [
@@ -307,7 +307,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.new_email_confirmation.subject',
                     [
@@ -379,7 +379,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.email_activation.request.subject',
                     [
@@ -418,7 +418,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.email_activation.confirmation.subject',
                     [
@@ -501,7 +501,7 @@ class UserManager
         $this->container->get('app.sms_sender')
             ->send(
                 $to,
-                /** @Desc("Available arguments: %code%") */
+                /** @Meaning("Available arguments: %code%") */
                 $this->container->get('translator')->trans(
                     'my.settings.new_mobile.request.sms.text',
                     [
@@ -537,7 +537,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.new_mobile.confirmation.subject',
                     [
@@ -616,7 +616,7 @@ class UserManager
         $this->container->get('app.sms_sender')
             ->send(
                 $to,
-                /** @Desc("Available arguments: %code%") */
+                /** @Meaning("Available arguments: %code%") */
                 $this->container->get('translator')->trans(
                     'my.settings.mobile_activation.request.sms.text',
                     [
@@ -649,7 +649,7 @@ class UserManager
 
         $this->container->get('app.mailer')
             ->swiftMessageInitializeAndSend([
-                /** @Desc("Available arguments: %app_name%") */
+                /** @Meaning("Available arguments: %app_name%") */
                 'subject' => $this->container->get('translator')->trans(
                     'emails.user.mobile_activation.confirmation.subject',
                     [

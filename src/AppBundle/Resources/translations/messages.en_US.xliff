@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-18T19:03:45Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-18T19:04:51Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -469,12 +469,12 @@
         <target>Welcome to %app_name%.</target>
         <jms:reference-file line="4">/../src/AppBundle/Resources/views/Content/index.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="a3fc750d51d1a0915f51a09687e580e33e22cce7" resname="admin.users.switch_user.back.user_action.text">
+      <trans-unit id="a3fc750d51d1a0915f51a09687e580e33e22cce7" resname="admin.users.switch_user.back.user_action.text" extradata="Meaning: Available arguments: %user_id%">
         <source>admin.users.switch_user.back.user_action.text</source>
         <target>The user has switched back to own user (from user with ID "%user_id%").</target>
         <jms:reference-file line="79">/../src/AppBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="d3a9874c0f0efc4eaa18cf87dc7ad46f4e2ebe17" resname="admin.users.switch_user.into.user_action.text">
+      <trans-unit id="d3a9874c0f0efc4eaa18cf87dc7ad46f4e2ebe17" resname="admin.users.switch_user.into.user_action.text" extradata="Meaning: Available arguments: %target_user_id%">
         <source>admin.users.switch_user.into.user_action.text</source>
         <target>The user has switched into the user with the ID "%target_user_id%".</target>
         <jms:reference-file line="95">/../src/AppBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
@@ -485,7 +485,7 @@
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Content/my/tfa/recovery_codes.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="78e933db98bd1da658cdab8d5e210d615e1d54d0" resname="brute_force.attempt.text">
+      <trans-unit id="78e933db98bd1da658cdab8d5e210d615e1d54d0" resname="brute_force.attempt.text" extradata="Meaning: Available arguments: %time%, %action%">
         <source>brute_force.attempt.text</source>
         <target>You have been blocked from executing the following action: %action%. The block will be released at %time%.</target>
         <jms:reference-file line="40">/../src/AppBundle/Manager/BruteForceManager.php</jms:reference-file>
@@ -514,7 +514,7 @@
         <jms:reference-file line="7">/../src/AppBundle/Resources/views/Emails/User/signup_confirmation.html.twig</jms:reference-file>
         <jms:reference-file line="12">/../src/AppBundle/Resources/views/Emails/User/signup_request.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="dc60cc7192204cad637e02a59be22ff652db9b9c" resname="emails.user.email_activation.confirmation.subject">
+      <trans-unit id="dc60cc7192204cad637e02a59be22ff652db9b9c" resname="emails.user.email_activation.confirmation.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.email_activation.confirmation.subject</source>
         <target>[%app_name%] Email activation confirmation</target>
         <jms:reference-file line="422">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -529,12 +529,12 @@
         <target>Please click the link below to confirm your email.</target>
         <jms:reference-file line="18">/../src/AppBundle/Resources/views/Emails/User/email_activation_request.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="5e6dbd00f81ea62e152d2d3af4530cd01beda8a9" resname="emails.user.email_activation.request.subject">
+      <trans-unit id="5e6dbd00f81ea62e152d2d3af4530cd01beda8a9" resname="emails.user.email_activation.request.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.email_activation.request.subject</source>
         <target>[%app_name%] Email activation request</target>
         <jms:reference-file line="383">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="843256892ce3928235aae16ef567047663befd16" resname="emails.user.login.tfa.subject">
+      <trans-unit id="843256892ce3928235aae16ef567047663befd16" resname="emails.user.login.tfa.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.login.tfa.subject</source>
         <target>[%app_name%] Two-factor login</target>
         <jms:reference-file line="94">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
@@ -544,7 +544,7 @@
         <target>We detected a two-factor authentication login request. Please click on the link below or enter the following code to into the form: %code%. The link will expire at %expires_at%.</target>
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/login/2fa.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="ae075489d04be98ef1381ca1ecc573dac44e8629" resname="emails.user.mobile_activation.confirmation.subject">
+      <trans-unit id="ae075489d04be98ef1381ca1ecc573dac44e8629" resname="emails.user.mobile_activation.confirmation.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.mobile_activation.confirmation.subject</source>
         <target>[%app_name%] Mobile activation confirmation</target>
         <jms:reference-file line="653">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -564,17 +564,17 @@
         <target>Please click the link below to confirm your email.</target>
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/new_email_request.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="434bd043141a674454fbcf923e8ea34f3af27f51" resname="emails.user.new_email.request.subject">
+      <trans-unit id="434bd043141a674454fbcf923e8ea34f3af27f51" resname="emails.user.new_email.request.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.new_email.request.subject</source>
         <target>[%app_name%] New email request</target>
         <jms:reference-file line="269">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="2ecfb36866dc97b6ac2490ad657c451e3d55bf75" resname="emails.user.new_email_confirmation.subject">
+      <trans-unit id="2ecfb36866dc97b6ac2490ad657c451e3d55bf75" resname="emails.user.new_email_confirmation.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.new_email_confirmation.subject</source>
         <target>[%app_name%] New email confirmation</target>
         <jms:reference-file line="311">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="16ddfa5aa705a164b1f634b738182e3630e7633a" resname="emails.user.new_mobile.confirmation.subject">
+      <trans-unit id="16ddfa5aa705a164b1f634b738182e3630e7633a" resname="emails.user.new_mobile.confirmation.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.new_mobile.confirmation.subject</source>
         <target>[%app_name%] New mobile confirmation</target>
         <jms:reference-file line="541">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -584,7 +584,7 @@
         <target>You have successfully confirmed your mobile number.</target>
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/new_mobile_confirmation.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="8281000b0ab17eb8796daf15e0b4f0323001b305" resname="emails.user.reset_password.confirmation.subject">
+      <trans-unit id="8281000b0ab17eb8796daf15e0b4f0323001b305" resname="emails.user.reset_password.confirmation.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.reset_password.confirmation.subject</source>
         <target>[%app_name%] Reset password confirmation</target>
         <jms:reference-file line="144">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -594,7 +594,7 @@
         <target>Please click the link below to reset your password.</target>
         <jms:reference-file line="15">/../src/AppBundle/Resources/views/Emails/User/reset_password_request.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="1b66fcf8033e67e009495da0f57f954fa1dad854" resname="emails.user.reset_password.request.subject">
+      <trans-unit id="1b66fcf8033e67e009495da0f57f954fa1dad854" resname="emails.user.reset_password.request.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.reset_password.request.subject</source>
         <target>[%app_name%] Reset password request</target>
         <jms:reference-file line="203">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -604,7 +604,7 @@
         <target>Your password was successfully changed!</target>
         <jms:reference-file line="10">/../src/AppBundle/Resources/views/Emails/User/reset_password_confirmation.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="56c21f115aee90ae3e30933a91805c8b0c562622" resname="emails.user.signup.confirmation.subject">
+      <trans-unit id="56c21f115aee90ae3e30933a91805c8b0c562622" resname="emails.user.signup.confirmation.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.signup.confirmation.subject</source>
         <target>[%app_name%] Signup confirmation</target>
         <jms:reference-file line="88">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -619,7 +619,7 @@
         <target>Please click the link below to confirm your signup.</target>
         <jms:reference-file line="19">/../src/AppBundle/Resources/views/Emails/User/signup_request.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="27ee06707f2758ff8ba8f925ec061ab9c95a29c9" resname="emails.user.signup.request.subject">
+      <trans-unit id="27ee06707f2758ff8ba8f925ec061ab9c95a29c9" resname="emails.user.signup.request.subject" extradata="Meaning: Available arguments: %app_name%">
         <source>emails.user.signup.request.subject</source>
         <target>[%app_name%] Signup</target>
         <jms:reference-file line="48">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -697,7 +697,7 @@
         <target>Please select the method below.</target>
         <jms:reference-file line="22">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="4a27e9e87968ab77fd5472c0ef88c7a38aae80c7" resname="login.tfa.sms.text">
+      <trans-unit id="4a27e9e87968ab77fd5472c0ef88c7a38aae80c7" resname="login.tfa.sms.text" extradata="Meaning: Available arguments: %code%">
         <source>login.tfa.sms.text</source>
         <target>The 2FA code is: %code%</target>
         <jms:reference-file line="126">/../src/AppBundle/Manager/TwoFactorAuthenticationManager.php</jms:reference-file>
@@ -707,7 +707,7 @@
         <target>You are now successfully logged in.</target>
         <jms:reference-file line="176">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="0750c51b58bd7ead9b231afd73c5d2af9181f575" resname="login.tfa.too_many_attempts.text">
+      <trans-unit id="0750c51b58bd7ead9b231afd73c5d2af9181f575" resname="login.tfa.too_many_attempts.text" extradata="Meaning: Available arguments: %time%">
         <source>login.tfa.too_many_attempts.text</source>
         <target>Your account has been blocked from logging in. The block will be released at %time%.</target>
         <jms:reference-file line="309">/../src/AppBundle/Controller/Login/TwoFactorAuthenticationController.php</jms:reference-file>
@@ -812,7 +812,7 @@
         <target>You have successfully resent the activation code to your mobile number.</target>
         <jms:reference-file line="176">/../src/AppBundle/Controller/My/SettingsController.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="ea4d0bec3b04b2e1709518d608606108e81c9c8c" resname="my.settings.mobile_activation.request.sms.text">
+      <trans-unit id="ea4d0bec3b04b2e1709518d608606108e81c9c8c" resname="my.settings.mobile_activation.request.sms.text" extradata="Meaning: Available arguments: %code%">
         <source>my.settings.mobile_activation.request.sms.text</source>
         <target>Your activation code: %code%</target>
         <jms:reference-file line="620">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
@@ -867,7 +867,7 @@
         <target>my.settings.new_mobile.confirmation.user_action.text</target>
         <jms:reference-file line="558">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="ad88e625dfe31625ac7f135a781c96c2d36e6e50" resname="my.settings.new_mobile.request.sms.text">
+      <trans-unit id="ad88e625dfe31625ac7f135a781c96c2d36e6e50" resname="my.settings.new_mobile.request.sms.text" extradata="Meaning: Available arguments: %code%">
         <source>my.settings.new_mobile.request.sms.text</source>
         <target>Your activation code: %code%</target>
         <jms:reference-file line="505">/../src/AppBundle/Manager/UserManager.php</jms:reference-file>

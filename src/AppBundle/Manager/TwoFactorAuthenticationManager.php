@@ -90,7 +90,7 @@ class TwoFactorAuthenticationManager
             $this->container
                 ->get('app.mailer')
                 ->swiftMessageInitializeAndSend([
-                    /** @Desc("Available arguments: %app_name%") */
+                    /** @Meaning("Available arguments: %app_name%") */
                     'subject' => $this->container->get('translator')->trans(
                         'emails.user.login.tfa.subject',
                         [
@@ -122,7 +122,7 @@ class TwoFactorAuthenticationManager
             $this->container->get('app.sms_sender')
                 ->send(
                     $to,
-                    /** @Desc("Available arguments: %code%") */
+                    /** @Meaning("Available arguments: %code%") */
                     $this->container->get('translator')->trans(
                         'login.tfa.sms.text',
                         [
