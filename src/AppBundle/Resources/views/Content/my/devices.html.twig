@@ -1,0 +1,36 @@
+{% extends 'AppBundle:Layouts:default.html.twig' %}
+
+{% block title %}{{ 'My Devices' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'My Devices' | trans }}</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>{{ knp_pagination_sortable(pagination, 'Key', 'ud.name') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'User Agent', 'ud.userAgent') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Last Active', 'ud.lastActiveAt') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Time', 'ud.createdAt') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for userDevice in pagination %}
+                    <tr>
+                        <td>{{ userDevice.getName() }}</td>
+                        <td>{{ userDevice.getUserAgent() }}</td>
+                        <td>{{ userDevice.getLastActiveAt() | date(globals.date_time_format) }}</td>
+                        <td>{{ userDevice.getCreatedAt() | date(globals.date_time_format) }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">
+                            {{ 'my.devices.no_devices_yet.text' | trans }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {{ knp_pagination_render(pagination) }}
+{% endblock %}

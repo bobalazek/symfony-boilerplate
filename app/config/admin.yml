@@ -78,3 +78,17 @@ services:
               label: User Blocked Actions
         calls:
             - [setContainer, ["@service_container"]]
+
+    admin.user_device:
+        class: AdminBundle\Admin\UserDeviceAdmin
+        arguments:
+            - ~
+            - AppBundle\Entity\UserDevice
+            - ~
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User Devices
+        calls:
+            - [setContainer, ["@service_container"]]

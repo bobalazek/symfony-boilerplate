@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-17T23:39:34Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-07-18T16:46:28Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -14,7 +14,7 @@
       <trans-unit id="e8442a3a9ebf7bb5cc78ffdb8fc26d539e2ab168" resname="2FA">
         <source>2FA</source>
         <target>2FA</target>
-        <jms:reference-file line="80">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+        <jms:reference-file line="85">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="85dfa32c97d8618d1bea083609e2c8a29845abe5" resname="Account">
         <source>Account</source>
@@ -90,6 +90,11 @@
         <source>Default method</source>
         <target>Default method</target>
         <jms:reference-file line="34">/../src/AppBundle/Form/Type/My/TwoFactorAuthenticationType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="df485c871329671f46570634d63216761441bcd6" resname="Devices">
+        <source>Devices</source>
+        <target>Devices</target>
+        <jms:reference-file line="80">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c4a2e80cc873135b3d277a22b6e85110c509731" resname="Disclaimer">
         <source>Disclaimer</source>
@@ -186,12 +191,12 @@
         <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
         <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
         <jms:reference-file line="9">/../src/AppBundle/Resources/views/Content/login/tfa.html.twig</jms:reference-file>
-        <jms:reference-file line="94">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+        <jms:reference-file line="99">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e43d612e11f1568f2373e719d4c4b08dcecdc7cc" resname="Logout">
         <source>Logout</source>
         <target>Logout</target>
-        <jms:reference-file line="86">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+        <jms:reference-file line="91">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7e4ac6803c9159c694f63d089cb06b2519c16aba" resname="Methods">
         <source>Methods</source>
@@ -209,6 +214,12 @@
         <target>My Actions</target>
         <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
         <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="83ee15ebbd15850dd8fff190a4cd24793cd48118" resname="My Devices">
+        <source>My Devices</source>
+        <target>My Devices</target>
+        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/my/devices.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/my/devices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="933257a3349a248d1e0fb19d7c953a00ff004a1d" resname="My Password">
         <source>My Password</source>
@@ -642,6 +653,11 @@
         <target>No actions yet.</target>
         <jms:reference-file line="30">/../src/AppBundle/Resources/views/Content/my/actions.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="0203590b1df65ead51dd18240386e7f600885c5f" resname="my.devices.no_devices_yet.text">
+        <source>my.devices.no_devices_yet.text</source>
+        <target>No devices yet.</target>
+        <jms:reference-file line="28">/../src/AppBundle/Resources/views/Content/my/devices.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="9dfd280b38e06dd08c6e7cd9a90260daa15f2c1e" resname="my.login.tfa.method_switch.user_action.text">
         <source>my.login.tfa.method_switch.user_action.text</source>
         <target>The user has switched it's 2FA method.</target>
@@ -650,12 +666,12 @@
       <trans-unit id="bef317cb57eb19a3250f849d1c23f1f9d5b86c2f" resname="my.password.success.flash_message.text">
         <source>my.password.success.flash_message.text</source>
         <target>You have successfully changed your password!</target>
-        <jms:reference-file line="60">/../src/AppBundle/Controller/MyController.php</jms:reference-file>
+        <jms:reference-file line="49">/../src/AppBundle/Controller/My/PasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ed04ad32d2c7115f44b7ec60496f8bd954f72be3" resname="my.password.user_action.text">
         <source>my.password.user_action.text</source>
         <target>The user has successfully changed his password.</target>
-        <jms:reference-file line="55">/../src/AppBundle/Controller/MyController.php</jms:reference-file>
+        <jms:reference-file line="44">/../src/AppBundle/Controller/My/PasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c9bf56f8382656f4a5af4643712ea1303ae460c8" resname="my.settings.email.is_activated.text">
         <source>my.settings.email.is_activated.text</source>
