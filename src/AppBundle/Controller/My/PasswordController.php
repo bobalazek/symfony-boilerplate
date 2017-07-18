@@ -41,12 +41,16 @@ class PasswordController extends Controller
 
                 $this->get('app.user_action_manager')->add(
                     'user.settings.password.change',
-                    $this->get('translator')->trans('my.password.user_action.text')
+                    $this->get('translator')->trans(
+                        'my.password.user_action.text'
+                    )
                 );
 
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('my.password.success.flash_message.text')
+                    $this->get('translator')->trans(
+                        'my.password.success.flash_message.text'
+                    )
                 );
             }
 

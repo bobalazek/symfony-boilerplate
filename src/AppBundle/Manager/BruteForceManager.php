@@ -36,6 +36,7 @@ class BruteForceManager
             );
         if ($userBlockedAction) {
             throw new BruteForceAttemptException(
+                /** @Desc("Available arguments: %time%, %action%") */
                 $this->container->get('translator')->trans(
                     'brute_force.attempt.text',
                     [

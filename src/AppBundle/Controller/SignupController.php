@@ -22,7 +22,9 @@ class SignupController extends Controller
         if ($this->isGranted('ROLE_USER')) {
             $this->addFlash(
                 'info',
-                $this->get('translator')->trans('general.already_logged_in')
+                $this->get('translator')->trans(
+                    'general.already_logged_in'
+                )
             );
 
             return $this->redirectToRoute('home');

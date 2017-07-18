@@ -305,6 +305,7 @@ class TwoFactorAuthenticationController extends Controller
             );
         if ($userBlockedAction) {
             throw new BruteForceAttemptException(
+                /** @Desc("Available arguments: %time%") */
                 $this->get('translator')->trans(
                     'login.tfa.too_many_attempts.text',
                     [

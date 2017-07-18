@@ -27,7 +27,9 @@ class LoginController extends Controller
             if ($referer !== $loginUrl) {
                 $this->addFlash(
                     'info',
-                    $this->get('translator')->trans('general.already_logged_in')
+                    $this->get('translator')->trans(
+                        'general.already_logged_in'
+                    )
                 );
             }
 
