@@ -21,7 +21,7 @@ services:
             - [setContainer, ["@service_container"]]
 
     app.two_factor_authenticator:
-        class: AppBundle\Manager\TwoFactorAuthenticator
+        class: AppBundle\Manager\TwoFactorAuthenticatorService
         calls:
             - [setContainer, ["@service_container"]]
 
