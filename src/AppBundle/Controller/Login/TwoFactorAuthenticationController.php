@@ -238,7 +238,7 @@ class TwoFactorAuthenticationController extends Controller
         EntityManager $em
     ) {
         return $this
-            ->get('app.two_factor_authenticator_manager')
+            ->get('app.two_factor_authenticator')
             ->checkCode(
                 $user,
                 $code

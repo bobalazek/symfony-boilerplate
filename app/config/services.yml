@@ -20,6 +20,11 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.two_factor_authenticator:
+        class: AppBundle\Manager\TwoFactorAuthenticator
+        calls:
+            - [setContainer, ["@service_container"]]
+
     # Managers
     app.user_action_manager:
         class: AppBundle\Manager\UserActionManager
@@ -43,11 +48,6 @@ services:
 
     app.two_factor_authentication_manager:
         class: AppBundle\Manager\TwoFactorAuthenticationManager
-        calls:
-            - [setContainer, ["@service_container"]]
-
-    app.two_factor_authenticator_manager:
-        class: AppBundle\Manager\TwoFactorAuthenticatorManager
         calls:
             - [setContainer, ["@service_container"]]
 

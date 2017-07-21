@@ -24,7 +24,7 @@ class AuthenticatorController extends Controller
         $session = $this->get('session');
         $user = $this->getUser();
         $twoFactorAuthenticatorManager = $this
-            ->get('app.two_factor_authenticator_manager');
+            ->get('app.two_factor_authenticator');
 
         $secret = $user->getTFAAuthenticatorSecret();
 
@@ -104,7 +104,7 @@ class AuthenticatorController extends Controller
     {
         $action = $request->query->get('action');
         if ($action === 'reset') {
-            $secret = $this->container->get('app.two_factor_authenticator_manager')
+            $secret = $this->container->get('app.two_factor_authenticator')
                 ->generateSecret();
 
             $user

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Manager;
+namespace AppBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;
@@ -10,7 +10,7 @@ use AppBundle\Entity\User;
  *
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class TwoFactorAuthenticatorManager
+class TwoFactorAuthenticator
 {
     use ContainerAwareTrait;
 
