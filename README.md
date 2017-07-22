@@ -1,5 +1,31 @@
 # Symfony Boilerplate
 
+## Functionality
+
+* User System
+  * Login
+  * Signup
+  * Reset password
+  * Settings
+  * Actions (logs every action the user does: login, request password reset, changed settings ...)
+  * Brute force protection (if too many login attempts, switching 2FA methods too many times, ...)
+  * Devices (log the devices with which the user has accessed the platform)
+  * 2FA/Two-factor authentication
+    * Email
+    * SMS
+    * Authenticator (Google Authenticator, Authy, ...)
+    * Recovery codes
+* Administration
+  * Users (filter, view, edit, delete, impersonate, restore, ...)
+  * User actions (filter, view)
+  * User login codes (filter, view)
+  * User blocked actions (filter, view)
+  * User devices (filter, view)
+* API
+  * Signup
+  * Reset password
+* Deployment ready
+
 ## Server requirements
 
 * [Symfony3 requirements](http://symfony.com/doc/current/reference/requirements.html)
