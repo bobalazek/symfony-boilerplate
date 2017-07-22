@@ -6,6 +6,10 @@ api:
     resource: "@ApiBundle/Controller/"
     type: annotation
 
+tfa:
+    resource: "@TfaBundle/Controller/"
+    type: annotation
+
 logout:
     path: /logout
 

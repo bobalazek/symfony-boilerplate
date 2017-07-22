@@ -23,9 +23,10 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     protected $translator;
 
     /**
-     * @param EntityManager     $em
-     * @param UserActionManager $userActionManager
-     * @param BruteForceManager $bruteForceManager
+     * @param EntityManager           $em
+     * @param UserActionManager       $userActionManager
+     * @param BruteForceManager       $bruteForceManager
+     * @param DataCollectorTranslator $translator
      */
     public function __construct(
         EntityManager $em,

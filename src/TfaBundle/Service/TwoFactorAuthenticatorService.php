@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service;
+namespace TfaBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use AppBundle\Entity\User;

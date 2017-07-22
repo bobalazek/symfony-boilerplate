@@ -1,5 +1,5 @@
 services:
-    # Services
+    # General
     app.emogrifier:
         class: AppBundle\Service\EmogrifierService
         calls:
@@ -17,11 +17,6 @@ services:
 
     app.apifier:
         class: AppBundle\Service\ApifierService
-        calls:
-            - [setContainer, ["@service_container"]]
-
-    app.two_factor_authenticator:
-        class: AppBundle\Manager\TwoFactorAuthenticatorService
         calls:
             - [setContainer, ["@service_container"]]
 
@@ -43,11 +38,6 @@ services:
 
     app.user_manager:
         class: AppBundle\Manager\UserManager
-        calls:
-            - [setContainer, ["@service_container"]]
-
-    app.two_factor_authentication_manager:
-        class: AppBundle\Manager\TwoFactorAuthenticationManager
         calls:
             - [setContainer, ["@service_container"]]
 
@@ -98,7 +88,6 @@ services:
             - "@security.token_storage"
             - "@security.authorization_checker"
             - "@app.user_action_manager"
-            - "@app.two_factor_authentication_manager"
             - "@translator"
 
     app.logout_listener:

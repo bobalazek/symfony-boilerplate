@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\My\TwoFactorAuthentication;
+namespace TfaBundle\Controller\My\TwoFactorAuthentication;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Login;
+namespace TfaBundle\Controller\Login;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -75,7 +75,7 @@ class TwoFactorAuthenticationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Content:login/tfa.html.twig',
+            'TfaBundle:Content:login/tfa.html.twig',
             [
                 'method' => $method,
                 'alternative_methods' => $alternativeMethods,

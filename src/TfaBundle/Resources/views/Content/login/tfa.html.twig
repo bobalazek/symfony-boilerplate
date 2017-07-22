@@ -9,13 +9,13 @@
                 <h1>{{ 'Login' | trans }}</h1>
                 <h2>{{ 'Two-factor authentication' | trans }}</h2>
                 {% if method == 'email' %}
-                    {% include 'AppBundle:Content:login/tfa/_method_email.html.twig' %}
+                    {% include 'TfaBundle:Content:login/tfa/_method_email.html.twig' %}
                 {% elseif method == 'sms' %}
-                    {% include 'AppBundle:Content:login/tfa/_method_sms.html.twig' %}
+                    {% include 'TfaBundle:Content:login/tfa/_method_sms.html.twig' %}
                 {% elseif method == 'authenticator' %}
-                    {% include 'AppBundle:Content:login/tfa/_method_authenticator.html.twig' %}
+                    {% include 'TfaBundle:Content:login/tfa/_method_authenticator.html.twig' %}
                 {% elseif method == 'recovery_code' %}
-                    {% include 'AppBundle:Content:login/tfa/_method_recovery_code.html.twig' %}
+                    {% include 'TfaBundle:Content:login/tfa/_method_recovery_code.html.twig' %}
                 {% else %}
                     {% if app.user.getAvailableTFAMethods() is not empty %}
                         <div class="alert alert-info">

@@ -54,6 +54,7 @@ class AppKernel extends Kernel
 
             // App
             new AppBundle\AppBundle(),
+            new TfaBundle\TfaBundle(),
             new ApiBundle\ApiBundle(),
             new AdminBundle\AdminBundle(),
             new DevBundle\DevBundle(),

@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Translation\DataCollectorTranslator;
 use AppBundle\Manager\UserActionManager;
-use AppBundle\Manager\TwoFactorAuthenticationManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -20,26 +19,23 @@ class SecuritySubscriber implements EventSubscriberInterface
     protected $tokenStorage;
     protected $authorizationChecker;
     protected $userActionManager;
-    protected $twoFactorAuthenticationManager;
     protected $translator;
 
     /**
-     * @param TokenStorage                   $tokenStorage
-     * @param AuthorizationChecker           $authorizationChecker
-     * @param UserActionManager              $userActionManager
-     * @param TwoFactorAuthenticationManager $twoFactorAuthenticationManager
+     * @param TokenStorage            $tokenStorage
+     * @param AuthorizationChecker    $authorizationChecker
+     * @param UserActionManager       $userActionManager
+     * @param DataCollectorTranslator $translator
      */
     public function __construct(
         TokenStorage $tokenStorage,
         AuthorizationChecker $authorizationChecker,
         UserActionManager $userActionManager,
-        TwoFactorAuthenticationManager $twoFactorAuthenticationManager,
         DataCollectorTranslator $translator
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
         $this->userActionManager = $userActionManager;
-        $this->twoFactorAuthenticationManager = $twoFactorAuthenticationManager;
         $this->translator = $translator;
     }
 
@@ -48,20 +44,14 @@ class SecuritySubscriber implements EventSubscriberInterface
      */
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
+        // TODO: also check if the propagation was stopped from TFA's security subscriber?
         $url = $event->getRequest()->getUri();
-        if (strpos($url, '/api')) {
-            return false;
+        if (strpos($url, '/api') === false) {
+            $this->userActionManager->add(
+                'user.login',
+                'User has been logged in!'
+            );
         }
-
-        $continuePropagation = $this->twoFactorAuthenticationManager->handle($event);
-        if (!$continuePropagation) {
-            return false;
-        }
-
-        $this->userActionManager->add(
-            'user.login',
-            'User has been logged in!'
-        );
     }
 
     /**

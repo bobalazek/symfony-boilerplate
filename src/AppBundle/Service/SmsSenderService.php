@@ -30,13 +30,17 @@ class SmsSenderService
 
         $client = new Client();
         try {
-            $response = $client->request(
-                'GET',
-                $url.
+            $sendUrl = $url.
                 '/api/send'.
                 '?token='.$token.
                 '&to='.$to.
-                '&message='.$message
+                '&message='.$message;
+            $response = $client->request(
+                'GET',
+                $sendUrl,
+                [
+                    'timeout' => 5,
+                ]
             );
         } catch (\Exception $e) {
             throw new SmsSenderException(
@@ -50,7 +54,7 @@ class SmsSenderService
 
         if ($json === null) {
             throw new SmsSenderException(
-                'The SMS Service was not found.'
+                'The SMS Service did not give the correct response.'
             );
         }
 

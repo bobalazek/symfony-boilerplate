@@ -1,0 +1,20 @@
+services:
+    # General
+    app.two_factor_authenticator:
+        class: TfaBundle\Service\TwoFactorAuthenticatorService
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    # Managers
+    app.two_factor_authentication_manager:
+        class: TfaBundle\Manager\TwoFactorAuthenticationManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    # Listeners & subscribers
+    app.tfa.security_subscriber:
+        class: TfaBundle\EventSubscriber\SecuritySubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments:
+            - "@app.two_factor_authentication_manager"

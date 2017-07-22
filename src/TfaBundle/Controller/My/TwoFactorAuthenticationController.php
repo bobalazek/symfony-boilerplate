@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Controller\My;
+namespace TfaBundle\Controller\My;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\Type\My\TwoFactorAuthenticationType;
+use TfaBundle\Form\Type\My\TwoFactorAuthenticationType;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -78,7 +78,7 @@ class TwoFactorAuthenticationController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Content:my/tfa.html.twig',
+            'TfaBundle:Content:my/tfa.html.twig',
             [
                 'form' => $form->createView(),
             ]

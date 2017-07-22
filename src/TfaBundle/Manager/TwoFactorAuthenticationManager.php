@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Manager;
+namespace TfaBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -98,7 +98,7 @@ class TwoFactorAuthenticationManager
                         ]
                     ),
                     'to' => [$user->getEmail() => $user->getName()],
-                    'body' => 'AppBundle:Emails:User/login/2fa.html.twig',
+                    'body' => 'TfaBundle:Emails:User/tfa_login.html.twig',
                     'template_data' => [
                         'user' => $user,
                         'user_login_code' => $userLoginCode,
