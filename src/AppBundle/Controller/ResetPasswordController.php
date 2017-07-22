@@ -109,9 +109,8 @@ class ResetPasswordController extends Controller
                 return false;
             }
 
-            $isPasswordCodeAlreadySent = $user->getResetPasswordCodeExpiresAt()
-                && new \DateTime() < $user->getResetPasswordCodeExpiresAt();
-            if ($isPasswordCodeAlreadySent) {
+            $isResetPasswordCodeExpired = $user->isResetPasswordCodeExpired();
+            if (!$isResetPasswordCodeExpired) {
                 $alert = 'info';
                 $alertMessage = $this->get('translator')->trans(
                     'reset_password.request.already_requested.text'
@@ -165,7 +164,8 @@ class ResetPasswordController extends Controller
 
             return false;
         }
-        $isResetPasswordCodeExpired = new \DateTime() > $user->getResetPasswordCodeExpiresAt();
+
+        $isResetPasswordCodeExpired = $user->isResetPasswordCodeExpired();
         if ($isResetPasswordCodeExpired) {
             $alert = 'danger';
             $alertMessage = $this->get('translator')->trans(

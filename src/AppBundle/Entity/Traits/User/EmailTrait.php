@@ -63,21 +63,6 @@ trait EmailTrait
      */
     protected $emailActivatedAt;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="reset_password_code", type="string", length=255, nullable=true)
-     */
-    protected $resetPasswordCode;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Versioned
-     * @ORM\Column(name="reset_password_code_expires_at", type="datetime", nullable=true)
-     */
-    protected $resetPasswordCodeExpiresAt;
-
     /*** Email ***/
 
     /**
@@ -194,49 +179,5 @@ trait EmailTrait
     public function isEmailActivated()
     {
         return $this->getEmailActivatedAt() !== null;
-    }
-
-    /*** Reset password code ***/
-
-    /**
-     * @return string
-     */
-    public function getResetPasswordCode()
-    {
-        return $this->resetPasswordCode;
-    }
-
-    /**
-     * @param $resetPasswordCode
-     *
-     * @return User
-     */
-    public function setResetPasswordCode($resetPasswordCode)
-    {
-        $this->resetPasswordCode = $resetPasswordCode;
-
-        return $this;
-    }
-
-    /*** Reset Password Code Expires at ***/
-
-    /**
-     * @return \DateTime
-     */
-    public function getResetPasswordCodeExpiresAt()
-    {
-        return $this->resetPasswordCodeExpiresAt;
-    }
-
-    /**
-     * @param \DateTime $resetPasswordCodeExpiresAt
-     *
-     * @return User
-     */
-    public function setResetPasswordCodeExpiresAt(\DateTime $resetPasswordCodeExpiresAt = null)
-    {
-        $this->resetPasswordCodeExpiresAt = $resetPasswordCodeExpiresAt;
-
-        return $this;
     }
 }

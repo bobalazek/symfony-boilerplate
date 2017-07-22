@@ -129,11 +129,13 @@ class UserBlockedAction
      */
     public function isExpired()
     {
-        if ($this->getExpiresAt() === null) {
+        $expiresAt = $this->getExpiresAt();
+
+        if ($expiresAt === null) {
             return false;
         }
 
-        return $this->getExpiresAt() < new \Datetime();
+        return $expiresAt < new \Datetime();
     }
 
     /*** User ***/

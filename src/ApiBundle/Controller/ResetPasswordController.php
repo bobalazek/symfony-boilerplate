@@ -36,9 +36,8 @@ class ResetPasswordController extends Controller
             );
         }
 
-        $isPasswordCodeAlreadySent = $user->getResetPasswordCodeExpiresAt()
-            && new \DateTime() < $user->getResetPasswordCodeExpiresAt();
-        if ($isPasswordCodeAlreadySent) {
+        $isResetPasswordCodeExpired = $user->isResetPasswordCodeExpired();
+        if (!$isResetPasswordCodeExpired) {
             return $this->json(
                 [
                     'error' => [
