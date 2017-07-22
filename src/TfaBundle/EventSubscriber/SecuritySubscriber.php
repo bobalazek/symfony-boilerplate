@@ -30,7 +30,7 @@ class SecuritySubscriber implements EventSubscriberInterface
     {
         $continuePropagation = $this->twoFactorAuthenticationManager->handle($event);
         if (!$continuePropagation) {
-            return $event->stopPropagation();
+            $event->stopPropagation();
         }
     }
 

@@ -189,6 +189,11 @@ jms_translation:
                 - "%kernel.root_dir%/../src/AppBundle"
             output_dir: "%kernel.root_dir%/../src/AppBundle/Resources/translations"
             default_output_format: xliff
+        TfaBundle:
+            dirs:
+                - "%kernel.root_dir%/../src/TfaBundle"
+            output_dir: "%kernel.root_dir%/../src/TfaBundle/Resources/translations"
+            default_output_format: xliff
         DevBundle:
             dirs:
                 - "%kernel.root_dir%/../src/DevBundle"
