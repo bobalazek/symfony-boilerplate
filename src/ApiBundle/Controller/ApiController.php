@@ -17,7 +17,9 @@ class ApiController extends Controller
     public function indexAction(Request $request)
     {
         return $this->json([
-            'message' => 'Hello API!',
+            'data' => [
+                'message' => 'Hello API!',
+            ],
         ]);
     }
 }
