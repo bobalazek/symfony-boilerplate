@@ -17,6 +17,7 @@ class LoginController extends Controller
      */
     public function loginAction(Request $request)
     {
+        // Fixes the issue of showing the "already logged in" flash directly after the login.
         if ($this->isGranted('ROLE_USER')) {
             $referer = $request->headers->get('referer');
             $loginUrl = $this->generateUrl(

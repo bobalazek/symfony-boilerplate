@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-07-22T19:20:55Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="3a17e89f8b71ef37c8aa88cbd4e3a7e454c4674c" resname="api.reset_password.request.already_requested.text">
+        <source>api.reset_password.request.already_requested.text</source>
+        <target>You have already requested a new password. Please check your email and click the link inside.</target>
+        <jms:reference-file line="46">/../src/ApiBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b3a1c68c5b3f7ec2d336310538b4d7c5ca4737bb" resname="api.reset_password.request.email_not_found.text">
+        <source>api.reset_password.request.email_not_found.text</source>
+        <target>An user with this email was not found.</target>
+        <jms:reference-file line="31">/../src/ApiBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="997f08e480817c7692d19b2902c3a5a94538490b" resname="api.reset_password.request.success.text">
+        <source>api.reset_password.request.success.text</source>
+        <target>You have successfully requested a reset password email. Please check your email and click the link inside.</target>
+        <jms:reference-file line="59">/../src/ApiBundle/Controller/ResetPasswordController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1efe40a3ce90d947c1b330d0ff1ad68c1795eb0f" resname="api.signup.request.success.text">
+        <source>api.signup.request.success.text</source>
+        <target>You have been successfully registered.</target>
+        <jms:reference-file line="59">/../src/ApiBundle/Controller/SignupController.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

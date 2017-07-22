@@ -80,6 +80,8 @@ class ResetPasswordController extends Controller
      * @param Form    $form
      * @param bool    $alert
      * @param string  $alertMessage
+     *
+     * @return bool
      */
     private function handleResetPasswordRequest(
         Request $request,
@@ -98,28 +100,34 @@ class ResetPasswordController extends Controller
                 ->findOneByEmail($formUser->getEmail())
             ;
 
-            if ($user) {
-                $isPasswordCodeAlreadySent = $user->getResetPasswordCodeExpiresAt()
-                    && new \DateTime() < $user->getResetPasswordCodeExpiresAt();
-                if ($isPasswordCodeAlreadySent) {
-                    $alert = 'info';
-                    $alertMessage = $this->get('translator')->trans(
-                        'reset_password.request.already_requested.text'
-                    );
-                } else {
-                    $this->get('app.user_manager')->resetPasswordRequest($user);
-
-                    $alert = 'success';
-                    $alertMessage = $this->get('translator')->trans(
-                        'reset_password.request.success.text'
-                    );
-                }
-            } else {
+            if ($user === nul) {
                 $alert = 'danger';
                 $alertMessage = $this->get('translator')->trans(
                     'reset_password.request.email_not_found.text'
                 );
+
+                return false;
             }
+
+            $isPasswordCodeAlreadySent = $user->getResetPasswordCodeExpiresAt()
+                && new \DateTime() < $user->getResetPasswordCodeExpiresAt();
+            if ($isPasswordCodeAlreadySent) {
+                $alert = 'info';
+                $alertMessage = $this->get('translator')->trans(
+                    'reset_password.request.already_requested.text'
+                );
+
+                return false;
+            }
+
+            $this->get('app.user_manager')->resetPasswordRequest($user);
+
+            $alert = 'success';
+            $alertMessage = $this->get('translator')->trans(
+                'reset_password.request.success.text'
+            );
+
+            return true;
         }
     }
 
@@ -130,6 +138,8 @@ class ResetPasswordController extends Controller
      * @param Form    $form
      * @param bool    $alert
      * @param string  $alertMessage
+     *
+     * @return bool
      */
     private function handleResetPasswordConfirmation(
         $id,
@@ -147,35 +157,40 @@ class ResetPasswordController extends Controller
                 'resetPasswordCode' => $resetPasswordCode,
             ]);
 
-        if ($user) {
-            $isResetPasswordCodeExpired = new \DateTime() > $user->getResetPasswordCodeExpiresAt();
-            if ($isResetPasswordCodeExpired) {
-                $alert = 'danger';
-                $alertMessage = $this->get('translator')->trans(
-                    'reset_password.confirmation.code_expired.text'
-                );
-            } else {
-                $form->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $formUser = $form->getData();
-
-                    $this->get('app.user_manager')
-                        ->resetPasswordConfirmation(
-                            $user,
-                            $formUser->getPlainPassword()
-                        );
-
-                    $alert = 'success';
-                    $alertMessage = $this->get('translator')->trans(
-                        'reset_password.confirmation.success.text'
-                    );
-                }
-            }
-        } else {
+        if ($user === null) {
             $alert = 'danger';
             $alertMessage = $this->get('translator')->trans(
                 'reset_password.confirmation.code_not_found.text'
             );
+
+            return false;
         }
+        $isResetPasswordCodeExpired = new \DateTime() > $user->getResetPasswordCodeExpiresAt();
+        if ($isResetPasswordCodeExpired) {
+            $alert = 'danger';
+            $alertMessage = $this->get('translator')->trans(
+                'reset_password.confirmation.code_expired.text'
+            );
+
+            return false;
+        }
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formUser = $form->getData();
+
+            $this->get('app.user_manager')
+                ->resetPasswordConfirmation(
+                    $user,
+                    $formUser->getPlainPassword()
+                );
+
+            $alert = 'success';
+            $alertMessage = $this->get('translator')->trans(
+                'reset_password.confirmation.success.text'
+            );
+        }
+
+        return true;
     }
 }
