@@ -12,3 +12,14 @@ tfa:
     resource: "@TfaBundle/Controller/"
     type: annotation
 ```
+
+Inside `app/config/config.yml` add
+```
+jms_translation:
+    configs:
+        TfaBundle:
+            dirs:
+                - "%kernel.root_dir%/../src/TfaBundle"
+            output_dir: "%kernel.root_dir%/../src/TfaBundle/Resources/translations"
+            default_output_format: xliff
+```

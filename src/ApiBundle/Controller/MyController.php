@@ -11,21 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class MyController extends Controller
 {
-    /********** Login **********/
-    // TODO
-
-    /********** Signup **********/
-    // TODO
-
-    /********** Reset password **********/
-    // TODO
-
-    /********** Me **********/
-
     /**
-     * @Route("/api/me", name="api.me")
+     * @Route("/api/my/profile", name="api.my.profile")
      */
-    public function meAction(Request $request)
+    public function profileAction(Request $request)
     {
         return $this->json([
             'data' => $this->getUser()->toArray(),

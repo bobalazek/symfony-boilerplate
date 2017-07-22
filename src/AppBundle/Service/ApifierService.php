@@ -14,6 +14,11 @@ class ApifierService
 
     /**
      * Get a nicer errors format.
+     *
+     * @param ConstraintViolationList $errors
+     * @param string                  $errorMessage
+     *
+     * @return array
      */
     public function errors(ConstraintViolationList $errors, $errorMessage = 'One or more fields are invalid.')
     {
@@ -40,6 +45,8 @@ class ApifierService
      * Returns the error text.
      *
      * @param \Exception $e
+     *
+     * @return string
      */
     public function errorText(\Exception $e)
     {

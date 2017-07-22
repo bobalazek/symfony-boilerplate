@@ -16,11 +16,21 @@ class UserProvider implements UserProviderInterface
 {
     protected $em;
 
+    /**
+     * @param EntityManager $em
+     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
     }
 
+    /**
+     * @param string $username
+     *
+     * @return User|null
+     *
+     * @throws UsernameNotFoundException
+     */
     public function loadUserByUsername($username)
     {
         $user = $this->em
@@ -36,6 +46,14 @@ class UserProvider implements UserProviderInterface
         );
     }
 
+    /**
+     * @param string $id
+     * @param string $token
+     *
+     * @return User|null
+     *
+     * @throws UsernameNotFoundException
+     */
     public function loadUserByIdAndToken($id, $token)
     {
         $user = $this->em
@@ -51,6 +69,13 @@ class UserProvider implements UserProviderInterface
         );
     }
 
+    /**
+     * @param UserInterface $user
+     *
+     * @return User
+     *
+     * @throws UnsupportedUserException
+     */
     public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof User) {
