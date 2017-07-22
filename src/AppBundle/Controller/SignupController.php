@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\Form;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\SignupType;
 
@@ -109,13 +109,13 @@ class SignupController extends Controller
     }
 
     /**
-     * @param FormBuilder $form
-     * @param Request     $request
-     * @param string      $alert
-     * @param string      $alertMessage
+     * @param Form    $form
+     * @param Request $request
+     * @param string  $alert
+     * @param string  $alertMessage
      */
     protected function handleSignupRequest(
-        FormBuilder $form,
+        Form $form,
         Request $request,
         &$alert,
         &$alertMessage
