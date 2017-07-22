@@ -62,6 +62,9 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="username", type="string", length=64, unique=true)
+     * @Assert\NotBlank(
+     *     groups={"signup"}
+     * )
      */
     protected $username;
 
