@@ -28,7 +28,7 @@ class UserDevice
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable,
-        Shared\RequestMetaTrait
+        Traits\Common\RequestMetaTrait
     ;
 
     /**

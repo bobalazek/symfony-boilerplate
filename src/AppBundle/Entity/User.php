@@ -4,13 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Doctrine\Common\Collections\ArrayCollection;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use AppBundle\Utils\Helpers;
+use TfaBundle\Entity\Traits\User\TwoFactorAuthenticationTrait;
 
 /**
  * User Entity.
@@ -39,12 +40,12 @@ class User implements AdvancedUserInterface, \Serializable
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable,
-        User\StatusesTrait,
-        User\TwoFactorAuthenticationTrait,
-        User\RolesTrait,
-        User\PasswordsTrait,
-        User\EmailTrait,
-        User\MobileTrait
+        Traits\User\StatusesTrait,
+        Traits\User\RolesTrait,
+        Traits\User\PasswordsTrait,
+        Traits\User\EmailTrait,
+        Traits\User\MobileTrait,
+        TwoFactorAuthenticationTrait
     ;
 
     /**

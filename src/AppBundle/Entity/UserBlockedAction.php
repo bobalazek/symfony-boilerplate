@@ -21,7 +21,7 @@ class UserBlockedAction
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable,
-        Shared\RequestMetaTrait
+        Traits\Common\RequestMetaTrait
     ;
 
     public static $actions = [

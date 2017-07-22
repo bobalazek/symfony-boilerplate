@@ -22,7 +22,7 @@ class Profile
         ORMBehaviors\Loggable\Loggable,
         ORMBehaviors\SoftDeletable\SoftDeletable,
         ORMBehaviors\Timestampable\Timestampable,
-        Shared\ImageTrait
+        Traits\Common\ImageTrait
     ;
 
     public static $titles = [

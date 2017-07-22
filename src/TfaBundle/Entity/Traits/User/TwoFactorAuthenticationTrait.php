@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\User;
+namespace TfaBundle\Entity\Traits\User;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Entity\User;

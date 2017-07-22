@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\Shared;
+namespace AppBundle\Entity\Traits\Common;
 
 use Doctrine\ORM\Mapping as ORM;
 
