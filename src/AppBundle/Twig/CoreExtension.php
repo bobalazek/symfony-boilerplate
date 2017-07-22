@@ -14,6 +14,9 @@ class CoreExtension extends Twig_Extension
 {
     use ContainerAwareTrait;
 
+    /**
+     * @return array
+     */
     public function getFunctions()
     {
         return [
@@ -57,24 +60,44 @@ class CoreExtension extends Twig_Extension
                     'is_safe' => ['html'],
                 ]
             ),
+            new Twig_SimpleFunction(
+                'route_exists',
+                [
+                    $this,
+                    'routeExists',
+                ],
+                [
+                    'is_safe' => ['html'],
+                ]
+            ),
         ];
     }
 
-    public function fileGetContents($file)
+    /**
+     * @param string $filePath
+     *
+     * @return string
+     */
+    public function fileGetContents($filePath)
     {
         try {
-            return file_get_contents($file);
+            return file_get_contents($filePath);
         } catch (\Exception $e) {
             // try if the file exist relative to the web dir
             // (hack for emails inside console commands)
-            if ($file[0] !== '/') {
-                $file = dirname(__FILE__).'/../../../web/'.$file;
+            if ($filePath[0] !== '/') {
+                $filePath = dirname(__FILE__).'/../../../web/'.$filePath;
             }
 
-            return file_get_contents($file);
+            return file_get_contents($filePath);
         }
     }
 
+    /**
+     * @param string $userAgentString
+     *
+     * @return Agent
+     */
     public function userAgent($userAgentString)
     {
         $agent = new Agent();
@@ -83,6 +106,12 @@ class CoreExtension extends Twig_Extension
         return $agent;
     }
 
+    /**
+     * @param string $ipAddress
+     * @param string $type
+     *
+     * @return object|array
+     */
     public function geoIp($ipAddress = 'me', $type = 'city')
     {
         $geoIpService = $this->container->get('cravler_max_mind_geo_ip.service.geo_ip_service');
@@ -96,6 +125,11 @@ class CoreExtension extends Twig_Extension
         }
     }
 
+    /**
+     * @param mixed $data
+     *
+     * @return string
+     */
     public function dumpData($data)
     {
         $html = '';
@@ -127,6 +161,23 @@ class CoreExtension extends Twig_Extension
         return $html;
     }
 
+    /**
+     * @param string $route
+     *
+     * @return bool
+     */
+    public function routeExists($route)
+    {
+        $router = $this->container->get('router');
+
+        return $router->getRouteCollection()->get($route) === null
+            ? false
+            : true;
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'app_extension';

@@ -36,12 +36,14 @@
                             href="{{ url('my.devices') }}">
                             {{ 'Devices' | trans }}
                         </a>
-                        <a class="list-group-item {{ 'my.tfa' in app.request.attributes.get('_route')
-                            ? 'active'
-                            : '' }}"
-                            href="{{ url('my.tfa') }}">
-                            {{ '2FA' | trans }}
-                        </a>
+                        {% if route_exists('my.tfa') %}
+                            <a class="list-group-item {{ 'my.tfa' in app.request.attributes.get('_route')
+                                ? 'active'
+                                : '' }}"
+                                href="{{ url('my.tfa') }}">
+                                {{ '2FA' | trans }}
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-md-9">

@@ -80,11 +80,13 @@
                                         {{ 'Devices' | trans }}
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ url('my.tfa') }}">
-                                        {{ '2FA' | trans }}
-                                    </a>
-                                </li>
+                                {% if route_exists('my.tfa') %}
+                                    <li>
+                                        <a href="{{ url('my.tfa') }}">
+                                            {{ '2FA' | trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
                                 <li class="divider"></li>
                                 <li>
                                     <a href="{{ url('logout') }}">
