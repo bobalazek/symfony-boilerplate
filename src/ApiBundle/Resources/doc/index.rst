@@ -1,4 +1,4 @@
 ApiBundle
 ================
 
-The application API bundle.
+The API bundle.

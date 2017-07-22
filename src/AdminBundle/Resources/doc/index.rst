@@ -1,4 +1,4 @@
 AdminBundle
 ================
 
-THe application admin bundle.
+The admin bundle.

@@ -1,7 +1,7 @@
 TfaBundle
 ================
 
-The application two-factor authentication bundle.
+The TFA (two-factor authentication) bundle has all the related 2FA functionality.
 
 Usage
 ----------------

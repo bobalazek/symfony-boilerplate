@@ -1,4 +1,4 @@
 AppBundle
 ================
 
-The application core bundle.
+The app bundle.
