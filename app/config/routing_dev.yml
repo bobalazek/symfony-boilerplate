@@ -6,14 +6,14 @@ _profiler:
     resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
     prefix: /_profiler
 
-_errors:
+_error:
     resource: "@TwigBundle/Resources/config/routing/errors.xml"
     prefix: /_error
 
 _main:
     resource: routing.yml
 
-JMSTranslationBundle_ui:
+_trans:
     resource: "@JMSTranslationBundle/Controller/"
     type: annotation
     prefix: /_trans
