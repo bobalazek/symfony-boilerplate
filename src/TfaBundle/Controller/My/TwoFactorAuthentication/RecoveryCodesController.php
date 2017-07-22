@@ -53,7 +53,7 @@ class RecoveryCodesController extends Controller
         );
 
         return $this->render(
-            'AppBundle:Content:my/tfa/recovery_codes.html.twig',
+            'TfaBundle:Content:my/tfa/recovery_codes.html.twig',
             [
                 'pagination' => $pagination,
             ]

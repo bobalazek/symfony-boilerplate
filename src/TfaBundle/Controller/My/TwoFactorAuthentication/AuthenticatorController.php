@@ -87,7 +87,7 @@ class AuthenticatorController extends Controller
         }
 
         return $this->render(
-            'AppBundle:Content:my/tfa/authenticator.html.twig',
+            'TfaBundle:Content:my/tfa/authenticator.html.twig',
             [
                 'qr_code_url' => $qrCodeUrl,
                 'secret' => $secret,
