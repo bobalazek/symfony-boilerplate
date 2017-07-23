@@ -3,34 +3,47 @@
 # https://docs.docker.com/samples/php/
 FROM php:7.0-apache
 
-# General dependencies
+### Dependencies
+
+## OS
 RUN apt-get update -yq && apt-get upgrade -yq
 run apt-get install -yq git \
     curl \
     wget \
+    zip \
+    unzip \
     apt-utils
+
+## PHP
+RUN docker-php-ext-install -j$(nproc) zip mcrypt
 
 # Install composer
 RUN curl -s https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
-# Node
+## Node
 RUN apt-get install -yq nodejs \
     npm
 
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
+# Install node dependencies
 RUN npm install -g bower gulp
 
-# Copy app to the container
-COPY ./ /var/www/html/
+### Copy stuff
+## App
+COPY ./ /var/www/html
 
-# Copy apache stuff to the container
-COPY docker/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
-COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/default-ssl.conf
-COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
+## Configuration
+# Apache
+COPY docker/apache2/sites-available/000-default.conf /etc/apache2/sites-available
+COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available
+COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled
+COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled
 
-# Cleanup
+# PHP
+COPY docker/php/php.ini /usr/local/etc/php
+
+### Cleanup
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
