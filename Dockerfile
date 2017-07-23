@@ -41,13 +41,13 @@ RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 RUN npm install -g bower gulp
 
 # Copy app to the container
-COPY . /var/www/html
+COPY ./ /var/www/html/
 
 # Copy apache stuff to the container
-COPY docker/apache2/sites-available/000-default.conf /etc/apache2/sites-available
-COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available
-COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled
-COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled
+COPY docker/apache2/sites-available/000-default.conf /etc/apache2/sites-available/
+COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/
+COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/
+COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled/
 
 # Expose ports
 EXPOSE 80
