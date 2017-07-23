@@ -31,10 +31,6 @@ COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-availabl
 COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/default-ssl.conf
 COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
 
-# Expose ports
-EXPOSE 80
-EXPOSE 443
-
 # Cleanup
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
