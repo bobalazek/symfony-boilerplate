@@ -21,9 +21,7 @@ services:
             - "81:80"
             - "444:443"
         volumes:
-            - ".:/var/www/html"
-            - "./docker/apache2/sites-available:/etc/apache2/sites-available"
-            - "./docker/apache2/sites-enabled:/etc/apache2/sites-enabled"
+            - "./:/var/www/html"
             - "/var/www/html/docker" # create an empty directory for the not needed files
         networks:
             - default
