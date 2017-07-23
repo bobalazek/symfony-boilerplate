@@ -18,27 +18,28 @@ services:
             - redis
             - memcached
         ports:
-            - "80:80"
-            - "443:443"
+            - "81:80"
+            - "444:443"
         volumes:
             - ".:/var/www/html"
-            - "/var/www/html/docker" # create an empty directory for the un-needed files
             - "./docker/apache2/sites-available:/etc/apache2/sites-available"
             - "./docker/apache2/sites-enabled:/etc/apache2/sites-enabled"
+            - "/var/www/html/docker" # create an empty directory for the not needed files
         networks:
             - default
 
     mysql:
         image: mysql
+        user: mysql
         ports:
-            - "33066:3306"
+            - "3307:3306"
         volumes:
             - "./docker/var/logs/mysql:/var/log/mysql"
             - "./docker/var/data/mysql:/var/lib/mysql"
         networks:
             - default
         environment:
-            MYSQL_ROOT_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: sfbp
             MYSQL_DATABASE: sfbp
             MYSQL_USER: sfbp
             MYSQL_PASSWORD: sfbp
@@ -46,13 +47,13 @@ services:
     redis:
         image: redis
         ports:
-            - "6379:6379"
+            - "6380:6379"
         networks:
             - default
 
     memcached:
         image: memcached
         ports:
-            - "11211:11211"
+            - "11212:11211"
         networks:
             - default
