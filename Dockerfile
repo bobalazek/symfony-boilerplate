@@ -3,9 +3,13 @@
 # General
 FROM phusion/baseimage
 
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
 # General dependencies
-RUN apt-get update
-RUN apt-get install -yq git curl zip unzip wget curl
+RUN apt-get update -yq
+RUN apt-get upgrade -yq
+RUN apt-get install -yq git curl wget
 RUN apt-get install -yq apt-utils
 
 # Apache
@@ -28,16 +32,13 @@ RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
 RUN npm install -g bower gulp
 
-# Copy app to the container & set the workdir
-WORKDIR /var/www/html
-
-# Cleanup
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Copy app to the container
+COPY . /var/www/html
 
 # Expose ports
 EXPOSE 80
 EXPOSE 443
 
-# Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
+# Cleanup
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
