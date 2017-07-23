@@ -1,10 +1,7 @@
 # bobalazek / Symfony Boilerplate Docker file
 
-# General
-FROM phusion/baseimage
-
-# Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
+# https://docs.docker.com/samples/php/
+FROM php:7.0-apache
 
 # General dependencies
 RUN apt-get update -yq && apt-get upgrade -yq
@@ -13,22 +10,7 @@ run apt-get install -yq git \
     wget \
     apt-utils
 
-# Apache
-RUN apt-get install -yq apache2 \
-    libapache2-mod-php
-RUN a2enmod ssl
-RUN a2enmod rewrite
-RUN service apache2 restart
-
-# PHP
-RUN apt-get install -yq php \
-    php-cli \
-    php-mysql \
-    php-mcrypt \
-    php-curl \
-    php-zip \
-    php-gd
-
+# Install composer
 RUN curl -s https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
@@ -44,10 +26,10 @@ RUN npm install -g bower gulp
 COPY ./ /var/www/html/
 
 # Copy apache stuff to the container
-COPY docker/apache2/sites-available/000-default.conf /etc/apache2/sites-available/
-COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/
-COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/
-COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled/
+COPY docker/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/default-ssl.conf
+COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
 
 # Expose ports
 EXPOSE 80
