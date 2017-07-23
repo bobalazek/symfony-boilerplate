@@ -12,10 +12,15 @@ run apt-get install -yq git \
     wget \
     zip \
     unzip \
+    zlib1g-dev \
     apt-utils
 
 ## PHP
-RUN docker-php-ext-install -j$(nproc) zip mcrypt
+RUN docker-php-ext-install mysqli \
+    zip \
+    pdo \
+    pdo_mysql \
+    gettext
 
 # Install composer
 RUN curl -s https://getcomposer.org/installer | php
