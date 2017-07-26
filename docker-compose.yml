@@ -1,7 +1,7 @@
 version: "3"
 
+# Services
 services:
-
     web:
         build: .
         links:
@@ -15,8 +15,10 @@ services:
         volumes:
             - "./:/var/www/html/"
         ports:
-            - "81:80"
-            - "444:443"
+            - 81:80
+            - 444:443
+        networks:
+            - backend
 
     mysql:
         image: mysql
@@ -30,32 +32,44 @@ services:
             - "./docker/var/logs/mysql/:/var/log/mysql/"
             - "./docker/var/data/mysql/:/var/lib/mysql/"
         ports:
-            - "3307:3306"
+            - 3307:3306
+        networks:
+            - backend
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         restart: always
         environment:
             PMA_ARBITRARY: 1
-            PMA_HOST: localhost
+            PMA_HOST: mysql
             PMA_USER: sfbp
             PMA_PASSWORD: sfbp
         links:
             - mysql
         depends_on:
             - mysql
-        volumes: # duplicate mysql volumes, since they removed the volumes_from option
-            - "./docker/var/logs/mysql/:/var/log/mysql/"
-            - "./docker/var/data/mysql/:/var/lib/mysql/"
         ports:
-            - "82:80"
+            - 82:80
+        networks:
+            - backend
 
     redis:
         image: redis
         ports:
-            - "6380:6379"
+            - 6380:6379
+        networks:
+            - backend
 
     memcached:
         image: memcached
         ports:
-            - "11212:11211"
+            - 11212:11211
+        networks:
+            - backend
+
+# Networks
+networks:
+    frontend:
+        driver: bridge
+    backend:
+        driver: bridge
