@@ -3,6 +3,10 @@
 # https://docs.docker.com/samples/php/
 FROM php:7.0-apache
 
+### Environment
+ENV PROJECT_DIR /var/www/html
+ENV SYMFONY_ENV dev
+
 ### Dependencies
 
 ## OS
@@ -37,17 +41,25 @@ RUN npm install -g bower gulp
 
 ### Copy stuff
 ## App
-COPY ./ /var/www/html
+COPY ./ $PROJECT_DIR/
 
 ## Configuration
-# Apache
+## Apache
 COPY docker/apache2/sites-available/000-default.conf /etc/apache2/sites-available
 COPY docker/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available
 COPY docker/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled
 COPY docker/apache2/sites-enabled/default-ssl.conf /etc/apache2/sites-enabled
 
-# PHP
+## PHP
 COPY docker/php/php.ini /usr/local/etc/php
+
+## App
+# File permissions
+RUN rm -rf $PROJECT_DIR/var/cache/* && \
+    rm -rf $PROJECT_DIR/var/logs/*
+RUN HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1) && \
+    setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX $PROJECT_DIR/var && \
+    setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX $PROJECT_DIR/var
 
 ### Cleanup
 RUN apt-get clean

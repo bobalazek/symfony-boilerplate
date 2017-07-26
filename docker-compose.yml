@@ -1,10 +1,5 @@
 version: "3"
 
-networks:
-
-    default:
-        driver: bridge
-
 services:
 
     web:
@@ -17,40 +12,50 @@ services:
             - mysql
             - redis
             - memcached
+        volumes:
+            - "./:/var/www/html/"
         ports:
             - "81:80"
             - "444:443"
-        volumes:
-            - "./:/var/www/html/"
-        networks:
-            - default
 
     mysql:
         image: mysql
         user: mysql
-        ports:
-            - "3307:3306"
-        volumes:
-            - "./docker/var/logs/mysql/:/var/log/mysql/"
-            - "./docker/var/data/mysql/:/var/lib/mysql/"
-        networks:
-            - default
         environment:
             MYSQL_ROOT_PASSWORD: sfbp
             MYSQL_DATABASE: sfbp
             MYSQL_USER: sfbp
             MYSQL_PASSWORD: sfbp
+        volumes:
+            - "./docker/var/logs/mysql/:/var/log/mysql/"
+            - "./docker/var/data/mysql/:/var/lib/mysql/"
+        ports:
+            - "3307:3306"
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: localhost
+            PMA_USER: sfbp
+            PMA_PASSWORD: sfbp
+        links:
+            - mysql
+        depends_on:
+            - mysql
+        volumes: # duplicate mysql volumes, since they removed the volumes_from option
+            - "./docker/var/logs/mysql/:/var/log/mysql/"
+            - "./docker/var/data/mysql/:/var/lib/mysql/"
+        ports:
+            - "82:80"
 
     redis:
         image: redis
         ports:
             - "6380:6379"
-        networks:
-            - default
 
     memcached:
         image: memcached
         ports:
             - "11212:11211"
-        networks:
-            - default
