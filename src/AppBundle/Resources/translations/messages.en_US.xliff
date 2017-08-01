@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-07-22T15:03:22Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-08-01T17:48:30Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,14 +9,14 @@
       <trans-unit id="e8442a3a9ebf7bb5cc78ffdb8fc26d539e2ab168" resname="2FA">
         <source>2FA</source>
         <target>2FA</target>
-        <jms:reference-file line="85">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
-        <jms:reference-file line="43">/../src/AppBundle/Resources/views/Layouts/my.html.twig</jms:reference-file>
+        <jms:reference-file line="86">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+        <jms:reference-file line="44">/../src/AppBundle/Resources/views/Layouts/my.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="85dfa32c97d8618d1bea083609e2c8a29845abe5" resname="Account">
         <source>Account</source>
         <target>Account</target>
         <jms:reference-file line="19">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
-        <jms:reference-file line="40">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="42">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c3cd636a585b20c40ac2df5ffb403e83cb2eef51" resname="Actions">
         <source>Actions</source>
@@ -157,10 +157,10 @@
       <trans-unit id="4e5a2893bdcc7d239c1db72e4c4ffbe4bea73174" resname="Login">
         <source>Login</source>
         <target>Login</target>
-        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
-        <jms:reference-file line="57">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
-        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
-        <jms:reference-file line="99">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="59">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="101">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="83fce8327410848c9eb609acb21732c7c0fec96a" resname="Logo">
         <source>Logo</source>
@@ -170,7 +170,7 @@
       <trans-unit id="e43d612e11f1568f2373e719d4c4b08dcecdc7cc" resname="Logout">
         <source>Logout</source>
         <target>Logout</target>
-        <jms:reference-file line="91">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
+        <jms:reference-file line="93">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b1d702459399a2512fba5a402d4d5f26aee34693" resname="Mobile">
         <source>Mobile</source>
@@ -211,7 +211,7 @@
       <trans-unit id="8be3c943b1609fffbfc51aad666d0a04adf83c9d" resname="Password">
         <source>Password</source>
         <target>Password</target>
-        <jms:reference-file line="27">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="29">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
         <jms:reference-file line="70">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
         <jms:reference-file line="25">/../src/AppBundle/Resources/views/Layouts/my.html.twig</jms:reference-file>
       </trans-unit>
@@ -227,7 +227,7 @@
         <target>Profile</target>
         <jms:reference-file line="58">/../src/AppBundle/Resources/views/Content/my/profile.html.twig</jms:reference-file>
         <jms:reference-file line="11">/../src/AppBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
-        <jms:reference-file line="16">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
         <jms:reference-file line="60">/../src/AppBundle/Resources/views/Layouts/default/_header.html.twig</jms:reference-file>
         <jms:reference-file line="13">/../src/AppBundle/Resources/views/Layouts/my.html.twig</jms:reference-file>
       </trans-unit>
@@ -239,15 +239,15 @@
       <trans-unit id="ced7b308a348567fbf21dd775ee496dd01207f24" resname="Remember me">
         <source>Remember me</source>
         <target>Remember me</target>
-        <jms:reference-file line="41">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="43">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3fb75e3bfe4de94eb5198656fa9de95352dab915" resname="Reset Password">
         <source>Reset Password</source>
         <target>Reset Password</target>
-        <jms:reference-file line="48">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
-        <jms:reference-file line="18">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
-        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
-        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
+        <jms:reference-file line="50">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="20">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../src/AppBundle/Resources/views/Content/reset_password.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="47dcc27d6e87ece8baebe7e3877a261a5467093d" resname="Roles">
         <source>Roles</source>
@@ -269,10 +269,10 @@
       <trans-unit id="894bc414e6b716730609cecece10977501d4d3dc" resname="Signup">
         <source>Signup</source>
         <target>Signup</target>
-        <jms:reference-file line="62">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
-        <jms:reference-file line="3">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
-        <jms:reference-file line="49">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
-        <jms:reference-file line="6">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="64">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="51">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
+        <jms:reference-file line="8">/../src/AppBundle/Resources/views/Content/signup.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2dacf65959849884a011f36f76a04eebea94c5ea" resname="Submit">
         <source>Submit</source>
@@ -310,7 +310,7 @@
       <trans-unit id="2c7ab350b329cfbb1942cfa52094f9852c4442a3" resname="Username or email">
         <source>Username or email</source>
         <target>Username or email</target>
-        <jms:reference-file line="17">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
+        <jms:reference-file line="19">/../src/AppBundle/Resources/views/Content/login.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="17dfb031e086e3415d71f3928e6ce08d6b1c1d4d" resname="Username:">
         <source>Username:</source>
@@ -335,12 +335,12 @@
       <trans-unit id="a3fc750d51d1a0915f51a09687e580e33e22cce7" resname="admin.users.switch_user.back.user_action.text" extradata="Meaning: Available arguments: %user_id%">
         <source>admin.users.switch_user.back.user_action.text</source>
         <target>The user has switched back to own user (from user with ID "%user_id%").</target>
-        <jms:reference-file line="69">/../src/AppBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
+        <jms:reference-file line="71">/../src/AppBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d3a9874c0f0efc4eaa18cf87dc7ad46f4e2ebe17" resname="admin.users.switch_user.into.user_action.text" extradata="Meaning: Available arguments: %target_user_id%">
         <source>admin.users.switch_user.into.user_action.text</source>
         <target>The user has switched into the user with the ID "%target_user_id%".</target>
-        <jms:reference-file line="85">/../src/AppBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
+        <jms:reference-file line="87">/../src/AppBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="78e933db98bd1da658cdab8d5e210d615e1d54d0" resname="brute_force.attempt.text" extradata="Meaning: Available arguments: %time%, %action%">
         <source>brute_force.attempt.text</source>
@@ -472,14 +472,14 @@
       <trans-unit id="6d5a377cec1ee692ae89e34217898e6296a00d82" resname="general.already_logged_in">
         <source>general.already_logged_in</source>
         <target>You are already logged in.</target>
-        <jms:reference-file line="30">/../src/AppBundle/Controller/LoginController.php</jms:reference-file>
+        <jms:reference-file line="31">/../src/AppBundle/Controller/LoginController.php</jms:reference-file>
         <jms:reference-file line="26">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
         <jms:reference-file line="25">/../src/AppBundle/Controller/SignupController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3a226b0c720df7aedc885666da3b04fc6d0ef4ab" resname="general.something_went_wrong">
         <source>general.something_went_wrong</source>
         <target>Whops. Something went wrong.</target>
-        <jms:reference-file line="51">/../src/AppBundle/Service/ApifierService.php</jms:reference-file>
+        <jms:reference-file line="58">/../src/AppBundle/Service/ApifierService.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3da7669813faae9552b57532be5cc9d2156881df" resname="general.wildcard_searches.text">
         <source>general.wildcard_searches.text</source>
@@ -490,6 +490,11 @@
         <source>login.fail.user_action.text</source>
         <target>The user has tried to log in, but failed.</target>
         <jms:reference-file line="56">/../src/AppBundle/EventSubscriber/AuthenticationSubscriber.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ac98d5144876a5dae49a601fe801937366dfdd63" resname="login.user_action.text">
+        <source>login.user_action.text</source>
+        <target>The user has successfully logged in.</target>
+        <jms:reference-file line="52">/../src/AppBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3feec603f97862c50f67294ce925bed18ce7ae39" resname="logout.user_action.text">
         <source>logout.user_action.text</source>
@@ -689,32 +694,32 @@
       <trans-unit id="6cc9ac4c7ecc5c4a7aa62ede0a345e196b8d2602" resname="reset_password.confirmation.code_expired.text">
         <source>reset_password.confirmation.code_expired.text</source>
         <target>The reset password code has expired.</target>
-        <jms:reference-file line="154">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="171">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c0c10c62f7f7976938a1d7fe5c75084ab2129815" resname="reset_password.confirmation.code_not_found.text">
         <source>reset_password.confirmation.code_not_found.text</source>
         <target>The reset password code is invalid.</target>
-        <jms:reference-file line="176">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="161">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="36ad8a0d7536e0b0e74ef0e2ce9d37ddb55e60d6" resname="reset_password.confirmation.success.text">
         <source>reset_password.confirmation.success.text</source>
         <target>Reset password was successful.</target>
-        <jms:reference-file line="169">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="189">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b8b16e4305dde7f5dc23056fb79de99091bd2c46" resname="reset_password.request.already_requested.text">
         <source>reset_password.request.already_requested.text</source>
         <target>You have already requested a code.</target>
-        <jms:reference-file line="106">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="115">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f4e4edf3188fb235bf76290ceb5bcb1f6101342b" resname="reset_password.request.email_not_found.text">
         <source>reset_password.request.email_not_found.text</source>
         <target>This email was not found.</target>
-        <jms:reference-file line="119">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="105">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cfbf29c811923278e7ed080853b37c0f0a4265c7" resname="reset_password.request.success.text">
         <source>reset_password.request.success.text</source>
         <target>You have successfully requested a new password.</target>
-        <jms:reference-file line="113">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
+        <jms:reference-file line="125">/../src/AppBundle/Controller/ResetPasswordController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5135a85afdf1c78210e31ff768dfeaf562aa65e1" resname="reset_password.request.user_action.text">
         <source>reset_password.request.user_action.text</source>

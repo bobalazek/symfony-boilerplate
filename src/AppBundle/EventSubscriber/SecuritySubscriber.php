@@ -44,12 +44,14 @@ class SecuritySubscriber implements EventSubscriberInterface
      */
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
-        // TODO: also check if the propagation was stopped from TFA's security subscriber?
         $url = $event->getRequest()->getUri();
+        // TODO: automatically determine if in app area?
         if (strpos($url, '/api') === false) {
             $this->userActionManager->add(
                 'user.login',
-                'User has been logged in!'
+                $this->translator->trans(
+                    'login.user_action.text'
+                )
             );
         }
     }
