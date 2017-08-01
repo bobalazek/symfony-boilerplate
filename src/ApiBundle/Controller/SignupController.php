@@ -5,6 +5,7 @@ namespace ApiBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Noxlogic\RateLimitBundle\Annotation\RateLimit;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Profile;
 
@@ -15,6 +16,8 @@ class SignupController extends Controller
 {
     /**
      * @Route("/api/signup", name="api.signup")
+     *
+     * @RateLimit(limit=10, period=3600)
      */
     public function signupAction(Request $request)
     {

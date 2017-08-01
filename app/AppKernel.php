@@ -13,37 +13,37 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
-            // KNP
+            // Pagination & menu
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
             // CORS
             new Nelmio\CorsBundle\NelmioCorsBundle(),
 
-            // JMS
+            // Translations
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
 
-            // Doctrine migrations
+            // Doctrine & co.
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-
-            // Assetic
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-
-            // Doctrine Extensions
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
 
             // GeoIP
             new Cravler\MaxMindGeoIpBundle\CravlerMaxMindGeoIpBundle(),
 
-            // MISD
+            // Phone numbers
             new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
+
+            // Rate limit bundle
+            new Noxlogic\RateLimitBundle\NoxlogicRateLimitBundle(),
 
             // Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),

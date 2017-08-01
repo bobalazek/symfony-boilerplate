@@ -21,7 +21,7 @@
         "symfony/symfony": "3.3.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
-        "doctrine/doctrine-cache-bundle": "^1.2",
+        "doctrine/doctrine-cache-bundle": "^1.3",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/annotations": "~1.4.0",
         "doctrine/inflector": "~1.1.0",
@@ -52,7 +52,8 @@
         "jenssegers/agent": "^2.5",
         "cravler/maxmind-geoip-bundle": "^1.1",
         "misd/phone-number-bundle": "^1.2",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "noxlogic/ratelimit-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

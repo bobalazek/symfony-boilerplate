@@ -34,14 +34,14 @@ class GeneralListener
             !$event->isMasterRequest() ||
             !$tokenStorage->getToken()
         ) {
-            return false;
+            return;
         }
 
         $token = $tokenStorage->getToken();
         $user = $token->getUser();
 
         if (!($user instanceof User)) {
-            return false;
+            return;
         }
 
         // Two factor authentication
@@ -52,12 +52,12 @@ class GeneralListener
 
             // Prevent the 2FA gate on pages, that do not require authentication
             if ($roles === null) {
-                return false;
+                return;
             }
 
             $twoFactorAuthenticationRoute = 'login.tfa';
             if ($twoFactorAuthenticationRoute === $event->getRequest()->get('_route')) {
-                return false;
+                return;
             }
 
             $url = $this->container->get('router')
@@ -66,7 +66,7 @@ class GeneralListener
                 return new RedirectResponse($url);
             });
 
-            return false;
+            return;
         }
 
         $em = $this->container->get('doctrine.orm.entity_manager');
@@ -120,18 +120,18 @@ class GeneralListener
             !$event->isMasterRequest() ||
             !$tokenStorage->getToken()
         ) {
-            return false;
+            return;
         }
 
         $token = $tokenStorage->getToken();
         $user = $token->getUser();
 
         if (!($user instanceof User)) {
-            return false;
+            return;
         }
 
         if ($request->cookies->has('device_uid')) {
-            return false;
+            return;
         }
 
         $em = $this->container->get('doctrine.orm.entity_manager');
@@ -156,7 +156,7 @@ class GeneralListener
         $deviceUid = $request->attributes->get('device_uid');
 
         if (!$deviceUid) {
-            return false;
+            return;
         }
 
         $cookie = new Cookie('device_uid', $deviceUid, time() + $cookieLifetime);
