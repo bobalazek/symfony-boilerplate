@@ -69,15 +69,15 @@ class LoginController extends Controller
 
         $encoder = $this->get('security.password_encoder');
         $encodedPassword = $encoder->encodePassword(
-            $password,
-            $user->getSalt()
+            $user,
+            $password
         );
 
         if ($encodedPassword !== $user->getPassword()) {
             $this->container->get('app.user_action_manager')
                 ->add(
                     'user.api.login.fail',
-                    $this->translator->trans(
+                    $this->get('translator')->trans(
                         'api.login.fail.user_action.text'
                     ),
                     [
@@ -101,7 +101,7 @@ class LoginController extends Controller
         $this->container->get('app.user_action_manager')
             ->add(
                 'user.api.login',
-                $this->translator->trans(
+                $this->get('translator')->trans(
                     'api.login.user_action.text'
                 ),
                 [],
