@@ -22,8 +22,10 @@
   * User blocked actions (filter, view)
   * User devices (filter, view)
 * API
+  * Login
   * Signup
   * Reset password
+  * Rate limiting
 * Deployment ready
 
 ## Server requirements
