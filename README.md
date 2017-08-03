@@ -128,7 +128,7 @@
     * Branch: `develop`
     * Database: `testing` - is flushed and recreated during each run
 * QA (`qa`)
-    * Description: Is the total bleeding-edge / current version of the application. Used for testing only internally by the company developers / testers. May contain many bugs. Runs on a separate qa database.
+    * Description: Is the total bleeding-edge / current version of the application. Used for testing only internally by the company developers / testers. May contain many bugs. Runs on a separate QA database.
     * Branch: `develop`
     * Database: `qa` - data created with fixtures or obfuscated production data
 * Staging (`stag`)
