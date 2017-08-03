@@ -13,10 +13,10 @@ services:
             - redis
             - memcached
         volumes:
-            - "./:/var/www/html/"
+            - ".:${PROJECT_DIR}"
         ports:
-            - 81:80
-            - 444:443
+            - ${LOCAL_WEB_HTTP_PORT}:80
+            - ${LOCAL_WEB_HTTPS_PORT}:443
         networks:
             - backend
 
@@ -24,15 +24,15 @@ services:
         image: mysql
         user: mysql
         environment:
-            MYSQL_ROOT_PASSWORD: sfbp
-            MYSQL_DATABASE: sfbp
-            MYSQL_USER: sfbp
-            MYSQL_PASSWORD: sfbp
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
-            - "./docker/var/logs/mysql/:/var/log/mysql/"
-            - "./docker/var/data/mysql/:/var/lib/mysql/"
+            - "./docker/var/logs/mysql:/var/log/mysql"
+            - "./docker/var/data/mysql:/var/lib/mysql"
         ports:
-            - 3307:3306
+            - ${LOCAL_MYSQL_PORT}:3306
         networks:
             - backend
 
@@ -40,30 +40,30 @@ services:
         image: phpmyadmin/phpmyadmin
         restart: always
         environment:
-            PMA_ARBITRARY: 1
-            PMA_HOST: mysql
-            PMA_USER: sfbp
-            PMA_PASSWORD: sfbp
+            - PMA_ARBITRARY=1
+            - PMA_HOST=mysql
+            - PMA_USER=${MYSQL_USER}
+            - PMA_PASSWORD=${MYSQL_PASSWORD}
         links:
             - mysql
         depends_on:
             - mysql
         ports:
-            - 82:80
+            - ${LOCAL_PMA_PORT}:80
         networks:
             - backend
 
     redis:
         image: redis
         ports:
-            - 6380:6379
+            - ${LOCAL_REDIS_PORT}:6379
         networks:
             - backend
 
     memcached:
         image: memcached
         ports:
-            - 11212:11211
+            - ${LOCAL_MEMCACHED_PORT}:11211
         networks:
             - backend
 

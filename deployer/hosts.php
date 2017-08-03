@@ -12,8 +12,3 @@ localhost('production_server')
     ->set('branch', 'master')
     ->set('env', 'prod')
     ->set('deploy_path', '/var/www/html/deployment/prod');
-
-// Include the local hosts if present
-if (file_exists(dirname(__FILE__).'/hosts-local.php')) {
-    include dirname(__FILE__).'/hosts-local.php';
-}

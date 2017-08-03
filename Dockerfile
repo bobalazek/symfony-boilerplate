@@ -3,10 +3,11 @@
 # https://docs.docker.com/samples/php/
 FROM php:7.0-apache
 
-### Environment
+### Variables
 ENV PROJECT_DIR /var/www/html
 ENV SYMFONY_ENV dev
 
+## Config
 VOLUME $PROJECT_DIR
 WORKDIR $PROJECT_DIR
 
