@@ -120,20 +120,25 @@
 ## Stages
 
 * Development (`dev`)
-    * Description: This is normally the stage in which you work on locally.
+    * Description: This is normally the stage in which you work on locally, on your local machine.
     * Branch: `develop` (or rather the specific branch for the feature / bug / hotfix / ... you are currently working on)
+    * Database: `local`
 * Testing (`test`)
-    * Description: In this stage we do (functional / integration / unit) tests for the application. Locally and / or the CI server. Should have a separate database just for the tests.
+    * Description: In this stage we do (functional / integration / unit) tests for the application. Locally and / or the CI server.
     * Branch: `develop`
+    * Database: `testing` - is flushed and recreated during each run
 * QA (`qa`)
     * Description: Is the total bleeding-edge / current version of the application. Used for testing only internally by the company developers / testers. May contain many bugs. Runs on a separate qa database.
     * Branch: `develop`
+    * Database: `qa` - data created with fixtures or obfuscated production data
 * Staging (`stag`)
-    * Description: The exact same environment as production, meant for the final testing before everything ships into production. Runs on the production database.
+    * Description: The exact same environment as production, meant for the final testing before everything ships into production.
     * Branch: `master`
+    * Database: `production`
 * Production (`prod`)
     * Description: The live version for the end-users.
     * Branch: `master`
+    * Database: `production`
 
 
 ## Tests
