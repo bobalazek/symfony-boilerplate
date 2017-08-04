@@ -1,0 +1,4 @@
+CoreBundle
+================
+
+The app bundle.

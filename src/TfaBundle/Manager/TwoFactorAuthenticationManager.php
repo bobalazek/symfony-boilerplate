@@ -8,8 +8,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use libphonenumber\PhoneNumberFormat;
-use AppBundle\Entity\User;
-use AppBundle\Utils\Helpers;
+use CoreBundle\Entity\User;
+use CoreBundle\Utils\Helpers;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>

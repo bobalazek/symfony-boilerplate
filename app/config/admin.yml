@@ -13,7 +13,7 @@ services:
         class: AdminBundle\Admin\UserAdmin
         arguments:
             - ~
-            - AppBundle\Entity\User
+            - CoreBundle\Entity\User
             - AdminBundle:User
         tags:
             - name: sonata.admin
@@ -27,7 +27,7 @@ services:
         class: AdminBundle\Admin\UserActionAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserAction
+            - CoreBundle\Entity\UserAction
             - ~
         tags:
             - name: sonata.admin
@@ -41,7 +41,7 @@ services:
         class: AdminBundle\Admin\UserRecoveryCodeAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserRecoveryCode
+            - CoreBundle\Entity\UserRecoveryCode
             - ~
         tags:
             - name: sonata.admin
@@ -55,7 +55,7 @@ services:
         class: AdminBundle\Admin\UserLoginCodeAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserLoginCode
+            - CoreBundle\Entity\UserLoginCode
             - ~
         tags:
             - name: sonata.admin
@@ -69,7 +69,7 @@ services:
         class: AdminBundle\Admin\UserBlockedActionAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserBlockedAction
+            - CoreBundle\Entity\UserBlockedAction
             - ~
         tags:
             - name: sonata.admin
@@ -83,7 +83,7 @@ services:
         class: AdminBundle\Admin\UserDeviceAdmin
         arguments:
             - ~
-            - AppBundle\Entity\UserDevice
+            - CoreBundle\Entity\UserDevice
             - ~
         tags:
             - name: sonata.admin

@@ -53,7 +53,7 @@ class AppKernel extends Kernel
             new Picoss\SonataExtraAdminBundle\PicossSonataExtraAdminBundle(),
 
             // App
-            new AppBundle\AppBundle(),
+            new CoreBundle\CoreBundle(),
             new TfaBundle\TfaBundle(),
             new ApiBundle\ApiBundle(),
             new AdminBundle\AdminBundle(),

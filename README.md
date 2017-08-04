@@ -107,8 +107,8 @@
 
 ## Translations
 
-* Generate translations: `php bin/console translation:extract en_US --bundle=AppBundle` (or alternatively: `php bin/console translation:update en_US AppBundle --force` if you only want to generate translations from twig files)
-* View translations from twig files: `php bin/console debug:translation en_US AppBundle`
+* Generate translations: `php bin/console translation:extract en_US --bundle=CoreBundle` (or alternatively: `php bin/console translation:update en_US CoreBundle --force` if you only want to generate translations from twig files)
+* View translations from twig files: `php bin/console debug:translation en_US CoreBundle`
 
 
 ## Commands

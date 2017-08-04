@@ -1,63 +1,63 @@
 services:
     # General
     app.emogrifier:
-        class: AppBundle\Service\EmogrifierService
+        class: CoreBundle\Service\EmogrifierService
         calls:
             - [setContainer, ["@service_container"]]
 
     app.mailer:
-        class: AppBundle\Service\MailerService
+        class: CoreBundle\Service\MailerService
         calls:
             - [setContainer, ["@service_container"]]
 
     app.sms_sender:
-        class: AppBundle\Service\SmsSenderService
+        class: CoreBundle\Service\SmsSenderService
         calls:
             - [setContainer, ["@service_container"]]
 
     app.apifier:
-        class: AppBundle\Service\ApifierService
+        class: CoreBundle\Service\ApifierService
         calls:
             - [setContainer, ["@service_container"]]
 
     # Managers
     app.user_action_manager:
-        class: AppBundle\Manager\UserActionManager
+        class: CoreBundle\Manager\UserActionManager
         calls:
             - [setContainer, ["@service_container"]]
 
     app.user_login_code_manager:
-        class: AppBundle\Manager\UserLoginCodeManager
+        class: CoreBundle\Manager\UserLoginCodeManager
         calls:
             - [setContainer, ["@service_container"]]
 
     app.user_recovery_code_manager:
-        class: AppBundle\Manager\UserRecoveryCodeManager
+        class: CoreBundle\Manager\UserRecoveryCodeManager
         calls:
             - [setContainer, ["@service_container"]]
 
     app.user_manager:
-        class: AppBundle\Manager\UserManager
+        class: CoreBundle\Manager\UserManager
         calls:
             - [setContainer, ["@service_container"]]
 
     app.brute_force_manager:
-        class: AppBundle\Manager\BruteForceManager
+        class: CoreBundle\Manager\BruteForceManager
         calls:
             - [setContainer, ["@service_container"]]
 
     # Security
     app.user_provider:
-        class: AppBundle\Security\UserProvider
+        class: CoreBundle\Security\UserProvider
         arguments:
             - "@doctrine.orm.entity_manager"
 
     app.token_authenticator:
-        class: AppBundle\Security\TokenAuthenticator
+        class: CoreBundle\Security\TokenAuthenticator
 
     # Twig
     app.twig_core_extension:
-        class: AppBundle\Twig\CoreExtension
+        class: CoreBundle\Twig\CoreExtension
         public: false
         tags:
             - name: twig.extension
@@ -71,7 +71,7 @@ services:
 
     # Event Subscribers & Listeners
     app.authentication_subscriber:
-        class: AppBundle\EventSubscriber\AuthenticationSubscriber
+        class: CoreBundle\EventSubscriber\AuthenticationSubscriber
         tags:
             - { name: kernel.event_subscriber }
         arguments:
@@ -81,7 +81,7 @@ services:
             - "@translator"
 
     app.security_subscriber:
-        class: AppBundle\EventSubscriber\SecuritySubscriber
+        class: CoreBundle\EventSubscriber\SecuritySubscriber
         tags:
             - { name: kernel.event_subscriber }
         arguments:
@@ -91,20 +91,20 @@ services:
             - "@translator"
 
     app.logout_listener:
-        class: AppBundle\EventListener\LogoutListener
+        class: CoreBundle\EventListener\LogoutListener
         arguments:
             - "@app.user_action_manager"
             - "@translator"
 
     app.exception_listener:
-        class: AppBundle\EventListener\ExceptionListener
+        class: CoreBundle\EventListener\ExceptionListener
         calls:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
     app.general_listener:
-        class: AppBundle\EventListener\GeneralListener
+        class: CoreBundle\EventListener\GeneralListener
         calls:
             - [setContainer, ["@service_container"]]
         tags:
@@ -118,7 +118,7 @@ services:
 
     # Form types
     app.form.type.user:
-        class: AppBundle\Form\Type\UserType
+        class: CoreBundle\Form\Type\UserType
         calls:
             - [setContainer, ["@service_container"]]
         tags:

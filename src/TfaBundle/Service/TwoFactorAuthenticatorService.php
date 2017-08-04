@@ -3,7 +3,7 @@
 namespace TfaBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use AppBundle\Entity\User;
+use CoreBundle\Entity\User;
 
 /**
  * Some methods are taken from https://github.com/scheb/two-factor-bundle/blob/master/Security/TwoFactor/Provider/Google/GoogleAuthenticator.php.

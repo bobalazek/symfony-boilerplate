@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use AppBundle\Entity\User;
+use CoreBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -61,7 +61,7 @@ class TwoFactorAuthenticationType extends AbstractType
     {
         $resolver->setRequired('user');
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\User',
+            'data_class' => 'CoreBundle\Entity\User',
             'validation_groups' => ['my.tfa'],
         ]);
     }

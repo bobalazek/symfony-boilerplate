@@ -7,8 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
-use AppBundle\Entity\User;
-use AppBundle\Entity\UserRecoveryCode;
+use CoreBundle\Entity\User;
+use CoreBundle\Entity\UserRecoveryCode;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -35,7 +35,7 @@ class RecoveryCodesController extends Controller
 
         $query = $em->createQueryBuilder()
             ->select('urc')
-            ->from('AppBundle:UserRecoveryCode', 'urc')
+            ->from('CoreBundle:UserRecoveryCode', 'urc')
             ->where('urc.user = ?1')
             ->andWhere('urc.deletedAt IS NULL')
             ->setParameter(1, $user)

@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use AppBundle\Entity\User;
+use CoreBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -22,7 +22,7 @@ class ResetPasswordController extends Controller
     {
         $email = $request->get('email');
         $user = $em
-            ->getRepository('AppBundle:User')
+            ->getRepository('CoreBundle:User')
             ->findOneByEmail($formUser->getEmail())
         ;
 

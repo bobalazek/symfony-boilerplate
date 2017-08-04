@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Exception\BruteForceAttemptException;
-use AppBundle\Entity\User;
+use CoreBundle\Exception\BruteForceAttemptException;
+use CoreBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -296,7 +296,7 @@ class TwoFactorAuthenticationController extends Controller
         $dateTimeFormat = $this->getParameter('date_time_format');
 
         $userBlockedAction = $em
-            ->getRepository('AppBundle:UserBlockedAction')
+            ->getRepository('CoreBundle:UserBlockedAction')
             ->getCurrentlyActive(
                 $ip,
                 $sessionId,

@@ -40,7 +40,7 @@ class LoginController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository('AppBundle:User')
+        $user = $em->getRepository('CoreBundle:User')
             ->findByUsernameOrEmail($username);
 
         if (empty($user)) {

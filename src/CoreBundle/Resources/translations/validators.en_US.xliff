@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-08-01T17:48:00Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="49898953ddee8884228c580e2e6567817d0fec55" resname="Invalid Password.">
+        <source>Invalid Password.</source>
+        <target>Invalid Password.</target>
+        <jms:reference-file line="26">/../src/CoreBundle/Form/Type/ResetPasswordType.php</jms:reference-file>
+        <jms:reference-file line="37">/../src/CoreBundle/Form/Type/SignupType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e3a96f07e433a9688bd523a8fe77f62a441c94bf" resname="Password invalid.">
+        <source>Password invalid.</source>
+        <target>Password invalid.</target>
+        <jms:reference-file line="28">/../src/CoreBundle/Form/Type/My/PasswordType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="04b17f324e3b03c077f4d52d0d233f27ee00dd6e" resname="This email is already in use.">
+        <source>This email is already in use.</source>
+        <target>This email is already in use.</target>
+      </trans-unit>
+      <trans-unit id="a510675f0b8448be2538d335e04cbd8df942b925" resname="This uid is already in use.">
+        <source>This uid is already in use.</source>
+        <target state="new">This uid is already in use.</target>
+      </trans-unit>
+      <trans-unit id="7c9d130ce85156d5ad17213f8469c9ed258873a2" resname="This username is already in use.">
+        <source>This username is already in use.</source>
+        <target>This username is already in use.</target>
+      </trans-unit>
+      <trans-unit id="d1f02641cee88f689f7ecdf0fe0090dc3ed469c3" resname="Wrong value for your current password">
+        <source>Wrong value for your current password</source>
+        <target>Wrong value for your current password</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

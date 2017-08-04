@@ -24,5 +24,5 @@ jms_translation:
             default_output_format: xliff
 ```
 
-Inside `src/AppBundle/Entity/User.php` add
+Inside `src/CoreBundle/Entity/User.php` add
 `TfaBundle\Entity\Traits\User\TwoFactorAuthenticationTrait` as a trait

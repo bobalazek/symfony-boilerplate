@@ -3,7 +3,7 @@
 namespace TfaBundle\Entity\Traits\User;
 
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Entity\User;
+use CoreBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>

@@ -39,8 +39,8 @@ parameters:
     # Login code
     login_code_expiry_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
     # Other
-    knp.doctrine_behaviors.blameable_subscriber.user_entity: AppBundle\Entity\User
-    app.security.authentication.listener.form.class: AppBundle\EventListener\UsernamePasswordFormAuthenticationListener
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: CoreBundle\Entity\User
+    app.security.authentication.listener.form.class: CoreBundle\EventListener\UsernamePasswordFormAuthenticationListener
 
 framework:
     secret: "%secret%"
@@ -87,7 +87,7 @@ twig:
             date_format: "%date_format%"
             date_time_format: "%date_time_format%"
     form_themes:
-        - AppBundle:Form:layout.html.twig
+        - CoreBundle:Form:layout.html.twig
 
 # Assetic
 assetic:
@@ -129,8 +129,8 @@ doctrine:
 
 # Doctrine migrations
 doctrine_migrations:
-    dir_name: "%kernel.root_dir%/../src/AppBundle/Migrations"
-    namespace: AppBundle\Migrations
+    dir_name: "%kernel.root_dir%/../src/CoreBundle/Migrations"
+    namespace: CoreBundle\Migrations
     table_name: migration_versions
     name: Application Migrations
 
@@ -170,8 +170,8 @@ knp_paginator:
     page_range: 5
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
-        sortable: AppBundle:Pagination:sortable_link.html.twig
-        filtration: AppBundle:Pagination:filtration.html.twig
+        sortable: CoreBundle:Pagination:sortable_link.html.twig
+        filtration: CoreBundle:Pagination:filtration.html.twig
 
 # CORS
 nelmio_cors:
@@ -193,10 +193,10 @@ jms_translation:
     locales: "%locales%"
     source_language: "%locale%"
     configs:
-        AppBundle:
+        CoreBundle:
             dirs:
-                - "%kernel.root_dir%/../src/AppBundle"
-            output_dir: "%kernel.root_dir%/../src/AppBundle/Resources/translations"
+                - "%kernel.root_dir%/../src/CoreBundle"
+            output_dir: "%kernel.root_dir%/../src/CoreBundle/Resources/translations"
             default_output_format: xliff
         ApiBundle:
             dirs:
@@ -219,4 +219,4 @@ noxlogic_rate_limit:
     enabled: true
     storage_engine: doctrine
     doctrine_provider: rate_limit_cache
-    rate_response_exception: AppBundle\Exception\TooManyRequestsHttpException
+    rate_response_exception: CoreBundle\Exception\TooManyRequestsHttpException

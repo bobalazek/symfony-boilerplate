@@ -6,8 +6,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use AppBundle\Entity\User;
-use AppBundle\Entity\Profile;
+use CoreBundle\Entity\User;
+use CoreBundle\Entity\Profile;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>

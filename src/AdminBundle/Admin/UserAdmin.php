@@ -10,9 +10,9 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
-use AppBundle\Entity\User;
-use AppBundle\AppBundle;
-use AppBundle\Form\Type\ProfileType;
+use CoreBundle\Entity\User;
+use CoreBundle\CoreBundle;
+use CoreBundle\Form\Type\ProfileType;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -212,7 +212,7 @@ class UserAdmin extends AbstractAdmin
     /***** Hooks *****/
 
     /**
-     * @param AppBundle\Entity\User $user
+     * @param CoreBundle\Entity\User $user
      */
     public function prePersist($user)
     {
@@ -223,7 +223,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @param AppBundle\Entity\User $user
+     * @param CoreBundle\Entity\User $user
      */
     public function preUpdate($user)
     {
@@ -238,7 +238,7 @@ class UserAdmin extends AbstractAdmin
     /***** Helpers *****/
 
     /**
-     * @param AppBundle\Entity\User $user
+     * @param CoreBundle\Entity\User $user
      */
     private function preparePlainPassword($user)
     {
@@ -251,7 +251,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @param AppBundle\Entity\User $user
+     * @param CoreBundle\Entity\User $user
      */
     private function preventLockingYourself($user)
     {
@@ -269,7 +269,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @param AppBundle\Entity\User $user
+     * @param CoreBundle\Entity\User $user
      */
     private function preventLockingWithoutReason($user)
     {
@@ -287,7 +287,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @param AppBundle\Entity\User $user
+     * @param CoreBundle\Entity\User $user
      */
     private function preventDisablingYourself($user)
     {
@@ -318,7 +318,7 @@ class UserAdmin extends AbstractAdmin
     }
 
     /**
-     * @return AppBundle\Entity\User
+     * @return CoreBundle\Entity\User
      */
     private function getUser()
     {

@@ -1,0 +1,55 @@
+{% extends 'CoreBundle:Layouts:default.html.twig' %}
+
+{% set is_container_fluid = false %}
+
+{% block title %}{{ 'Signup' | trans }} | {{ parent() }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'Signup' | trans }}</h1>
+    {% if alert %}
+        <div class="alert alert-{{ alert }}">
+            {{ alert_message | trans }}
+        </div>
+    {% else %}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>{{ 'Profile' | trans }}</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.profile.title) }}
+                        </div> <!-- /.col-md-6 -->
+                    </div> <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.profile.firstName) }}
+                        </div> <!-- /.col-md-6 -->
+                        <div class="col-md-6">
+                            {{ form_row(form.profile.lastName) }}
+                        </div> <!-- /.col-md-6 -->
+                    </div> <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.profile.gender) }}
+                        </div> <!-- /.col-md-6 -->
+                        <div class="col-md-6">
+                            {{ form_row(form.profile.birthday) }}
+                        </div> <!-- /.col-md-6 -->
+                    </div> <!-- /.row -->
+                </div>
+                <div class="col-md-6">
+                    <h3>{{ 'Account' | trans }}</h3>
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword) }}
+                    {{ form_row(form.terms) }}
+                </div>
+            </div>
+            <button type="submit"
+                class="btn btn-block btn-lg btn-primary" />
+                {{ 'Signup' | trans }}
+            </button>
+        {{ form_end(form) }}
+    {% endif %}
+{% endblock %}
