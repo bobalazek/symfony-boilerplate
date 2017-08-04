@@ -9,7 +9,7 @@ use Tests\CoreBundle\WebTestCase;
  */
 class ApiControllerTest extends WebTestCase
 {
-    public function testDefaultApiPage()
+    public function testIfDefaultApiPageWorks()
     {
         $crawler = $this->client->request(
             'GET',

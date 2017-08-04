@@ -138,8 +138,10 @@ doctrine_migrations:
 doctrine_cache:
     providers:
         rate_limit_cache:
-            type: apc
+            type: file_system
             namespace: rate_limit
+            file_system:
+                directory: "%kernel.cache_dir%/doctrine/rate_limit"
 
 # Doctrine behaviors
 knp_doctrine_behaviors:

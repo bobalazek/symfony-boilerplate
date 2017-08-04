@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\CoreBundle\Controller;
+namespace Tests\ApiBundle\Controller;
 
 use Tests\CoreBundle\WebTestCase;
 
@@ -15,11 +15,11 @@ class UserSystemControllerTest extends WebTestCase
             'GET',
             $this->client->getContainer()
                 ->get('router')
-                ->generate('login')
+                ->generate('api.login')
         );
         $this->assertEquals(
-            200,
-            $this->client->getResponse()->isOk()
+            400, // because the username & password is missing
+            $this->client->getResponse()->getStatusCode()
         );
     }
 
@@ -29,10 +29,10 @@ class UserSystemControllerTest extends WebTestCase
             'GET',
             $this->client->getContainer()
                 ->get('router')
-                ->generate('signup')
+                ->generate('api.signup')
         );
         $this->assertEquals(
-            200,
+            400, // because the registration data is missing
             $this->client->getResponse()->getStatusCode()
         );
     }
@@ -43,10 +43,10 @@ class UserSystemControllerTest extends WebTestCase
             'GET',
             $this->client->getContainer()
                 ->get('router')
-                ->generate('reset_password')
+                ->generate('api.reset_password')
         );
         $this->assertEquals(
-            200,
+            400, // because the email
             $this->client->getResponse()->getStatusCode()
         );
     }

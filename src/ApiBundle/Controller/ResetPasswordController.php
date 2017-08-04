@@ -21,12 +21,26 @@ class ResetPasswordController extends Controller
     public function resetPasswordAction(Request $request)
     {
         $email = $request->get('email');
+        if (empty($email)) {
+            return $this->json(
+                [
+                    'error' => [
+                        'message' => $this->get('translator')->trans(
+                            'api.reset_password.request.email_empty.text'
+                        ),
+                    ],
+                ],
+                400
+            );
+        }
+
+        $em = $this->getDoctrine()->getManager();
         $user = $em
             ->getRepository('CoreBundle:User')
-            ->findOneByEmail($formUser->getEmail())
+            ->findOneByEmail($email)
         ;
 
-        if ($user === nul) {
+        if ($user === null) {
             return $this->json(
                 [
                     'error' => [

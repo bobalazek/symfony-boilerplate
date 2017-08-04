@@ -9,7 +9,7 @@ use Tests\CoreBundle\WebTestCase;
  */
 class MyControllerTest extends WebTestCase
 {
-    public function testUserPages()
+    public function testIfSettingsPagesWork()
     {
         $routes = [
             'my.profile',

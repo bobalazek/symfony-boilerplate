@@ -9,7 +9,7 @@ use Tests\CoreBundle\WebTestCase;
  */
 class MyControllerTest extends WebTestCase
 {
-    public function testPages()
+    public function testIfTfaSettingsPagesWork()
     {
         $routes = [
             'my.tfa',
