@@ -381,7 +381,7 @@
       </trans-unit>
       <trans-unit id="ea8333dd2f537d245277a449c651337591390454" resname="my.tfa.sms.not_yet_activated.text">
         <source>my.tfa.sms.not_yet_activated.text</source>
-        <target>In order to use SMS 2FA, you will need to activate it first.</target>
+        <target>In order to use SMS 2FA, you will need to activate your mobile number it first.</target>
         <jms:reference-file line="18">/../src/TfaBundle/Resources/views/Content/my/tfa/_sms.html.twig</jms:reference-file>
       </trans-unit>
     </body>
