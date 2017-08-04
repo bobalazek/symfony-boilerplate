@@ -296,7 +296,7 @@
       </trans-unit>
       <trans-unit id="e22cfdb333b5d82b6ce17ebfce1f2200ac09ac5b" resname="my.tfa.authenticator.already_activated.text">
         <source>my.tfa.authenticator.already_activated.text</source>
-        <target>my.tfa.authenticator.already_activated.text</target>
+        <target>Your authenticator is already activated.</target>
         <jms:reference-file line="26">/../src/TfaBundle/Resources/views/Content/my/tfa/authenticator.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8d51bb7db7f5352e53c21f3dcd0a4526128752fb" resname="my.tfa.authenticator.invalid_code.text">
