@@ -14,7 +14,7 @@ security:
             stateless: true
             guard:
                 authenticators:
-                    - app.token_authenticator
+                    - api.token_authenticator
 
         main:
             pattern: ^/

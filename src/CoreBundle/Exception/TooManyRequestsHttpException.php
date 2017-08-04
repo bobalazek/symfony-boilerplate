@@ -12,7 +12,8 @@ class TooManyRequestsHttpException extends TooManyRequestsHttpExceptionBase
     /**
      * @param
      */
-    public function __construct($message, $code) {
+    public function __construct($message, $code)
+    {
         parent::__construct(null, $message, null, $code);
     }
 }

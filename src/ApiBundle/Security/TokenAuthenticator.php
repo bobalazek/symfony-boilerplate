@@ -1,12 +1,12 @@
 <?php
 
-namespace CoreBundle\Security;
+namespace ApiBundle\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -25,6 +25,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     {
         // Skip the authentication, if we're on those pages
         if (in_array($request->getPathInfo(), [
+            '/api',
             '/api/login',
             '/api/signup',
             '/api/reset-password',
@@ -57,8 +58,10 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return array
      */
-    public function getUser($credentials, UserProviderInterface $userProvider)
-    {
+    public function getUser(
+        $credentials,
+        UserProviderInterface $userProvider
+    ) {
         return $userProvider->loadUserByIdAndToken(
             $credentials['id'],
             $credentials['token']
@@ -71,8 +74,10 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return bool
      */
-    public function checkCredentials($credentials, UserInterface $user)
-    {
+    public function checkCredentials(
+        $credentials,
+        UserInterface $user
+    ) {
         return true;
     }
 
@@ -81,8 +86,11 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      * @param TokenInterface $token
      * @param string         $providerKey
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
-    {
+    public function onAuthenticationSuccess(
+        Request $request,
+        TokenInterface $token,
+        $providerKey
+    ) {
         return null;
     }
 
@@ -92,8 +100,10 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return JsonResponse
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-    {
+    public function onAuthenticationFailure(
+        Request $request,
+        AuthenticationException $exception
+    ) {
         return new JsonResponse([
             'error' => [
                 'message' => strtr(
@@ -110,8 +120,10 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return JsonResponse
      */
-    public function start(Request $request, AuthenticationException $exception = null)
-    {
+    public function start(
+        Request $request,
+        AuthenticationException $exception = null
+    ) {
         return new JsonResponse([
             'error' => [
                 'message' => 'Authentication Required',

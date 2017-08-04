@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
-class AppController extends Controller
+class CoreController extends Controller
 {
     /**
      * @Route("/", name="home")

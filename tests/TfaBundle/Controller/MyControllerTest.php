@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\CoreBundle\Controller;
+namespace Tests\TfaBundle\Controller;
 
 use Tests\CoreBundle\WebTestCase;
 
@@ -9,14 +9,12 @@ use Tests\CoreBundle\WebTestCase;
  */
 class MyControllerTest extends WebTestCase
 {
-    public function testUserPages()
+    public function testPages()
     {
         $routes = [
-            'my.profile',
-            'my.settings',
-            'my.password',
-            'my.actions',
-            'my.devices',
+            'my.tfa',
+            'my.tfa.authenticator',
+            'my.tfa.recovery_codes',
         ];
 
         $this->login('bobalazek124@gmail.com');

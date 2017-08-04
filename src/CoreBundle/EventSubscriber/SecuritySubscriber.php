@@ -45,7 +45,11 @@ class SecuritySubscriber implements EventSubscriberInterface
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $url = $event->getRequest()->getUri();
-        // TODO: automatically determine if in app area?
+        /*
+         * In the api are that would be triggered each time the user would
+         *   do a request, so we only log the login action, if the user
+         *   has logged in via the normal form.
+         */
         if (strpos($url, '/api') === false) {
             $this->userActionManager->add(
                 'user.login',

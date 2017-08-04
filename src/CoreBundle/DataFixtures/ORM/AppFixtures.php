@@ -50,7 +50,7 @@ class AppFixtures implements FixtureInterface, ContainerAwareInterface
         ;
 
         $user->prepareUserRecoveryCodes(
-            $this->getParameter('recovery_codes_count')
+            $this->container->getParameter('recovery_codes_count')
         );
 
         $manager->persist($user);

@@ -1,0 +1,3 @@
+services:
+    api.token_authenticator:
+        class: ApiBundle\Security\TokenAuthenticator

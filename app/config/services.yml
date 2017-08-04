@@ -52,9 +52,6 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
 
-    app.token_authenticator:
-        class: CoreBundle\Security\TokenAuthenticator
-
     # Twig
     app.twig_core_extension:
         class: CoreBundle\Twig\CoreExtension

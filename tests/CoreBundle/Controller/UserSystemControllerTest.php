@@ -9,27 +9,45 @@ use Tests\CoreBundle\WebTestCase;
  */
 class UserSystemControllerTest extends WebTestCase
 {
-    public function testPages()
+    public function testIfLoginPageExists()
     {
-        $routes = [
-            'login',
-            'signup',
-            'reset_password',
-        ];
+        $crawler = $this->client->request(
+            'GET',
+            $this->client->getContainer()
+                ->get('router')
+                ->generate('login')
+        );
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
+    }
 
-        foreach ($routes as $route) {
-            $crawler = $this->client->request(
-                'GET',
-                $this->client->getContainer()
-                    ->get('router')
-                    ->generate($route)
-            );
+    public function testIfSignupPageExists()
+    {
+        $crawler = $this->client->request(
+            'GET',
+            $this->client->getContainer()
+                ->get('router')
+                ->generate('signup')
+        );
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
+    }
 
-            $this->assertEquals(
-                200,
-                $this->client->getResponse()->getStatusCode(),
-                'Something went wrong with the route "'.$route.'".'
-            );
-        }
+    public function testIfResetPasswordPageExists()
+    {
+        $crawler = $this->client->request(
+            'GET',
+            $this->client->getContainer()
+                ->get('router')
+                ->generate('reset_password')
+        );
+        $this->assertEquals(
+            200,
+            $this->client->getResponse()->getStatusCode()
+        );
     }
 }

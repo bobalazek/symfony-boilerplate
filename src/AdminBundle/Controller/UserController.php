@@ -58,7 +58,7 @@ class UserController extends Controller
     /***** Hooks *****/
 
     /**
-     * @param Request               $request
+     * @param Request                $request
      * @param CoreBundle\Entity\User $user
      */
     public function preDelete(Request $request, $user)
