@@ -231,12 +231,12 @@
       </trans-unit>
       <trans-unit id="e58b86d8b8a6d4e3416816338c2159fb67febaf1" resname="login.tfa.method.authenticator.message.text">
         <source>login.tfa.method.authenticator.message.text</source>
-        <target>login.tfa.method.authenticator.message.text</target>
+        <target>Enter the code from your two-factor authenticator (Google Authenticator, Authy, ...) down below.</target>
         <jms:reference-file line="2">/../src/TfaBundle/Resources/views/Content/login/tfa/_method_authenticator.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="874c11a43ee95873e209b804be6be4f2f9c9748f" resname="login.tfa.method.email.message.text">
         <source>login.tfa.method.email.message.text</source>
-        <target>Enter the code from your two-factor authenticator (Google Authenticator, Authy, ...) down below.</target>
+        <target>Enter the code that we just sent you to your email down below.</target>
         <jms:reference-file line="2">/../src/TfaBundle/Resources/views/Content/login/tfa/_method_email.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="16c573ee4ff00d4fc9d1256a099050a0b88c92ed" resname="login.tfa.method.recovery_code.message.text">

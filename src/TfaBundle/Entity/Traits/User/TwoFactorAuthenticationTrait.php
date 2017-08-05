@@ -30,8 +30,8 @@ trait TwoFactorAuthenticationTrait
         $isTFAEmailEnabled = $this->isTFAEmailEnabled();
         $isEmailActivated = $this->isEmailActivated();
         if (
-            !$isTFAEmailEnabled ||
-            !$isEmailActivated
+            $isTFAEmailEnabled === false ||
+            $isEmailActivated === false
         ) {
             unset($availableMethods['email']);
         }
@@ -40,8 +40,8 @@ trait TwoFactorAuthenticationTrait
         $isTFASmsEnabled = $this->isTFASmsEnabled();
         $isMobileActivated = $this->isMobileActivated();
         if (
-            !$isTFASmsEnabled ||
-            !$isMobileActivated
+            $isTFASmsEnabled === false ||
+            $isMobileActivated === false
         ) {
             unset($availableMethods['sms']);
         }
@@ -51,8 +51,8 @@ trait TwoFactorAuthenticationTrait
         $isTFAAuthenticatorActivated = $this->isTFAAuthenticatorActivated();
         $tfaAuthenticatorSecret = $this->getTFAAuthenticatorSecret();
         if (
-            !$isTFAAuthenticatorEnabled ||
-            !$isTFAAuthenticatorActivated ||
+            $isTFAAuthenticatorEnabled === false ||
+            $isTFAAuthenticatorActivated === false ||
             empty($tfaAuthenticatorSecret)
         ) {
             unset($availableMethods['authenticator']);

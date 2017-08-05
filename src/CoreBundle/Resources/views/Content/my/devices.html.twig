@@ -10,6 +10,7 @@
                 <tr>
                     <th>{{ knp_pagination_sortable(pagination, 'Key', 'ud.name') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'User Agent', 'ud.userAgent') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Is trusted?', 'ud.trusted') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Last Active', 'ud.lastActiveAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Time', 'ud.createdAt') }}</th>
                 </tr>
@@ -19,6 +20,9 @@
                     <tr>
                         <td>{{ userDevice.getName() }}</td>
                         <td>{{ userDevice.getUserAgent() }}</td>
+                        <td>{{ userDevice.isTrusted()
+                            ? 'Yes' | trans
+                            : 'No' | trans }}</td>
                         <td>{{ userDevice.getLastActiveAt() | date(globals.date_time_format) }}</td>
                         <td>{{ userDevice.getCreatedAt() | date(globals.date_time_format) }}</td>
                     </tr>

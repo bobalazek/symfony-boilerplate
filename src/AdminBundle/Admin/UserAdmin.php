@@ -293,7 +293,7 @@ class UserAdmin extends AbstractAdmin
     {
         if (
             $user === $this->getUser() &&
-            !$user->isEnabled()
+            $user->isEnabled() === false
         ) {
             $user->enable();
 

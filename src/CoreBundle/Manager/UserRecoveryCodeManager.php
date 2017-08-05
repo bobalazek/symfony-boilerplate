@@ -29,8 +29,8 @@ class UserRecoveryCodeManager
             ]);
         if (
             $userRecoveryCode !== null &&
-            !$userRecoveryCode->isUsed() &&
-            !$userRecoveryCode->isDeleted()
+            $userRecoveryCode->isUsed() === false &&
+            $userRecoveryCode->isDeleted() === false
         ) {
             return $userRecoveryCode;
         }

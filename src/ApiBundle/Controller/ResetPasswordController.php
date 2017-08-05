@@ -54,7 +54,7 @@ class ResetPasswordController extends Controller
         }
 
         $isResetPasswordCodeExpired = $user->isResetPasswordCodeExpired();
-        if (!$isResetPasswordCodeExpired) {
+        if ($isResetPasswordCodeExpired === false) {
             return $this->json(
                 [
                     'error' => [

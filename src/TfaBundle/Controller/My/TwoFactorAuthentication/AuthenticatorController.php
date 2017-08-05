@@ -52,13 +52,13 @@ class AuthenticatorController extends Controller
         if ($request->getMethod() === 'POST') {
             $code = $request->request->get('code');
 
-            $codeIsValid = $twoFactorAuthenticatorManager
+            $isCodeValid = $twoFactorAuthenticatorManager
                 ->checkCode(
                     $user,
                     $code
                 );
 
-            if (!$codeIsValid) {
+            if ($isCodeValid === false) {
                 $this->addFlash(
                     'danger',
                     $this->get('translator')->trans(

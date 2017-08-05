@@ -26,6 +26,11 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    app.user_device_manager:
+        class: CoreBundle\Manager\UserDeviceManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
     app.user_login_code_manager:
         class: CoreBundle\Manager\UserLoginCodeManager
         calls:

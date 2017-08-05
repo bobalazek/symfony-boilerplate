@@ -25,10 +25,21 @@ class TwoFactorAuthenticationManager
      */
     public function handle(InteractiveLoginEvent $event)
     {
-        $session = $this->container->get('session');
         $user = $event->getAuthenticationToken()->getUser();
+        $request = $event->getRequest();
 
-        if ($user->isTFAEnabled()) {
+        $userDeviceIsTrusted = $this->container
+            ->get('app.user_device_manager')
+            ->isCurrentTrusted(
+                $user,
+                $request
+            );
+
+        if (
+            $user->isTFAEnabled() &&
+            $userDeviceIsTrusted === false
+        ) {
+            $session = $this->container->get('session');
             $availableMethods = $user->getAvailableTFAMethods();
             $method = $user->getTFADefaultMethod();
 

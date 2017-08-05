@@ -494,7 +494,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function isAccountNonExpired()
     {
-        return !$this->isExpired();
+        return $this->isExpired() === false;
     }
 
     /*** Credentials expired ***/
@@ -520,7 +520,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function isCredentialsNonExpired()
     {
-        return !$this->isExpired();
+        return $this->isExpired() === false;
     }
 
     /**

@@ -23,10 +23,14 @@ class TwoFactorAuthenticationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
-
-        if (!$session->get(
+        $tfaInProgress = $session->get(
             'two_factor_authentication_in_progress'
-        )) {
+        );
+
+        if (
+            $tfaInProgress === null ||
+            $tfaInProgress === false
+        ) {
             $this->addFlash(
                 'info',
                 $this->get('translator')->trans(
@@ -156,7 +160,7 @@ class TwoFactorAuthenticationController extends Controller
             );
         }
 
-        if (!$success) {
+        if ($success === false) {
             $this->addFlash(
                 'danger',
                 $this->get('translator')->trans(
@@ -174,17 +178,11 @@ class TwoFactorAuthenticationController extends Controller
         }
 
         if ($isTrustedDevice) {
-            $userDeviceId = $request->attributes->get('user_device_id');
-            if ($userDeviceId) {
-                $userDevice = $em
-                    ->getRepository('CoreBundle:UserDevice')
-                    ->find($userDeviceId);
-
-                $userDevice->setTrusted(true);
-
-                $em->persist($userDevice);
-                $em->flush();
-            }
+            $this->get('app.user_device_manager')
+                ->setCurrentAsTrusted(
+                    $user,
+                    $request
+                );
         }
 
         $response = $this->redirectToRoute('home');

@@ -234,7 +234,7 @@ trait StatusesTrait
      */
     public function isAccountNonLocked()
     {
-        return !$this->isLocked();
+        return $this->isLocked() === false;
     }
 
     /*** Locked reason ***/

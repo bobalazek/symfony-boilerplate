@@ -110,7 +110,7 @@ class ResetPasswordController extends Controller
             }
 
             $isResetPasswordCodeExpired = $user->isResetPasswordCodeExpired();
-            if (!$isResetPasswordCodeExpired) {
+            if ($isResetPasswordCodeExpired === false) {
                 $alert = 'info';
                 $alertMessage = $this->get('translator')->trans(
                     'reset_password.request.already_requested.text'

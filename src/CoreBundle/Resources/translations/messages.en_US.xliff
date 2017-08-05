@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-08-04T15:52:54Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+  <file date="2017-08-05T20:12:28Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -208,6 +208,11 @@
         <jms:reference-file line="3">/../src/CoreBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
         <jms:reference-file line="6">/../src/CoreBundle/Resources/views/Content/my/settings.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="816c52fd2bdd94a63cd0944823a6c0aa9384c103" resname="No">
+        <source>No</source>
+        <target>No</target>
+        <jms:reference-file line="25">/../src/CoreBundle/Resources/views/Content/my/devices.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="8be3c943b1609fffbfc51aad666d0a04adf83c9d" resname="Password">
         <source>Password</source>
         <target>Password</target>
@@ -332,15 +337,20 @@
         <target>Welcome to %app_name%.</target>
         <jms:reference-file line="4">/../src/CoreBundle/Resources/views/Content/index.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="5397e0583f14f6c88de06b1ef28f460a1fb5b0ae" resname="Yes">
+        <source>Yes</source>
+        <target>Yes</target>
+        <jms:reference-file line="24">/../src/CoreBundle/Resources/views/Content/my/devices.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="a3fc750d51d1a0915f51a09687e580e33e22cce7" resname="admin.users.switch_user.back.user_action.text" extradata="Meaning: Available arguments: %user_id%">
         <source>admin.users.switch_user.back.user_action.text</source>
         <target>The user has switched back to own user (from user with ID "%user_id%").</target>
-        <jms:reference-file line="71">/../src/CoreBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
+        <jms:reference-file line="75">/../src/CoreBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d3a9874c0f0efc4eaa18cf87dc7ad46f4e2ebe17" resname="admin.users.switch_user.into.user_action.text" extradata="Meaning: Available arguments: %target_user_id%">
         <source>admin.users.switch_user.into.user_action.text</source>
         <target>The user has switched into the user with the ID "%target_user_id%".</target>
-        <jms:reference-file line="87">/../src/CoreBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
+        <jms:reference-file line="91">/../src/CoreBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="78e933db98bd1da658cdab8d5e210d615e1d54d0" resname="brute_force.attempt.text" extradata="Meaning: Available arguments: %time%, %action%">
         <source>brute_force.attempt.text</source>
@@ -494,7 +504,7 @@
       <trans-unit id="ac98d5144876a5dae49a601fe801937366dfdd63" resname="login.user_action.text">
         <source>login.user_action.text</source>
         <target>The user has successfully logged in.</target>
-        <jms:reference-file line="52">/../src/CoreBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
+        <jms:reference-file line="56">/../src/CoreBundle/EventSubscriber/SecuritySubscriber.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3feec603f97862c50f67294ce925bed18ce7ae39" resname="logout.user_action.text">
         <source>logout.user_action.text</source>
@@ -509,7 +519,7 @@
       <trans-unit id="0203590b1df65ead51dd18240386e7f600885c5f" resname="my.devices.no_devices_yet.text">
         <source>my.devices.no_devices_yet.text</source>
         <target>No devices yet.</target>
-        <jms:reference-file line="28">/../src/CoreBundle/Resources/views/Content/my/devices.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/../src/CoreBundle/Resources/views/Content/my/devices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bef317cb57eb19a3250f849d1c23f1f9d5b86c2f" resname="my.password.success.flash_message.text">
         <source>my.password.success.flash_message.text</source>

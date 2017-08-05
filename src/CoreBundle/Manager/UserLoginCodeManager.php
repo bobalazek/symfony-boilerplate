@@ -79,8 +79,8 @@ class UserLoginCodeManager
             ]);
         if (
             $userLoginCode !== null &&
-            !$userLoginCode->isExpired() &&
-            !$userLoginCode->isDeleted()
+            $userLoginCode->isExpired() === false &&
+            $userLoginCode->isDeleted() === false
         ) {
             return true;
         }
