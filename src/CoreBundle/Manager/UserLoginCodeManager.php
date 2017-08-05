@@ -25,6 +25,9 @@ class UserLoginCodeManager
         $em = $this->container->get('doctrine.orm.entity_manager');
         $token = $this->container->get('security.token_storage')->getToken();
         $session = $this->container->get('session');
+        $loginCodeExpiryTime = $this->container->getParameter(
+            'login_code_expiry_time'
+        );
 
         if (
             $user === null &&
@@ -37,7 +40,7 @@ class UserLoginCodeManager
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $sessionId = $session->getId();
         $expiresAt = (new \Datetime())->add(
-            new \Dateinterval('PT'.$this->container->getParameter('login_code_expiry_time').'S')
+            new \Dateinterval('PT'.$loginCodeExpiryTime.'S')
         );
 
         $userLoginCode = new UserLoginCode();
@@ -68,7 +71,8 @@ class UserLoginCodeManager
     public function exists($code, User $user)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $userLoginCode = $em->getRepository('CoreBundle:UserLoginCode')
+        $userLoginCode = $em
+            ->getRepository('CoreBundle:UserLoginCode')
             ->findOneBy([
                 'code' => $code,
                 'user' => $user,

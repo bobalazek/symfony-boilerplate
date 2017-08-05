@@ -48,6 +48,9 @@ class UserDeviceAdmin extends AbstractAdmin
             ->add('name', null, [
                 'label' => 'name',
             ])
+            ->add('trusted', null, [
+                'label' => 'trusted',
+            ])
             ->add('ip', null, [
                 'label' => 'IP',
             ])
@@ -74,6 +77,7 @@ class UserDeviceAdmin extends AbstractAdmin
             ])
             ->add('uid')
             ->add('name')
+            ->add('trusted')
             ->add('lastActiveAt')
             ->add('createdAt')
             ->add('_action', 'actions', [
@@ -93,6 +97,7 @@ class UserDeviceAdmin extends AbstractAdmin
             ->with('General', ['class' => 'col-md-6'])
                 ->add('uid')
                 ->add('name')
+                ->add('trusted')
                 ->add('ip')
                 ->add('userAgent')
                 ->add('sessionId')

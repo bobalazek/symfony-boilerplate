@@ -18,3 +18,10 @@ services:
             - { name: kernel.event_subscriber }
         arguments:
             - "@app.two_factor_authentication_manager"
+
+    app.two_factor_authentication_listener:
+        class: TfaBundle\EventListener\TwoFactorAuthenticationListener
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller }

@@ -60,10 +60,12 @@ class TwoFactorAuthenticationController extends Controller
 
         if ($request->getMethod() === 'POST') {
             $code = $request->request->get('code');
+            $isTrustedDevice = $request->request->get('is_trusted_device') === 'yes';
 
             $postResponse = $this->handlePost(
                 $method,
                 $code,
+                $isTrustedDevice,
                 $user,
                 $request,
                 $session,
@@ -89,6 +91,7 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * @param string        $method
      * @param string        $code
+     * @param bool          $isTrustedDevice
      * @param User          $user
      * @param Request       $request
      * @param Session       $session
@@ -99,6 +102,7 @@ class TwoFactorAuthenticationController extends Controller
     private function handlePost(
         $method,
         $code,
+        $isTrustedDevice,
         $user,
         Request $request,
         Session $session,
@@ -167,6 +171,22 @@ class TwoFactorAuthenticationController extends Controller
             );
 
             return null;
+        }
+
+        // TODO: fix, not working
+        if ($isTrustedDevice) {
+            $userDeviceId = $request->attributes->get('user_device_id');
+            if ($userDeviceId) {
+                $userDevice = $em->get(
+                    'CoreBundle:UserDevice',
+                    $userDeviceId
+                );
+
+                $userDevice->setTrusted(true);
+
+                $em->persist($userDevice);
+                $em->flush();
+            }
         }
 
         $response = $this->redirectToRoute('home');

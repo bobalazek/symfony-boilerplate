@@ -68,6 +68,16 @@ class BruteForceManager
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $session = $this->container->get('session');
 
+        $bruteForceWatchTime = $this->container->getParameter(
+            'brute_force_watch_time'
+        );
+        $bruteForceMaxAttempts = $this->container->getParameter(
+            'brute_force_max_attempts'
+        );
+        $bruteForceBlockTime = $this->container->getParameter(
+            'brute_force_block_time'
+        );
+
         $ip = $request->getClientIp();
         $sessionId = $session->getId();
         $userAgent = $request->headers->get('User-Agent');
@@ -75,18 +85,19 @@ class BruteForceManager
         $attemptsCount = $em->getRepository('CoreBundle:UserAction')
             ->getCount(
                 $userActionKey,
-                $this->container->getParameter('brute_force_watch_time'),
+                $bruteForceWatchTime,
                 $ip,
                 $sessionId,
                 $userAgent
             );
 
-        if ($attemptsCount > $this->container->getParameter('brute_force_max_attempts')) {
+        if ($attemptsCount > $bruteForceMaxAttempts) {
             $expiresAt = (new \Datetime())->add(
-                new \Dateinterval('PT'.$this->container->getParameter('brute_force_block_time').'S')
+                new \Dateinterval('PT'.$bruteForceBlockTime.'S')
             );
 
-            $userBlockedAction = $em->getRepository('CoreBundle:UserBlockedAction')
+            $userBlockedAction = $em
+                ->getRepository('CoreBundle:UserBlockedAction')
                 ->getCurrentlyActive(
                     $ip,
                     $sessionId,

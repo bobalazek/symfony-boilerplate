@@ -62,6 +62,14 @@ class UserDevice
     protected $data = [];
 
     /**
+     * @var bool
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(name="trusted", type="boolean")
+     */
+    protected $trusted = false;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="last_active_at", type="datetime", nullable=true)
@@ -157,6 +165,28 @@ class UserDevice
     public function setData(array $data)
     {
         $this->data = $data;
+
+        return $this;
+    }
+
+    /*** Trusted ***/
+
+    /**
+     * @return bool
+     */
+    public function isTrusted()
+    {
+        return $this->trusted;
+    }
+
+    /**
+     * @param $trusted
+     *
+     * @return User
+     */
+    public function setTrusted($trusted)
+    {
+        $this->trusted = $trusted;
 
         return $this;
     }

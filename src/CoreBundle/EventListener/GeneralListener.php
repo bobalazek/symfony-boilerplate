@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Jenssegers\Agent\Agent;
 use CoreBundle\Entity\User;
@@ -27,9 +26,8 @@ class GeneralListener
      */
     public function onKernelController(FilterControllerEvent $event)
     {
-        $session = $this->container->get('session');
         $tokenStorage = $this->container->get('security.token_storage');
-        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $request = $event->getRequest();
 
         if (
             !$event->isMasterRequest() ||
@@ -45,31 +43,6 @@ class GeneralListener
             return;
         }
 
-        // Two factor authentication
-        if ($session->get('two_factor_authentication_in_progress')) {
-            $accessMap = $this->container->get('security.access_map');
-            $patterns = $accessMap->getPatterns($request);
-            $roles = $patterns[0];
-
-            // Prevent the 2FA gate on pages, that do not require authentication
-            if ($roles === null) {
-                return;
-            }
-
-            $twoFactorAuthenticationRoute = 'login.tfa';
-            if ($twoFactorAuthenticationRoute === $event->getRequest()->get('_route')) {
-                return;
-            }
-
-            $url = $this->container->get('router')
-                ->generate($twoFactorAuthenticationRoute);
-            $event->setController(function () use ($url) {
-                return new RedirectResponse($url);
-            });
-
-            return;
-        }
-
         $em = $this->container->get('doctrine.orm.entity_manager');
 
         // User - last active
@@ -77,8 +50,8 @@ class GeneralListener
         $em->persist($user);
 
         // User device - last active
-        $deviceUid = $request->query->has('device_uid')
-            ? $request->query->get('device_uid')
+        $deviceUid = $request->query->has('_device_uid')
+            ? $request->query->get('_device_uid')
             : ($request->cookies->has('device_uid')
                 ? $request->cookies->get('device_uid')
                 : ($request->headers->has('X-Device-UID')
@@ -87,7 +60,8 @@ class GeneralListener
                 )
             );
         if ($deviceUid) {
-            $userDevice = $em->getRepository('CoreBundle:UserDevice')
+            $userDevice = $em
+                ->getRepository('CoreBundle:UserDevice')
                 ->findOneBy([
                     'user' => $user,
                     'uid' => $deviceUid,
@@ -100,6 +74,11 @@ class GeneralListener
                     $user
                 );
             }
+
+            $request->attributes->set(
+                'user_device_id',
+                $userDevice->getId()
+            );
 
             $userDevice->setLastActiveAt(new \Datetime());
 
@@ -160,7 +139,11 @@ class GeneralListener
             return;
         }
 
-        $cookie = new Cookie('device_uid', $deviceUid, time() + $cookieLifetime);
+        $cookie = new Cookie(
+            'device_uid',
+            $deviceUid,
+            time() + $cookieLifetime
+        );
         $response->headers->setCookie($cookie);
     }
 
