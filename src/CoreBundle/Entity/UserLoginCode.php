@@ -122,7 +122,7 @@ class UserLoginCode
      */
     public function getType()
     {
-        return $this->code;
+        return $this->type;
     }
 
     /**
