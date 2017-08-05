@@ -4,7 +4,7 @@ imports:
 swiftmailer:
     spool:
         type: file
-        path: '%kernel.cache_dir%/swiftmailer/spool'
+        path: "%kernel.cache_dir%/swiftmailer/spool"
 
 monolog:
     handlers:
@@ -19,16 +19,16 @@ monolog:
             members: [streamed, deduplicated]
         streamed:
             type: stream
-            path: '%kernel.logs_dir%/%kernel.environment%.log'
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
         deduplicated:
             type: deduplication
             handler: swift
         swift:
             type: swift_mailer
-            from_email: 'errors@corcosoft.com'
-            to_email: 'errors@corcosoft.com'
-            subject: '[App] An Error Occurred (%%message%%)'
+            from_email: "errors@corcosoft.com"
+            to_email: "errors@corcosoft.com"
+            subject: "[App] An Error Occurred (%%message%%)"
             level:  debug
             formatter:  monolog.formatter.html
             content_type: text/html

@@ -20,4 +20,4 @@ parameters:
     sms_sender_url: ~
     sms_sender_token: ~
     # Other
-    secret: 'MySuperSecureToken'
+    secret: "MySuperSecureToken"

@@ -16,17 +16,17 @@ parameters:
     sender_address: sfbp@corcosoft.com # from which email will the emails be sent
     sender_name: Symfony Boilerplate Mailer # name of the sender, from which the emails will be sent
     # Versions
-    version: 'v0.1.0-dev'
-    assets_version: 'v2017-03-28-00-00'
+    version: "v0.1.0-dev"
+    assets_version: "v2017-03-28-00-00"
     # Date & time formats
     date_format: "d.m.Y"
     date_time_format: "d.m.Y H:i:s"
     # Upload
-    uploads_directory: '%kernel.root_dir%/../web/assets/uploads'
-    uploads_path: '/assets/uploads'
+    uploads_directory: "%kernel.root_dir%/../web/assets/uploads"
+    uploads_path: "/assets/uploads"
     # Deployment
     deployment_emails: # to whom should the email be sent, after a successful deployment?
-        bobalazek124@gmail.com: 'Borut Balazek'
+        bobalazek124@gmail.com: "Borut Balazek"
     # Brute force
     brute_force_max_attempts: 10
     brute_force_block_time: 600 # in seconds; 10 minutes
@@ -53,7 +53,7 @@ framework:
         enabled: true
         enable_annotations: true
     templating:
-        engines: [ 'twig' ]
+        engines: [ "twig" ]
     default_locale: "%locale%"
     trusted_hosts: ~
     trusted_proxies: ~
@@ -66,7 +66,7 @@ framework:
     php_errors:
         log: true
     translator:
-        fallbacks: [ '%locale%' ]
+        fallbacks: [ "%locale%" ]
         paths:
             - "%kernel.root_dir%/../src"
 
@@ -90,8 +90,8 @@ twig:
 
 # Assetic
 assetic:
-    debug: '%kernel.debug%'
-    use_controller: '%kernel.debug%'
+    debug: "%kernel.debug%"
+    use_controller: "%kernel.debug%"
     filters:
         cssrewrite: ~
 
@@ -178,9 +178,9 @@ knp_paginator:
 nelmio_cors:
     defaults:
         allow_credentials: false
-        allow_origin: ['*']
-        allow_headers: ['*']
-        allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        allow_origin: ["*"]
+        allow_headers: ["*"]
+        allow_methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
         max_age: 3600
         hosts: []
         origin_regex: false
@@ -231,4 +231,4 @@ sonata_block:
 
 sonata_admin:
     title: "Administration"
-    title_logo: 'assets/img/logo/icon.png'
+    title_logo: "assets/img/logo/icon.png"
