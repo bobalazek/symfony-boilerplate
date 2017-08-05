@@ -46,10 +46,7 @@ class GeneralListener
         // User device - last active
         $userDevice = $this->container
             ->get('app.user_device_manager')
-            ->get(
-                $user,
-                $request
-            );
+            ->get($user, $request);
         $userDevice->setLastActiveAt(new \Datetime());
         $em->persist($userDevice);
 

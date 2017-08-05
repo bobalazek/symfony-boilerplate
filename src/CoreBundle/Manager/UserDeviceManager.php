@@ -8,8 +8,6 @@ use CoreBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
- *
- * @TODO: optimize fetching -- reuse the same user device
  */
 class UserDeviceManager
 {
@@ -56,10 +54,11 @@ class UserDeviceManager
             ]);
 
         if ($userDevice === null) {
-            $userDevice = $this->get('app.user_device_manager')->create(
-                $user,
-                $request
-            );
+            $userDevice = $this->get('app.user_device_manager')
+                ->create(
+                    $user,
+                    $request
+                );
         }
 
         $this->currentUserDevice = $userDevice;
