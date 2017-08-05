@@ -173,14 +173,12 @@ class TwoFactorAuthenticationController extends Controller
             return null;
         }
 
-        // TODO: fix, not working
         if ($isTrustedDevice) {
             $userDeviceId = $request->attributes->get('user_device_id');
             if ($userDeviceId) {
-                $userDevice = $em->get(
-                    'CoreBundle:UserDevice',
-                    $userDeviceId
-                );
+                $userDevice = $em
+                    ->getRepository('CoreBundle:UserDevice')
+                    ->find($userDeviceId);
 
                 $userDevice->setTrusted(true);
 

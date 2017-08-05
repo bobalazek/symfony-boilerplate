@@ -2,7 +2,6 @@
 
 namespace CoreBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -85,42 +84,6 @@ class GeneralListener
             $em->persist($userDevice);
         }
 
-        $em->flush();
-    }
-
-    /**
-     * @param GetResponseEvent $event
-     */
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-        $tokenStorage = $this->container->get('security.token_storage');
-        $request = $event->getRequest();
-
-        if (
-            !$event->isMasterRequest() ||
-            !$tokenStorage->getToken()
-        ) {
-            return;
-        }
-
-        $token = $tokenStorage->getToken();
-        $user = $token->getUser();
-
-        if (!($user instanceof User)) {
-            return;
-        }
-
-        if ($request->cookies->has('device_uid')) {
-            return;
-        }
-
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $userDevice = $this->createUserDevice(
-            $request,
-            $this->container->get('session'),
-            $user
-        );
-        $em->persist($userDevice);
         $em->flush();
     }
 

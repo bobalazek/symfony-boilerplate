@@ -106,7 +106,6 @@ services:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
-            - { name: kernel.event_listener, event: kernel.request }
             - { name: kernel.event_listener, event: kernel.response }
 
     # Other
