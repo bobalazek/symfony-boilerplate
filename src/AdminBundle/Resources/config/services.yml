@@ -27,6 +27,20 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
+    admin.user_devices:
+        class: AdminBundle\Admin\UserDeviceAdmin
+        arguments:
+            - ~
+            - CoreBundle\Entity\UserDevice
+            - ~
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: General
+              label: User Devices
+        calls:
+            - [setContainer, ["@service_container"]]
+
     admin.user_recovery_codes:
         class: AdminBundle\Admin\UserRecoveryCodeAdmin
         arguments:
@@ -66,19 +80,5 @@ services:
               manager_type: orm
               group: General
               label: User Blocked Actions
-        calls:
-            - [setContainer, ["@service_container"]]
-
-    admin.user_devices:
-        class: AdminBundle\Admin\UserDeviceAdmin
-        arguments:
-            - ~
-            - CoreBundle\Entity\UserDevice
-            - ~
-        tags:
-            - name: sonata.admin
-              manager_type: orm
-              group: General
-              label: User Devices
         calls:
             - [setContainer, ["@service_container"]]

@@ -233,6 +233,21 @@ sonata_admin:
     title: "Administration"
     title_logo: "assets/img/logo/icon.png"
     dashboard:
+        blocks:
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups:
+                      - users
+                      - user_actions
+                      - user_devices
+            - position: right
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups:
+                      - user_recovery_codes
+                      - user_login_codes
+                      - user_blocked_actions
         groups:
             users:
                 on_top: true
@@ -247,6 +262,13 @@ sonata_admin:
                 icon: '<i class="fa fa-star"></i>'
                 items:
                     - admin.user_actions
+
+            user_devices:
+                on_top: true
+                label: User Devices
+                icon: '<i class="fa fa-desktop"></i>'
+                items:
+                    - admin.user_devices
 
             user_recovery_codes:
                 on_top: true
@@ -268,10 +290,3 @@ sonata_admin:
                 icon: '<i class="fa fa-ban"></i>'
                 items:
                     - admin.user_blocked_actions
-
-            user_devices:
-                on_top: true
-                label: User Devices
-                icon: '<i class="fa fa-desktop"></i>'
-                items:
-                    - admin.user_devices
