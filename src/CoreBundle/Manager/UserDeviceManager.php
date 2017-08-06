@@ -57,7 +57,8 @@ class UserDeviceManager
             $userDevice = $this->get('app.user_device_manager')
                 ->create(
                     $user,
-                    $request
+                    $request,
+                    $uid
                 );
         }
 
@@ -71,15 +72,20 @@ class UserDeviceManager
      *
      * @param User    $user
      * @param Request $request
+     * @param sting   $uid
      *
      * @return UserDevice
      */
     public function create(
         User $user,
-        Request $request
+        Request $request,
+        $uid
     ) {
         $session = $this->container->get('session');
-        $deviceUid = Helpers::getRandomString(64);
+
+        if (empty($uid)) {
+            $uid = Helpers::getRandomString(64);
+        }
 
         $userAgent = $request->headers->get('User-Agent');
         $agent = new Agent();
@@ -87,7 +93,7 @@ class UserDeviceManager
 
         $userDevice = new UserDevice();
         $userDevice
-            ->setUid($deviceUid)
+            ->setUid($uid)
             ->setName($agent->platform().' - '.$agent->browser())
             ->setIp($request->getClientIp())
             ->setUserAgent($userAgent)
