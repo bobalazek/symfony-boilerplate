@@ -232,3 +232,46 @@ sonata_block:
 sonata_admin:
     title: "Administration"
     title_logo: "assets/img/logo/icon.png"
+    dashboard:
+        groups:
+            users:
+                on_top: true
+                label: Users
+                icon: '<i class="fa fa-users"></i>'
+                items:
+                    - admin.users
+
+            user_actions:
+                on_top: true
+                label: User Actions
+                icon: '<i class="fa fa-star"></i>'
+                items:
+                    - admin.user_actions
+
+            user_recovery_codes:
+                on_top: true
+                label: User Recovery Codes
+                icon: '<i class="fa fa-medkit"></i>'
+                items:
+                    - admin.user_recovery_codes
+
+            user_login_codes:
+                on_top: true
+                label: User Login Codes
+                icon: '<i class="fa fa-file-text"></i>'
+                items:
+                    - admin.user_login_codes
+
+            user_blocked_actions:
+                on_top: true
+                label: User Blocked Actions
+                icon: '<i class="fa fa-ban"></i>'
+                items:
+                    - admin.user_blocked_actions
+
+            user_devices:
+                on_top: true
+                label: User Devices
+                icon: '<i class="fa fa-desktop"></i>'
+                items:
+                    - admin.user_devices

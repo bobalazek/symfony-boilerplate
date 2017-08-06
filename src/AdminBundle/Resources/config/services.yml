@@ -1,5 +1,5 @@
 services:
-    admin.user:
+    admin.users:
         class: AdminBundle\Admin\UserAdmin
         arguments:
             - ~
@@ -13,7 +13,7 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_action:
+    admin.user_actions:
         class: AdminBundle\Admin\UserActionAdmin
         arguments:
             - ~
@@ -27,7 +27,7 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_recovery_code:
+    admin.user_recovery_codes:
         class: AdminBundle\Admin\UserRecoveryCodeAdmin
         arguments:
             - ~
@@ -41,7 +41,7 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.login_code:
+    admin.user_login_codes:
         class: AdminBundle\Admin\UserLoginCodeAdmin
         arguments:
             - ~
@@ -55,7 +55,7 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_blocked_action:
+    admin.user_blocked_actions:
         class: AdminBundle\Admin\UserBlockedActionAdmin
         arguments:
             - ~
@@ -69,7 +69,7 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    admin.user_device:
+    admin.user_devices:
         class: AdminBundle\Admin\UserDeviceAdmin
         arguments:
             - ~
