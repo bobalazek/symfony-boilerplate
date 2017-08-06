@@ -204,6 +204,11 @@ jms_translation:
                 - "%kernel.root_dir%/../src/ApiBundle"
             output_dir: "%kernel.root_dir%/../src/ApiBundle/Resources/translations"
             default_output_format: xliff
+        AdminBundle:
+            dirs:
+                - "%kernel.root_dir%/../src/AdminBundle"
+            output_dir: "%kernel.root_dir%/../src/AdminBundle/Resources/translations"
+            default_output_format: xliff
         DevBundle:
             dirs:
                 - "%kernel.root_dir%/../src/DevBundle"
@@ -232,6 +237,10 @@ sonata_block:
 sonata_admin:
     title: "Administration"
     title_logo: "assets/img/logo/icon.png"
+    templates:
+        layout: "AdminBundle:Layout:default.html.twig"
+        user_block: "AdminBundle:Layout:_user_block.html.twig"
+
     dashboard:
         blocks:
             - position: left
@@ -248,6 +257,7 @@ sonata_admin:
                       - user_recovery_codes
                       - user_login_codes
                       - user_blocked_actions
+
         groups:
             users:
                 on_top: true

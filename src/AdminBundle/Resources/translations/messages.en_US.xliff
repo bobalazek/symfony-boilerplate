@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-08-06T11:18:48Z" source-language="en_US" target-language="en_US" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="c3cd636a585b20c40ac2df5ffb403e83cb2eef51" resname="Actions">
+        <source>Actions</source>
+        <target>Actions</target>
+        <jms:reference-file line="196">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ce7472d6a63fe8c01b7203d9cde948768a24ede6" resname="Back to Home">
+        <source>Back to Home</source>
+        <target>Back to Home</target>
+        <jms:reference-file line="3">/../src/AdminBundle/Resources/views/Layout/_user_block.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a6b9d69f57d94a826930e45360e373533bfd130d" resname="Birthday">
+        <source>Birthday</source>
+        <target>Birthday</target>
+        <jms:reference-file line="162">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e5e429bcc9c2e4a41a3c7a4d96203be6cb273b11" resname="Data">
+        <source>Data</source>
+        <target>Data</target>
+        <jms:reference-file line="119">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="125">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="113">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="119">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="126">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="132">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="114">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="120">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="84add5b2952787581cb9a8851eef63d1ec75d22b" resname="Email">
+        <source>Email</source>
+        <target>Email</target>
+        <jms:reference-file line="108">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="37">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="73">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="102">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="37">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="62">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="115">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="37">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="76">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="103">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="37">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="60">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="37">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="59">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="93">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7e568a90221d853052b3466e581eb5f7c030b901" resname="First name">
+        <source>First name</source>
+        <target>First name</target>
+        <jms:reference-file line="111">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="110">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+        <jms:reference-file line="153">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+        <jms:reference-file line="93">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+        <jms:reference-file line="105">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="118">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="106">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="96">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8a754c61c2ced0c5ff79a1827e02c9d643d6d926" resname="Gender">
+        <source>Gender</source>
+        <target>Gender</target>
+        <jms:reference-file line="159">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="89f89c02cf47e091e726a4e07b88af0966806897" resname="ID">
+        <source>ID</source>
+        <target>ID</target>
+        <jms:reference-file line="102">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="96">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="109">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="97">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="87">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ea424d38af72dd1366a08aad1f47eca3e7ec3d24" resname="IP">
+        <source>IP</source>
+        <target>IP</target>
+        <jms:reference-file line="52">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="55">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="53e197c544476c460ef1cf74e54c9371f6b03b79" resname="Is trusted?">
+        <source>Is trusted?</source>
+        <target>Is trusted?</target>
+        <jms:reference-file line="52">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c67dd20ee842986086a0a915ddc2a279490130ed" resname="Key">
+        <source>Key</source>
+        <target>Key</target>
+        <jms:reference-file line="46">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="adec36a821f81a6990b1e65d9e4ac5fb8ee2a205" resname="Last name">
+        <source>Last name</source>
+        <target>Last name</target>
+        <jms:reference-file line="114">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="43">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="113">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+        <jms:reference-file line="156">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+        <jms:reference-file line="96">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+        <jms:reference-file line="108">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="43">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="121">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="43">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="109">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="43">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="43">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="99">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="68f4145fee7dde76afceb910165924ad14cf0d00" resname="Message">
+        <source>Message</source>
+        <target>Message</target>
+        <jms:reference-file line="49">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="709a23220f2c3d64d1e1d6d18c4d5280f8d82fca" resname="Name">
+        <source>Name</source>
+        <target>Name</target>
+        <jms:reference-file line="49">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8be3c943b1609fffbfc51aad666d0a04adf83c9d" resname="Password">
+        <source>Password</source>
+        <target>Password</target>
+        <jms:reference-file line="53">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="366c2415f45eda358aa31b5d67c61f41a43a2bd0" resname="Repeat password">
+        <source>Repeat password</source>
+        <target>Repeat password</target>
+        <jms:reference-file line="56">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="47dcc27d6e87ece8baebe7e3877a261a5467093d" resname="Roles">
+        <source>Roles</source>
+        <target>Roles</target>
+        <jms:reference-file line="116">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+        <jms:reference-file line="181">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="25e4fe87361d885d32a6c83258f3203aa36f6de9" resname="Session ID">
+        <source>Session ID</source>
+        <target>Session ID</target>
+        <jms:reference-file line="58">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="61">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="768e0c1c69573fb588f61f1308a015c11468e05f" resname="Title">
+        <source>Title</source>
+        <target>Title</target>
+        <jms:reference-file line="150">/../src/AdminBundle/Admin/UserAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d946adf52a4783929f122d341b29ac0fe188371c" resname="UID">
+        <source>UID</source>
+        <target>UID</target>
+        <jms:reference-file line="46">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8f9f2317df27b96fec34402a882717f5741a2312" resname="User Agent">
+        <source>User Agent</source>
+        <target>User Agent</target>
+        <jms:reference-file line="55">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="58">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="84c29015de33e5d22422382a372caba5c58f8c01" resname="Username">
+        <source>Username</source>
+        <target>Username</target>
+        <jms:reference-file line="105">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="34">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="70">/../src/AdminBundle/Admin/UserActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="34">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="59">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="99">/../src/AdminBundle/Admin/UserBlockedActionAdmin.php</jms:reference-file>
+        <jms:reference-file line="112">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="34">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="73">/../src/AdminBundle/Admin/UserDeviceAdmin.php</jms:reference-file>
+        <jms:reference-file line="100">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="34">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="57">/../src/AdminBundle/Admin/UserLoginCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="34">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="56">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+        <jms:reference-file line="90">/../src/AdminBundle/Admin/UserRecoveryCodeAdmin.php</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

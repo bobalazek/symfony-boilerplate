@@ -46,10 +46,10 @@ class UserDeviceAdmin extends AbstractAdmin
                 'label' => 'UID',
             ])
             ->add('name', null, [
-                'label' => 'name',
+                'label' => 'Name',
             ])
             ->add('trusted', null, [
-                'label' => 'trusted',
+                'label' => 'Is trusted?',
             ])
             ->add('ip', null, [
                 'label' => 'IP',
