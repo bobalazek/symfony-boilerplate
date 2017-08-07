@@ -65,9 +65,13 @@ class CoreExtension extends Twig_Extension
                 [
                     $this,
                     'routeExists',
-                ],
+                ]
+            ),
+            new Twig_SimpleFunction(
+                'bundle_exists',
                 [
-                    'is_safe' => ['html'],
+                    $this,
+                    'bundleExists',
                 ]
             ),
         ];
@@ -162,6 +166,10 @@ class CoreExtension extends Twig_Extension
     }
 
     /**
+     * Note: should NOT be used very often.
+     *   Especially not on templates, that are
+     *   parsed on every request!
+     *
      * @param string $route
      *
      * @return bool
@@ -173,6 +181,18 @@ class CoreExtension extends Twig_Extension
         return $router->getRouteCollection()->get($route) === null
             ? false
             : true;
+    }
+
+    /**
+     * @param string $bundle
+     *
+     * @return bool
+     */
+    public function bundleExists($bundle)
+    {
+        $bundles = $this->container->getParameter('kernel.bundles');
+
+        return array_key_exists($bundle, $bundles);
     }
 
     /**

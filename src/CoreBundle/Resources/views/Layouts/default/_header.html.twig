@@ -29,7 +29,7 @@
                             {{ 'Home' | trans }}
                         </a>
                     </li>
-                    {% if route_exists('sonata_admin_dashboard') and is_granted('ROLE_ADMIN') %}
+                    {% if bundle_exists('AdminBundle') and is_granted('ROLE_ADMIN') %}
                         <li>
                             <a href="{{ url('sonata_admin_dashboard') }}">
                                 {{ 'Admin' | trans }}
@@ -80,7 +80,7 @@
                                         {{ 'Devices' | trans }}
                                     </a>
                                 </li>
-                                {% if route_exists('my.tfa') %}
+                                {% if bundle_exists('TfaBundle') %}
                                     <li>
                                         <a href="{{ url('my.tfa') }}">
                                             {{ '2FA' | trans }}
