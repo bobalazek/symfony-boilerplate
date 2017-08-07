@@ -132,3 +132,15 @@ services:
         arguments:
             - "mysql:host=%database_host%;dbname=%database_name%"
             - { db_username: "%database_user%", db_password: "%database_password%" }
+
+    session.memcached:
+        class: Memcached
+        calls:
+            - [addServer, ["%memcached_host%", "%memcached_port%"]]
+
+    session.handler.memcached:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
+        public: false
+        arguments:
+            - "@session.memcached"
+            - { prefix: "%memcached_prefix%", expiretime: "%memcached_expire%" }

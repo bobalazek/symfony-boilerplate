@@ -37,6 +37,11 @@ parameters:
     recovery_codes_count: 8 # how many codes should be generated?
     # Login code
     login_code_expiry_time: 600 # in seconds; 10 minutes; for how long is the login code valid?
+    # Memcached
+    memcached_host: 127.0.0.1
+    memcached_port: 11211
+    memcached_prefix: sfbp_
+    memcached_expire: 14400
     # Other
     knp.doctrine_behaviors.blameable_subscriber.user_entity: CoreBundle\Entity\User
     app.security.authentication.listener.form.class: CoreBundle\EventListener\UsernamePasswordFormAuthenticationListener
@@ -58,7 +63,7 @@ framework:
     trusted_hosts: ~
     trusted_proxies: ~
     session:
-        handler_id: session.handler.pdo
+        handler_id: session.handler.pdo # or session.handler.memcached
     fragments:  ~
     http_method_override: true
     assets:
