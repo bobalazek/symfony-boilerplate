@@ -15,7 +15,7 @@ if (
                 '::1',
             ]
         ) ||
-        strpos(// docker
+        strpos( // Docker
             @$_SERVER['REMOTE_ADDR'],
             '172.'
         ) !== false
