@@ -2,7 +2,7 @@
 
 namespace Deployer;
 
-localhost('production_server')
+host('production_server')
     ->hostname('128.128.128.128')
     ->user('root')
     ->port(22)
