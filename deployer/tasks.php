@@ -55,10 +55,10 @@ task('notify:success', function () {
     $commitsSinceLastTag = '';
     try {
         $lastTag = trim(
-            runLocally('git describe --tags --abbrev=0')->getOutput()
+            runLocally('git describe --tags --abbrev=0')
         );
         $commitsSinceLastTag = trim(
-            runLocally('git log '.$lastTag.'..HEAD --oneline')->getOutput()
+            runLocally('git log '.$lastTag.'..HEAD --oneline')
         );
     } catch (\Exception $e) {
     }
@@ -67,7 +67,7 @@ task('notify:success', function () {
     if (has('previous_release')) {
         try {
             $lastReleaseTime = trim(
-                run('find {{previous_release}} -maxdepth 0 -printf "%TY-%Tm-%Td %TH:%TM:%TS\n"')->getOutput()
+                run('find {{previous_release}} -maxdepth 0 -printf "%TY-%Tm-%Td %TH:%TM:%TS\n"')
             );
             $lastReleaseTimeExploded = explode('.', $lastReleaseTime);
             $lastReleaseTime = $lastReleaseTimeExploded[0];
@@ -81,7 +81,7 @@ task('notify:success', function () {
     }
 
     $commitsSinceLastDeployment = trim(
-        runLocally('git log --date=local --since="'.$lastReleaseTime.'" --oneline')->getOutput()
+        runLocally('git log --date=local --since="'.$lastReleaseTime.'" --oneline')
     );
 
     run('{{bin/php}} {{bin/console}} app:deployment:success '.

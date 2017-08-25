@@ -125,7 +125,7 @@ class DeploymentSuccessCommand extends ContainerAwareCommand
                     ]
                 ),
                 'to' => $emails,
-                'body' => 'CoreBundle:Emails:Deployment/success.html.twig',
+                'body' => 'DevBundle:Emails:Deployment/success.html.twig',
                 'template_data' => [
                     'version' => $version,
                     'assets_version' => $assetsVersion,

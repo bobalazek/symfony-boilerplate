@@ -8,7 +8,7 @@ set('ssh_type', 'native');
 set('ssh_multiplexing', true);
 
 set('repository', 'git@github.com:bobalazek/symfony-boilerplate.git');
-set('default_stage', 'prod');
+set('default_stage', 'qa');
 set('BOWER_TOKEN', '17c512d0e630fad6d10bb34c3d4183d6daa5e24c');
 
 set('shared_dirs', ['var/cache',  'var/logs', 'var/sessions', 'web/assets/uploads']);
