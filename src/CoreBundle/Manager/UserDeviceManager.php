@@ -4,7 +4,10 @@ namespace CoreBundle\Manager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
+use Jenssegers\Agent\Agent;
+use CoreBundle\Utils\Helpers;
 use CoreBundle\Entity\User;
+use CoreBundle\Entity\UserDevice;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -54,12 +57,11 @@ class UserDeviceManager
             ]);
 
         if ($userDevice === null) {
-            $userDevice = $this->get('app.user_device_manager')
-                ->create(
-                    $user,
-                    $request,
-                    $uid
-                );
+            $userDevice = $this->create(
+                $user,
+                $request,
+                $uid
+            );
         }
 
         $this->currentUserDevice = $userDevice;
