@@ -61,7 +61,7 @@
         "symfony/phpunit-bridge": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/data-fixtures": "^1.2",
-        "deployer/deployer": "^5.0"
+        "deployer/deployer": "^6.0"
     },
     "scripts": {
         "symfony-scripts": [

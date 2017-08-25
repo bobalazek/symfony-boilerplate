@@ -2,7 +2,6 @@
 
 namespace Deployer;
 
-// Hosts
 localhost('local_server')
     ->stage('dev')
     ->set('branch', 'master')

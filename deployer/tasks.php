@@ -60,8 +60,7 @@ task('notify:success', function () {
         $commitsSinceLastTag = trim(
             runLocally('git log '.$lastTag.'..HEAD --oneline')->getOutput()
         );
-    } catch (\Exception $e) {
-    }
+    } catch (\Exception $e) {}
 
     $lastReleaseTime = '0000-00-00T00:00:00+00:00';
     if (has('previous_release')) {
@@ -76,7 +75,7 @@ task('notify:success', function () {
             $lastReleaseTime->add(new \DateInterval('PT'.$offset.'S'));
             $lastReleaseTime = $lastReleaseTime->format(\DateTime::ISO8601);
         } catch (\Exception $e) {
-            // TODO: make it also work for non-unix systems
+            // TODO: make it also work for non-unix systems?
         }
     }
 
@@ -103,7 +102,6 @@ after('success', 'notify:success');
 after('deploy:failed', 'deploy:unlock');
 
 /********** Helpers **********/
-function escapeMultilineString($string)
-{
+function escapeMultilineString($string) {
     return htmlspecialchars(json_encode(explode("\n", $string)));
 }
