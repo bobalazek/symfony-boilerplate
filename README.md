@@ -97,7 +97,7 @@
     * Installed libapache2mod (`sudo apt-get install libapache2-mod-php`)
   * MySQL 5.7.17
   * PHP 7.0.13
-    * Installed extensions: `sudo apt-get install php-cli php-mysql php-mcrypt php-curl php-zip php-gd`
+    * Installed extensions: `sudo apt-get install php-cli php-mysql php-mcrypt php-curl php-zip php-gd php-mbstring php-dom`
   * phpMyAdmin 4.5.4
   * NodeJS 4.2.6 (note: after installing NodeJS, make an alias for it: `sudo ln -fs /usr/bin/nodejs /usr/local/bin/node`) & NPM
   * Bower (`npm install -g bower`)
