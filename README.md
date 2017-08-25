@@ -102,7 +102,7 @@
   * NodeJS 4.2.6 (note: after installing NodeJS, make an alias for it: `sudo ln -fs /usr/bin/nodejs /usr/local/bin/node`) & NPM
   * Bower (`npm install -g bower`)
   * GIT (`sudo apt-get install git`)
-  * Other stuff: `sudo apt-get install zip unzip wget curl`
+  * Other stuff: `sudo apt-get install acl zip unzip wget curl`
 
 
 ## Translations
