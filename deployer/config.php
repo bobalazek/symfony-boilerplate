@@ -11,7 +11,7 @@ set('repository', 'git@github.com:bobalazek/symfony-boilerplate.git');
 set('default_stage', 'prod');
 set('BOWER_TOKEN', '17c512d0e630fad6d10bb34c3d4183d6daa5e24c');
 
-set('shared_dirs', ['var/logs', 'var/sessions', 'web/assets/uploads']);
+set('shared_dirs', ['var/cache',  'var/logs', 'var/sessions', 'web/assets/uploads']);
 set('writable_dirs', ['var/cache', 'var/logs', 'var/sessions', 'web/assets/uploads']);
 
 set('dump_assets', true);
