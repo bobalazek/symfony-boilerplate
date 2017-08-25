@@ -72,8 +72,6 @@ framework:
         log: true
     translator:
         fallbacks: [ "%locale%" ]
-        paths:
-            - "%kernel.root_dir%/../src"
 
 # Twig Configuration
 twig:
