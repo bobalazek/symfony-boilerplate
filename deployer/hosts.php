@@ -2,13 +2,14 @@
 
 namespace Deployer;
 
-host('production_server')
-    ->hostname('128.128.128.128')
+host('qa_server')
+    ->hostname('ltu1.corcosoft.com')
     ->user('root')
     ->port(22)
     ->forwardAgent(true)
     ->multiplexing(true)
-    ->stage('prod')
+    ->stage('qa')
     ->set('branch', 'master')
-    ->set('env', 'prod')
-    ->set('deploy_path', '/var/www/html/deployment/prod');
+    ->set('deploy_path', '/var/www/projects/symfony-boilerplate/qa')
+    ->set('symfony_env', 'qa')
+;

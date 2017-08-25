@@ -4,11 +4,11 @@ namespace Deployer;
 
 // Make sure that stuff works before you push it to the server!
 task('test', function () {
-    runLocally('{{env_vars}} {{bin/php}} vendor/bin/simple-phpunit');
-    runLocally('{{env_vars}} {{bin/php}} bin/console lint:yaml src');
-    runLocally('{{env_vars}} {{bin/php}} bin/console lint:yaml app');
-    runLocally('{{env_vars}} {{bin/php}} bin/console lint:twig src');
-    runLocally('{{env_vars}} {{bin/php}} bin/console lint:twig app');
+    runLocally('{{bin/php}} vendor/bin/simple-phpunit');
+    runLocally('{{bin/php}} bin/console lint:yaml src');
+    runLocally('{{bin/php}} bin/console lint:yaml app');
+    runLocally('{{bin/php}} bin/console lint:twig src');
+    runLocally('{{bin/php}} bin/console lint:twig app');
 })->desc('Running tests before the deployment');
 before('deploy', 'test');
 
@@ -23,7 +23,7 @@ after('deploy:vendors', 'deploy:vendors_bower');
 
 /*** Database backup ***/
 task('database:backup', function () {
-    run('{{env_vars}} {{bin/php}} {{bin/console}} app:database:backup');
+    run('{{bin/php}} {{bin/console}} app:database:backup');
 })->desc('Backing up the current database');
 before('database:migrate', 'database:backup');
 
@@ -32,7 +32,7 @@ before('database:migrate', 'database:backup');
 // From there on on, we shall better use only doctrine migrations
 //   (see the "database:migrate" task).
 task('database:schema_update', function () {
-    run('{{env_vars}} {{bin/php}} {{bin/console}} doctrine:schema:update --force');
+    run('{{bin/php}} {{bin/console}} doctrine:schema:update --force');
 })->desc('Updating database schema');
 after('database:migrate', 'database:schema_update');
 
@@ -84,7 +84,7 @@ task('notify:success', function () {
         runLocally('git log --date=local --since="'.$lastReleaseTime.'" --oneline')->getOutput()
     );
 
-    run('{{env_vars}} {{bin/php}} {{bin/console}} app:deployment:success '.
+    run('{{bin/php}} {{bin/console}} app:deployment:success '.
         '--stage="'.$stage.'" '.
         '--server-name="'.$serverName.'" '.
         '--server-host="'.$serverHost.'" '.
