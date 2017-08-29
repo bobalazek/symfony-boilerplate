@@ -15,7 +15,9 @@ WORKDIR $PROJECT_DIR
 
 ## OS
 RUN apt-get update -yq && apt-get upgrade -yq
-run apt-get install -yq git \
+run apt-get install -yq nano \
+    ssh \
+    git \
     curl \
     wget \
     acl \
