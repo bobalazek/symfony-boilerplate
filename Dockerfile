@@ -15,16 +15,26 @@ WORKDIR $PROJECT_DIR
 
 ## OS
 RUN apt-get update -yq && apt-get upgrade -yq
-run apt-get install -yq git \
+run apt-get install -yq nano \
+    ssh \
+    git \
     curl \
     wget \
+    acl \
     zip \
     unzip \
+    imagemagick \
     zlib1g-dev \
     apt-utils
 
 ## PHP
 RUN docker-php-ext-install mysqli \
+    gd \
+    imagick \
+    dom \
+    mbstring \
+    mcrypt \
+    cli \
     zip \
     pdo \
     pdo_mysql \
