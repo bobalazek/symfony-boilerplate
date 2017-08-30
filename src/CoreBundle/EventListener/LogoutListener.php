@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
-use Symfony\Bundle\FrameworkBundle\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 use CoreBundle\Manager\UserActionManager;
 
 /**
@@ -18,12 +18,12 @@ class LogoutListener implements LogoutHandlerInterface
     protected $translator;
 
     /**
-     * @param UserActionManager       $userActionManager
-     * @param DataCollectorTranslator $translator
+     * @param UserActionManager   $userActionManager
+     * @param TranslatorInterface $translator
      */
     public function __construct(
         UserActionManager $userActionManager,
-        Translator $translator
+        TranslatorInterface $translator
     ) {
         $this->userActionManager = $userActionManager;
         $this->translator = $translator;
