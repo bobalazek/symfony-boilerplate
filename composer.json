@@ -28,6 +28,7 @@
         "doctrine/doctrine-cache-bundle": "^1.3",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/inflector": "~1.1.0",
+        "doctrine/instantiator": "~1.0.5",
         "doctrine/orm": "^2.5",
         "fluoresce/validate-embedded": "^1.0",
         "gedmo/doctrine-extensions": "^2.4",
