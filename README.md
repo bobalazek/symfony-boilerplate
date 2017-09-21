@@ -89,6 +89,9 @@
 
 * Should be the typical LAMP stack:
   * Ubuntu 16.04.2
+    * (optional) Create SSH key on the server (`ssh-keygen -t rsa -C "admin@app.com"`)
+    * Get the key (`cat ~/.ssh/id_rsa.pub`) and add it to Github (https://github.com/settings/keys)
+    * Ping github to make sure it works (`ssh -T git@github.com`)
   * Apache 2.4.18
     * After the setup, change the `DocumentRoot` (in `/etc/apache2/sites-available/000-default.conf` & `/etc/apache2/sites-available/default-ssl.conf`) to `/var/www/html/deployment/production/current/web`
     * Set the `AllowOverride` to `All` in the `/etc/apache2/apache2.conf` file
