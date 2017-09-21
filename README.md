@@ -87,27 +87,44 @@
 
 ## Server
 
-* Should be the typical LAMP stack:
-  * Ubuntu 16.04.2
-    * (optional) Create SSH key on the server (`ssh-keygen -t rsa -C "admin@app.com"`)
-    * Get the key (`cat ~/.ssh/id_rsa.pub`) and add it to Github (https://github.com/settings/keys)
-    * Ping github to make sure it works (`ssh -T git@github.com`)
-  * Apache 2.4.18
-    * After the setup, change the `DocumentRoot` (in `/etc/apache2/sites-available/000-default.conf` & `/etc/apache2/sites-available/default-ssl.conf`) to `/var/www/html/deployment/production/current/web`
-    * Set the `AllowOverride` to `All` in the `/etc/apache2/apache2.conf` file
-    * Enabled SSL (`sudo a2enmod ssl`)
-    * Enabled Rewrite (`sudo a2enmod rewrite`)
-    * Installed libapache2mod (`sudo apt-get install libapache2-mod-php`)
-  * MySQL 5.7.17
-  * PHP 7.0.13
-    * Installed extensions: `sudo apt-get install php-cli php-mysql php-mcrypt php-curl php-zip php-gd php-mbstring php-dom php-imagick`
-  * phpMyAdmin 4.5.4
-  * NodeJS 4.2.6 (note: after installing NodeJS, make an alias for it: `sudo ln -fs /usr/bin/nodejs /usr/local/bin/node`) & NPM
-  * Bower (`npm install -g bower`)
-  * GIT (`sudo apt-get install git`)
-  * Composer - global install (https://getcomposer.org/download/)
-  * Other stuff: `sudo apt-get install imagemagick acl zip unzip wget curl`
+* Ubuntu 16.04
+* Apache 2.4
+* MySQL 5.7
+* PHP 7.0
+* GIT
+* Node
+* Bower
+* Composer
 
+
+### Prepare server
+
+* General
+  * Install: `sudo apt-get install git acl zip unzip wget curl imagemagick`
+* SSH
+  * Generate key: `ssh-keygen -t rsa -C "admin@app.com"`
+  * Get the key: `cat ~/.ssh/id_rsa.pub` and add it to [GitHub - Settings - Keys](https://github.com/settings/keys)
+  * Make sure the key works: `ssh -T git@github.com`
+* Apache
+  * Install: `sudo apt-get install apache2`
+  * Set the `AllowOverride` to `All` in the `/etc/apache2/apache2.conf` file
+  * Enabled SSL: `sudo a2enmod ssl`
+  * Enabled Rewrite: `sudo a2enmod rewrite`
+* MySQL
+  * Install: `sudo apt-get install mysql-server`
+  * Secure the installation: `mysql_secure_installation`
+* PHP
+  * Install: `sudo apt-get install php php-cli php-mysql php-mcrypt php-curl php-zip php-gd php-mbstring php-dom php-imagick`
+  * Install libapache2mod: `sudo apt-get install libapache2-mod-php`
+  * Dowload & install composer (https://getcomposer.org/download/):
+    * `php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"`
+    * `php composer-setup.php`
+    * `php -r "unlink('composer-setup.php');"`
+  * Move composer for global usage: `mv composer.phar /usr/local/bin/composer`
+* Node
+  * Install: `sudo apt-get install nodejs npm`
+  * Symlink fix (for bower): `sudo ln -fs /usr/bin/nodejs /usr/local/bin/node`
+  * Install bower: `npm install -g bower`
 
 ## Translations
 
