@@ -105,6 +105,7 @@
   * NodeJS 4.2.6 (note: after installing NodeJS, make an alias for it: `sudo ln -fs /usr/bin/nodejs /usr/local/bin/node`) & NPM
   * Bower (`npm install -g bower`)
   * GIT (`sudo apt-get install git`)
+  * Composer - global install (https://getcomposer.org/download/)
   * Other stuff: `sudo apt-get install imagemagick acl zip unzip wget curl`
 
 
