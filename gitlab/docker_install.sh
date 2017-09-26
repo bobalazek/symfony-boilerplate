@@ -23,11 +23,9 @@ apt-get install -yqq nano \
 ## PHP
 docker-php-ext-install mysqli \
     gd \
-    imagick \
     dom \
     mbstring \
     mcrypt \
-    cli \
     zip \
     pdo \
     pdo_mysql \
