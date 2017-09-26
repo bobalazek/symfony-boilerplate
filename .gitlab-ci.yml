@@ -1,12 +1,12 @@
+image: tmaier/docker-compose:latest
+
+services:
+    - docker:dind
+
 before_script:
-  - bash gitlab/docker_install.sh > /dev/null
+    - docker-compose build
 
-test:7.0:
-  image: php:7.0-apache
-  script:
-    - php vendor/bin/simple-phpunit
-
-test:7.1:
-  image: php:7.1-apache
-  script:
-    - php vendor/bin/simple-phpunit
+test:docker:
+    script:
+        - docker-compose build
+        - php vendor/bin/simple-phpunit
