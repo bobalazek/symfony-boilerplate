@@ -13,7 +13,8 @@ WORKDIR $PROJECT_DIR
 
 ## OS
 RUN apt-get update -yq && apt-get upgrade -yq
-run apt-get install -yq nano \
+run apt-get install -yq apt-utils \
+    nano \
     ssh \
     git \
     curl \
@@ -23,7 +24,6 @@ run apt-get install -yq nano \
     unzip \
     imagemagick \
     zlib1g-dev \
-    apt-utils
 
 ## PHP
 RUN docker-php-ext-install mysqli \
