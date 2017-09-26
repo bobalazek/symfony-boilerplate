@@ -8,7 +8,7 @@ set -xe
 
 ## OS
 apt-get update -yqq
-apt-get install -yqq apt-get install -yq nano \
+apt-get install -yqq nano \
     ssh \
     git \
     curl \
