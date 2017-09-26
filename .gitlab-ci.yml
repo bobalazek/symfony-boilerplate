@@ -8,5 +8,5 @@ before_script:
 
 test:docker:
     script:
-        - docker-compose build
+        - sudo docker-compose build
         - php vendor/bin/simple-phpunit
