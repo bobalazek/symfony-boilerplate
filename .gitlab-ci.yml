@@ -1,3 +1,4 @@
+### General
 image: docker:latest
 
 services:
@@ -8,15 +9,57 @@ before_script:
     - docker version
     - docker-compose version
 
+# Stages
 stages:
     - build
     - test
+    - deploy
 
+### Build
 build:
     stage: build
     script:
+        - echo "Building the app ..."
         - docker-compose build
+
+### Test
 test:
     stage: test
     script:
+        - echo "Testing the app ..."
         - php vendor/bin/simple-phpunit
+
+### Deploy
+deploy_qa:
+    stage: deploy
+    environment:
+        name: qa
+        url: http://qa.example.com
+    only:
+        - develop
+    script:
+        - echo "Deploying the app to *qa* ..."
+        - dep deploy qa -vvv
+
+deploy_stag:
+    stage: deploy
+    environment:
+        name: stag
+        url: http://stag.example.com
+    only:
+        - master
+    script:
+        - echo "Deploying the app to *stag* ..."
+        - dep deploy stag -vvv
+
+deploy_prod:
+    stage: deploy
+    environment:
+        name: prod
+        url: http://example.com
+    only:
+        - master
+    script:
+        - echo "Deploying the app to *prod* ..."
+        - dep deploy prod -vvv
+    when: manual
