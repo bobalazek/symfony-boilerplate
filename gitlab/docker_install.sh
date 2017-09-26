@@ -1,18 +1,47 @@
 #!/bin/bash
 
-# We need to install dependencies only for Docker
 [[ ! -e /.dockerenv ]] && exit 0
 
 set -xe
 
-# Install git (the php image doesn't have it) which is required by composer
+### Dependencies
+
+## OS
 apt-get update -yqq
-apt-get install git -yqq
+apt-get install -yqq apt-get install -yq nano \
+    ssh \
+    git \
+    curl \
+    wget \
+    acl \
+    zip \
+    unzip \
+    imagemagick \
+    zlib1g-dev \
+    apt-utils
 
-# Install phpunit, the tool that we will use for testing
-curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
-chmod +x /usr/local/bin/phpunit
+## PHP
+docker-php-ext-install mysqli \
+    gd \
+    imagick \
+    dom \
+    mbstring \
+    mcrypt \
+    cli \
+    zip \
+    pdo \
+    pdo_mysql \
+    gettext
 
-# Install mysql driver
-# Here you can install any other extension that you need
-docker-php-ext-install pdo_mysql
+# Install composer
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+## Node
+apt-get install -yqq nodejs npm
+
+ln -fs /usr/bin/nodejs /usr/local/bin/node
+
+# Install node dependencies
+npm install -g bower gulp

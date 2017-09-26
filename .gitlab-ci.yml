@@ -2,11 +2,11 @@ before_script:
   - bash gitlab/docker_install.sh > /dev/null
 
 test:7.0:
-  image: php:7.0
+  image: php:7.0-apache
   script:
     - php vendor/bin/simple-phpunit
 
 test:7.1:
-  image: php:7.1
+  image: php:7.1-apache
   script:
     - php vendor/bin/simple-phpunit
