@@ -113,6 +113,8 @@
 * MySQL
   * Install: `sudo apt-get install mysql-server`
   * Secure the installation: `mysql_secure_installation`
+* PHPMyAdmin
+  * Install: `sudo apt-get install phpmyadmin`
 * PHP
   * Install: `sudo apt-get install php php-cli php-mysql php-mcrypt php-curl php-zip php-gd php-mbstring php-dom php-imagick`
   * Install libapache2mod: `sudo apt-get install libapache2-mod-php`
