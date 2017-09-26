@@ -8,7 +8,15 @@ before_script:
     - docker version
     - docker-compose version
 
-test:docker:
+stages:
+    - build
+    - test
+
+build:
+    stage: build
     script:
         - docker-compose build
+test:
+    stage: test
+    script:
         - php vendor/bin/simple-phpunit
