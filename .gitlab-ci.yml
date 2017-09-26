@@ -34,7 +34,7 @@ deploy_qa:
     stage: deploy
     environment:
         name: qa
-        url: http://qa.example.com
+        url: http://symfony-boilerplate.lt1.corcosoft.com
     only:
         - develop
     script:
