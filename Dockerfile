@@ -1,6 +1,4 @@
-# bobalazek / Symfony Boilerplate Docker file
-
-# https://docs.docker.com/samples/php/
+########## bobalazek / Symfony Boilerplate Docker file ##########
 FROM php:7.0-apache
 
 ### Variables
