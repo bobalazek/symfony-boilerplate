@@ -13,7 +13,7 @@ WORKDIR $PROJECT_DIR
 
 ## OS
 RUN apt-get update -yq && apt-get upgrade -yq
-run apt-get install -yq apt-utils \
+RUN apt-get install -yq apt-utils \
     nano \
     ssh \
     git \
