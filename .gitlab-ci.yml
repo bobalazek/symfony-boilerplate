@@ -1,6 +1,9 @@
 ### General
 image: docker:latest
 
+variables:
+    DOCKER_DRIVER: overlay2
+
 services:
     - docker:dind
 
@@ -12,6 +15,7 @@ stages:
 # Scripts
 before_script:
     - apk add --update python py-pip python-dev && pip install docker-compose
+    - docker -D info
     - docker version
     - docker-compose version
 
