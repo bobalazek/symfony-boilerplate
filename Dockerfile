@@ -23,7 +23,8 @@ RUN apt-get install -yq apt-utils \
     zip \
     unzip \
     imagemagick \
-    zlib1g-dev
+    zlib1g-dev \
+    libxml2-dev
 
 ## PHP
 RUN docker-php-ext-install mysqli \
