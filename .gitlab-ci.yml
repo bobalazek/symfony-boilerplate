@@ -4,6 +4,7 @@ image: docker:latest
 variables:
     DOCKER_DRIVER: overlay2
     CI_REGISTRY_IMAGE_FULL: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    PROJECT_DIR: /var/www/html
 
 services:
     - docker:dind
@@ -38,7 +39,7 @@ test:
     script:
         - echo "Testing the app ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/simple-phpunit
+        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/simple-phpunit
 
 ### Deploy
 deploy_qa:
@@ -51,7 +52,7 @@ deploy_qa:
     script:
         - echo "Deploying the app to *qa* ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy qa -vvv
+        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/dep deploy qa -vvv
 
 deploy_stag:
     stage: deploy
@@ -63,7 +64,7 @@ deploy_stag:
     script:
         - echo "Deploying the app to *stag* ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy stag -vvv
+        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/dep deploy stag -vvv
 
 deploy_prod:
     stage: deploy
@@ -75,5 +76,5 @@ deploy_prod:
     script:
         - echo "Deploying the app to *prod* ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy prod -vvv
+        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/dep deploy prod -vvv
     when: manual
