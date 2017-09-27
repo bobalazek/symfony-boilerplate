@@ -3,6 +3,7 @@ image: docker:latest
 
 variables:
     DOCKER_DRIVER: overlay2
+    CI_REGISTRY_IMAGE_FULL: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
 
 services:
     - docker:dind
@@ -14,24 +15,30 @@ stages:
 
 # Scripts
 before_script:
+    - echo "Install docker compose ..."
     - apk add --update python py-pip python-dev && pip install docker-compose
+    - echo "Docker info & version:"
     - docker -D info
     - docker version
+    - echo "Docker compose info:"
     - docker-compose version
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 ### Build
 build:
     stage: build
     script:
         - echo "Building the app ..."
-        - docker-compose build
+        - docker build --pull -t $CI_REGISTRY_IMAGE_FULL .
+        - docker push $CI_REGISTRY_IMAGE_FULL
 
 ### Test
 test:
     stage: test
     script:
         - echo "Testing the app ..."
-        - php vendor/bin/simple-phpunit
+        - docker pull $CI_REGISTRY_IMAGE_FULL
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/simple-phpunit
 
 ### Deploy
 deploy_qa:
@@ -43,7 +50,8 @@ deploy_qa:
         - develop
     script:
         - echo "Deploying the app to *qa* ..."
-        - dep deploy qa -vvv
+        - docker pull $CI_REGISTRY_IMAGE_FULL
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy qa -vvv
 
 deploy_stag:
     stage: deploy
@@ -54,7 +62,8 @@ deploy_stag:
         - master
     script:
         - echo "Deploying the app to *stag* ..."
-        - dep deploy stag -vvv
+        - docker pull $CI_REGISTRY_IMAGE_FULL
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy stag -vvv
 
 deploy_prod:
     stage: deploy
@@ -65,5 +74,6 @@ deploy_prod:
         - master
     script:
         - echo "Deploying the app to *prod* ..."
-        - dep deploy prod -vvv
+        - docker pull $CI_REGISTRY_IMAGE_FULL
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy prod -vvv
     when: manual
