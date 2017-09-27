@@ -35,7 +35,7 @@ RUN docker-php-ext-install mysqli \
     gettext
 
 # iconv, mcrypt & gd extensions
-RUN apt-get update && apt-get install -y \
+RUN apt-get update -yq && apt-get install -yq \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
