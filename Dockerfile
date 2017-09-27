@@ -28,11 +28,9 @@ RUN apt-get install -yq apt-utils \
 ## PHP
 RUN docker-php-ext-install mysqli \
     gd \
-    imagick \
     dom \
     mbstring \
     mcrypt \
-    cli \
     zip \
     pdo \
     pdo_mysql \

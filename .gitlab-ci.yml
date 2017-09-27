@@ -4,16 +4,19 @@ image: docker:latest
 services:
     - docker:dind
 
-before_script:
-    - apk add --update python py-pip python-dev && pip install docker-compose
-    - docker version
-    - docker-compose version
+variables:
+    DOCKER_DRIVER: overlay2
 
-# Stages
 stages:
     - build
     - test
     - deploy
+
+# Scripts
+before_script:
+    - apk add --update python py-pip python-dev && pip install docker-compose
+    - docker version
+    - docker-compose version
 
 ### Build
 build:
