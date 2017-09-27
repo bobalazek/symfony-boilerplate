@@ -4,9 +4,6 @@ image: docker:latest
 services:
     - docker:dind
 
-variables:
-    DOCKER_DRIVER: overla2
-
 stages:
     - build
     - test
