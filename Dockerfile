@@ -48,13 +48,13 @@ RUN apt-get update -yq && apt-get install -yq \
 # Install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
-    php -r "unlink('composer-setup.php');"
+    php -r "unlink('composer-setup.php');" && \
+    mv composer.phar /usr/local/bin/composer
 
 ## Node
-RUN apt-get install -yq nodejs \
-    npm
+RUN apt-get install -yq nodejs npm
 
-RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10 # Bower fix
 
 # Install node dependencies
 RUN npm install -g bower gulp
