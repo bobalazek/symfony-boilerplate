@@ -63,7 +63,7 @@
 **IMPORTANT:** It's SSH Key protected, so your public key will need to be added to the server, if you want to do the deployment or access the server.
 
 * We use [Deployer](http://deployer.org/)
-* Run `vendor/bin/dep deploy production`
+* Run `vendor/bin/dep deploy prod`
 * **(first time only)**
   * SSH to the server: `ssh root@123.123.123.123`
   * Set parameters for the application
