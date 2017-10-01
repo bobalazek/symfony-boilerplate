@@ -4,7 +4,6 @@ image: docker:latest
 variables:
     DOCKER_DRIVER: overlay2
     CI_REGISTRY_IMAGE_FULL: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    PROJECT_DIR: /var/www/html
 
 services:
     - docker:dind
@@ -31,7 +30,9 @@ build:
     stage: build
     script:
         - echo "Building the app ..."
-        - docker build --pull -t $CI_REGISTRY_IMAGE_FULL .
+        - docker build --pull
+          -t $CI_REGISTRY_IMAGE_FULL
+          .
         - docker push $CI_REGISTRY_IMAGE_FULL
 
 ### Test
@@ -40,7 +41,7 @@ test:
     script:
         - echo "Testing the app ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/simple-phpunit
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/simple-phpunit
 
 ### Deploy
 deploy:qa:
@@ -53,7 +54,7 @@ deploy:qa:
     script:
         - echo "Deploying the app to *qa* ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/dep deploy qa -vvv
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy qa -vvv
           --revision="$CI_COMMIT_REF_NAME"
           -o repository="$CI_REPOSITORY_URL"
 
@@ -67,7 +68,7 @@ deploy:stag:
     script:
         - echo "Deploying the app to *stag* ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/dep deploy stag -vvv
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy stag -vvv
           --revision="$CI_COMMIT_REF_NAME"
           -o repository="$CI_REPOSITORY_URL"
 
@@ -81,7 +82,7 @@ deploy:prod:
     script:
         - echo "Deploying the app to *prod* ..."
         - docker pull $CI_REGISTRY_IMAGE_FULL
-        - docker run $CI_REGISTRY_IMAGE_FULL php $PROJECT_DIR/vendor/bin/dep deploy prod -vvv
+        - docker run $CI_REGISTRY_IMAGE_FULL php vendor/bin/dep deploy prod -vvv
           --revision="$CI_COMMIT_REF_NAME"
           -o repository="$CI_REPOSITORY_URL"
     allow_failure: false
