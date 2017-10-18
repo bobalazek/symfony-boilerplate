@@ -34,6 +34,8 @@ class SettingsType extends AbstractType
             ])
             ->add('locale', LocaleType::class, [
                 'label' => 'Locale',
+                'choices' => array_flip($options['locales']),
+                'choice_loader' => null,
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
@@ -52,6 +54,7 @@ class SettingsType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired(['locales']);
         $resolver->setDefaults([
             'data_class' => 'CoreBundle\Entity\User',
             'validation_groups' => ['my.settings'],

@@ -26,7 +26,10 @@ class SettingsController extends Controller
 
         $form = $this->createForm(
             SettingsType::class,
-            $user
+            $user,
+            [
+                'locales' => $this->getParameter('locales')
+            ]
         );
 
         $userOld = clone $user;

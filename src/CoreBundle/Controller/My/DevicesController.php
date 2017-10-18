@@ -33,15 +33,20 @@ class DevicesController extends Controller
             $request->query->getInt('page', 1),
             10,
             [
-                'defaultSortFieldName' => 'ud.createdAt',
+                'defaultSortFieldName' => 'ud.lastActiveAt',
                 'defaultSortDirection' => 'desc',
             ]
         );
+
+        $currentUserDevice = $this->container
+            ->get('app.user_device_manager')
+            ->get($this->getUser(), $request);
 
         return $this->render(
             'CoreBundle:Content:my/devices.html.twig',
             [
                 'pagination' => $pagination,
+                'current_user_device' => $currentUserDevice,
             ]
         );
     }

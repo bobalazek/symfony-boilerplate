@@ -95,7 +95,7 @@
                         {% endif %}
                         <li>
                             <b>{{ 'Locale:' | trans }}</b>
-                            {{ app.user.getLocale() }}
+                            {{ locales[app.user.getLocale()] | default(app.user.getLocale()) }}
                         </li>
                     </ul>
                 </div> <!-- /.col-md-4 -->

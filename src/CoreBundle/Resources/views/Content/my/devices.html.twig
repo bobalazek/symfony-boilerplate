@@ -8,23 +8,23 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>{{ knp_pagination_sortable(pagination, 'Key', 'ud.name') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Name', 'ud.name') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'User Agent', 'ud.userAgent') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Is trusted?', 'ud.trusted') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Last Active', 'ud.lastActiveAt') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Time', 'ud.createdAt') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Created', 'ud.createdAt') }}</th>
                 </tr>
             </thead>
             <tbody>
-                {% for userDevice in pagination %}
-                    <tr>
-                        <td>{{ userDevice.getName() }}</td>
-                        <td>{{ userDevice.getUserAgent() }}</td>
-                        <td>{{ userDevice.isTrusted()
+                {% for user_device in pagination %}
+                    <tr class="{{ user_device == current_user_device ? 'info' : '' }}">
+                        <td>{{ user_device.getName() }}</td>
+                        <td>{{ user_device.getUserAgent() }}</td>
+                        <td>{{ user_device.isTrusted()
                             ? 'Yes' | trans
                             : 'No' | trans }}</td>
-                        <td>{{ userDevice.getLastActiveAt() | date(globals.date_time_format) }}</td>
-                        <td>{{ userDevice.getCreatedAt() | date(globals.date_time_format) }}</td>
+                        <td>{{ user_device.getLastActiveAt() | date(globals.date_time_format) }}</td>
+                        <td>{{ user_device.getCreatedAt() | date(globals.date_time_format) }}</td>
                     </tr>
                 {% else %}
                     <tr>

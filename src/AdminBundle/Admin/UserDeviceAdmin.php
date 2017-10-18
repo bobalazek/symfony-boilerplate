@@ -77,7 +77,9 @@ class UserDeviceAdmin extends AbstractAdmin
             ])
             ->add('uid')
             ->add('name')
-            ->add('trusted')
+            ->add('trusted', 'boolean', [
+                'editable' => true,
+            ])
             ->add('lastActiveAt')
             ->add('createdAt')
             ->add('_action', 'actions', [

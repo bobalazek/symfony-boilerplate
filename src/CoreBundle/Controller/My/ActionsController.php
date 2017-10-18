@@ -31,7 +31,7 @@ class ActionsController extends Controller
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            10,
+            20,
             [
                 'defaultSortFieldName' => 'ua.createdAt',
                 'defaultSortDirection' => 'desc',

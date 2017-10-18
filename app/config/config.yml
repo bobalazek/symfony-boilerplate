@@ -7,8 +7,8 @@ parameters:
     # General
     locale: en_US
     locales:
-        - en_US
-        - de_DE
+        en_US: 'English (American)'
+        de_DE: 'Deutsch'
     app_name: SymfonyBoilerplate
     description: My personal symfony boilerplate.
     author: Borut Balazek

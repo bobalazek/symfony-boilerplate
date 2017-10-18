@@ -60,7 +60,10 @@ class UserAdmin extends AbstractAdmin
                     'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
                     'preferred_country_choices' => ['DE', 'AT', 'CH'],
                 ])
-                ->add('locale', 'locale')
+                ->add('locale', 'locale', [
+                    'choices' => array_flip($this->container->getParameter('locales')),
+                    'choice_loader' => null,
+                ])
             ->end()
             ->with('Roles', ['class' => 'col-md-4'])
                 ->add('roles', 'choice', [
@@ -116,10 +119,18 @@ class UserAdmin extends AbstractAdmin
                 'label' => 'Roles',
                 'html' => "{{ value | join(', ') }}",
             ])
-            ->add('enabled')
-            ->add('verified')
-            ->add('warned')
-            ->add('locked')
+            ->add('enabled', 'boolean', [
+                'editable' => true,
+            ])
+            ->add('verified', 'boolean', [
+                'editable' => true,
+            ])
+            ->add('warned', 'boolean', [
+                'editable' => true,
+            ])
+            ->add('locked', 'boolean', [
+                'editable' => true,
+            ])
             ->add('lastActiveAt')
             ->add('createdAt')
             ->add('deletedAt')

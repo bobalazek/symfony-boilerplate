@@ -16,13 +16,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for userAction in pagination %}
+                {% for user_action in pagination %}
                     <tr>
-                        <td>{{ userAction.getKey() }}</td>
-                        <td>{{ userAction.getMessage() }}</td>
-                        <td>{{ userAction.getIp() }}</td>
-                        <td>{{ userAction.getUserAgent() }}</td>
-                        <td>{{ userAction.getCreatedAt() | date(globals.date_time_format) }}</td>
+                        <td>{{ user_action.getKey() }}</td>
+                        <td>{{ user_action.getMessage() }}</td>
+                        <td>{{ user_action.getIp() }}</td>
+                        <td>{{ user_action.getUserAgent() }}</td>
+                        <td>{{ user_action.getCreatedAt() | date(globals.date_time_format) }}</td>
                     </tr>
                 {% else %}
                     <tr>
