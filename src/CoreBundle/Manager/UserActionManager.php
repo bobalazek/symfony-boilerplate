@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Manager;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use CoreBundle\Entity\User;
 use CoreBundle\Entity\UserAction;
 
@@ -11,7 +11,16 @@ use CoreBundle\Entity\UserAction;
  */
 class UserActionManager
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param string $key
@@ -19,7 +28,7 @@ class UserActionManager
      * @param array  $data
      * @param User   $user
      * @param bool   $handleBlockedActions should it check if the action was executed too much times? Create a block if so
-     * @param string $action               What is the action key?
+     * @param string $action               what is the action key?
      *
      * @return bool
      */

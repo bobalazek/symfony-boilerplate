@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Service;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Pelago\Emogrifier;
 
 /**
@@ -10,7 +10,16 @@ use Pelago\Emogrifier;
  */
 class EmogrifierService
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param string $twigTemplatePathOrContent

@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Manager;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use CoreBundle\Exception\BruteForceAttemptException;
 use CoreBundle\Entity\User;
@@ -13,7 +13,16 @@ use CoreBundle\Entity\UserBlockedAction;
  */
 class BruteForceManager
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @return bool

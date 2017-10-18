@@ -1,0 +1,37 @@
+services:
+    # General
+    app.emogrifier: '@CoreBundle\Service\EmogrifierService'
+    app.mailer: '@CoreBundle\Service\MailerService'
+    app.sms_sender: '@CoreBundle\Service\SmsSenderService'
+    app.apifier: '@CoreBundle\Service\ApifierService'
+    app.google_authenticator: '@Google\Authenticator\GoogleAuthenticator'
+
+    # Managers
+    app.user_manager: '@CoreBundle\Manager\UserManager'
+    app.user_action_manager: '@CoreBundle\Manager\UserActionManager'
+    app.user_device_manager: '@CoreBundle\Manager\UserDeviceManager'
+    app.user_login_code_manager: '@CoreBundle\Manager\UserLoginCodeManager'
+    app.user_recovery_code_manager: '@CoreBundle\Manager\UserRecoveryCodeManager'
+    app.brute_force_manager: '@CoreBundle\Manager\BruteForceManager'
+
+    # Security
+    app.user_provider: '@CoreBundle\Security\UserProvider'
+
+    # Twig
+    app.twig_core_extension: '@CoreBundle\Twig\CoreExtension'
+    twig.text_extension: '@Twig_Extensions_Extension_Text'
+
+    # Event Subscribers & Listeners
+    app.authentication_subscriber: '@CoreBundle\EventSubscriber\AuthenticationSubscriber'
+    app.security_subscriber: '@CoreBundle\EventSubscriber\SecuritySubscriber'
+    app.logout_listener: '@CoreBundle\EventListener\LogoutListener'
+    app.exception_listener: '@CoreBundle\EventListener\ExceptionListener'
+    app.general_listener: '@CoreBundle\EventListener\GeneralListener'
+
+    # Form types
+    app.form.type.user: '@CoreBundle\Form\Type\UserType'
+
+    # Session
+    session.handler.pdo: '@Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler'
+    session.memcached: '@Memcached'
+    session.handler.memcached: '@Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler'

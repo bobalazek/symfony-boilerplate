@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Manager;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Jenssegers\Agent\Agent;
 use CoreBundle\Utils\Helpers;
@@ -14,9 +14,19 @@ use CoreBundle\Entity\UserDevice;
  */
 class UserDeviceManager
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
 
+    /** @var UserDevice */
     protected $currentUserDevice = null;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param Request $request

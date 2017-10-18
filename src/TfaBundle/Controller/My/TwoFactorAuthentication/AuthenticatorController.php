@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use CoreBundle\Entity\User;
 
 /**
@@ -98,9 +98,9 @@ class AuthenticatorController extends Controller
     /**
      * @param Request       $request
      * @param User          $user
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      */
-    protected function handleActions(Request $request, User $user, EntityManager $em)
+    protected function handleActions(Request $request, User $user, EntityManagerInterface $em)
     {
         $action = $request->query->get('action');
         if ($action === 'reset') {

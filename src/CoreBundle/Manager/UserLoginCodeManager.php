@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Manager;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use CoreBundle\Entity\User;
 use CoreBundle\Entity\UserLoginCode;
 
@@ -11,7 +11,16 @@ use CoreBundle\Entity\UserLoginCode;
  */
 class UserLoginCodeManager
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param string $code

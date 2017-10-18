@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Manager;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use libphonenumber\PhoneNumberFormat;
 use CoreBundle\Entity\User;
@@ -14,7 +14,16 @@ use CoreBundle\Exception\BruteForceAttemptException;
  */
 class UserManager
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /***** Signup *****/
 

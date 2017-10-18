@@ -2,7 +2,7 @@
 
 namespace CoreBundle\Service;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 /**
@@ -10,7 +10,16 @@ use Symfony\Component\Validator\ConstraintViolationList;
  */
 class ApifierService
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * Get a nicer errors format.

@@ -1,146 +1,89 @@
+imports:
+    - { resource: services_aliases.yml }
+
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
     # General
-    app.emogrifier:
-        class: CoreBundle\Service\EmogrifierService
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Service\EmogrifierService: ~
 
-    app.mailer:
-        class: CoreBundle\Service\MailerService
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Service\MailerService: ~
 
-    app.sms_sender:
-        class: CoreBundle\Service\SmsSenderService
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Service\SmsSenderService: ~
 
-    app.apifier:
-        class: CoreBundle\Service\ApifierService
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Service\ApifierService: ~
 
     # Managers
-    app.user_action_manager:
-        class: CoreBundle\Manager\UserActionManager
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Manager\UserManager: ~
 
-    app.user_device_manager:
-        class: CoreBundle\Manager\UserDeviceManager
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Manager\UserActionManager: ~
 
-    app.user_login_code_manager:
-        class: CoreBundle\Manager\UserLoginCodeManager
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Manager\UserDeviceManager: ~
 
-    app.user_recovery_code_manager:
-        class: CoreBundle\Manager\UserRecoveryCodeManager
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Manager\UserLoginCodeManager: ~
 
-    app.user_manager:
-        class: CoreBundle\Manager\UserManager
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Manager\UserRecoveryCodeManager: ~
 
-    app.brute_force_manager:
-        class: CoreBundle\Manager\BruteForceManager
-        calls:
-            - [setContainer, ["@service_container"]]
+    CoreBundle\Manager\BruteForceManager: ~
+
+    Google\Authenticator\GoogleAuthenticator: ~
 
     # Security
-    app.user_provider:
-        class: CoreBundle\Security\UserProvider
-        arguments:
-            - "@doctrine.orm.entity_manager"
+    CoreBundle\Security\UserProvider: ~
 
     # Twig
-    app.twig_core_extension:
-        class: CoreBundle\Twig\CoreExtension
-        public: false
+    CoreBundle\Twig\CoreExtension:
         tags:
             - name: twig.extension
         calls:
             - [setContainer, ["@service_container"]]
 
-    twig.text_extension:
+    Twig_Extensions_Extension_Text:
         class: Twig_Extensions_Extension_Text
         tags:
             - name: twig.extension
 
     # Event Subscribers & Listeners
-    app.authentication_subscriber:
-        class: CoreBundle\EventSubscriber\AuthenticationSubscriber
-        tags:
-            - { name: kernel.event_subscriber }
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@app.user_action_manager"
-            - "@app.brute_force_manager"
-            - "@translator"
+    CoreBundle\EventSubscriber\AuthenticationSubscriber: ~
 
-    app.security_subscriber:
-        class: CoreBundle\EventSubscriber\SecuritySubscriber
-        tags:
-            - { name: kernel.event_subscriber }
-        arguments:
-            - "@security.token_storage"
-            - "@security.authorization_checker"
-            - "@app.user_action_manager"
-            - "@translator"
+    CoreBundle\EventSubscriber\SecuritySubscriber: ~
 
-    app.logout_listener:
-        class: CoreBundle\EventListener\LogoutListener
-        arguments:
-            - "@app.user_action_manager"
-            - "@translator"
+    CoreBundle\EventListener\LogoutListener: ~
 
-    app.exception_listener:
-        class: CoreBundle\EventListener\ExceptionListener
+    CoreBundle\EventListener\ExceptionListener:
         calls:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
 
-    app.general_listener:
-        class: CoreBundle\EventListener\GeneralListener
+    CoreBundle\EventListener\GeneralListener:
         calls:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
             - { name: kernel.event_listener, event: kernel.response }
 
-    # Other
-    google_authenticator:
-        class: Google\Authenticator\GoogleAuthenticator
-
     # Form types
-    app.form.type.user:
-        class: CoreBundle\Form\Type\UserType
+    CoreBundle\Form\Type\UserType:
         calls:
             - [setContainer, ["@service_container"]]
         tags:
             - { name: form.type }
 
     # Session
-    session.handler.pdo:
-        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-        public: false
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
         arguments:
             - "mysql:host=%database_host%;dbname=%database_name%"
             - { db_username: "%database_user%", db_password: "%database_password%" }
 
-    session.memcached:
-        class: Memcached
+    Memcached:
+        class: 'Memcached'
         calls:
             - [addServer, ["%memcached_host%", "%memcached_port%"]]
 
-    session.handler.memcached:
-        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
-        public: false
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler:
         arguments:
             - "@session.memcached"
             - { prefix: "%memcached_prefix%", expiretime: "%memcached_expire%" }

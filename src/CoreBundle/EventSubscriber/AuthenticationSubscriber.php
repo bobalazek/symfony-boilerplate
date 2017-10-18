@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Translation\DataCollectorTranslator;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use CoreBundle\Entity\User;
 use CoreBundle\Manager\UserActionManager;
 use CoreBundle\Manager\BruteForceManager;
@@ -29,7 +29,7 @@ class AuthenticationSubscriber implements EventSubscriberInterface
      * @param DataCollectorTranslator $translator
      */
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         UserActionManager $userActionManager,
         BruteForceManager $bruteForceManager,
         DataCollectorTranslator $translator

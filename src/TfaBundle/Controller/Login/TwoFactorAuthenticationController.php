@@ -2,7 +2,7 @@
 
 namespace TfaBundle\Controller\Login;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,7 +99,7 @@ class TwoFactorAuthenticationController extends Controller
      * @param User          $user
      * @param Request       $request
      * @param Session       $session
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      *
      * @return Response|null
      */
@@ -110,7 +110,7 @@ class TwoFactorAuthenticationController extends Controller
         $user,
         Request $request,
         Session $session,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         try {
             $this->handleTooManyAttempts(
@@ -218,7 +218,7 @@ class TwoFactorAuthenticationController extends Controller
      * @param User          $user
      * @param Request       $request
      * @param Session       $session
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      *
      * @return bool Was it successfull?
      */
@@ -228,7 +228,7 @@ class TwoFactorAuthenticationController extends Controller
         User $user,
         Request $request,
         Session $session,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         return $this
             ->get('app.user_login_code_manager')
@@ -242,7 +242,7 @@ class TwoFactorAuthenticationController extends Controller
      * @param User          $user
      * @param Request       $request
      * @param Session       $session
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      *
      * @return bool Was it successfull?
      */
@@ -251,7 +251,7 @@ class TwoFactorAuthenticationController extends Controller
         User $user,
         Request $request,
         Session $session,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         return $this
             ->get('app.two_factor_authenticator')
@@ -268,7 +268,7 @@ class TwoFactorAuthenticationController extends Controller
      * @param User          $user
      * @param Request       $request
      * @param Session       $session
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      *
      * @return bool Was it successfull?
      */
@@ -277,7 +277,7 @@ class TwoFactorAuthenticationController extends Controller
         User $user,
         Request $request,
         Session $session,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         $userRecoveryCode = $this
             ->get('app.user_recovery_code_manager')
@@ -297,14 +297,14 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * @param Request       $request
      * @param Session       $session
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      *
      * @throws BruteForceAttemptHttpException
      */
     private function handleTooManyAttempts(
         Request $request,
         Session $session,
-        EntityManager $em
+        EntityManagerInterface $em
     ) {
         $ip = $request->getClientIp();
         $sessionId = $session->getId();

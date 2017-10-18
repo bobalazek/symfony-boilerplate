@@ -26,7 +26,7 @@ class TwoFactorAuthenticatorService
     {
         $secret = $user->getTFAAuthenticatorSecret();
 
-        return $this->container->get('google_authenticator')
+        return $this->container->get('app.google_authenticator')
             ->checkCode(
                 $secret,
                 $code
@@ -91,7 +91,7 @@ class TwoFactorAuthenticatorService
      */
     public function generateSecret()
     {
-        return $this->container->get('google_authenticator')
+        return $this->container->get('app.google_authenticator')
             ->generateSecret();
     }
 }

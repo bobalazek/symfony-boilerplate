@@ -3,7 +3,7 @@
 namespace CoreBundle\Service;
 
 use GuzzleHttp\Client;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use CoreBundle\Exception\SmsSenderException;
 
 /**
@@ -11,7 +11,16 @@ use CoreBundle\Exception\SmsSenderException;
  */
 class SmsSenderService
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param string $to

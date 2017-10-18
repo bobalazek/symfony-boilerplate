@@ -2,16 +2,26 @@
 
 namespace CoreBundle\Service;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
  */
 class MailerService
 {
-    use ContainerAwareTrait;
+    /** @var ContainerInterface */
+    protected $container;
 
+    /** @var Swift_Message */
     protected $swiftMessageInstance;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * Prepares the (swift) email and sends it.
