@@ -12,4 +12,7 @@ install:
     - docker-compose version
 
 script:
+    - echo "Testing ..."
     - php vendor/bin/simple-phpunit
+    - echo "Deploying ..."
+    - php vendor/bin/dep deploy qa -vvv
