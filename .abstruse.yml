@@ -1,0 +1,15 @@
+### General
+image: docker:latest
+
+# Scripts
+install:
+    - echo "Install docker compose ..."
+    - apk add --update python py-pip python-dev && pip install docker-compose
+    - echo "Docker info & version:"
+    - docker -D info
+    - docker version
+    - echo "Docker compose info:"
+    - docker-compose version
+
+script:
+    - php vendor/bin/simple-phpunit
