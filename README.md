@@ -31,7 +31,7 @@
 ## Server requirements
 
 * [Symfony3 requirements](http://symfony.com/doc/current/reference/requirements.html)
-* PHP 7.0 - minimum
+* PHP 7.2 - minimum
 * MySQL 5.5 - minimum
 * Apache 2.4 - minimum
 * Ubuntu 16.04
@@ -90,7 +90,7 @@
 * Ubuntu 16.04
 * Apache 2.4
 * MySQL 5.7
-* PHP 7.0
+* PHP 7.2
 * GIT
 * Node
 * Bower

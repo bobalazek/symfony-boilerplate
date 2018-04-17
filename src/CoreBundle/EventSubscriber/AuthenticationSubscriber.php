@@ -5,7 +5,7 @@ namespace CoreBundle\EventSubscriber;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use CoreBundle\Entity\User;
 use CoreBundle\Manager\UserActionManager;
@@ -23,16 +23,16 @@ class AuthenticationSubscriber implements EventSubscriberInterface
     protected $translator;
 
     /**
-     * @param EntityManager           $em
-     * @param UserActionManager       $userActionManager
-     * @param BruteForceManager       $bruteForceManager
-     * @param DataCollectorTranslator $translator
+     * @param EntityManager       $em
+     * @param UserActionManager   $userActionManager
+     * @param BruteForceManager   $bruteForceManager
+     * @param TranslatorInterface $translator
      */
     public function __construct(
         EntityManagerInterface $em,
         UserActionManager $userActionManager,
         BruteForceManager $bruteForceManager,
-        DataCollectorTranslator $translator
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->userActionManager = $userActionManager;

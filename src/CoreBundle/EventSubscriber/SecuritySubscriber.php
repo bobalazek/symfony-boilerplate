@@ -8,7 +8,7 @@ use Symfony\Component\Security\Http\Event\SwitchUserEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 use CoreBundle\Manager\UserActionManager;
 
 /**
@@ -22,16 +22,16 @@ class SecuritySubscriber implements EventSubscriberInterface
     protected $translator;
 
     /**
-     * @param TokenStorage            $tokenStorage
-     * @param AuthorizationChecker    $authorizationChecker
-     * @param UserActionManager       $userActionManager
-     * @param DataCollectorTranslator $translator
+     * @param TokenStorage         $tokenStorage
+     * @param AuthorizationChecker $authorizationChecker
+     * @param UserActionManager    $userActionManager
+     * @param TranslatorInterface  $translator
      */
     public function __construct(
         TokenStorage $tokenStorage,
         AuthorizationChecker $authorizationChecker,
         UserActionManager $userActionManager,
-        DataCollectorTranslator $translator
+        TranslatorInterface $translator
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
