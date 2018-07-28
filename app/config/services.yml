@@ -20,7 +20,8 @@ services:
 
     CoreBundle\Manager\UserActionManager: ~
 
-    CoreBundle\Manager\UserDeviceManager: ~
+    CoreBundle\Manager\UserDeviceManager:
+        public: true
 
     CoreBundle\Manager\UserLoginCodeManager: ~
 

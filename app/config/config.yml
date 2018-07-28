@@ -62,7 +62,6 @@ framework:
         engines: [ "twig" ]
     default_locale: "%locale%"
     trusted_hosts: ~
-    trusted_proxies: ~
     session:
         handler_id: session.handler.pdo # or session.handler.memcached
     fragments:  ~
@@ -232,6 +231,11 @@ noxlogic_rate_limit:
     rate_response_exception: CoreBundle\Exception\TooManyRequestsHttpException
 
 # Sonata admin
+sonata_core:
+    form:
+        mapping:
+            enabled: true
+
 sonata_block:
     default_contexts: [cms]
     blocks:
