@@ -12,6 +12,7 @@ parameters:
     app_name: SymfonyBoilerplate
     description: My personal symfony boilerplate.
     author: Borut Balazek
+    author_url: https://bobalazek.com
     # Email sender
     sender_address: sfbp@corcosoft.com # from which email will the emails be sent
     sender_name: Symfony Boilerplate Mailer # name of the sender, from which the emails will be sent
@@ -84,7 +85,7 @@ twig:
             description: "%description%"
             author: "%author%"
             version: "%version%"
-            copyright: "Copyright © %author% 2017. All rights reserved."
+            copyright: "Copyright © <a href=\"%author_url%\" target=\"_blank\">%author%</a> 2017. All rights reserved."
             assets_version: "%assets_version%"
             date_format: "%date_format%"
             date_time_format: "%date_time_format%"

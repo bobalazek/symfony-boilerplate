@@ -45,7 +45,7 @@
         "noxlogic/ratelimit-bundle": "^1.7",
         "ocramius/proxy-manager": "~2.2",
         "pelago/emogrifier": "^2.0",
-        "picoss/sonata-extra-admin-bundle": "dev-master",
+        "picoss/sonata-extra-admin-bundle": "^3.0",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.1",
         "simplethings/entity-audit-bundle": "^1.0",

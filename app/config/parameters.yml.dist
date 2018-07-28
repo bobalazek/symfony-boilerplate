@@ -15,7 +15,7 @@ parameters:
     # Two factor authenticator
     two_factor_authenticator_hostname: localhost
     two_factor_authenticator_issuer: Corcosoft
-    # SMS Sender
+    # SMS Sender - https://github.com/bobalazek/sms-sender
     sms_sender_from: ~
     sms_sender_url: ~
     sms_sender_token: ~
