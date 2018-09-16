@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use libphonenumber\PhoneNumberFormat;
 use CoreBundle\Entity\User;
 use CoreBundle\Utils\Helpers;
+use CoreBundle\Manager\UserDeviceManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -29,7 +30,7 @@ class TwoFactorAuthenticationManager
         $request = $event->getRequest();
 
         $userDeviceIsTrusted = $this->container
-            ->get('app.user_device_manager')
+            ->get(UserDeviceManager::class)
             ->isCurrentTrusted(
                 $user,
                 $request

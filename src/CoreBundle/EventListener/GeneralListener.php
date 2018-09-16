@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Cookie;
 use CoreBundle\Entity\User;
+use CoreBundle\Manager\UserDeviceManager;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -45,7 +46,7 @@ class GeneralListener
 
         // User device - last active
         $userDevice = $this->container
-            ->get('app.user_device_manager')
+            ->get(UserDeviceManager::class)
             ->get($user, $request);
         $userDevice->setLastActiveAt(new \Datetime());
         $em->persist($userDevice);
