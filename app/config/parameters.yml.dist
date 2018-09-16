@@ -15,9 +15,14 @@ parameters:
     # Two factor authenticator
     two_factor_authenticator_hostname: localhost
     two_factor_authenticator_issuer: Corcosoft
-    # SMS Sender - https://github.com/bobalazek/sms-sender
-    sms_sender_from: ~
-    sms_sender_url: ~
-    sms_sender_token: ~
+    # SMS Sender
+    sms_sender_service: ~ # ~, bobalazek_sms_sender or twilio
+    # Bobalazek SMS Sender - https://github.com/bobalazek/sms-sender
+    bobalazek_sms_sender_url: ~
+    bobalazek_sms_sender_token: ~
+    # Twilio SMS Sender - https://github.com/twilio/twilio-php
+    twilio_sms_sender_sid: ~
+    twilio_sms_sender_token: ~
+    twilio_sms_sender_from: ~
     # Other
     secret: "MySuperSecureToken"

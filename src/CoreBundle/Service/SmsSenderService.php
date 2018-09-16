@@ -33,9 +33,70 @@ class SmsSenderService
     public function send($to, $message)
     {
         $to = preg_replace('/\s+/', '', $to); // trim all whitespace
+        $service = $this->container->getParameter('sms_sender_service');
 
-        $url = $this->container->getParameter('sms_sender_url');
-        $token = $this->container->getParameter('sms_sender_token');
+        if ($service === null) {
+            throw new SmsSenderException(
+                'The SMS Service is not specified.'
+            );
+        }
+
+        if ($service === 'twilio') {
+            return $this->sendViaTwilio($to, $message);
+        }
+
+        if ($service === 'bobalazek_sms_sender') {
+            return $this->sendViaBobalazekSmsSender($to, $message);
+        }
+
+        throw new SmsSenderException(
+            'The SMS Service does not exist.'
+        );
+    }
+
+    /**
+     * @param string $to
+     * @param string $message
+     *
+     * @return bool
+     *
+     * @throws SmsSenderException
+     */
+    public function sendViaTwilio($to, $message)
+    {
+        $sid = $this->container->getParameter('twilio_sms_sender_sid');
+        $token = $this->container->getParameter('twilio_sms_sender_token');
+        $from = $this->container->getParameter('twilio_sms_sender_from');
+
+        try {
+            $client = new \Twilio\Rest\Client($sid, $token);
+            $message = $client->messages->create(
+                $to,
+                [
+                    'from' => $from,
+                    'body' => $message,
+                ]
+            );
+        } catch (\Exception $e) {
+            throw new SmsSenderException(
+                'Something went wrong with Twilio. Exception: ' .
+                $e->getMessage()
+            );
+        }
+    }
+
+    /**
+     * @param string $to
+     * @param string $message
+     *
+     * @return bool
+     *
+     * @throws SmsSenderException
+     */
+    public function sendViaBobalazekSmsSender($to, $message)
+    {
+        $url = $this->container->getParameter('bobalazek_sms_sender_url');
+        $token = $this->container->getParameter('bobalazek_sms_sender_token');
 
         $client = new Client();
         try {
@@ -53,7 +114,8 @@ class SmsSenderService
             );
         } catch (\Exception $e) {
             throw new SmsSenderException(
-                'The SMS Service was not found.'
+                'The SMS Service was not found. Exception: ' .
+                $e->getMessage()
             );
         }
 
