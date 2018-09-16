@@ -33,24 +33,6 @@
                 type="password"
                 name="_password" />
         </div>
-        <div class="clearfix">
-            <div class="pull-left">
-                <div class="checkbox">
-                    <label>
-                        <input id="remember-me"
-                            type="checkbox"
-                            name="_remember_me" />
-                        {{ 'Remember me' | trans }}
-                    </label>
-                </div>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-link"
-                    href="{{ path('reset_password') }}">
-                    {{ 'Reset Password' | trans }}
-                </a>
-            </div>
-        </div>
         <input type="hidden"
             name="_csrf_token"
             value="{{ csrf_token('authenticate') }}" />
@@ -59,6 +41,10 @@
             {{ 'Login' | trans }}
         </button>
         <hr />
+        <a class="btn btn-block btn-default"
+            href="{{ path('reset_password') }}">
+            {{ 'Reset Password' | trans }}
+        </a>
         <a class="btn btn-block btn-default"
             href="{{ path('signup') }}">
             {{ 'Signup' | trans }}

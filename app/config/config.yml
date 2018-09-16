@@ -234,7 +234,7 @@ noxlogic_rate_limit:
 sonata_core:
     form:
         mapping:
-            enabled: true
+            enabled: false
 
 sonata_block:
     default_contexts: [cms]

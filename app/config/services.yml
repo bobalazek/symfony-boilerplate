@@ -5,6 +5,7 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+        public: true
 
     # General
     CoreBundle\Service\EmogrifierService: ~
@@ -20,8 +21,7 @@ services:
 
     CoreBundle\Manager\UserActionManager: ~
 
-    CoreBundle\Manager\UserDeviceManager:
-        public: true
+    CoreBundle\Manager\UserDeviceManager: ~
 
     CoreBundle\Manager\UserLoginCodeManager: ~
 
