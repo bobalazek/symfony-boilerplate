@@ -1,3 +1,4 @@
+# TODO: not working... some issue with networking... needs fixing
 version: "3"
 
 # Services
@@ -18,7 +19,8 @@ services:
             - ${LOCAL_WEB_HTTP_PORT}:80
             - ${LOCAL_WEB_HTTPS_PORT}:443
         networks:
-            - default
+            backend:
+                ipv4_address: 10.10.16.16
 
     mysql:
         image: mysql
@@ -34,7 +36,8 @@ services:
         ports:
             - ${LOCAL_MYSQL_PORT}:3306
         networks:
-            - default
+            backend:
+                ipv4_address: 10.10.16.16
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -51,23 +54,30 @@ services:
         ports:
             - ${LOCAL_PHPMYADMIN_PORT}:80
         networks:
-            - default
+            backend:
+                ipv4_address: 10.10.16.16
 
     redis:
         image: redis
         ports:
             - ${LOCAL_REDIS_PORT}:6379
         networks:
-            - default
+            backend:
+                ipv4_address: 10.10.16.16
 
     memcached:
         image: memcached
         ports:
             - ${LOCAL_MEMCACHED_PORT}:11211
         networks:
-            - default
+            backend:
+                ipv4_address: 10.10.16.16
 
 # Networks
 networks:
-    default:
+    backend:
         driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.10.16.0/24
