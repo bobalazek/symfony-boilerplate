@@ -18,7 +18,7 @@ services:
             - ${LOCAL_WEB_HTTP_PORT}:80
             - ${LOCAL_WEB_HTTPS_PORT}:443
         networks:
-            - backend
+            - default
 
     mysql:
         image: mysql
@@ -34,7 +34,7 @@ services:
         ports:
             - ${LOCAL_MYSQL_PORT}:3306
         networks:
-            - backend
+            - default
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -51,25 +51,23 @@ services:
         ports:
             - ${LOCAL_PHPMYADMIN_PORT}:80
         networks:
-            - backend
+            - default
 
     redis:
         image: redis
         ports:
             - ${LOCAL_REDIS_PORT}:6379
         networks:
-            - backend
+            - default
 
     memcached:
         image: memcached
         ports:
             - ${LOCAL_MEMCACHED_PORT}:11211
         networks:
-            - backend
+            - default
 
 # Networks
 networks:
-    frontend:
-        driver: bridge
-    backend:
+    default:
         driver: bridge
