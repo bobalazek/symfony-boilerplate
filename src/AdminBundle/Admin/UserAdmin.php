@@ -9,6 +9,12 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use CoreBundle\Entity\User;
 use CoreBundle\CoreBundle;
@@ -42,13 +48,13 @@ class UserAdmin extends AbstractAdmin
                 ])
             ->end()
             ->with('Account', ['class' => 'col-md-4'])
-                ->add('username', 'text')
-                ->add('email', 'email')
-                ->add('plainPassword', 'repeated', [
+                ->add('username', TextType::class)
+                ->add('email', EmailType::class)
+                ->add('plainPassword', RepeatedType::class, [
                     'required' => $user->getId()
                         ? false
                         : true,
-                    'type' => 'password',
+                    'type' => PasswordType::class,
                     'first_options' => [
                         'label' => 'Password',
                     ],
@@ -60,13 +66,13 @@ class UserAdmin extends AbstractAdmin
                     'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
                     'preferred_country_choices' => ['DE', 'AT', 'CH'],
                 ])
-                ->add('locale', 'locale', [
+                ->add('locale', LocaleType::class, [
                     'choices' => array_flip($this->container->getParameter('locales')),
                     'choice_loader' => null,
                 ])
             ->end()
             ->with('Roles', ['class' => 'col-md-4'])
-                ->add('roles', 'choice', [
+                ->add('roles', ChoiceType::class, [
                     'label' => false,
                     'multiple' => true,
                     'expanded' => true,
