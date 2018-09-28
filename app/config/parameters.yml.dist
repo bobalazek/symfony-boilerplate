@@ -16,7 +16,7 @@ parameters:
     two_factor_authenticator_hostname: localhost
     two_factor_authenticator_issuer: Corcosoft
     # SMS Sender
-    sms_sender_service: ~ # ~, bobalazek_sms_sender or twilio
+    sms_sender_service: ~ # available: ~, bobalazek_sms_sender or twilio
     # Bobalazek SMS Sender - https://github.com/bobalazek/sms-sender
     bobalazek_sms_sender_url: ~
     bobalazek_sms_sender_token: ~

@@ -1,21 +1,23 @@
-<h3>
-    {{ 'SMS' | trans }}
-    {% if 'sms' in app.user.getAvailableTFAMethods() | keys %}
-        <span class="label label-success">
-            {{ 'Active' | trans }}
-        </span>
-    {% else %}
-        <span class="label label-danger">
-            {{ 'Inactive' | trans }}
-        </span>
-    {% endif %}
-</h3>
-{{ form_row(form.tfaSmsEnabled) }}
-<div class="help-block">
-    {{ 'my.tfa.form.sms_enabled.help.text' | trans }}
-    {% if app.user.isMobileActivated() == false %}
-        <div class="alert alert-info">
-            {{ 'my.tfa.sms.not_yet_activated.text' | trans }}
-        </div>
-    {% endif %}
-</div>
+{% if globals.sms_sender_service %}
+    <h3>
+        {{ 'SMS' | trans }}
+        {% if 'sms' in app.user.getAvailableTFAMethods() | keys %}
+            <span class="label label-success">
+                {{ 'Active' | trans }}
+            </span>
+        {% else %}
+            <span class="label label-danger">
+                {{ 'Inactive' | trans }}
+            </span>
+        {% endif %}
+    </h3>
+    {{ form_row(form.tfaSmsEnabled) }}
+    <div class="help-block">
+        {{ 'my.tfa.form.sms_enabled.help.text' | trans }}
+        {% if app.user.isMobileActivated() == false %}
+            <div class="alert alert-info">
+                {{ 'my.tfa.sms.not_yet_activated.text' | trans }}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

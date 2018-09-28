@@ -88,6 +88,7 @@ twig:
             assets_version: "%assets_version%"
             date_format: "%date_format%"
             date_time_format: "%date_time_format%"
+            sms_sender_service: "%sms_sender_service%"
     form_themes:
         - CoreBundle:Form:layout.html.twig
 
