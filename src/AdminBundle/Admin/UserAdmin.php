@@ -63,7 +63,7 @@ class UserAdmin extends AbstractAdmin
                     ],
                 ])
                 ->add('mobile', PhoneNumberType::class, [
-                    'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
+                    'widget' => PhoneNumberType::WIDGET_SINGLE_TEXT,
                     'preferred_country_choices' => ['DE', 'AT', 'CH'],
                 ])
                 ->add('locale', LocaleType::class, [
