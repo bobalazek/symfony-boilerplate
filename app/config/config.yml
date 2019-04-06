@@ -60,6 +60,9 @@ framework:
         enable_annotations: true
     templating:
         engines: [ "twig" ]
+        form:
+            resources:
+                - 'CoreBundle:Form:layout.html.twig'
     default_locale: "%locale%"
     trusted_hosts: ~
     session:

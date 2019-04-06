@@ -36,7 +36,7 @@
 * Apache 2.4 - minimum
 * Ubuntu 16.04
 * SSH access
-* Ability to install [NodeJS](https://nodejs.org/en/) for [Bower](https://bower.io/) & [Gulp](http://gulpjs.com/)
+* Ability to install [NodeJS](https://nodejs.org/en/) & [Gulp](http://gulpjs.com/)
 * Ability to set [VirtualHost(-s)](http://symfony.com/doc/current/setup/web_server_configuration.html) for Apache OR set the DocumentRoot via the server's admin panel (cPanel or similar)
 * A SSL certificate
 
@@ -54,7 +54,6 @@
   * (optional) [Download & update MaxMind GeoIp2 database](https://github.com/cravler/CravlerMaxMindGeoIpBundle#download-and-update-the-maxmind-geoip2-database): `php bin/console cravler:maxmind:geoip-update`
 * **Front-end**
   * Install NPM dependencies: `npm install` (you'll need to have [NPM](https://www.npmjs.com/) installed)
-  * Install front-end dependencies with bower: `bower install`
 * (optional) You can run the app via a PHP server with: `php bin/console server:run`
 
 
@@ -93,7 +92,6 @@
 * PHP 7.2
 * GIT
 * Node
-* Bower
 * Composer
 
 
@@ -125,8 +123,6 @@
   * Move composer for global usage: `mv composer.phar /usr/local/bin/composer`
 * Node
   * Install: `sudo apt-get install nodejs npm`
-  * Symlink fix (for bower): `sudo ln -fs /usr/bin/nodejs /usr/local/bin/node`
-  * Install bower: `npm install -g bower`
 
 ## Translations
 
