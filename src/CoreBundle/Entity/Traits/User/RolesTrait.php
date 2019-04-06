@@ -11,9 +11,9 @@ use CoreBundle\Entity\User;
 trait RolesTrait
 {
     public static $rolesAvailable = [
-        'Super admin' => 'ROLE_SUPER_ADMIN',
-        'Admin' => 'ROLE_ADMIN',
-        'User' => 'ROLE_USER',
+        'ROLE_SUPER_ADMIN' => 'Super admin',
+        'ROLE_ADMIN' => 'Admin',
+        'ROLE_USER' => 'User',
     ];
 
     /**

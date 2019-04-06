@@ -25,8 +25,7 @@
 # MaxMind
 /app/Resources/MaxMind/*
 
-# Bower
-/web/assets/vendor
+# Uploads
 /web/assets/uploads/*
 !/web/assets/uploads/.gitkeep
 
@@ -48,3 +47,6 @@
 
 # Deployer
 /deployer/local.php
+
+# Lock files
+*.lock

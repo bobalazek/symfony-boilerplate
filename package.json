@@ -1,6 +1,4 @@
 {
-  "name": "housekeeper-app",
-  "description": "Housekeeper App",
   "author": "Borut Balazek <bobalazek124@gmail.com>",
   "devDependencies": {
     "eslint-config-jquery": "^1.0.0",

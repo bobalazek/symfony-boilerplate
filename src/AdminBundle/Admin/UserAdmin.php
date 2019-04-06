@@ -76,7 +76,7 @@ class UserAdmin extends AbstractAdmin
                     'label' => false,
                     'multiple' => true,
                     'expanded' => true,
-                    'choices' => User::$rolesAvailable,
+                    'choices' => array_flip(User::$rolesAvailable),
                 ])
             ->end()
             ->with('Statuses', ['class' => 'col-md-4'])

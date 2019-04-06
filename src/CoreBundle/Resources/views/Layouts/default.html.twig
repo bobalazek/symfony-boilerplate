@@ -25,15 +25,22 @@
         <!-- Stylesheets -->
         {% block stylesheets_before %}{% endblock %}
         {% block stylesheets %}
-            {% stylesheets
-                'assets/vendor/animate.css/animate.min.css'
-                'assets/vendor/font-awesome/css/font-awesome.min.css'
-                'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
-                'assets/vendor/toastr/toastr.min.css'
-                'assets/css/app.css'
-                filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset_url }}">
-            {% endstylesheets %}
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"
+                integrity="sha256-HtCCUh9Hkh//8U1OwcbD8epVEUdBvuI8wj1KtqMhNkI="
+                crossorigin="anonymous" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"
+                integrity="sha256-R91pD48xW+oHbpJYGn5xR0Q7tMhH4xOrWn1QqMRINtA="
+                crossorigin="anonymous" />
+            <link rel="stylesheet"
+                href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+                crossorigin="anonymous">
+            <link rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+                crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
         {% endblock %}
         {% block stylesheets_after %}{% endblock %}
         <!-- Stylesheets /END -->
@@ -90,15 +97,23 @@
         <!-- Body Javascripts -->
         {% block body_javascripts_before %}{% endblock %}
         {% block body_javascripts %}
-            {% javascripts
-                'assets/vendor/jquery/dist/jquery.min.js'
-                'assets/vendor/jquery-migrate/jquery-migrate.min.js'
-                'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
-                'assets/vendor/toastr/toastr.min.js'
-                'assets/vendor/moment/min/moment-with-locales.min.js'
-                'assets/js/app.js' %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+            <script
+                src="https://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+            <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+                integrity="sha256-yNbKY1y6h2rbVcQtf0b8lq4a+xpktyFc3pSYoGAY1qQ="
+                crossorigin="anonymous"></script>
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
+                integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo="
+                crossorigin="anonymous"></script>
+            <script src="{{ asset('assets/js/app.js') }}"></script>
         {% endblock %}
         {% block body_javascripts_after %}{% endblock %}
         <!-- Body Javascripts /END -->
