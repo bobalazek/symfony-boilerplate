@@ -103,7 +103,7 @@ trait PasswordTrait
     {
         $this->plainPassword = $plainPassword;
 
-        if ($encoder !== null) {
+        if (null !== $encoder) {
             $password = $encoder->encodePassword(
                 $this,
                 $plainPassword
@@ -188,7 +188,7 @@ trait PasswordTrait
     {
         $expiresAt = $this->getResetPasswordCodeExpiresAt();
 
-        if ($expiresAt === null) {
+        if (null === $expiresAt) {
             return true;
         }
 

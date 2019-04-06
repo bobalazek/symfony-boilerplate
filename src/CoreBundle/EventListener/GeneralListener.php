@@ -25,8 +25,8 @@ class GeneralListener
         $request = $event->getRequest();
 
         if (
-            $event->isMasterRequest() === false ||
-            $tokenStorage->getToken() === null
+            false === $event->isMasterRequest() ||
+            null === $tokenStorage->getToken()
         ) {
             return;
         }
@@ -72,7 +72,7 @@ class GeneralListener
             'device_uid'
         );
 
-        if ($deviceUid === null) {
+        if (null === $deviceUid) {
             return;
         }
 

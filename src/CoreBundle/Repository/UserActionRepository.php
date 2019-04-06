@@ -21,7 +21,7 @@ class UserActionRepository extends EntityRepository
     public function getCount($key, $watchTime, $ip, $sessionId, $userAgent)
     {
         $createdAt = (new \Datetime())->sub(
-            new \Dateinterval('PT'.$watchTime.'S')
+            new \Dateinterval('PT' . $watchTime . 'S')
         );
 
         return $this->createQueryBuilder('ua')

@@ -45,8 +45,8 @@ class UserActionManager
         $session = $this->container->get('session');
 
         if (
-            $user === null &&
-            $token !== null &&
+            null === $user &&
+            null !== $token &&
             $token->getUser() instanceof User
         ) {
             $user = $token->getUser();

@@ -41,7 +41,7 @@ class TwoFactorAuthenticationController extends Controller
             $method = $user->getTFADefaultMethod();
             $tfaAvailableMethods = array_keys($user->getAvailableTFAMethods());
             if (
-                $method !== null &&
+                null !== $method &&
                 !in_array($method, $tfaAvailableMethods)
             ) {
                 $method = null;

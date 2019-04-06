@@ -52,7 +52,7 @@ class SecuritySubscriber implements EventSubscriberInterface
          *   do a request, so we only log the login action, if the user
          *   has logged in via the normal form.
          */
-        if (strpos($url, '/api') === false) {
+        if (false === strpos($url, '/api')) {
             $this->userActionManager->add(
                 'user.login',
                 $this->translator->trans(

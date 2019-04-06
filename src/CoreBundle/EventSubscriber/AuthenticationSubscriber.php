@@ -7,7 +7,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Translation\TranslatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use CoreBundle\Entity\User;
 use CoreBundle\Manager\UserActionManager;
 use CoreBundle\Manager\BruteForceManager;
 

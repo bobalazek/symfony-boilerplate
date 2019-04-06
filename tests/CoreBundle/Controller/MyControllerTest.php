@@ -36,7 +36,7 @@ class MyControllerTest extends WebTestCase
             $this->assertEquals(
                 200,
                 $this->client->getResponse()->getStatusCode(),
-                'Something went wrong with the route "'.$route.'".'
+                'Something went wrong with the route "' . $route . '".'
             );
         }
     }

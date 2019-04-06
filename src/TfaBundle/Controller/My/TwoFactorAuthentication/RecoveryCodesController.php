@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use CoreBundle\Entity\User;
-use CoreBundle\Entity\UserRecoveryCode;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -61,14 +60,14 @@ class RecoveryCodesController extends Controller
     }
 
     /**
-     * @param Request       $request
-     * @param User          $user
+     * @param Request                $request
+     * @param User                   $user
      * @param EntityManagerInterface $em
      */
     protected function handleActions(Request $request, User $user, EntityManagerInterface $em)
     {
         $action = $request->query->get('action');
-        if ($action === 'generate') {
+        if ('generate' === $action) {
             $userRecoveryCodes = $user->getUserRecoveryCodes(true);
             foreach ($userRecoveryCodes as $userRecoveryCode) {
                 $em->remove($userRecoveryCode);

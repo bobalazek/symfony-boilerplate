@@ -5,7 +5,6 @@ namespace TfaBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -28,7 +27,7 @@ class TwoFactorAuthenticationListener
             $roles = $patterns[0];
 
             // Prevent the 2FA gate on pages, that do not require authentication
-            if ($roles === null) {
+            if (null === $roles) {
                 return;
             }
 

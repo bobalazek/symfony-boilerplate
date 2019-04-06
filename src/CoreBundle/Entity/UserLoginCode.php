@@ -186,7 +186,7 @@ class UserLoginCode
      */
     public function isExpired()
     {
-        if ($this->getExpiresAt() === null) {
+        if (null === $this->getExpiresAt()) {
             return false;
         }
 

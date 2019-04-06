@@ -175,7 +175,7 @@ trait MobileTrait
      */
     public function isMobileActivated()
     {
-        return $this->getMobileActivatedAt() !== null;
+        return null !== $this->getMobileActivatedAt();
     }
 
     /*** Mobile Activation Code Expires at ***/

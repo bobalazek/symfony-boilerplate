@@ -174,7 +174,7 @@ class UserAction
      */
     public function __toString()
     {
-        return '['.$this->getKey().'] '.$this->getMessage();
+        return '[' . $this->getKey() . '] ' . $this->getMessage();
     }
 
     /**

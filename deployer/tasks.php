@@ -14,10 +14,10 @@ before('deploy', 'test');
 
 /*** Bower vendors ***/
 task('deploy:vendors_bower', function () {
-    $command = 'export BOWER_TOKEN='.get('BOWER_TOKEN').' && '.
-        'bower --allow-root login -t '.get('BOWER_TOKEN').' &&  '.
+    $command = 'export BOWER_TOKEN=' . get('BOWER_TOKEN') . ' && ' .
+        'bower --allow-root login -t ' . get('BOWER_TOKEN') . ' &&  ' .
         'bower --allow-root install';
-    run('cd {{release_path}} && '.$command);
+    run('cd {{release_path}} && ' . $command);
 })->desc('Installing bower vendors');
 after('deploy:vendors', 'deploy:vendors_bower');
 
@@ -58,7 +58,7 @@ task('notify:success', function () {
             runLocally('git describe --tags --abbrev=0')
         );
         $commitsSinceLastTag = trim(
-            runLocally('git log '.$lastTag.'..HEAD --oneline')
+            runLocally('git log ' . $lastTag . '..HEAD --oneline')
         );
     } catch (\Exception $e) {
     }
@@ -73,7 +73,7 @@ task('notify:success', function () {
             $lastReleaseTime = $lastReleaseTimeExploded[0];
             $lastReleaseTime = new \Datetime($lastReleaseTime);
             $offset = $lastReleaseTime->getOffset();
-            $lastReleaseTime->add(new \DateInterval('PT'.$offset.'S'));
+            $lastReleaseTime->add(new \DateInterval('PT' . $offset . 'S'));
             $lastReleaseTime = $lastReleaseTime->format(\DateTime::ISO8601);
         } catch (\Exception $e) {
             // TODO: make it also work for non-unix systems?
@@ -81,20 +81,20 @@ task('notify:success', function () {
     }
 
     $commitsSinceLastDeployment = trim(
-        runLocally('git log --date=local --since="'.$lastReleaseTime.'" --oneline')
+        runLocally('git log --date=local --since="' . $lastReleaseTime . '" --oneline')
     );
 
-    run('{{bin/php}} {{bin/console}} app:deployment:success '.
-        '--stage="'.$stage.'" '.
-        '--server-name="'.$serverName.'" '.
-        '--server-host="'.$serverHost.'" '.
-        '--branch="'.$branch.'" '.
-        '--scheme="'.$scheme.'" '.
-        '--base-url="'.$baseUrl.'" '.
-        '--last-tag="'.$lastTag.'" '.
-        '--last-release-time="'.$lastReleaseTime.'" '.
-        '--commits-since-last-tag="'.escapeMultilineString($commitsSinceLastTag).'" '.
-        '--commits-since-last-deployment="'.escapeMultilineString($commitsSinceLastDeployment).'"'
+    run('{{bin/php}} {{bin/console}} app:deployment:success ' .
+        '--stage="' . $stage . '" ' .
+        '--server-name="' . $serverName . '" ' .
+        '--server-host="' . $serverHost . '" ' .
+        '--branch="' . $branch . '" ' .
+        '--scheme="' . $scheme . '" ' .
+        '--base-url="' . $baseUrl . '" ' .
+        '--last-tag="' . $lastTag . '" ' .
+        '--last-release-time="' . $lastReleaseTime . '" ' .
+        '--commits-since-last-tag="' . escapeMultilineString($commitsSinceLastTag) . '" ' .
+        '--commits-since-last-deployment="' . escapeMultilineString($commitsSinceLastDeployment) . '"'
     );
 })->desc('Notifying team about the successful deplyment');
 after('success', 'notify:success');

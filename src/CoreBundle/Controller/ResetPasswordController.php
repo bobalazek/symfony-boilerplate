@@ -100,7 +100,7 @@ class ResetPasswordController extends Controller
                 ->findOneByEmail($formUser->getEmail())
             ;
 
-            if ($user === nul) {
+            if (nul === $user) {
                 $alert = 'danger';
                 $alertMessage = $this->get('translator')->trans(
                     'reset_password.request.email_not_found.text'
@@ -110,7 +110,7 @@ class ResetPasswordController extends Controller
             }
 
             $isResetPasswordCodeExpired = $user->isResetPasswordCodeExpired();
-            if ($isResetPasswordCodeExpired === false) {
+            if (false === $isResetPasswordCodeExpired) {
                 $alert = 'info';
                 $alertMessage = $this->get('translator')->trans(
                     'reset_password.request.already_requested.text'
@@ -156,7 +156,7 @@ class ResetPasswordController extends Controller
                 'resetPasswordCode' => $resetPasswordCode,
             ]);
 
-        if ($user === null) {
+        if (null === $user) {
             $alert = 'danger';
             $alertMessage = $this->get('translator')->trans(
                 'reset_password.confirmation.code_not_found.text'

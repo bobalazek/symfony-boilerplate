@@ -20,7 +20,7 @@ class ExceptionListener
      */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        if (strpos($event->getRequest()->getPathInfo(), '/api') !== false) {
+        if (false !== strpos($event->getRequest()->getPathInfo(), '/api')) {
             $exception = $event->getException();
 
             $response = new JsonResponse();

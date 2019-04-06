@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use CoreBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>

@@ -28,8 +28,8 @@ class TwoFactorAuthenticationController extends Controller
         );
 
         if (
-            $tfaInProgress === null ||
-            $tfaInProgress === false
+            null === $tfaInProgress ||
+            false === $tfaInProgress
         ) {
             $this->addFlash(
                 'info',
@@ -62,9 +62,9 @@ class TwoFactorAuthenticationController extends Controller
             return $methodSwitchResponse;
         }
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $code = $request->request->get('code');
-            $isTrustedDevice = $request->request->get('is_trusted_device') === 'yes';
+            $isTrustedDevice = 'yes' === $request->request->get('is_trusted_device');
 
             $postResponse = $this->handlePost(
                 $method,
@@ -93,12 +93,12 @@ class TwoFactorAuthenticationController extends Controller
     /***** Handle post methods *****/
 
     /**
-     * @param string        $method
-     * @param string        $code
-     * @param bool          $isTrustedDevice
-     * @param User          $user
-     * @param Request       $request
-     * @param Session       $session
+     * @param string                 $method
+     * @param string                 $code
+     * @param bool                   $isTrustedDevice
+     * @param User                   $user
+     * @param Request                $request
+     * @param Session                $session
      * @param EntityManagerInterface $em
      *
      * @return Response|null
@@ -131,8 +131,8 @@ class TwoFactorAuthenticationController extends Controller
 
         $success = false;
         if (
-            $method === 'email' ||
-            $method === 'sms'
+            'email' === $method ||
+            'sms' === $method
         ) {
             $success = $this->handlePostLoginCode(
                 $method,
@@ -142,7 +142,7 @@ class TwoFactorAuthenticationController extends Controller
                 $session,
                 $em
             );
-        } elseif ($method === 'authenticator') {
+        } elseif ('authenticator' === $method) {
             $success = $this->handlePostAuthenticator(
                 $code,
                 $user,
@@ -150,7 +150,7 @@ class TwoFactorAuthenticationController extends Controller
                 $session,
                 $em
             );
-        } elseif ($method === 'recovery_code') {
+        } elseif ('recovery_code' === $method) {
             $success = $this->handlePostRecoveryCode(
                 $code,
                 $user,
@@ -160,7 +160,7 @@ class TwoFactorAuthenticationController extends Controller
             );
         }
 
-        if ($success === false) {
+        if (false === $success) {
             $this->addFlash(
                 'danger',
                 $this->get('translator')->trans(
@@ -213,11 +213,11 @@ class TwoFactorAuthenticationController extends Controller
      * Handle the post request, if it is the email method.
      * We use the same function for email & sms 2FA methods.
      *
-     * @param string        $method
-     * @param string        $code
-     * @param User          $user
-     * @param Request       $request
-     * @param Session       $session
+     * @param string                 $method
+     * @param string                 $code
+     * @param User                   $user
+     * @param Request                $request
+     * @param Session                $session
      * @param EntityManagerInterface $em
      *
      * @return bool Was it successfull?
@@ -238,10 +238,10 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * Handle when a user tries to login with an authenticator.
      *
-     * @param string        $code
-     * @param User          $user
-     * @param Request       $request
-     * @param Session       $session
+     * @param string                 $code
+     * @param User                   $user
+     * @param Request                $request
+     * @param Session                $session
      * @param EntityManagerInterface $em
      *
      * @return bool Was it successfull?
@@ -264,10 +264,10 @@ class TwoFactorAuthenticationController extends Controller
     /**
      * Handle when a user tries to login via a recovery code.
      *
-     * @param string        $code
-     * @param User          $user
-     * @param Request       $request
-     * @param Session       $session
+     * @param string                 $code
+     * @param User                   $user
+     * @param Request                $request
+     * @param Session                $session
      * @param EntityManagerInterface $em
      *
      * @return bool Was it successfull?
@@ -295,8 +295,8 @@ class TwoFactorAuthenticationController extends Controller
     }
 
     /**
-     * @param Request       $request
-     * @param Session       $session
+     * @param Request                $request
+     * @param Session                $session
      * @param EntityManagerInterface $em
      *
      * @throws BruteForceAttemptHttpException
@@ -387,7 +387,7 @@ class TwoFactorAuthenticationController extends Controller
             return $this->redirectToRoute(
                 'login.tfa'
             );
-        } elseif ($method !== null) {
+        } elseif (null !== $method) {
             $this->addFlash(
                 'info',
                 $this->get('translator')->trans(

@@ -35,17 +35,17 @@ class SmsSenderService
         $to = preg_replace('/\s+/', '', $to); // trim all whitespace
         $service = $this->container->getParameter('sms_sender_service');
 
-        if ($service === null) {
+        if (null === $service) {
             throw new SmsSenderException(
                 'The SMS Service is not specified.'
             );
         }
 
-        if ($service === 'twilio') {
+        if ('twilio' === $service) {
             return $this->sendViaTwilio($to, $message);
         }
 
-        if ($service === 'bobalazek_sms_sender') {
+        if ('bobalazek_sms_sender' === $service) {
             return $this->sendViaBobalazekSmsSender($to, $message);
         }
 
@@ -100,11 +100,11 @@ class SmsSenderService
 
         $client = new Client();
         try {
-            $sendUrl = $url.
-                '/api/send'.
-                '?token='.$token.
-                '&to='.$to.
-                '&message='.$message;
+            $sendUrl = $url .
+                '/api/send' .
+                '?token=' . $token .
+                '&to=' . $to .
+                '&message=' . $message;
             $response = $client->request(
                 'GET',
                 $sendUrl,
@@ -123,7 +123,7 @@ class SmsSenderService
         $body = (string) $response->getBody();
         $json = json_decode($body);
 
-        if ($json === null) {
+        if (null === $json) {
             throw new SmsSenderException(
                 'The SMS Service did not give the correct response.'
             );

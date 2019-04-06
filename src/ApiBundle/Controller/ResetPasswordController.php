@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Noxlogic\RateLimitBundle\Annotation\RateLimit;
-use CoreBundle\Entity\User;
 
 /**
  * @author Borut Balazek <bobalazek124@gmail.com>
@@ -40,7 +39,7 @@ class ResetPasswordController extends Controller
             ->findOneByEmail($email)
         ;
 
-        if ($user === null) {
+        if (null === $user) {
             return $this->json(
                 [
                     'error' => [
@@ -54,7 +53,7 @@ class ResetPasswordController extends Controller
         }
 
         $isResetPasswordCodeExpired = $user->isResetPasswordCodeExpired();
-        if ($isResetPasswordCodeExpired === false) {
+        if (false === $isResetPasswordCodeExpired) {
             return $this->json(
                 [
                     'error' => [

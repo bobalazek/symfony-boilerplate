@@ -43,24 +43,24 @@ class DatabaseBackupCommand extends ContainerAwareCommand
 
         $dumpDir = !empty($dumpDirOption)
             ? $dumpDirOption
-            : $container->get('kernel')->getCacheDir().'/database_backups';
+            : $container->get('kernel')->getCacheDir() . '/database_backups';
         if (false === @mkdir($dumpDir, 0777, true) && !is_dir($dumpDir)) {
             $output->writeln(
-                '<error>'.
+                '<error>' .
                 sprintf(
                     'Unable to create the %s directory',
                     $dumpDir
-                ).
+                ) .
                 '</error>'
             );
 
             return false;
         }
 
-        $fileName = (new \Datetime())->format('Y-m-d_H:i:s').'.sql';
-        $filePath = $dumpDir.'/'.$fileName;
+        $fileName = (new \Datetime())->format('Y-m-d_H:i:s') . '.sql';
+        $filePath = $dumpDir . '/' . $fileName;
 
-        if ($driver->getName() === 'pdo_mysql') {
+        if ('pdo_mysql' === $driver->getName()) {
             $database = $connection->getDatabase();
             $host = $connection->getHost();
             $port = $connection->getPort();
@@ -70,16 +70,16 @@ class DatabaseBackupCommand extends ContainerAwareCommand
             $mysqldumpPath = 'mysqldump';
 
             // Check if mysqldump is available
-            exec('which '.$mysqldumpPath, $mysqldumpCheckOutput, $mysqldumpCheckResult);
-            if ($mysqldumpCheckResult !== 0) {
+            exec('which ' . $mysqldumpPath, $mysqldumpCheckOutput, $mysqldumpCheckResult);
+            if (0 !== $mysqldumpCheckResult) {
                 // We are probably on MacOS
                 $mysqldumpPath = !empty($mysqldumpPathOption)
                     ? $mysqldumpPathOption
                     : '/Applications/MAMP/Library/bin/mysqldump';
 
-                exec('which '.$mysqldumpPath, $mysqldumpCheck2Output, $mysqldumpCheck2Result);
+                exec('which ' . $mysqldumpPath, $mysqldumpCheck2Output, $mysqldumpCheck2Result);
 
-                if ($mysqldumpCheck2Result !== 0) {
+                if (0 !== $mysqldumpCheck2Result) {
                     $output->writeln(
                         '<error>No "mysqldump" found. Skipping backup ...</error>'
                     );
@@ -98,18 +98,18 @@ class DatabaseBackupCommand extends ContainerAwareCommand
             );
             exec($execCommand, $mysqldumpOutput, $mysqldumpResult);
 
-            if ($mysqldumpResult === 0) {
+            if (0 === $mysqldumpResult) {
                 $output->writeln(
-                    '<info>'.
-                    'The database backup was sucesfully created!'.
+                    '<info>' .
+                    'The database backup was sucesfully created!' .
                     '</info>'
                 );
             } else {
                 $output->writeln(
-                    '<error>'.
-                    'Something went wrong.'.
-                    'Error: '.
-                    implode($mysqldumpOutput, "\n").
+                    '<error>' .
+                    'Something went wrong.' .
+                    'Error: ' .
+                    implode($mysqldumpOutput, "\n") .
                     '</error>'
                 );
             }
@@ -117,8 +117,8 @@ class DatabaseBackupCommand extends ContainerAwareCommand
             // TODO: implement other drivers
 
             $output->writeln(
-                '<info>'.
-                'This database driver is not supported! Skipping database backup ...'.
+                '<info>' .
+                'This database driver is not supported! Skipping database backup ...' .
                 '</info>'
             );
         }

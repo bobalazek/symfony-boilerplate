@@ -2,7 +2,6 @@
 
 namespace Tests\CoreBundle;
 
-use CoreBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\BrowserKit\Cookie;
@@ -47,7 +46,7 @@ class WebTestCase extends SymfonyWebTestCase
             $firewall,
             $user->getRoles()
         );
-        $session->set('_security_'.$firewall, serialize($token));
+        $session->set('_security_' . $firewall, serialize($token));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());

@@ -131,7 +131,7 @@ class UserBlockedAction
     {
         $expiresAt = $this->getExpiresAt();
 
-        if ($expiresAt === null) {
+        if (null === $expiresAt) {
             return false;
         }
 

@@ -42,10 +42,10 @@ class TwoFactorAuthenticatorService
      */
     public function getUrl(User $user)
     {
-        $encoder = 'https://chart.googleapis.com'.
+        $encoder = 'https://chart.googleapis.com' .
             '/chart?chs=200x200&chld=M|0&cht=qr&chl=';
 
-        return $encoder.urlencode($this->getQRContent($user));
+        return $encoder . urlencode($this->getQRContent($user));
     }
 
     /**
@@ -62,8 +62,8 @@ class TwoFactorAuthenticatorService
         $issuer = $this->container->getParameter('two_factor_authenticator_issuer');
         $secret = $user->getTFAAuthenticatorSecret();
 
-        $userAndHost = rawurlencode($user->getUsername()).
-            ($hostname ? '@'.rawurlencode($hostname) : '');
+        $userAndHost = rawurlencode($user->getUsername()) .
+            ($hostname ? '@' . rawurlencode($hostname) : '');
 
         if ($issuer) {
             $qrContent = sprintf(

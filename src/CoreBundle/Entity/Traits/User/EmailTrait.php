@@ -178,6 +178,6 @@ trait EmailTrait
      */
     public function isEmailActivated()
     {
-        return $this->getEmailActivatedAt() !== null;
+        return null !== $this->getEmailActivatedAt();
     }
 }

@@ -39,8 +39,8 @@ class UserLoginCodeManager
         );
 
         if (
-            $user === null &&
-            $token !== null &&
+            null === $user &&
+            null !== $token &&
             $token->getUser() instanceof User
         ) {
             $user = $token->getUser();
@@ -49,7 +49,7 @@ class UserLoginCodeManager
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $sessionId = $session->getId();
         $expiresAt = (new \Datetime())->add(
-            new \Dateinterval('PT'.$loginCodeExpiryTime.'S')
+            new \Dateinterval('PT' . $loginCodeExpiryTime . 'S')
         );
 
         $userLoginCode = new UserLoginCode();
@@ -87,9 +87,9 @@ class UserLoginCodeManager
                 'user' => $user,
             ]);
         if (
-            $userLoginCode !== null &&
-            $userLoginCode->isExpired() === false &&
-            $userLoginCode->isDeleted() === false
+            null !== $userLoginCode &&
+            false === $userLoginCode->isExpired() &&
+            false === $userLoginCode->isDeleted()
         ) {
             return true;
         }

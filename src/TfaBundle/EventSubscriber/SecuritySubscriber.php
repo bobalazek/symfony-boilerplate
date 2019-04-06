@@ -29,7 +29,7 @@ class SecuritySubscriber implements EventSubscriberInterface
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $continuePropagation = $this->twoFactorAuthenticationManager->handle($event);
-        if ($continuePropagation === false) {
+        if (false === $continuePropagation) {
             $event->stopPropagation();
         }
     }

@@ -102,7 +102,7 @@ class BruteForceManager
 
         if ($attemptsCount > $bruteForceMaxAttempts) {
             $expiresAt = (new \Datetime())->add(
-                new \Dateinterval('PT'.$bruteForceBlockTime.'S')
+                new \Dateinterval('PT' . $bruteForceBlockTime . 'S')
             );
 
             $userBlockedAction = $em
@@ -114,7 +114,7 @@ class BruteForceManager
                     $type
                 );
 
-            if ($userBlockedAction === null) {
+            if (null === $userBlockedAction) {
                 $userBlockedAction = new UserBlockedAction();
                 $userBlockedAction
                     ->setAction($action)

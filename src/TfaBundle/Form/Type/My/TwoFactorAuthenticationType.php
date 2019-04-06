@@ -34,7 +34,7 @@ class TwoFactorAuthenticationType extends AbstractType
                 'label' => 'Default method',
                 'choices' => $defaultMethodChoices,
                 'choice_attr' => function ($val, $key, $index) use ($availableMethods) {
-                    return !in_array($key, $availableMethods) && $val !== null
+                    return !in_array($key, $availableMethods) && null !== $val
                         ? ['disabled' => 'disabled']
                         : [];
                 },

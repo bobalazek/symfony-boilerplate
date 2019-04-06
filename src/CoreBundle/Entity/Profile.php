@@ -194,8 +194,8 @@ class Profile
     public function getFullName()
     {
         return trim(
-            $this->getTitle().' '.
-            $this->getFirstName().' '.
+            $this->getTitle() . ' ' .
+            $this->getFirstName() . ' ' .
             $this->getLastName()
         );
     }

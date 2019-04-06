@@ -177,7 +177,7 @@ class UserManager
     {
         $expiresAt = (new \Datetime())->add(
             new \Dateinterval(
-                'PT'.$this->container->getParameter('reset_password_expiry_time').'S'
+                'PT' . $this->container->getParameter('reset_password_expiry_time') . 'S'
             )
         );
 

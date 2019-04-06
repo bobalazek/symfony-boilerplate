@@ -16,7 +16,7 @@ class UserController extends Controller
     public function impersonateAction($id)
     {
         $user = $this->admin->getSubject();
-        if ($user === null) {
+        if (null === $user) {
             throw $this->createNotFoundException(
                 sprintf('Unable to find the object with id : %s', $id)
             );
@@ -33,7 +33,7 @@ class UserController extends Controller
     public function restoreAction($id)
     {
         $user = $this->admin->getSubject();
-        if ($user === null) {
+        if (null === $user) {
             throw $this->createNotFoundException(
                 sprintf('Unable to find the object with id : %s', $id)
             );

@@ -37,9 +37,9 @@ class UserRecoveryCodeManager
                 'user' => $user,
             ]);
         if (
-            $userRecoveryCode !== null &&
-            $userRecoveryCode->isUsed() === false &&
-            $userRecoveryCode->isDeleted() === false
+            null !== $userRecoveryCode &&
+            false === $userRecoveryCode->isUsed() &&
+            false === $userRecoveryCode->isDeleted()
         ) {
             return $userRecoveryCode;
         }
@@ -57,6 +57,6 @@ class UserRecoveryCodeManager
      */
     public function exists($code, User $user)
     {
-        return $this->get($code, $user) !== null;
+        return null !== $this->get($code, $user);
     }
 }

@@ -28,7 +28,7 @@ class AuthenticatorController extends Controller
 
         $secret = $user->getTFAAuthenticatorSecret();
 
-        if ($secret === null) {
+        if (null === $secret) {
             $secret = $twoFactorAuthenticatorManager
                 ->generateSecret();
             $user->setTFAAuthenticatorSecret($secret);
@@ -49,7 +49,7 @@ class AuthenticatorController extends Controller
         $qrCodeUrl = $twoFactorAuthenticatorManager
             ->getUrl($user);
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $code = $request->request->get('code');
 
             $isCodeValid = $twoFactorAuthenticatorManager
@@ -58,7 +58,7 @@ class AuthenticatorController extends Controller
                     $code
                 );
 
-            if ($isCodeValid === false) {
+            if (false === $isCodeValid) {
                 $this->addFlash(
                     'danger',
                     $this->get('translator')->trans(
@@ -96,14 +96,14 @@ class AuthenticatorController extends Controller
     }
 
     /**
-     * @param Request       $request
-     * @param User          $user
+     * @param Request                $request
+     * @param User                   $user
      * @param EntityManagerInterface $em
      */
     protected function handleActions(Request $request, User $user, EntityManagerInterface $em)
     {
         $action = $request->query->get('action');
-        if ($action === 'reset') {
+        if ('reset' === $action) {
             $secret = $this->container->get('app.two_factor_authenticator')
                 ->generateSecret();
 

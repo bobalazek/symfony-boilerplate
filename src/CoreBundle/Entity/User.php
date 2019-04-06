@@ -381,7 +381,7 @@ class User implements AdvancedUserInterface, \Serializable
     public function prepareUserRecoveryCodes($count = 8)
     {
         for ($i = 0; $i < $count; ++$i) {
-            $code = Helpers::getRandomString(8).'-'.Helpers::getRandomString(8);
+            $code = Helpers::getRandomString(8) . '-' . Helpers::getRandomString(8);
             $userRecoveryCode = new UserRecoveryCode();
             $userRecoveryCode
                 ->setCode($code)
@@ -494,7 +494,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function isAccountNonExpired()
     {
-        return $this->isExpired() === false;
+        return false === $this->isExpired();
     }
 
     /*** Credentials expired ***/
@@ -520,7 +520,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function isCredentialsNonExpired()
     {
-        return $this->isExpired() === false;
+        return false === $this->isExpired();
     }
 
     /**
@@ -586,7 +586,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function __toString()
     {
-        return $this->getName().' ('.$this->getUsername().')';
+        return $this->getName() . ' (' . $this->getUsername() . ')';
     }
 
     /**

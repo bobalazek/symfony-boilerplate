@@ -89,8 +89,8 @@ class CoreExtension extends Twig_Extension
         } catch (\Exception $e) {
             // try if the file exist relative to the web dir
             // (hack for emails inside console commands)
-            if ($filePath[0] !== '/') {
-                $filePath = dirname(__FILE__).'/../../../web/'.$filePath;
+            if ('/' !== $filePath[0]) {
+                $filePath = dirname(__FILE__) . '/../../../web/' . $filePath;
             }
 
             return file_get_contents($filePath);
@@ -149,7 +149,7 @@ class CoreExtension extends Twig_Extension
             $html .= '<ul>';
             foreach ($data as $key => $val) {
                 $html .= '<li>';
-                $html .= '<b>'.$key.'</b>: ';
+                $html .= '<b>' . $key . '</b>: ';
                 if (is_array($val)) {
                     $html .= $this->dumpData($val);
                 } else {
@@ -178,7 +178,7 @@ class CoreExtension extends Twig_Extension
     {
         $router = $this->container->get('router');
 
-        return $router->getRouteCollection()->get($route) === null
+        return null === $router->getRouteCollection()->get($route)
             ? false
             : true;
     }

@@ -242,7 +242,7 @@ class UserDevice
     {
         $agent = $this->getUserAgentObject();
 
-        return $agent->platform().' - '.$agent->browser();
+        return $agent->platform() . ' - ' . $agent->browser();
     }
 
     /**

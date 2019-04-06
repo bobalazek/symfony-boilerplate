@@ -28,7 +28,7 @@ class SettingsController extends Controller
             SettingsType::class,
             $user,
             [
-                'locales' => $this->getParameter('locales')
+                'locales' => $this->getParameter('locales'),
             ]
         );
 
@@ -144,7 +144,7 @@ class SettingsController extends Controller
 
         /***** Actions *****/
         $action = $request->query->get('action');
-        if ($action === 'resend_email_activation') {
+        if ('resend_email_activation' === $action) {
             try {
                 $this->get('app.user_manager')
                     ->emailActivationRequest(
@@ -166,7 +166,7 @@ class SettingsController extends Controller
             }
 
             return $this->redirectToRoute('my.settings');
-        } elseif ($action === 'resend_mobile_activation') {
+        } elseif ('resend_mobile_activation' === $action) {
             try {
                 $this->get('app.user_manager')
                     ->mobileActivationRequest(
@@ -188,7 +188,7 @@ class SettingsController extends Controller
             }
 
             return $this->redirectToRoute('my.settings');
-        } elseif ($action === 'resend_new_email') {
+        } elseif ('resend_new_email' === $action) {
             try {
                 $this->get('app.user_manager')
                     ->newEmailRequest(
@@ -213,7 +213,7 @@ class SettingsController extends Controller
             }
 
             return $this->redirectToRoute('my.settings');
-        } elseif ($action === 'resend_new_mobile') {
+        } elseif ('resend_new_mobile' === $action) {
             try {
                 $this->get('app.user_manager')
                     ->newMobileRequest(
@@ -238,7 +238,7 @@ class SettingsController extends Controller
             }
 
             return $this->redirectToRoute('my.settings');
-        } elseif ($action === 'cancel_new_email') {
+        } elseif ('cancel_new_email' === $action) {
             $user
                 ->setNewEmail(null)
                 ->setNewEmailCode(null)
@@ -254,7 +254,7 @@ class SettingsController extends Controller
             );
 
             return $this->redirectToRoute('my.settings');
-        } elseif ($action === 'cancel_new_mobile') {
+        } elseif ('cancel_new_mobile' === $action) {
             $user
                 ->setNewMobile(null)
                 ->setNewMobileCode(null)
@@ -274,7 +274,7 @@ class SettingsController extends Controller
 
         /***** Email activation code *****/
         $emailActivationCode = $request->query->get('email_activation_code');
-        if ($emailActivationCode !== null) {
+        if (null !== $emailActivationCode) {
             $userByEmailActivationCode = $em
                 ->getRepository('CoreBundle:User')
                 ->findOneBy([
@@ -306,7 +306,7 @@ class SettingsController extends Controller
 
         /***** Mobile activation code *****/
         $mobileActivationCode = $request->query->get('mobile_activation_code');
-        if ($mobileActivationCode !== null) {
+        if (null !== $mobileActivationCode) {
             $userByMobileActivationCode = $em
                 ->getRepository('CoreBundle:User')
                 ->findOneBy([
@@ -337,7 +337,7 @@ class SettingsController extends Controller
 
         /***** New email code *****/
         $newEmailCode = $request->query->get('new_email_code');
-        if ($newEmailCode !== null) {
+        if (null !== $newEmailCode) {
             $userByNewEmailCode = $em
                 ->getRepository('CoreBundle:User')
                 ->findOneBy([
@@ -369,7 +369,7 @@ class SettingsController extends Controller
 
         /***** New mobile code *****/
         $newMobileCode = $request->query->get('new_mobile_code');
-        if ($newMobileCode !== null) {
+        if (null !== $newMobileCode) {
             $userByNewMobileCode = $em
                 ->getRepository('CoreBundle:User')
                 ->findOneBy([

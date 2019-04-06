@@ -13,6 +13,7 @@ return PhpCsFixer\Config::create()
         '@PSR2' => true,
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
+        'concat_space' => ['spacing' => 'one'],
     ))
     ->setFinder($finder)
 ;

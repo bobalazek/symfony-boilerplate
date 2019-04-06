@@ -38,7 +38,7 @@ class TwoFactorAuthenticationManager
 
         if (
             $user->isTFAEnabled() &&
-            $userDeviceIsTrusted === false
+            false === $userDeviceIsTrusted
         ) {
             $session = $this->container->get('session');
             $availableMethods = $user->getAvailableTFAMethods();
@@ -92,7 +92,7 @@ class TwoFactorAuthenticationManager
      */
     public function handleMethod($method, User $user)
     {
-        if ($method === 'email') {
+        if ('email' === $method) {
             $code = Helpers::getRandomString(8);
 
             $userLoginCode = $this->container
@@ -117,7 +117,7 @@ class TwoFactorAuthenticationManager
                     ],
                 ])
             ;
-        } elseif ($method === 'sms') {
+        } elseif ('sms' === $method) {
             $code = Helpers::getRandomString(8);
 
             $userLoginCode = $this->container

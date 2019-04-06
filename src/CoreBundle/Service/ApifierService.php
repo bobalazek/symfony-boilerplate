@@ -43,7 +43,7 @@ class ApifierService
         return [
             'errors' => $errorsWithPaths,
             'error' => [
-                'message' => count($errors) === 1
+                'message' => 1 === count($errors)
                     ? $errors[0]->getMessage()
                     : $errorMessage,
             ],
@@ -61,7 +61,7 @@ class ApifierService
     {
         $env = $this->container->getParameter('kernel.environment');
         if (
-            $env === 'prod' &&
+            'prod' === $env &&
             !is_a($e, 'CoreBundle\Exception\UserException')
         ) {
             return $this->container->get('translator')->trans(
@@ -86,15 +86,15 @@ class ApifierService
         $env = $this->container->getParameter('kernel.environment');
         $request = $this->container->get('request_stack')->getCurrentRequest();
         $baseUrl = str_replace(
-            '/app_'.$env.'.php',
+            '/app_' . $env . '.php',
             '',
             $request->getBaseUrl()
         );
         $uploadsPath = $this->container->getParameter('uploads_path');
         $uploadsDirectory = $this->container->getParameter('uploads_directory');
 
-        $name = $prefix.md5(uniqid()).'.'.$file->guessExtension();
-        $url = $request->getSchemeAndHttpHost().$baseUrl.$uploadsPath.'/'.$name;
+        $name = $prefix . md5(uniqid()) . '.' . $file->guessExtension();
+        $url = $request->getSchemeAndHttpHost() . $baseUrl . $uploadsPath . '/' . $name;
 
         $file->move($uploadsDirectory, $name);
 
@@ -104,7 +104,7 @@ class ApifierService
         ];
 
         if ($includePath) {
-            $output['path'] = $uploadsDirectory.'/'.$name;
+            $output['path'] = $uploadsDirectory . '/' . $name;
         }
 
         return $output;

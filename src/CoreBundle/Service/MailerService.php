@@ -150,7 +150,7 @@ class MailerService
      */
     public function send($swiftMessage = false)
     {
-        if ($swiftMessage === null) {
+        if (null === $swiftMessage) {
             $swiftMessage = $this->getSwiftMessageInstance();
         }
 

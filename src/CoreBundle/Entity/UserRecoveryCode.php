@@ -123,7 +123,7 @@ class UserRecoveryCode
      */
     public function isUsed()
     {
-        return $this->getUsedAt() !== null;
+        return null !== $this->getUsedAt();
     }
 
     /*** User ***/
@@ -164,7 +164,7 @@ class UserRecoveryCode
         return [
             'id' => $this->getId(),
             'code' => $this->getCode(),
-            'is_used' => $this->getUsedAt() !== null,
+            'is_used' => null !== $this->getUsedAt(),
             'used_at' => $this->getUsedAt()
                 ? $this->getUsedAt()->format(DATE_ATOM)
                 : null,

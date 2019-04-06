@@ -222,8 +222,8 @@ class UserAdmin extends AbstractAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('impersonate', $this->getRouterIdParameter().'/impersonate');
-        $collection->add('restore', $this->getRouterIdParameter().'/restore');
+        $collection->add('impersonate', $this->getRouterIdParameter() . '/impersonate');
+        $collection->add('restore', $this->getRouterIdParameter() . '/restore');
     }
 
     /***** Hooks *****/
@@ -310,7 +310,7 @@ class UserAdmin extends AbstractAdmin
     {
         if (
             $user === $this->getUser() &&
-            $user->isEnabled() === false
+            false === $user->isEnabled()
         ) {
             $user->enable();
 

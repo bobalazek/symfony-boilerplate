@@ -52,7 +52,7 @@ class UserDeviceManager
         User $user,
         Request $request
     ) {
-        if ($this->currentUserDevice !== null) {
+        if (null !== $this->currentUserDevice) {
             return $this->currentUserDevice;
         }
 
@@ -66,7 +66,7 @@ class UserDeviceManager
                 'uid' => $uid,
             ]);
 
-        if ($userDevice === null) {
+        if (null === $userDevice) {
             $userDevice = $this->create(
                 $user,
                 $request,
@@ -106,7 +106,7 @@ class UserDeviceManager
         $userDevice = new UserDevice();
         $userDevice
             ->setUid($uid)
-            ->setName($agent->platform().' - '.$agent->browser())
+            ->setName($agent->platform() . ' - ' . $agent->browser())
             ->setIp($request->getClientIp())
             ->setUserAgent($userAgent)
             ->setSessionId($session->getId())
